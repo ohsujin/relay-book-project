@@ -45,9 +45,13 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         
         if(regi_Chk.equals("join")){  // 서버에서 join을 반환하면 가입된것이므로 로그인 화면을 건너 뛰게 해준다.
         	System.out.println("가입됨: "+regi_Chk );
+        	finish(); //이전 액티비티 종료
         	
-        	 passwordEdit = (EditText) findViewById(R.id.Password);
-        	passwordEdit.setText("가입됨");
+        	Intent myIntent = new Intent(IntentCaller.this, ListViewTest.class);
+        	IntentCaller.this.startActivity(myIntent); //새로운 액티비티 이동
+        	
+        	//passwordEdit = (EditText) findViewById(R.id.Password);
+        	//passwordEdit.setText("가입됨");
         }else{
         	System.out.println("가입안됨 : "+regi_Chk);
         }
