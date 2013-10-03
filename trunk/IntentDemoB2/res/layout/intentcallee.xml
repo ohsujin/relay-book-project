@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="50px"
+    android:layout_marginLeft="40px"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="핸드폰 번호 : "
+        android:width="100dip" />
+    <TextView 
+        android:id="@+id/Phone"
+        android:width="200dip"
+        android:editable="true"
+        
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호 : "
+        android:layout_marginTop="20px"
+        android:width="100dip" />
+    <TextView
+        android:id="@+id/Password"       
+        android:width="200dip"
+        android:editable="true"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" />  
+        
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="대학교명 : "
+        android:layout_marginTop="20px"
+        android:width="100dip" />
+    <TextView
+        android:id="@+id/University"       
+        android:width="200dip"
+        android:editable="true"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" /> 
+    <Button 
+        android:text="Close" 
+        android:id="@+id/Close"            
+        android:width="245dip"
+        android:layout_marginTop="20px"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" /> 
+        
+    <Button 
+        android:text="ListView" 
+        android:id="@+id/ListView"            
+        android:width="245dip"
+        android:layout_marginTop="20px"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" /> 
+</LinearLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="50px"
+    android:layout_marginLeft="40px"
+    >
+    <LinearLayout 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        
+        >
+
+        <TextView 
+            android:text="핸드폰 번호"
+            android:width="100dip"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" />
+        
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/Phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:width="245dip" >
+
+            <requestFocus />
+        </EditText>        
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호"
+        android:width="100dip" />
+
+    <EditText
+        android:id="@+id/Password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:width="245dip" />'
+      
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="대학교명"
+        android:width="100dip" />
+
+    <EditText
+        android:id="@+id/University"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:width="245dip" />
+
+    <Button
+        android:id="@+id/Send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:text="Send"
+        android:width="245dip" />
+   
+</LinearLayout>
