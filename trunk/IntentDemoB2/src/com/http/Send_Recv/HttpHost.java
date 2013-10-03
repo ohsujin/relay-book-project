@@ -26,8 +26,8 @@ public class HttpHost {
 		if(msg == null)
 			msg = "";
 		
-		String URL = "http://192.168.25.6:8080/MyServer/JSONServer.jsp";
-//		String URL = "http://14.63.212.134/MyServer/JSONServer.jsp";
+//		String URL = "http://192.168.25.6:8080/MyServer/JSONServer.jsp";
+		String URL = "http://14.63.212.134/MyServer/JSONServer.jsp";
 //		String URL =  "http://api.androidhive.info/contacts/";
 		DefaultHttpClient client = new DefaultHttpClient();
 		try {
@@ -66,8 +66,8 @@ public class HttpHost {
 		public void HttpPostData(String msg){
 			try{
 				HttpClient client = new DefaultHttpClient();
-				   String postURL = "http://192.168.25.6:8080/MyServer/JSONServer.jsp";
-//				   String postURL = "http://14.63.212.134/MyServer/JSONServer.jsp";
+//				   String postURL = "http://192.168.25.6:8080/MyServer/JSONServer.jsp";
+				   String postURL = "http://14.63.212.134/MyServer/JSONServer.jsp";
 //				   String postURL = "http://121.156.253.22/hello.py";
 				   
 				   HttpPost post = new HttpPost(postURL);
@@ -78,8 +78,6 @@ public class HttpHost {
 				   post.setEntity(ent);
 				   HttpResponse responsePOST = client.execute(post);
 				   HttpEntity resEntity = responsePOST.getEntity();
-				   
-				   
 				   
 				   
 				  if (resEntity != null) {
