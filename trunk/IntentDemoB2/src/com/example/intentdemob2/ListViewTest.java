@@ -14,10 +14,10 @@ public class ListViewTest extends Activity {
 
 		//* 데이터 원본 준비
 		ArrayList<String> arGeneral = new ArrayList<String>();
-		arGeneral.add("김유신");
-		arGeneral.add("이순신");
-		arGeneral.add("강감찬");
-		arGeneral.add("을지문덕");
+		arGeneral.add("네트워크 프로그래밍");
+		arGeneral.add("프로그래밍 언어론");
+		arGeneral.add("소프트웨어 프로젝트");
+		arGeneral.add("모바일 프로그래밍");
 		//*/
 		
 		/* 배열로 준비
