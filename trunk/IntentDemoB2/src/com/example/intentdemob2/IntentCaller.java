@@ -12,6 +12,8 @@ import org.apache.http.protocol.*;
 import org.apache.http.util.*;
 import org.json.*;
 
+import com.http.Send_Recv.HttpHost;
+
 import android.app.*;
 import android.content.*;
 import android.os.*;
@@ -21,21 +23,44 @@ import android.view.*;
 import android.widget.*;
 
 public class IntentCaller extends Activity implements View.OnClickListener {
+
+	HttpHost http = new HttpHost();
+	private  EditText passwordEdit;
+
 	static final String[] COUNTRIES = new String[]{"aa", "aaa","ascc","aacsd","bb","bfdb"};
 	
-	
-    @Override
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intentcaller);
         
         EditText editText = (EditText)findViewById(R.id.Phone);
         editText.setText(getMy10DigitPhoneNumber());
+
+      
         
+        /* 서버를 통해 가입유무 확인 */
+        String regi_Chk = http.ChkRegister(getMy10DigitPhoneNumber());
+        
+        
+        if(regi_Chk.equals("join")){  // 서버에서 join을 반환하면 가입된것이므로 로그인 화면을 건너 뛰게 해준다.
+        	System.out.println("가입됨: "+regi_Chk );
+        	
+        	 passwordEdit = (EditText) findViewById(R.id.Password);
+        	passwordEdit.setText("가입됨");
+        }else{
+        	System.out.println("가입안됨 : "+regi_Chk);
+        }
+        
+        /**/
+        
+        
+
         AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.University);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,COUNTRIES);
         textView.setAdapter(adapter);
         
+
         Button button = (Button) findViewById(R.id.Send);
         button.setOnClickListener(this);            
     }
@@ -56,7 +81,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
     
     public void onClick(View v) {
         EditText phoneEdit = (EditText) findViewById(R.id.Phone);
-        EditText passwordEdit = (EditText) findViewById(R.id.Password);
+        passwordEdit = (EditText) findViewById(R.id.Password);
         AutoCompleteTextView universityEdit = (AutoCompleteTextView) findViewById(R.id.University);
         
         Intent intent = new Intent(this, IntentCallee.class);        
@@ -82,39 +107,9 @@ public class IntentCaller extends Activity implements View.OnClickListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		
-		HttpPostData(listData.toString());
-		 
-	
+		http.HttpPostData(listData.toString());
+
 	}
-    
-    
-  //------------------------------ 
-  //   Http Post로 주기
-  //------------------------------ 
-	public void HttpPostData(String msg){
-		try{
-			HttpClient client = new DefaultHttpClient();
-			   String postURL = "http://192.168.25.6:8080/MyServer/JSONServer.jsp";
-//			   String postURL = "http://14.63.212.134/MyServer/JSONServer.jsp";
-//			   String postURL = "http://121.156.253.22/hello.py";
-			   
-			   HttpPost post = new HttpPost(postURL);
-			   List params = new ArrayList(); // 파라미터를 List에 담아서 보냅니다.
-			   params.add(new BasicNameValuePair("regi_JSON", msg)); //파라미터 이름, 보낼 데이터 순입니다.
-			   
-			   UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params,HTTP.UTF_8);
-			   post.setEntity(ent);
-			   HttpResponse responsePOST = client.execute(post);
-			   HttpEntity resEntity = responsePOST.getEntity();
-			   
-			  if (resEntity != null) {
-			   Log.w("RESPONSE", EntityUtils.toString(resEntity));
-			  }
-			  }catch (Exception e) {
-			   // TODO: handle exception
-			  }
-			 
-	}
+       
 }
