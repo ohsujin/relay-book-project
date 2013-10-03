@@ -39,13 +39,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="비밀번호"
-        android:width="100dip" />
+        android:width="100dip"
+        />
 
     <EditText
         android:id="@+id/Password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:maxLength="4"
         android:width="245dip" />'
       
     <TextView
@@ -54,13 +56,18 @@
         android:text="대학교명"
         android:width="100dip" />
 
-    <EditText
-        android:id="@+id/University"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:width="245dip" />
 
+
+   	<AutoCompleteTextView 
+   	    android:id="@+id/University"
+   	    android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="245dip"
+        android:completionThreshold="1"
+        android:completionHint="목록에서 클릭하세요."
+        
+   	    />
+    
     <Button
         android:id="@+id/Send"
         android:layout_width="wrap_content"

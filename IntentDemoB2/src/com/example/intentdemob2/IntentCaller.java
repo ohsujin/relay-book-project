@@ -1,32 +1,29 @@
 package com.example.intentdemob2;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.apache.http.*;
+import org.apache.http.client.*;
+import org.apache.http.client.entity.*;
+import org.apache.http.client.methods.*;
+import org.apache.http.impl.client.*;
+import org.apache.http.message.*;
+import org.apache.http.protocol.*;
+import org.apache.http.util.*;
+import org.json.*;
 
 import android.app.*;
 import android.content.*;
 import android.os.*;
 import android.telephony.*;
-import android.util.Log;
+import android.util.*;
 import android.view.*;
 import android.widget.*;
 
-import net.sf.json.*;
-
 public class IntentCaller extends Activity implements View.OnClickListener {
+	static final String[] COUNTRIES = new String[]{"aa", "aaa","ascc","aacsd","bb","bfdb"};
+	
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +31,10 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         
         EditText editText = (EditText)findViewById(R.id.Phone);
         editText.setText(getMy10DigitPhoneNumber());
+        
+        AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.University);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,COUNTRIES);
+        textView.setAdapter(adapter);
         
         Button button = (Button) findViewById(R.id.Send);
         button.setOnClickListener(this);            
@@ -56,7 +57,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         EditText phoneEdit = (EditText) findViewById(R.id.Phone);
         EditText passwordEdit = (EditText) findViewById(R.id.Password);
-        EditText universityEdit = (EditText) findViewById(R.id.University);
+        AutoCompleteTextView universityEdit = (AutoCompleteTextView) findViewById(R.id.University);
         
         Intent intent = new Intent(this, IntentCallee.class);        
         intent.putExtra("phone", phoneEdit.getText());
