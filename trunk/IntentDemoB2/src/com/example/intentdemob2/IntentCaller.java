@@ -20,6 +20,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         button.setOnClickListener(this);            
     }
 
+    
     private String getMyPhoneNumber()
     {
     	TelephonyManager mTelephonyMgr;
