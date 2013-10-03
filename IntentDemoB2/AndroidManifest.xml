@@ -25,5 +25,5 @@
         <activity android:name=".IntentCallee" android:label="IntentCallee"></activity>
         <activity android:name=".ListViewTest" android:label="ListViewTest"></activity>
     </application>
-
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 </manifest>
