@@ -12,11 +12,9 @@ public class IntentCallee extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intentcallee);
         
-        Button button = (Button) findViewById(R.id.Close);
+        Button button = (Button) findViewById(R.id.Ok);
         button.setOnClickListener(this);
-        
-        Button button2 = (Button) findViewById(R.id.ListView);
-        button2.setOnClickListener(this);
+       
         
         this.setData();
       
@@ -42,9 +40,9 @@ public class IntentCallee extends Activity implements View.OnClickListener {
     }
 
     public void onClick(View v) {
-    	Intent intent = new Intent(this, ListViewTest.class);
-    	startActivity(intent);
+    	finish();
     	
-        finish();
+    	Intent intent = new Intent(this, Choice.class);
+    	startActivity(intent);
     }
 }
