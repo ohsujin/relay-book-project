@@ -92,9 +92,10 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         AutoCompleteTextView universityEdit = (AutoCompleteTextView) findViewById(R.id.University);
         
         
-        // 키보드 보이기
+        // 키보드 보이기 --->> 추후 삭제 요
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(universityEdit, InputMethodManager.SHOW_FORCED);
+        /* --------------------------------------------------------*/
         
         Intent intent = new Intent(this, IntentCallee.class);        
         intent.putExtra("phone", phoneEdit.getText());
