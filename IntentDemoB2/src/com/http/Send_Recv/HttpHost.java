@@ -2,8 +2,12 @@ package com.http.Send_Recv;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -70,6 +74,20 @@ public class HttpHost {
 				   String postURL = "http://14.63.212.134/MyServer/JSONServer.jsp";
 //				   String postURL = "http://121.156.253.22/hello.py";
 				   
+				   org.json.JSONObject json=new org.json.JSONObject();
+				   json.put("regi_JSON", msg);
+				   
+				   HttpURLConnection conn = (HttpURLConnection) new URL(postURL).openConnection();  
+				   conn.setDoOutput(true);	       	 
+				   OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
+				   wr.write(json.toString());
+				   
+//				   System.out.println("JSON 코드 : "+json.toString());
+				   wr.flush();
+				   
+				   
+				   /* 기존의 json 데이터를 String으로 넘기기
+				    * */
 				   HttpPost post = new HttpPost(postURL);
 				   List params = new ArrayList(); // 파라미터를 List에 담아서 보냅니다.
 				   params.add(new BasicNameValuePair("regi_JSON", msg)); //파라미터 이름, 보낼 데이터 순입니다.
@@ -80,9 +98,11 @@ public class HttpHost {
 				   HttpEntity resEntity = responsePOST.getEntity();
 				   
 				   
+				  
 				  if (resEntity != null) {
 				   Log.w("RESPONSE", EntityUtils.toString(resEntity));
 				  }
+				   
 				  }catch (Exception e) {
 				   // TODO: handle exception
 				  }
