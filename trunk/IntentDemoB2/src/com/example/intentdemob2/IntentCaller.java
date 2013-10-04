@@ -51,7 +51,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         	finish(); //이전 액티비티 종료
         	
 
-        	Intent myIntent = new Intent(IntentCaller.this, ListViewTest.class);
+        	Intent myIntent = new Intent(IntentCaller.this, Choice.class);
         	IntentCaller.this.startActivity(myIntent); //새로운 액티비티 이동
         	
         	//passwordEdit = (EditText) findViewById(R.id.Password);

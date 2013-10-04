@@ -1,20 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
+<?xml version="1.0" encoding="utf-8"?><LinearLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content"
-    android:layout_marginTop="50px"
-    android:layout_marginLeft="40px"
+    android:layout_marginLeft="40dp"
+    android:layout_marginTop="60dp"
     >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="핸드폰 번호 : "
-        android:width="100dip" />
+        android:width="100dp" />
     <TextView 
         android:id="@+id/Phone"
-        android:width="200dip"
+        android:width="280dp"
         android:editable="true"
         
         android:layout_width="wrap_content" 
@@ -24,11 +23,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="비밀번호 : "
-        android:layout_marginTop="20px"
+        android:layout_marginTop="20dp"
         android:width="100dip" />
     <TextView
         android:id="@+id/Password"       
-        android:width="200dip"
+        android:width="280dp"
         android:editable="true"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" />  
@@ -38,27 +37,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="대학교명 : "
-        android:layout_marginTop="20px"
-        android:width="100dip" />
+        android:layout_marginTop="20dp"
+        android:width="100dp" />
     <TextView
         android:id="@+id/University"       
-        android:width="200dip"
+        android:width="280dp"
         android:editable="true"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" /> 
-    <Button 
-        android:text="Close" 
-        android:id="@+id/Close"            
-        android:width="245dip"
-        android:layout_marginTop="20px"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" /> 
+
         
     <Button 
-        android:text="ListView" 
-        android:id="@+id/ListView"            
-        android:width="245dip"
-        android:layout_marginTop="20px"
+        android:text="Ok" 
+        android:id="@+id/Ok"            
+        android:width="280dp"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" /> 
 </LinearLayout>

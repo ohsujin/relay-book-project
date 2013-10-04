@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="40px"
-    android:layout_marginTop="50px"
+    android:layout_marginLeft="40dp"
+    android:layout_marginTop="60dp"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="핸드폰 번호"
-            android:width="100dip" />
+            android:width="100dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -28,7 +28,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:editable="false"
-            android:width="245dip" >
+            android:width="280dp" >
 
             <requestFocus />
         </EditText>
@@ -37,8 +37,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="비밀번호"
-        android:width="100dip"
+        android:width="100dp"
         />
 
     <EditText
@@ -48,14 +49,16 @@
         android:ems="10"
         android:password="true"
         android:maxLength="4"
-        android:width="245dip" />
+        android:inputType="number"
+        android:width="280dp" />
 
       
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="대학교명"
-        android:width="100dip" />
+        android:width="100dp" />
 
 
 
@@ -63,7 +66,7 @@
    	    android:id="@+id/University"
    	    android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:width="245dip"
+        android:width="280dp"
         android:completionThreshold="1"
         android:completionHint="목록에서 클릭하세요."
         
@@ -73,9 +76,9 @@
         android:id="@+id/Send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20px"
+		android:layout_marginTop="30dp"
         android:text="Send"
-        android:width="245dip" />
+        android:width="280dp" />
 
  
 
