@@ -12,6 +12,8 @@ import org.apache.http.protocol.*;
 import org.apache.http.util.*;
 import org.json.*;
 
+import relay.book.saveInform.SchoolList;
+
 import com.http.Send_Recv.HttpHost;
 
 import android.app.*;
@@ -20,6 +22,7 @@ import android.os.*;
 import android.telephony.*;
 import android.util.*;
 import android.view.*;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
 public class IntentCaller extends Activity implements View.OnClickListener {
@@ -27,7 +30,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
 	HttpHost http = new HttpHost();
 	private  EditText passwordEdit;
 
-	static final String[] COUNTRIES = new String[]{"aa", "aaa","ascc","aacsd","bb","bfdb"};
+	SchoolList sch_list = new SchoolList();
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,21 +50,21 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         	System.out.println("가입됨: "+regi_Chk );
         	finish(); //이전 액티비티 종료
         	
+
         	Intent myIntent = new Intent(IntentCaller.this, ListViewTest.class);
         	IntentCaller.this.startActivity(myIntent); //새로운 액티비티 이동
         	
         	//passwordEdit = (EditText) findViewById(R.id.Password);
         	//passwordEdit.setText("가입됨");
+
         }else{
         	System.out.println("가입안됨 : "+regi_Chk);
         }
         
         /**/
-        
-        
-
+       
         AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.University);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,COUNTRIES);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,sch_list.COUNTRIES);
         textView.setAdapter(adapter);
         
 
@@ -87,6 +90,10 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         EditText phoneEdit = (EditText) findViewById(R.id.Phone);
         passwordEdit = (EditText) findViewById(R.id.Password);
         AutoCompleteTextView universityEdit = (AutoCompleteTextView) findViewById(R.id.University);
+        
+        // 키보드 보이기
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(passwordEdit, InputMethodManager.SHOW_FORCED);
         
         Intent intent = new Intent(this, IntentCallee.class);        
         intent.putExtra("phone", phoneEdit.getText());
