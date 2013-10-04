@@ -40,9 +40,9 @@ public class IntentCallee extends Activity implements View.OnClickListener {
     }
 
     public void onClick(View v) {
-    	finish();
-    	
-    	Intent intent = new Intent(this, Choice.class);
+    	Intent intent = new Intent(this, MainPage.class);
     	startActivity(intent);
+    	
+    	finish();
     }
 }

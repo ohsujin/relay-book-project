@@ -51,7 +51,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         	finish(); //이전 액티비티 종료
         	
 
-        	Intent myIntent = new Intent(IntentCaller.this, Choice.class);
+        	Intent myIntent = new Intent(IntentCaller.this, MainPage.class);
         	IntentCaller.this.startActivity(myIntent); //새로운 액티비티 이동
         	
         	//passwordEdit = (EditText) findViewById(R.id.Password);
@@ -101,7 +101,9 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         intent.putExtra("phone", phoneEdit.getText());
         intent.putExtra("password", passwordEdit.getText());
         intent.putExtra("university", universityEdit.getText());
+        
         startActivity(intent);
+        finish();
         
         /* 서버로 넘기기 */
         JSONObject regi = new JSONObject();
