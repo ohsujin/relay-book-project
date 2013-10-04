@@ -7,14 +7,14 @@
     >
     
     <Button 
-        android:text="구매" 
+        android:text="삽니다" 
         android:id="@+id/Buy"            
         android:layout_width="match_parent" 
         android:layout_height="230dp" 
         /> 
         
     <Button 
-        android:text="판매" 
+        android:text="팝니다" 
         android:id="@+id/Sell"            
         android:layout_width="match_parent" 
         android:layout_height="230dp" /> 

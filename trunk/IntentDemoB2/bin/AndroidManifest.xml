@@ -25,7 +25,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".IntentCallee" android:label="IntentCallee"></activity>
-        <activity android:name=".Choice" android:label="Choice"></activity>
+        <activity android:name=".MainPage" android:label="MainPage"></activity>
+        <activity android:name=".Write" android:label="Write"></activity>
+        <activity android:name=".Listviewtest" android:label="Listviewtest"></activity>
     </application>
 	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 </manifest>
