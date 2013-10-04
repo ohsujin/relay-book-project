@@ -30,7 +30,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
 	HttpHost http = new HttpHost();
 	private  EditText passwordEdit;
 
-	SchoolList sch_list = new SchoolList();
+	SchoolList sch_list = new SchoolList(); //학교명단이 많아 따로 클래스로 분류
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,7 +93,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         
         // 키보드 보이기
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(passwordEdit, InputMethodManager.SHOW_FORCED);
+        imm.showSoftInput(universityEdit, InputMethodManager.SHOW_FORCED);
         
         Intent intent = new Intent(this, IntentCallee.class);        
         intent.putExtra("phone", phoneEdit.getText());
