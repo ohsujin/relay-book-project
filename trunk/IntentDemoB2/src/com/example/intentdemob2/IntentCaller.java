@@ -91,6 +91,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         passwordEdit = (EditText) findViewById(R.id.Password);
         AutoCompleteTextView universityEdit = (AutoCompleteTextView) findViewById(R.id.University);
         
+        
         // 키보드 보이기
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(universityEdit, InputMethodManager.SHOW_FORCED);
