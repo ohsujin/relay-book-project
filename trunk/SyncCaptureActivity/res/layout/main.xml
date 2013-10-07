@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <EditText
+        android:id="@+id/id_ip_edit"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:textSize="15sp"
+        android:gravity="center"
+        />
+    <LinearLayout 
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        >
+        <TextView  
+            android:id="@+id/id_tv"
+            android:layout_width="fill_parent" 
+            android:layout_height="wrap_content" 
+            android:padding="10dp"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_weight="0.7"
+            />
+        <Button
+            android:id="@+id/id_capture_btn"
+            android:layout_width="60pt" 
+            android:layout_height="wrap_content" 
+            android:text="capture"
+            android:layout_weight="0.3"
+            />
+    </LinearLayout>
+    <ImageView 
+        android:id="@+id/id_image"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        />
+</LinearLayout>
+
