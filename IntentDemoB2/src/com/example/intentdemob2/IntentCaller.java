@@ -40,8 +40,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         EditText editText = (EditText)findViewById(R.id.Phone);
         editText.setText(getMy10DigitPhoneNumber());
 
-      
-        
+
         /* 서버를 통해 가입유무 확인 */
         String regi_Chk = http.ChkRegister(getMy10DigitPhoneNumber());
         

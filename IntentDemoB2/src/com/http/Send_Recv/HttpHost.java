@@ -30,15 +30,16 @@ public class HttpHost {
 		if(msg == null)
 			msg = "";
 		
+		
 //		String URL = "http://192.168.25.6:8080/MyServer/JSONServer.jsp";
 		String URL = "http://14.63.212.134/MyServer/JSONServer.jsp";
+//		String URL = "http://121.156.253.22/hello.py";
 //		String URL =  "http://api.androidhive.info/contacts/";
 		DefaultHttpClient client = new DefaultHttpClient();
 		try {
 			/* 체크할 id와 pwd값 서버로 전송 */
 			HttpPost post = new HttpPost(URL+"?phone="+msg);
-			
-			
+
 			/* 지연시간 최대 5초 */
 			HttpParams params = client.getParams();
 			HttpConnectionParams.setConnectionTimeout(params, 3000);
@@ -78,6 +79,7 @@ public class HttpHost {
 				   HttpPost post = new HttpPost(postURL);
 				   List params = new ArrayList(); // 파라미터를 List에 담아서 보냅니다.
 				   params.add(new BasicNameValuePair("regi_JSON", msg)); //파라미터 이름, 보낼 데이터 순입니다.
+
 				   
 				   UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params,HTTP.UTF_8);
 				   post.setEntity(ent);
