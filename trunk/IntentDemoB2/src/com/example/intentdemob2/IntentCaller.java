@@ -67,7 +67,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         textView.setAdapter(adapter);
         
 
-        Button button = (Button) findViewById(R.id.Send);
+        ImageButton button = (ImageButton) findViewById(R.id.Send);
         button.setOnClickListener(this);            
     }
     
@@ -79,11 +79,14 @@ public class IntentCaller extends Activity implements View.OnClickListener {
     	return mTelephonyMgr.getLine1Number();
     }
     
+    
+    
     private String getMy10DigitPhoneNumber()
     {
     	String s = getMyPhoneNumber();
     	return s.substring(0);
     }
+    
     
     public void onClick(View v) {
         EditText phoneEdit = (EditText) findViewById(R.id.Phone);
@@ -96,7 +99,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         imm.showSoftInput(universityEdit, InputMethodManager.SHOW_FORCED);
         /* --------------------------------------------------------*/
         
-        Intent intent = new Intent(this, IntentCallee.class);        
+        Intent intent = new Intent(this, MainPage.class);        
         intent.putExtra("phone", phoneEdit.getText());
         intent.putExtra("password", passwordEdit.getText());
         intent.putExtra("university", universityEdit.getText());
