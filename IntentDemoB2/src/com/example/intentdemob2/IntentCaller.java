@@ -37,6 +37,8 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intentcaller);
         
+        startActivity(new Intent(this, SplashActivity.class));
+        
         EditText editText = (EditText)findViewById(R.id.Phone);
         editText.setText(getMy10DigitPhoneNumber());
 
