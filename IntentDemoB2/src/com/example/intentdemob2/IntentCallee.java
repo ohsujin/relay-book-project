@@ -13,11 +13,9 @@ public class IntentCallee extends Activity implements View.OnClickListener {
         setContentView(R.layout.intentcallee);
         
         Button button = (Button) findViewById(R.id.Ok);
-        button.setOnClickListener(this);
-       
+        button.setOnClickListener(this); 
         
         this.setData();
-      
     }
 
     public void setData() {
@@ -26,7 +24,6 @@ public class IntentCallee extends Activity implements View.OnClickListener {
         String phone = intent.getExtras().get("phone").toString();
         String password = intent.getExtras().get("password").toString();        
         String university = intent.getExtras().get("university").toString();        
-        
         
         TextView phoneText = (TextView) findViewById(R.id.Phone);        
         phoneText.setText(phone);
