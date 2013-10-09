@@ -40,7 +40,8 @@ public class Write extends Activity{
         Button button = (Button)findViewById(R.id.Send);
         button.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View v){
-				Intent intent = new Intent(Write.this, MainPage.class);
+				//MainPage.class이 부분을 이동할 곳으로 수정
+				Intent intent = new Intent(Write.this, MainPage.class); 
 		    	startActivity(intent);
 				
 			}
