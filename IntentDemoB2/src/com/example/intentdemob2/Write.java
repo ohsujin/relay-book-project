@@ -9,6 +9,7 @@ import android.net.*;
 import android.os.*;
 import android.provider.*;
 import android.provider.MediaStore.*;
+import android.telephony.TelephonyManager;
 import android.view.*;
 import android.widget.*;
 import android.widget.RatingBar.OnRatingBarChangeListener;
@@ -20,8 +21,10 @@ public class Write extends Activity{
 	
 	static int REQUEST_PICTURE = 1;
 	static int REQUEST_PHOTO_ALBUM = 2;
+
 	
 	static String SAMPLEIMG = System.currentTimeMillis() + ".png";	
+
 	
     /** Called when the activity is first created. */
 	Context mContext = this;
@@ -37,7 +40,8 @@ public class Write extends Activity{
 	    tv01 = (TextView) findViewById(R.id.tv01);           
 	    rating.setStepSize((float) 0.5); //별 색깔이 1칸씩줄어들고 늘어남 0.5로하면 반칸씩 들어감         
 	    rating.setRating((float) 2.5); // 처음보여줄때(색깔이 한개도없음) default 값이 0  이다 
-	    rating.setIsIndicator(false); //true - 별점만 표시 사용자가 변경 불가 , false - 사용자가 변경가능           
+	    rating.setIsIndicator(false); //true - 별점만 표시 사용자가 변경 불가 , false - 사용자가 변경가능   
+	    
 	    
 	    rating.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {               
 	    	@Override            
@@ -61,7 +65,7 @@ public class Write extends Activity{
     Dialog dialog;
     public void onClickImg(View v) {
     	switch(v.getId()) {
-    	case R.id.getCustom:
+    	case R.id.put_Image:
     		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
     		View customLayout = View.inflate(mContext, R.layout.custom_button, null);
     		builder.setView(customLayout);
@@ -81,11 +85,15 @@ public class Write extends Activity{
     
     //사진 촬영
   	void takePicture() {
+  		
+  		String fileName = getMy10DigitPhoneNumber()+ ".png";
   		//카메라 호출 intent 생성
   		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-  		File file = new File(Environment.getExternalStorageDirectory(), SAMPLEIMG);
+  		File file = new File(Environment.getExternalStorageDirectory()+"/DCIM/Camera", fileName);
   		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
   		startActivityForResult(intent, REQUEST_PICTURE);
+  		
+  		tv01.setText("경로 : " + Environment.getExternalStorageDirectory()+"/DCIM/Camera/"+file.getName());  
   	}
   	
   	//사진 불러오기
@@ -100,7 +108,7 @@ public class Write extends Activity{
   	
   	//촬영한 사진을 수정하기 위해서
   	Bitmap loadPicture() {
-  		File file = new File(Environment.getExternalStorageDirectory(), SAMPLEIMG);
+  		File file = new File(Environment.getExternalStorageDirectory()+"/DCIM/Camera", getMy10DigitPhoneNumber()+".png");
   		BitmapFactory.Options option = new BitmapFactory.Options();
   		option.inSampleSize = 4;
   		return BitmapFactory.decodeFile(file.getAbsolutePath(), option);
@@ -122,4 +130,25 @@ public class Write extends Activity{
   			iv.setImageURI(data.getData());
   		}
   	}
+  	
+  	/* 전화번호 불러오기 */
+  	
+  	 	public  String getMyPhoneNumber()
+	    {
+	    	TelephonyManager mTelephonyMgr;
+	    	mTelephonyMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+	    	
+	    	return mTelephonyMgr.getLine1Number();
+	    }
+	    
+	    
+	    
+	    public  String getMy10DigitPhoneNumber()
+	    {
+	    	String s = getMyPhoneNumber();
+	    	return s.substring(0);
+	    	
+	    }
+	    
+	    /* ======================================== */
 }
