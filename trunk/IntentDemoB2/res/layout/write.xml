@@ -14,9 +14,7 @@
 		    android:orientation="vertical" >
 		
 		    
-		<HorizontalScrollView
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content">
+		   
 			<ImageView
 			    android:id="@+id/imgView1"
 			    android:src="@drawable/sample_img"
@@ -37,7 +35,6 @@
 			    android:layout_width="150dp"
 			    android:layout_height="150dp"
 			    />
-			</HorizontalScrollView>
 			    
 		<Button
 		    android:id="@+id/put_Image"
