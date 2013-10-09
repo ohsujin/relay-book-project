@@ -9,7 +9,7 @@ import android.net.*;
 import android.os.*;
 import android.provider.*;
 import android.provider.MediaStore.Images;
-import android.telephony.TelephonyManager;
+import android.telephony.*;
 import android.view.*;
 import android.widget.*;
 import android.widget.RatingBar.OnRatingBarChangeListener;
@@ -36,6 +36,17 @@ public class Write extends Activity{
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.write);
 	    
+	    
+        Button button = (Button)findViewById(R.id.Send);
+        button.setOnClickListener(new Button.OnClickListener(){
+			public void onClick(View v){
+				Intent intent = new Intent(Write.this, MainPage.class);
+		    	startActivity(intent);
+				
+			}
+		});
+		
+        
 	    scrollview = (ScrollView) findViewById(R.id.Scroll);
 	    
 	    rating = (RatingBar) findViewById(R.id.Quality);         
