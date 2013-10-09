@@ -73,7 +73,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         button.setOnClickListener(this);            
     }
     
-    private String getMyPhoneNumber()
+    public String getMyPhoneNumber()
     {
     	TelephonyManager mTelephonyMgr;
     	mTelephonyMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
@@ -83,23 +83,19 @@ public class IntentCaller extends Activity implements View.OnClickListener {
     
     
     
-    private String getMy10DigitPhoneNumber()
+    public String getMy10DigitPhoneNumber()
     {
     	String s = getMyPhoneNumber();
     	return s.substring(0);
+    	
     }
     
-    
+
     public void onClick(View v) {
         EditText phoneEdit = (EditText) findViewById(R.id.Phone);
         passwordEdit = (EditText) findViewById(R.id.Password);
         AutoCompleteTextView universityEdit = (AutoCompleteTextView) findViewById(R.id.University);
         
-        
-        // 키보드 보이기 --->> 추후 삭제 요
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(universityEdit, InputMethodManager.SHOW_FORCED);
-        /* --------------------------------------------------------*/
         
         Intent intent = new Intent(this, MainPage.class);        
         intent.putExtra("phone", phoneEdit.getText());

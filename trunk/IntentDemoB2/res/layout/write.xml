@@ -20,7 +20,7 @@
 		    android:layout_height="280dp"
 		    />
 	    <Button
-		    android:id="@+id/getCustom"
+		    android:id="@+id/put_Image"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:onClick="onClickImg"
