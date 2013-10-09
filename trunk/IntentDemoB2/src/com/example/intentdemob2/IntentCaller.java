@@ -50,7 +50,6 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         if(regi_Chk.equals("join")){  // 서버에서 join을 반환하면 가입된것이므로 로그인 화면을 건너 뛰게 해준다.
         	System.out.println("가입됨: "+regi_Chk );
         	finish(); //이전 액티비티 종료
-        	
 
         	Intent myIntent = new Intent(IntentCaller.this, MainPage.class);
         	IntentCaller.this.startActivity(myIntent); //새로운 액티비티 이동
@@ -86,7 +85,8 @@ public class IntentCaller extends Activity implements View.OnClickListener {
     public String getMy10DigitPhoneNumber()
     {
     	String s = getMyPhoneNumber();
-    	return s.substring(0);
+    	//return s.substring(0);
+    	return s.replace("-", "").replace("+82", "0");
     	
     }
     
@@ -97,6 +97,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         AutoCompleteTextView universityEdit = (AutoCompleteTextView) findViewById(R.id.University);
         
         
+        
         Intent intent = new Intent(this, MainPage.class);        
         intent.putExtra("phone", phoneEdit.getText());
         intent.putExtra("password", passwordEdit.getText());
@@ -104,6 +105,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         
         startActivity(intent);
         finish();
+        
         
         /* 서버로 넘기기 */
         JSONObject regi = new JSONObject();
