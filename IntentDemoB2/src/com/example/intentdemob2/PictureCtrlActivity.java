@@ -41,7 +41,7 @@ public class PictureCtrlActivity extends Activity {
     
     //button 클릭
     Dialog dialog;
-    public void onClickImg(View v) {
+    public void onClickImg(View v) {	
     	switch(v.getId()) {
     	case R.id.getCustom:
     		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);

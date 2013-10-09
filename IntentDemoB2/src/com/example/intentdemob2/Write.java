@@ -8,7 +8,7 @@ import android.graphics.*;
 import android.net.*;
 import android.os.*;
 import android.provider.*;
-import android.provider.MediaStore.*;
+import android.provider.MediaStore.Images;
 import android.telephony.TelephonyManager;
 import android.view.*;
 import android.widget.*;
@@ -19,16 +19,18 @@ public class Write extends Activity{
 	RatingBar rating;     
 	TextView tv01; 
 	
+	static int i=1;
+	
 	static int REQUEST_PICTURE = 1;
 	static int REQUEST_PHOTO_ALBUM = 2;
 
 	
-	static String SAMPLEIMG = System.currentTimeMillis() + ".png";	
+	//static String SAMPLEIMG = System.currentTimeMillis() + "-" + i +".png";	
 
 	
     /** Called when the activity is first created. */
 	Context mContext = this;
-	ImageView iv;
+	ImageView iv1,iv2,iv3;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,8 +51,10 @@ public class Write extends Activity{
 	    		tv01.setText("평점 : " + rating);               
 	    	}         
 	    }); 
-	    
-	    iv = (ImageView) findViewById(R.id.imgView);
+
+	    iv1 = (ImageView) findViewById(R.id.imgView1);
+	    iv2 = (ImageView) findViewById(R.id.imgView2);
+	    iv3 = (ImageView) findViewById(R.id.imgView3);
         
         /**
         TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -75,12 +79,25 @@ public class Write extends Activity{
     	case R.id.camera:
     		dialog.dismiss();
     		takePicture();
+    		++i;
+    		dialog.dismiss();
+    		takePicture();
+    		++i;
+    		dialog.dismiss();
+    		takePicture();
     		break;
     	case R.id.photoAlbum:
     		dialog.dismiss();
     		photoAlbum();
+    		++i;
+    		dialog.dismiss();
+    		photoAlbum();
+    		++i;
+    		dialog.dismiss();
+    		photoAlbum();
     		break;
     	}
+    	
     }
     
     //사진 촬영
@@ -89,7 +106,8 @@ public class Write extends Activity{
   		String fileName = getMy10DigitPhoneNumber()+ ".png";
   		//카메라 호출 intent 생성
   		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-  		File file = new File(Environment.getExternalStorageDirectory()+"/DCIM/Camera", fileName);
+  		File file = new File(Environment.getExternalStorageDirectory(), "img-" + i +".png");
+  		
   		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
   		startActivityForResult(intent, REQUEST_PICTURE);
   		
@@ -108,10 +126,14 @@ public class Write extends Activity{
   	
   	//촬영한 사진을 수정하기 위해서
   	Bitmap loadPicture() {
-  		File file = new File(Environment.getExternalStorageDirectory()+"/DCIM/Camera", getMy10DigitPhoneNumber()+".png");
+
+  		File file = new File(Environment.getExternalStorageDirectory(), "img-" + i +".png");
+
   		BitmapFactory.Options option = new BitmapFactory.Options();
   		option.inSampleSize = 4;
+  		
   		return BitmapFactory.decodeFile(file.getAbsolutePath(), option);
+
   	}
   	
   	@Override
@@ -123,12 +145,29 @@ public class Write extends Activity{
   			return;
   		
   		if(requestCode == REQUEST_PICTURE) {
-  			iv.setImageBitmap(loadPicture());
+  			for(i=1; i<=3; i++){
+	  			if(i==1){
+	  				iv1.setImageBitmap(loadPicture());
+	  			} else if(i==2){
+	  				iv2.setImageBitmap(loadPicture());
+	  			} else {
+	  				iv3.setImageBitmap(loadPicture());
+	  			}
+  			}
   		}
   		
   		if(requestCode == REQUEST_PHOTO_ALBUM) {
-  			iv.setImageURI(data.getData());
+  			for(i=1; i<=3; i++){
+  				if(i==1){
+	  				iv1.setImageURI(data.getData());
+	  			} else if(i==2) {
+	  				iv2.setImageURI(data.getData());
+	  			} else {
+	  				iv3.setImageURI(data.getData());
+	  			}	
+  			}
   		}
+  		
   	}
   	
   	/* 전화번호 불러오기 */

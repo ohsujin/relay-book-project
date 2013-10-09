@@ -12,9 +12,36 @@
    		android:layout_marginTop="200dp"
     	android:orientation="vertical">
     
-	    <LinearLayout
+        
+        <LinearLayout
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content" >
+		    
+	        <ImageView 
+	            android:id="@+id/university_img"
+	            android:layout_width="36px"
+	        	android:layout_height="31px"
+	        	android:layout_marginTop="15dp"
+	        	android:layout_marginRight="10dp"
+	        	android:src="@drawable/university"
+	            />
+	    
+		   	<AutoCompleteTextView 
+		   	    android:id="@+id/University"
+		   	    android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:width="250dp"
+		        android:hint="대학교명"
+		        android:completionThreshold="1"
+		        android:completionHint="목록에서 클릭하세요."/>
+		 
+		</LinearLayout>
+		
+        
+	    <LinearLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" 
+	        android:layout_marginTop="15dp">
 	
 	        <ImageView 
 	            android:id="@+id/phone_img"
@@ -25,21 +52,15 @@
 	        	android:src="@drawable/phone"
 	            />
 	        
-	        <TextView
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:text="핸드폰 번호"
-	            android:textColor="#000000" 
-	            android:width="75dp" />
-	
 	        <EditText
 	            android:id="@+id/Phone"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_weight="1"
 	            android:ems="10"
+	            android:hint="핸드폰 번호"
 	            android:editable="false"
-	            android:width="180dp" >
+	            android:width="250dp" >
 	        </EditText>
 	
 	    </LinearLayout>
@@ -57,60 +78,19 @@
 	        	android:layout_marginRight="10dp"
 	        	android:src="@drawable/pw"
 	            />
-	        
-		    <TextView
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="비밀번호"
-		        android:textColor="#000000" 
-		        android:layout_marginLeft="10dp"
-		        android:width="65dp"
-		        />
 		
 		    <EditText
 		        android:id="@+id/Password"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:ems="10"
+		        android:hint="비밀번호"
 		        android:password="true"
 		        android:maxLength="4"
 		        android:inputType="number"
-		        android:width="180dp" />
+		        android:width="250dp" />
 		</LinearLayout>
-	      
-	    <LinearLayout
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content" 
-	        android:layout_marginTop="15dp">
-		    
-	        <ImageView 
-	            android:id="@+id/university_img"
-	            android:layout_width="36px"
-	        	android:layout_height="31px"
-	        	android:layout_marginTop="15dp"
-	        	android:layout_marginRight="10dp"
-	        	android:src="@drawable/university"
-	            />
-	        
-		    <TextView
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="대학교명"
-		        android:textColor="#000000" 
-		        android:layout_marginLeft="10dp"
-		        android:width="65dp" />
-		
-		
-		
-		   	<AutoCompleteTextView 
-		   	    android:id="@+id/University"
-		   	    android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:width="180dp"
-		        android:completionThreshold="1"
-		        android:completionHint="목록에서 클릭하세요."/>
-		 
-		</LinearLayout>
+	    
 	 	
 	 	<ImageButton 
 	 	    android:id="@+id/Send"
