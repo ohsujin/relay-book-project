@@ -35,6 +35,7 @@ public class Write extends Activity{
 	/* 파일 업로드를 위한 인자값 */
 	String filename;
 //	Sell_inform_thread SellThread = new Sell_inform_thread();
+	MyThread mMyThread =null;
 	
 	String Subject, Title, Writer, publisher, Price, Quality; //판매 정보를 전송하기위함 변수
 	
@@ -65,15 +66,14 @@ public class Write extends Activity{
 //				Intent intent = new Intent(Write.this, MainPage.class); 
 //		    	startActivity(intent);
 		    	
-//		    	TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-//		    	String myNumber = mTelephonyMgr.getLine1Number();
 		    	
-//		    	Subject = ((EditText) findViewById(R.id.Subject)).getText().toString();;
-//		    	Title = ((EditText) findViewById(R.id.Title)).getText().toString();;
-//		    	Writer =((EditText) findViewById(R.id.Writer)).getText().toString();;
-//		    	publisher = ((EditText) findViewById(R.id.Publisher)).getText().toString();;
-//		    	Price = ((EditText) findViewById(R.id.Price)).getText().toString();;
-//		    	Quality = (EditText) findViewById(R.id.Quality);
+		    	
+		    	Subject = ((EditText) findViewById(R.id.Subject)).getText().toString();;
+		    	Title = ((EditText) findViewById(R.id.Title)).getText().toString();;
+		    	Writer =((EditText) findViewById(R.id.Writer)).getText().toString();;
+		    	publisher = ((EditText) findViewById(R.id.Publisher)).getText().toString();;
+		    	Price = ((EditText) findViewById(R.id.Price)).getText().toString();;
+		    	
 		    	
 		    	/* 판매정보 & 파일경로 전송 */
 //		    	SellThread.setBookSell_inform(Subject, Title, Writer, publisher, Price, "4.5",myNumber);
@@ -84,7 +84,7 @@ public class Write extends Activity{
 		    	
 		    	/* ++++ ++++ ++++ ++++ ++++ ++++  */
 		    	
-//		    	mMyThread = (MyThread) new MyThread().execute((Void) null);
+		    	mMyThread = (MyThread) new MyThread().execute((Void) null);
 				
 			}
 		});
@@ -175,7 +175,6 @@ public class Write extends Activity{
   		option.inSampleSize = 4;
   		
   		return BitmapFactory.decodeFile(file.getAbsolutePath(), option);
-
   	}
   	
   	@Override
@@ -233,18 +232,25 @@ public class Write extends Activity{
 			@Override
 			protected Void doInBackground(Void... params) {
 				// TODO Auto-generated method stub
-				HttpFileUpload("http://192.168.25.5:8080/upload/RecvText");
+				HttpFileUpload("http://192.168.25.5:8090/MyRelayServer/RecvBookInform.jsp");
+
 				return null;
 			}}
   	
 	    private boolean HttpFileUpload(String urlString) {
-			try {
+	    	
+	    	
+	    	try {
 				FileInputStream mFileInputStream = new FileInputStream(new File(filename));			
 				URL connectUrl = new URL(urlString);
 				
 				//데이터 경계선
 				String delimiter = "\r\n--" + boundary + "\r\n";
 				StringBuffer postDataBuilder = new StringBuffer();
+
+				//전화번호 불러오기
+				TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+		    	String myNumber = mTelephonyMgr.getLine1Number();
 				
 				// 추가하고 싶은 Key & Value 추가
 			    // key & value를 추가한 후 꼭 경계선을 삽입해줘야 데이터를 구분할 수 있다.
@@ -262,6 +268,8 @@ public class Write extends Activity{
 				postDataBuilder.append(delimiter);
 //				postDataBuilder.append(setValue("Quality",Quality.toString()));
 //				postDataBuilder.append(delimiter);
+				postDataBuilder.append(setValue("PhoneNum", myNumber));
+				postDataBuilder.append(delimiter);
 				
 				
 				
@@ -281,10 +289,10 @@ public class Write extends Activity{
 				// write data
 					DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(conn.getOutputStream()));
 
+					
 				//위에서 작성한 메타데이터를 먼저 전송(한글때메 UTF-8 메소드 사용)
 				dos.writeUTF(postDataBuilder.toString());
-			
-
+		
 				int bytesAvailable = mFileInputStream.available();
 				int maxBufferSize = 1024;
 				int bufferSize = Math.min(bytesAvailable, maxBufferSize);
