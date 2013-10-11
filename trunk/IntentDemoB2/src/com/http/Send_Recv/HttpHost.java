@@ -32,9 +32,11 @@ public class HttpHost {
 		
 		
 //		String URL = "http://192.168.25.6:8080/MyServer/JSONServer.jsp";
-		String URL = "http://14.63.212.134/MyServer/JSONServer.jsp";
+		String URL = "http://14.63.212.134/MyRelayServer/JSONServer.jsp";
 //		String URL = "http://121.156.253.22/hello.py";
 //		String URL =  "http://api.androidhive.info/contacts/";
+		
+		
 		DefaultHttpClient client = new DefaultHttpClient();
 		try {
 			/* 체크할 id와 pwd값 서버로 전송 */
