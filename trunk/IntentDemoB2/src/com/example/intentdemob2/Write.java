@@ -171,6 +171,7 @@ public class Write extends Activity{
   		
   		filename = Environment.getExternalStorageDirectory() + "/img-" + 1 +".png"; //파일이름을 저장
 
+  		
   		BitmapFactory.Options option = new BitmapFactory.Options();
   		option.inSampleSize = 4;
   		
@@ -232,7 +233,7 @@ public class Write extends Activity{
 			@Override
 			protected Void doInBackground(Void... params) {
 				// TODO Auto-generated method stub
-				HttpFileUpload("http://192.168.25.5:8090/MyRelayServer/RecvBookInform.jsp");
+				HttpFileUpload("http://14.63.212.134/MyRelayServer/RecvBookInform.jsp");
 
 				return null;
 			}}
