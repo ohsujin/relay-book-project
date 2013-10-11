@@ -54,8 +54,6 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         	Intent myIntent = new Intent(IntentCaller.this, MainPage.class);
         	IntentCaller.this.startActivity(myIntent); //새로운 액티비티 이동
         	
-        	//passwordEdit = (EditText) findViewById(R.id.Password);
-        	//passwordEdit.setText("가입됨");
 
         }else{
         	System.out.println("가입안됨 : "+regi_Chk);
