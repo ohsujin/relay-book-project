@@ -15,7 +15,8 @@
 	    android:id="@+id/photoAlbum"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:text="photoAlbum"
+	    android:text="photoAlbum1"
 	    android:onClick="onClickImg"
 	    />
+	
 </LinearLayout>

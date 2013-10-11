@@ -101,14 +101,9 @@ public class Write extends Activity{
     	case R.id.photoAlbum:
     		dialog.dismiss();
     		photoAlbum();
-    		++i;
-    		dialog.dismiss();
-    		photoAlbum();
-    		++i;
-    		dialog.dismiss();
-    		photoAlbum();
     		break;
     	}
+    	
     	
     }
     
@@ -169,14 +164,12 @@ public class Write extends Activity{
   		}
   		
   		if(requestCode == REQUEST_PHOTO_ALBUM) {
-  			for(i=1; i<=3; i++){
-  				if(i==1){
-	  				iv1.setImageURI(data.getData());
-	  			} else if(i==2) {
-	  				iv2.setImageURI(data.getData());
-	  			} else {
-	  				iv3.setImageURI(data.getData());
-	  			}	
+  			if(i==1){
+  				iv1.setImageURI(data.getData());
+  			} else if(i==2){
+  				iv2.setImageURI(data.getData());
+  			} else {
+  				iv3.setImageURI(data.getData());
   			}
   		}
   		
