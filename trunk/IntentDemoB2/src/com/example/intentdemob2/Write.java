@@ -34,8 +34,7 @@ public class Write extends Activity{
 	
 	/* 파일 업로드를 위한 인자값 */
 	String filename;
-	Sell_inform_thread SellThread = new Sell_inform_thread();
-	MyThread mMyThread = null;
+//	Sell_inform_thread SellThread = new Sell_inform_thread();
 	
 	String Subject, Title, Writer, publisher, Price, Quality; //판매 정보를 전송하기위함 변수
 	
@@ -58,7 +57,6 @@ public class Write extends Activity{
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.write);
 
-	 
 	    
         Button button = (Button)findViewById(R.id.Send);
         button.setOnClickListener(new Button.OnClickListener(){
@@ -67,21 +65,22 @@ public class Write extends Activity{
 //				Intent intent = new Intent(Write.this, MainPage.class); 
 //		    	startActivity(intent);
 		    	
-		    	TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-		    	String myNumber = mTelephonyMgr.getLine1Number();
+//		    	TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+//		    	String myNumber = mTelephonyMgr.getLine1Number();
 		    	
-		    	Subject = ((EditText) findViewById(R.id.Subject)).getText().toString();;
-		    	Title = ((EditText) findViewById(R.id.Title)).getText().toString();;
-		    	Writer =((EditText) findViewById(R.id.Writer)).getText().toString();;
-		    	publisher = ((EditText) findViewById(R.id.Publisher)).getText().toString();;
-		    	Price = ((EditText) findViewById(R.id.Price)).getText().toString();;
+//		    	Subject = ((EditText) findViewById(R.id.Subject)).getText().toString();;
+//		    	Title = ((EditText) findViewById(R.id.Title)).getText().toString();;
+//		    	Writer =((EditText) findViewById(R.id.Writer)).getText().toString();;
+//		    	publisher = ((EditText) findViewById(R.id.Publisher)).getText().toString();;
+//		    	Price = ((EditText) findViewById(R.id.Price)).getText().toString();;
 //		    	Quality = (EditText) findViewById(R.id.Quality);
 		    	
 		    	/* 판매정보 & 파일경로 전송 */
-		    	SellThread.setBookSell_inform(Subject, Title, Writer, publisher, Price, "4.5",myNumber);
-		    	SellThread.setFilepath(filename);
+//		    	SellThread.setBookSell_inform(Subject, Title, Writer, publisher, Price, "4.5",myNumber);
+//		    	SellThread.setFilepath(filename);
 		    	
-		    	SellThread.execute((Void) null);
+//		    	mMyThread = (Sell_inform_thread) new Sell_inform_thread().execute((Void) null);
+		    	
 		    	
 		    	/* ++++ ++++ ++++ ++++ ++++ ++++  */
 		    	
@@ -111,13 +110,7 @@ public class Write extends Activity{
 	    iv2 = (ImageView) findViewById(R.id.imgView2);
 	    iv3 = (ImageView) findViewById(R.id.imgView3);
         
-        /**
-        TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-    	String myNumber = mTelephonyMgr.getLine1Number();
-    	
-    	TextView phoneText = (TextView) findViewById(R.id.PhoneNum);        
-        phoneText.setText(myNumber);
-    	**/
+     
 	}
 	
 	//button 클릭
@@ -152,7 +145,6 @@ public class Write extends Activity{
     
     //사진 촬영
   	void takePicture() {
-  		
   		
   		//카메라 호출 intent 생성
   		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -228,8 +220,6 @@ public class Write extends Activity{
 	    	return mTelephonyMgr.getLine1Number();
 	    }
 	    
-	    
-	    
 	    public  String getMy10DigitPhoneNumber()
 	    {
 	    	String s = getMyPhoneNumber();
@@ -239,8 +229,6 @@ public class Write extends Activity{
 	    
 	    /* ======================================== */
 	    public class MyThread extends AsyncTask<Void, Void, Void> {
-	    
-	    
 
 			@Override
 			protected Void doInBackground(Void... params) {
@@ -262,18 +250,18 @@ public class Write extends Activity{
 			    // key & value를 추가한 후 꼭 경계선을 삽입해줘야 데이터를 구분할 수 있다.
 				
 				postDataBuilder.append(delimiter);
-				postDataBuilder.append(setValue("Subject", Subject.toString()));
+				postDataBuilder.append(setValue("Subject", Subject));
 				postDataBuilder.append(delimiter);
-				postDataBuilder.append(setValue("Title", Title.toString()));
+				postDataBuilder.append(setValue("Title", Title));
 				postDataBuilder.append(delimiter);
-				postDataBuilder.append(setValue("Writer", Writer.toString()));
+				postDataBuilder.append(setValue("Writer", Writer));
 				postDataBuilder.append(delimiter);
-				postDataBuilder.append(setValue("publisher", publisher.toString()));
+				postDataBuilder.append(setValue("publisher", publisher));
 				postDataBuilder.append(delimiter);
-				postDataBuilder.append(setValue("Price", Price.toString()));
+				postDataBuilder.append(setValue("Price", Price));
 				postDataBuilder.append(delimiter);
-				postDataBuilder.append(setValue("Quality",Quality.toString()));
-				postDataBuilder.append(delimiter);
+//				postDataBuilder.append(setValue("Quality",Quality.toString()));
+//				postDataBuilder.append(delimiter);
 				
 				
 				

@@ -42,23 +42,26 @@
 		    android:onClick="onClickImg"
 		    android:text="사진 등록"
 		    />
+
 		<LinearLayout
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content" 
-	        android:layout_marginTop="8dp">
-	        
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="8dp" >
+
 		    <TextView
 		        android:layout_width="50dp"
 		        android:layout_height="wrap_content"
+		        android:layout_marginRight="7dp"
+		        android:layout_weight="3.70"
 		        android:text="강의제목"
-		    	android:textColor="#000000" 
-		        android:layout_marginRight="7dp"/>
+		        android:textColor="#000000" />
+
 		    <EditText
 		        android:id="@+id/Subject"
 		        android:layout_width="228dp"
 		        android:layout_height="wrap_content" >
-		    </EditText>	    
-	    </LinearLayout>
+		    </EditText>
+		</LinearLayout>
 	    
 	    <LinearLayout
 	        android:layout_width="wrap_content"

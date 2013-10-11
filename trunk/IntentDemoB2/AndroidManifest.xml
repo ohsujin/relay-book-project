@@ -4,11 +4,14 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk
+  <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="17" />
-
-      <uses-permission android:name="android.permission.INTERNET" />
+        android:targetSdkVersion="8" />
+  
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -39,7 +42,5 @@
     
         
     </application>
-	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
 </manifest>
