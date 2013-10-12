@@ -29,8 +29,7 @@ public class HttpHost {
 	public String ChkRegister(String msg) {
 		if(msg == null)
 			msg = "";
-		
-		
+
 //		String URL = "http://192.168.25.6:8080/MyServer/JSONServer.jsp";
 		String URL = "http://14.63.212.134/MyRelayServer/JSONServer.jsp";
 //		String URL = "http://121.156.253.22/hello.py";
@@ -74,7 +73,7 @@ public class HttpHost {
 			try{
 				HttpClient client = new DefaultHttpClient();
 //				   String postURL = "http://192.168.25.6:8080/MyServer/JSONServer.jsp";
-				   String postURL = "http://14.63.212.134/MyServer/JSONServer.jsp";
+				   String postURL = "http://14.63.212.134/MyRelayServer/JSONServer.jsp";
 //				   String postURL = "http://121.156.253.22/hello.py";
 				   
 				 
