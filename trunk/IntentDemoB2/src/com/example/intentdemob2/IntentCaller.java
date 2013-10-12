@@ -1,15 +1,6 @@
 package com.example.intentdemob2;
 
-import java.util.*;
 
-import org.apache.http.*;
-import org.apache.http.client.*;
-import org.apache.http.client.entity.*;
-import org.apache.http.client.methods.*;
-import org.apache.http.impl.client.*;
-import org.apache.http.message.*;
-import org.apache.http.protocol.*;
-import org.apache.http.util.*;
 import org.json.*;
 
 import relay.book.saveInform.SchoolList;
@@ -20,9 +11,9 @@ import android.app.*;
 import android.content.*;
 import android.os.*;
 import android.telephony.*;
-import android.util.*;
+
 import android.view.*;
-import android.view.inputmethod.InputMethodManager;
+
 import android.widget.*;
 
 public class IntentCaller extends Activity implements View.OnClickListener {
@@ -41,24 +32,26 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         
         EditText editText = (EditText)findViewById(R.id.Phone);
         editText.setText(getMy10DigitPhoneNumber());
-
+        
 
         /* 서버를 통해 가입유무 확인 */
-        String regi_Chk = http.ChkRegister(getMy10DigitPhoneNumber());
+        String regi_Chk =  http.ChkRegister(getMy10DigitPhoneNumber());
+        
+        System.out.println("regi_Chk : "+regi_Chk);
+        System.out.println(regi_Chk);
         
         
-        if(regi_Chk.equals("join")){  // 서버에서 join을 반환하면 가입된것이므로 로그인 화면을 건너 뛰게 해준다.
-        	System.out.println("가입됨: "+regi_Chk );
+        if(regi_Chk.equalsIgnoreCase(" join")){  // 서버에서 join을 반환하면 가입된것이므로 로그인 화면을 건너 뛰게 해준다.
+        	System.out.println("가입됨: "+regi_Chk);
         	finish(); //이전 액티비티 종료
+        	
 
         	Intent myIntent = new Intent(IntentCaller.this, MainPage.class);
         	IntentCaller.this.startActivity(myIntent); //새로운 액티비티 이동
-        	
 
         }else{
         	System.out.println("가입안됨 : "+regi_Chk);
         }
-        
         /**/
        
         AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.University);

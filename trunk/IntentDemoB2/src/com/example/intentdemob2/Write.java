@@ -175,6 +175,7 @@ public class Write extends Activity{
   		BitmapFactory.Options option = new BitmapFactory.Options();
   		option.inSampleSize = 4;
   		
+  		
   		return BitmapFactory.decodeFile(file.getAbsolutePath(), option);
   	}
   	
@@ -212,24 +213,26 @@ public class Write extends Activity{
   	
   	/* 전화번호 불러오기 */
   	
-  	 	public  String getMyPhoneNumber()
-	    {
-	    	TelephonyManager mTelephonyMgr;
-	    	mTelephonyMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-	    	
-	    	return mTelephonyMgr.getLine1Number();
-	    }
-	    
-	    public  String getMy10DigitPhoneNumber()
-	    {
-	    	String s = getMyPhoneNumber();
-	    	return s.substring(0);
-	    	
-	    }
+  	 public String getMyPhoneNumber()
+     {
+     	TelephonyManager mTelephonyMgr;
+     	mTelephonyMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+     	
+     	return mTelephonyMgr.getLine1Number();
+     }
+     
+     public String getMy10DigitPhoneNumber()
+     {
+     	String s = getMyPhoneNumber();
+     	//return s.substring(0);
+     	return s.replace("-", "").replace("+82", "0");
+     	
+     }
 	    
 	    /* ======================================== */
 	    public class MyThread extends AsyncTask<Void, Void, Void> {
 
+	    	
 			@Override
 			protected Void doInBackground(Void... params) {
 				// TODO Auto-generated method stub
@@ -244,6 +247,7 @@ public class Write extends Activity{
 	    	try {
 				FileInputStream mFileInputStream = new FileInputStream(new File(filename));			
 				URL connectUrl = new URL(urlString);
+				
 				
 				//데이터 경계선
 				String delimiter = "\r\n--" + boundary + "\r\n";
