@@ -16,9 +16,9 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.json.JSONObject;
 
+import com.Relaybook.Option.PhoneNum;
 import com.relay.image.ImageDownloader;
 
-import relay.book.saveInform.GetPhone_Num;
 import android.app.*;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -61,7 +61,7 @@ public class Read extends Activity{
 	
 	void getInform(){
 
-		  String Ph_num = getMy10DigitPhoneNumber();
+		  String Ph_num = PhoneNum.getPhoneNum();
 		DefaultHttpClient client = new DefaultHttpClient();
 		
 		try {
@@ -91,49 +91,32 @@ public class Read extends Activity{
 			
 			filename = rece.getString("filename");
     
-	    TextView Title_Title = (TextView)findViewById(R.id.Title_Title);
-	    TextView Title = (TextView)findViewById(R.id.Title); // 책 제목
-	    Title.setText(rece.getString("title"));
-	
-	    TextView SubjectTitle = (TextView)findViewById(R.id.Subject_Title);
-	    TextView Subject = (TextView)findViewById(R.id.Subject); // 과목명
-	    Subject.setText(rece.getString("subject"));
-	    
-	    TextView PriceTitle = (TextView)findViewById(R.id.Price_Title);
-	    TextView Price = (TextView)findViewById(R.id.Price); // 가격
-	    Price.setText(rece.getString("price"));
-	    
-	    TextView PublisherTitle = (TextView)findViewById(R.id.Publisher_Title);
-	    TextView Publisher = (TextView)findViewById(R.id.Publisher); // 출판사
-	    Publisher.setText(rece.getString("publisher"));
-	    
-	    TextView WriterTitle = (TextView)findViewById(R.id.Writer_Title);
-	    TextView Writer = (TextView)findViewById(R.id.Writer); //가격
-	    Writer.setText(rece.getString("writer"));
-	    
-    
-	} catch (Exception e) {
-		e.printStackTrace();
-		client.getConnectionManager().shutdown();	// 연결 지연 종료		
-	}
+		    TextView Title_Title = (TextView)findViewById(R.id.Title_Title);
+		    TextView Title = (TextView)findViewById(R.id.Title); // 책 제목
+		    Title.setText(rece.getString("title"));
 		
+		    TextView SubjectTitle = (TextView)findViewById(R.id.Subject_Title);
+		    TextView Subject = (TextView)findViewById(R.id.Subject); // 과목명
+		    Subject.setText(rece.getString("subject"));
+		    
+		    TextView PriceTitle = (TextView)findViewById(R.id.Price_Title);
+		    TextView Price = (TextView)findViewById(R.id.Price); // 가격
+		    Price.setText(rece.getString("price"));
+		    
+		    TextView PublisherTitle = (TextView)findViewById(R.id.Publisher_Title);
+		    TextView Publisher = (TextView)findViewById(R.id.Publisher); // 출판사
+		    Publisher.setText(rece.getString("publisher"));
+		    
+		    TextView WriterTitle = (TextView)findViewById(R.id.Writer_Title);
+		    TextView Writer = (TextView)findViewById(R.id.Writer); //가격
+		    Writer.setText(rece.getString("writer"));
+		    
+    
+			} catch (Exception e) {
+				e.printStackTrace();
+				client.getConnectionManager().shutdown();	// 연결 지연 종료		
+			}
+			
 	}
-	
-	/* 전화번호 불러오기 */
-	public String getMyPhoneNumber()
-    {
-    	TelephonyManager mTelephonyMgr;
-    	mTelephonyMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-    	
-    	return mTelephonyMgr.getLine1Number();
-    }	    
-
-    public String getMy10DigitPhoneNumber()
-    {
-    	String s = getMyPhoneNumber();
-    	//return s.substring(0);
-    	return s.replace("-", "").replace("+82", "0");
-    	
-    }
 	
 }
