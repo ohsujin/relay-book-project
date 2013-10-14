@@ -5,6 +5,7 @@ import org.json.*;
 
 import relay.book.saveInform.SchoolList;
 
+import com.Relaybook.Option.PhoneNum;
 import com.http.Send_Recv.HttpHost;
 
 import android.app.*;
@@ -21,6 +22,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
 	HttpHost http = new HttpHost();
 	private  EditText passwordEdit;
 
+
 	SchoolList sch_list = new SchoolList(); //학교명단이 많아 따로 클래스로 분류
 	
 	@Override
@@ -32,6 +34,8 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         
         EditText editText = (EditText)findViewById(R.id.Phone);
         editText.setText(getMy10DigitPhoneNumber());
+        
+        PhoneNum.setPhoneNum(getMy10DigitPhoneNumber()); //PhoneNum class에 핸드폰 번호 저
         
 
         /* 서버를 통해 가입유무 확인 */

@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import com.Relaybook.Option.PhoneNum;
 import com.http.Send_Recv.Sell_inform_thread;
 
 import android.app.*;
@@ -32,12 +33,13 @@ public class Write extends Activity{
 	String boundary = "*****";	
 	/* ++++ ++++ ++++ ++++ ++++ ++++ */
 	
+	
 	/* 파일 업로드를 위한 인자값 */
 	String filename;
 //	Sell_inform_thread SellThread = new Sell_inform_thread();
 	MyThread mMyThread =null;
 	
-	String Subject, Title, Writer, publisher, Price, Quality; //판매 정보를 전송하기위함 변수
+	String Subject, Title, Writer, publisher, Price,Quality; //판매 정보를 전송하기위함 변수
 	
 	/* */
 	
@@ -46,8 +48,6 @@ public class Write extends Activity{
 	static int REQUEST_PICTURE = 1;
 	static int REQUEST_PHOTO_ALBUM = 2;
 
-	
-	//static String SAMPLEIMG = System.currentTimeMillis() + "-" + i +".png";	
 
 	
     /** Called when the activity is first created. */
@@ -75,15 +75,6 @@ public class Write extends Activity{
 		    	Price = ((EditText) findViewById(R.id.Price)).getText().toString();;
 		    	
 		    	
-		    	/* 판매정보 & 파일경로 전송 */
-//		    	SellThread.setBookSell_inform(Subject, Title, Writer, publisher, Price, "4.5",myNumber);
-//		    	SellThread.setFilepath(filename);
-		    	
-//		    	mMyThread = (Sell_inform_thread) new Sell_inform_thread().execute((Void) null);
-		    	
-		    	
-		    	/* ++++ ++++ ++++ ++++ ++++ ++++  */
-		    	
 		    	mMyThread = (MyThread) new MyThread().execute((Void) null);
 				
 			}
@@ -102,7 +93,8 @@ public class Write extends Activity{
 	    rating.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {               
 	    	@Override            
 	    	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {                 
-	    		tv01.setText("평점 : " + rating);               
+	    		tv01.setText("평점 : " + rating);    
+	    		Quality = Float.toString(rating);
 	    	}         
 	    }); 
 
@@ -171,10 +163,8 @@ public class Write extends Activity{
   		
   		filename = Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/" + "/img-" + 1 +".png"; //파일이름을 저장
 
-  		
   		BitmapFactory.Options option = new BitmapFactory.Options();
   		option.inSampleSize = 4;
-  		
   		
   		return BitmapFactory.decodeFile(file.getAbsolutePath(), option);
   	}
@@ -211,32 +201,17 @@ public class Write extends Activity{
   		
   	}
   	
-  	/* 전화번호 불러오기 */
-  	
-  	 public String getMyPhoneNumber()
-     {
-     	TelephonyManager mTelephonyMgr;
-     	mTelephonyMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-     	
-     	return mTelephonyMgr.getLine1Number();
-     }
-     
-     public String getMy10DigitPhoneNumber()
-     {
-     	String s = getMyPhoneNumber();
-     	//return s.substring(0);
-     	return s.replace("-", "").replace("+82", "0");
-     	
-     }
-	    
-	    /* ======================================== */
+  	/*
+  	 * 파일 업로드 
+  	 */
 	    public class MyThread extends AsyncTask<Void, Void, Void> {
 
 	    	
 			@Override
 			protected Void doInBackground(Void... params) {
 				// TODO Auto-generated method stub
-				HttpFileUpload("http://14.63.212.134/MyRelayServer/RecvBookInform.jsp");
+				// HttpFileUpload("http://14.63.212.134/MyRelayServer/RecvBookInform.jsp");
+				HttpFileUpload("http://192.168.0.11:8090/MyRelayServer/RecvBookInform.jsp");
 
 				return null;
 			}}
@@ -247,8 +222,7 @@ public class Write extends Activity{
 	    	try {
 				FileInputStream mFileInputStream = new FileInputStream(new File(filename));			
 				URL connectUrl = new URL(urlString);
-				
-				
+
 				//데이터 경계선
 				String delimiter = "\r\n--" + boundary + "\r\n";
 				StringBuffer postDataBuilder = new StringBuffer();
@@ -271,11 +245,10 @@ public class Write extends Activity{
 				postDataBuilder.append(delimiter);
 				postDataBuilder.append(setValue("Price", Price));
 				postDataBuilder.append(delimiter);
-//				postDataBuilder.append(setValue("Quality",Quality.toString()));
-//				postDataBuilder.append(delimiter);
-				postDataBuilder.append(setValue("PhoneNum", myNumber));
+				postDataBuilder.append(setValue("Quality",Quality));
 				postDataBuilder.append(delimiter);
-				
+				postDataBuilder.append(setValue("PhoneNum", PhoneNum.getPhoneNum()));
+				postDataBuilder.append(delimiter);
 				
 				
 				//파일 첨부
@@ -337,10 +310,19 @@ public class Write extends Activity{
 			}
 		}
 		
-		 public  String setValue(String key, String value) {
+		 private Object setFile(String key, float quality2) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public  String setValue(String key, String value) {
 		        return "Content-Disposition: form-data; name=\"" + key + "\"r\n\r\n"
 		                + value;
 		    }
+		public  String setValue_float(String key, float value) {
+	        return "Content-Disposition: form-data; name=\"" + key + "\"r\n\r\n"
+	                + value;
+	    }
 		 
 		    /**
 		     * 업로드할 파일에 대한 메타 데이터를 설정한다.
