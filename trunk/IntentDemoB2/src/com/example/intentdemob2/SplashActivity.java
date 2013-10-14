@@ -2,6 +2,7 @@ package com.example.intentdemob2;
 
 import android.app.*;
 import android.os.*;
+import android.view.*;
 
 public class SplashActivity extends Activity {
 
@@ -9,15 +10,15 @@ public class SplashActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
+	    requestWindowFeature(Window.FEATURE_NO_TITLE);
+	    
 	    setContentView(R.layout.splash);
-	    Handler handler = new Handler() {
-	     @Override
-	     public void handleMessage(Message msg)  {
-	    	 finish();
-	    	 
-	     	}
-	     };
-	     handler.sendEmptyMessageDelayed(0, 5000);
-	}
+	    Handler handler = new Handler(){
+	    	public void handleMessage(Message msg){
+	    		finish();
+	    	}
+	    };
 
+	    handler.sendEmptyMessageDelayed(0, 4000); 
+	}
 }
