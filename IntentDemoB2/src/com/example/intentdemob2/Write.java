@@ -86,7 +86,7 @@ public class Write extends Activity{
 	    rating = (RatingBar) findViewById(R.id.Quality);         
 	    tv01 = (TextView) findViewById(R.id.tv01);           
 	    rating.setStepSize((float) 0.5); //별 색깔이 1칸씩줄어들고 늘어남 0.5로하면 반칸씩 들어감         
-	    rating.setRating((float) 2.5); // 처음보여줄때(색깔이 한개도없음) default 값이 0  이다 
+	    rating.setRating((float) 0.0); // 처음보여줄때(색깔이 한개도없음) default 값이 0  이다 
 	    rating.setIsIndicator(false); //true - 별점만 표시 사용자가 변경 불가 , false - 사용자가 변경가능   
 	    
 	    

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
     android:fillViewport="true" 
-    android:background="@drawable/list_bg"
+    android:background="@drawable/write_bg"
      >
 
     <LinearLayout 
@@ -20,29 +20,40 @@
 		    
 		    	<ImageView
 		    	    android:id="@+id/imgView1"
-		    	    android:layout_width="80dp"
-		    	    android:layout_height="150dp"
+		    	    android:layout_width="110dp"
+		    	    android:layout_height="110dp"
+				    android:layout_marginLeft="5dp"
 		    	    android:src="@drawable/sample_img" />
 				    
 				<ImageView
 				    android:id="@+id/imgView2"
 				    android:src="@drawable/sample_img"
-				    android:layout_width="150dp"
-				    android:layout_height="150dp"
-				    android:layout_marginLeft="8dp"
+				    android:layout_width="110dp"
+				    android:layout_height="110dp"
+				    android:layout_marginLeft="10dp"
 				    />
 				    
 				<ImageView
 				    android:id="@+id/imgView3"
 				    android:src="@drawable/sample_img"
-				    android:layout_width="150dp"
-				    android:layout_height="150dp"
-				    android:layout_marginLeft="8dp"
+				    android:layout_width="110dp"
+				    android:layout_height="110dp"
+				    android:layout_marginLeft="10dp"
 				    />
 		</LinearLayout>
     
     
-    
+	    <Button
+			    android:id="@+id/put_Image"
+			    android:layout_width="match_parent"
+			    android:layout_height="50dp"
+			    android:layout_marginTop="10dp"
+			    android:onClick="onClickImg"
+			    android:background="#231815"
+			    android:textColor="#ffffff"
+			    android:text="사진 등록"
+			    />
+	    
 	<LinearLayout 
 		    android:layout_width="285dp"
 		    android:layout_height="wrap_content"
@@ -51,13 +62,7 @@
 		
 		  	
 			    
-		<Button
-		    android:id="@+id/put_Image"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:onClick="onClickImg"
-		    android:text="사진 등록"
-		    />
+		
 
 		<LinearLayout
 		    android:layout_width="wrap_content"
@@ -161,7 +166,8 @@
 	        <RatingBar
 	            android:id="@+id/Quality"
 	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content" />
+	            android:layout_height="wrap_content"
+	            style="?android:attr/ratingBarStyleIndicator"/>
 	        
 	        <TextView android:layout_height="wrap_content"                           
 	            android:layout_width="wrap_content"
