@@ -18,7 +18,7 @@
 	    />
 	<ImageView
 	    android:id="@+id/imgView"
-	    android:src="@drawable/sample_img"
+	    android:src="@drawable/sample_img1"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    />

@@ -23,11 +23,11 @@
 		    	    android:layout_width="110dp"
 		    	    android:layout_height="110dp"
 				    android:layout_marginLeft="5dp"
-		    	    android:src="@drawable/sample_img" />
+		    	    android:src="@drawable/sample_img1" />
 				    
 				<ImageView
 				    android:id="@+id/imgView2"
-				    android:src="@drawable/sample_img"
+				    android:src="@drawable/sample_img2"
 				    android:layout_width="110dp"
 				    android:layout_height="110dp"
 				    android:layout_marginLeft="10dp"
@@ -35,7 +35,7 @@
 				    
 				<ImageView
 				    android:id="@+id/imgView3"
-				    android:src="@drawable/sample_img"
+				    android:src="@drawable/sample_img3"
 				    android:layout_width="110dp"
 				    android:layout_height="110dp"
 				    android:layout_marginLeft="10dp"
