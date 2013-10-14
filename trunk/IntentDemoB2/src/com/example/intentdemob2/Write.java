@@ -148,7 +148,7 @@ public class Write extends Activity{
   		
   		//카메라 호출 intent 생성
   		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-  		File file = new File(Environment.getExternalStorageDirectory(), "img-" + i +".png");
+  		File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/"  , "img-" + i +".png");
   		
   		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
   		startActivityForResult(intent, REQUEST_PICTURE);  		
@@ -167,9 +167,9 @@ public class Write extends Activity{
   	//촬영한 사진을 수정하기 위해서
   	Bitmap loadPicture() {
 
-  		File file = new File(Environment.getExternalStorageDirectory(), "img-" + i +".png");
+  		File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/" , "img-" + i +".png");
   		
-  		filename = Environment.getExternalStorageDirectory() + "/img-" + 1 +".png"; //파일이름을 저장
+  		filename = Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/" + "/img-" + 1 +".png"; //파일이름을 저장
 
   		
   		BitmapFactory.Options option = new BitmapFactory.Options();
@@ -190,22 +190,22 @@ public class Write extends Activity{
   		if(requestCode == REQUEST_PICTURE) {
   			for(i=1; i<=3; i++){
 	  			if(i==1){
-	  				iv1.setImageBitmap(loadPicture());
+	  				iv3.setImageBitmap(loadPicture());
 	  			} else if(i==2){
 	  				iv2.setImageBitmap(loadPicture());
 	  			} else {
-	  				iv3.setImageBitmap(loadPicture());
+	  				iv1.setImageBitmap(loadPicture());
 	  			}
   			}
   		}
   		
   		if(requestCode == REQUEST_PHOTO_ALBUM) {
   			if(i==1){
-  				iv1.setImageURI(data.getData());
+  				iv3.setImageURI(data.getData());
   			} else if(i==2){
   				iv2.setImageURI(data.getData());
   			} else {
-  				iv3.setImageURI(data.getData());
+  				iv1.setImageURI(data.getData());
   			}
   		}
   		
