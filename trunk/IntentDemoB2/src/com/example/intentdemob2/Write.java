@@ -210,8 +210,8 @@ public class Write extends Activity{
 			@Override
 			protected Void doInBackground(Void... params) {
 				// TODO Auto-generated method stub
-				// HttpFileUpload("http://14.63.212.134/MyRelayServer/RecvBookInform.jsp");
-				HttpFileUpload("http://192.168.0.11:8090/MyRelayServer/RecvBookInform.jsp");
+				 HttpFileUpload("http://14.63.212.134/MyRelayServer/RecvBookInform.jsp");
+//				HttpFileUpload("http://192.168.0.11:8090/MyRelayServer/RecvBookInform.jsp");
 
 				return null;
 			}}
