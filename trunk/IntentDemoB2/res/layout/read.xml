@@ -119,9 +119,34 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textColor="#000000" />
+			
 		</LinearLayout>
-				
+		<LinearLayout 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp" >
+			
+			<TextView
+			    android:id="@+id/Qulity_Title"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="상태 : "
+				android:textColor="#000000" />
+			
+			<!-- 밑에 뷰가 DB의 저자 받아올 뷰 -->
+			
+		</LinearLayout>
+
+		<RatingBar
+		    android:id="@+id/Quality_view"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content" />
 		
+		<TextView android:layout_height="wrap_content"                           
+	            android:layout_width="wrap_content"
+	            android:layout_gravity="right" 
+	            android:textColor="#000000"                      
+	            android:id="@+id/tv01" />  
 			
 	</LinearLayout>
 </ScrollView>
