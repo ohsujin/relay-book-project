@@ -20,6 +20,7 @@ public class MainPage extends Activity {
 			}
 		});
 		
+		
 		Button btn2 = (Button)findViewById(R.id.Sell);
 		btn2.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View v){

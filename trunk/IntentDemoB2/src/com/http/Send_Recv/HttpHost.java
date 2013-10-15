@@ -71,17 +71,18 @@ public class HttpHost {
 	  //------------------------------ 
 		public void HttpPostData(String msg){
 			try{
-				HttpClient client = new DefaultHttpClient();
-//				   String postURL = "http://192.168.25.6:8080/MyServer/JSONServer.jsp";
+					HttpClient client = new DefaultHttpClient();
+				
 				   String postURL = "http://14.63.212.134/MyRelayServer/JSONServer.jsp";
-//				   String postURL = "http://121.156.253.22/hello.py";
+
 				   
 				 
 				   HttpPost post = new HttpPost(postURL);
 				   List params = new ArrayList(); // 파라미터를 List에 담아서 보냅니다.
+				  
 				   params.add(new BasicNameValuePair("regi_JSON", msg)); //파라미터 이름, 보낼 데이터 순입니다.
-
 				   
+  	
 				   UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params,HTTP.UTF_8);
 				   post.setEntity(ent);
 				   HttpResponse responsePOST = client.execute(post);
