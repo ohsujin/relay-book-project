@@ -44,6 +44,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         System.out.println(regi_Chk);
         
         
+        
         if(regi_Chk.equalsIgnoreCase(" join")){  // 서버에서 join을 반환하면 가입된것이므로 로그인 화면을 건너 뛰게 해준다.
         	System.out.println("가입됨: "+regi_Chk);
         	//finish(); //이전 액티비티 종료
