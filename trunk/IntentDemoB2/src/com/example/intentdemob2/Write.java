@@ -84,7 +84,7 @@ public class Write extends Activity{
 	    scrollview = (ScrollView) findViewById(R.id.Scroll);
 	    
 	    rating = (RatingBar) findViewById(R.id.Quality);         
-	    tv01 = (TextView) findViewById(R.id.tv01);           
+	    //tv01 = (TextView) findViewById(R.id.tv01);           
 	    rating.setStepSize((float) 0.5); //별 색깔이 1칸씩줄어들고 늘어남 0.5로하면 반칸씩 들어감         
 	    rating.setRating((float) 0.0); // 처음보여줄때(색깔이 한개도없음) default 값이 0  이다 
 	    rating.setIsIndicator(false); //true - 별점만 표시 사용자가 변경 불가 , false - 사용자가 변경가능   
@@ -93,7 +93,7 @@ public class Write extends Activity{
 	    rating.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {               
 	    	@Override            
 	    	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {                 
-	    		tv01.setText("평점 : " + rating);    
+	    		//tv01.setText("평점 : " + rating);    
 	    		Quality = Float.toString(rating);
 	    	}         
 	    }); 
@@ -168,6 +168,7 @@ public class Write extends Activity{
   		
   		return BitmapFactory.decodeFile(file.getAbsolutePath(), option);
   	}
+  	
   	
   	@Override
   	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
