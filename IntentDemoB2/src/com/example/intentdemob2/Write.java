@@ -78,7 +78,6 @@ public class Write extends Activity{
 				
 			}
 		});
-		
         
 	    scrollview = (ScrollView) findViewById(R.id.Scroll);
 	    
@@ -160,10 +159,8 @@ public class Write extends Activity{
   	
   	//촬영한 사진을 수정하기 위해서
   	Bitmap loadPicture() {
-
-
   		
-  		filename = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-" + i +".png"; //파일이름을 저장
+  		filename = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "img-" + i +".png"; //파일이름을 저장
   		
   		BitmapFactory.Options option = new BitmapFactory.Options();
   		option.inSampleSize = 8;
@@ -226,14 +223,13 @@ public class Write extends Activity{
 			@Override
 			protected Void doInBackground(Void... params) {
 				// TODO Auto-generated method stub
-				 HttpFileUpload("http://14.63.212.134/MyRelayServer/RecvBookInform.jsp");
-//				HttpFileUpload("http://192.168.0.11:8090/MyRelayServer/RecvBookInform.jsp");
+//				 HttpFileUpload("http://14.63.212.134/MyRelayServer/RecvBookInform.jsp");
+				HttpFileUpload("http://121.156.253.58:8090/MyRelayServer/RecvBookInform.jsp");
 
 				return null;
 			}}
   	
 	    private boolean HttpFileUpload(String urlString) {
-	    	
 	    	
 	    	try {
 				FileInputStream mFileInputStream = new FileInputStream(new File(filename));			
@@ -266,9 +262,14 @@ public class Write extends Activity{
 				postDataBuilder.append(setValue("PhoneNum", PhoneNum.getPhoneNum()));
 				postDataBuilder.append(delimiter);
 				
+				System.out.println("파일명 : "+filename);
 				
 				//파일 첨부
 				postDataBuilder.append(setFile("upload2",filename));
+//				postDataBuilder.append(delimiter);
+//				postDataBuilder.append(setFile("upload1",Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "img-2.png"));
+//				postDataBuilder.append(delimiter);
+//				postDataBuilder.append(setFile("upload1",Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "img-3.png"));
 				postDataBuilder.append(lineEnd);
 
 				// open connection 
@@ -281,11 +282,13 @@ public class Write extends Activity{
 				conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
 				
 				// write data
-					DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(conn.getOutputStream()));
+				DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(conn.getOutputStream()));
 
 					
 				//위에서 작성한 메타데이터를 먼저 전송(한글때메 UTF-8 메소드 사용)
 				dos.writeUTF(postDataBuilder.toString());
+				
+				System.out.println(postDataBuilder.toString());
 		
 				int bytesAvailable = mFileInputStream.available();
 				int maxBufferSize = 1024;
@@ -313,9 +316,16 @@ public class Write extends Activity{
 				int ch;
 				InputStream is = conn.getInputStream();
 				StringBuffer b =new StringBuffer();
+					
+					
 				while( ( ch = is.read() ) != -1 ){
 					b.append( (char)ch );
 				}
+				
+				if(b.toString().trim().equals("RecvOK")){
+					System.out.println("응답 : "+b.toString().trim());
+				}
+				
 				dos.close();
 				
 				return true;
@@ -325,29 +335,20 @@ public class Write extends Activity{
 				return false;
 			}
 		}
+	    
 		
-		 private Object setFile(String key, float quality2) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
 		public  String setValue(String key, String value) {
-		        return "Content-Disposition: form-data; name=\"" + key + "\"r\n\r\n"
+		        return "Content-Disposition: form-data; name=\"" + key + "\"\n\r\n"
 		                + value;
-		    }
-		public  String setValue_float(String key, float value) {
-	        return "Content-Disposition: form-data; name=\"" + key + "\"r\n\r\n"
-	                + value;
-	    }
-		 
+		}	 
 		    /**
 		     * 업로드할 파일에 대한 메타 데이터를 설정한다.
 		     * @param key : 서버에서 사용할 파일 변수명
 		     * @param fileName : 서버에서 저장될 파일명
 		     * @return
 		     */
-		    public  String setFile(String key, String fileName) {
-		        return "Content-Disposition: form-data; name=\"" + key
-		                + "\";filename=\"" + fileName + "\"\r\n";
-		    }
+	    public  String setFile(String key, String fileName) {
+	        return "Content-Disposition: form-data; name=\"" + key
+	                + "\";filename=\"" + fileName ;
+	    }
 }
