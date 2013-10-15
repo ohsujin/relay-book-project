@@ -38,7 +38,7 @@
         <activity android:name=".IntentCallee" android:label="IntentCallee"></activity>
         <activity android:name=".IntentCaller" android:label="IntentCaller"></activity>
         <activity android:name=".MainPage" android:label="MainPage"></activity>
-        <activity android:name=".Write1" android:label="Write"></activity>
+        <activity android:name=".Write" android:label="Write"></activity>
         <activity android:name=".Listviewtest" android:label="Listviewtest"></activity>
         <activity android:name=".PictureCtrlActivity" android:label="PictureCtrlActivity"></activity>
         <activity android:name=".Read" android:label="Read"></activity>
