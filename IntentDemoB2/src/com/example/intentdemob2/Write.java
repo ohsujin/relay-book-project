@@ -10,6 +10,7 @@ import com.http.Send_Recv.Sell_inform_thread;
 import android.app.*;
 import android.content.*;
 import android.graphics.*;
+import android.graphics.Bitmap.CompressFormat;
 import android.net.*;
 import android.os.*;
 import android.provider.*;
@@ -65,9 +66,7 @@ public class Write extends Activity{
 				//MainPage.class이 부분을 이동할 곳으로 수정
 //				Intent intent = new Intent(Write.this, MainPage.class); 
 //		    	startActivity(intent);
-		    	
-		    	
-		    	
+		    			    	
 		    	Subject = ((EditText) findViewById(R.id.Subject)).getText().toString();;
 		    	Title = ((EditText) findViewById(R.id.Title)).getText().toString();;
 		    	Writer =((EditText) findViewById(R.id.Writer)).getText().toString();;
@@ -108,6 +107,8 @@ public class Write extends Activity{
 	//button 클릭
     Dialog dialog;
     public void onClickImg(View v) {
+    	i = 1;
+    	
     	switch(v.getId()) {
     	case R.id.put_Image:
     		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
@@ -125,6 +126,7 @@ public class Write extends Activity{
     		++i;
     		dialog.dismiss();
     		takePicture();
+    		
     		break;
     	case R.id.photoAlbum:
     		dialog.dismiss();
@@ -140,7 +142,7 @@ public class Write extends Activity{
   		
   		//카메라 호출 intent 생성
   		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-  		File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/"  , "img-" + i +".png");
+  		File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/"  , "img-" + i +".png");
   		
   		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
   		startActivityForResult(intent, REQUEST_PICTURE);  		
@@ -159,17 +161,30 @@ public class Write extends Activity{
   	//촬영한 사진을 수정하기 위해서
   	Bitmap loadPicture() {
 
-  		File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/" , "img-" + i +".png");
-  		
-  		filename = Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/" + "/img-" + 1 +".png"; //파일이름을 저장
 
-  		BitmapFactory.Options option = new BitmapFactory.Options();
-  		option.inSampleSize = 4;
   		
-  		return BitmapFactory.decodeFile(file.getAbsolutePath(), option);
-  	}
-  	
-  	
+  		filename = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-" + i +".png"; //파일이름을 저장
+  		
+  		BitmapFactory.Options option = new BitmapFactory.Options();
+  		option.inSampleSize = 8;
+  		Bitmap src = BitmapFactory.decodeFile(filename, option);
+  		Bitmap resized = Bitmap.createScaledBitmap(src, 400, 530, true);
+
+  		/* 
+  		 * 리사이즈된 bitmap 파일을 sdcard에 다시 저장해준다.
+  		 */
+  		try {
+  	       FileOutputStream out = new FileOutputStream(filename);
+  	       resized.compress(Bitmap.CompressFormat.PNG, 90, out);
+  	       out.close();
+	  	} catch (Exception e) {
+	  	       e.printStackTrace();
+	  	}
+	  	/* ++++ ++++ ++++ ++++ ++++ ++++ ++++ */
+	  		
+	  		return resized;
+	  	}
+
   	@Override
   	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
   		// TODO Auto-generated method stub
@@ -177,18 +192,18 @@ public class Write extends Activity{
   		
   		if(resultCode != RESULT_OK)
   			return;
-  		
-  		if(requestCode == REQUEST_PICTURE) {
-  			for(i=1; i<=3; i++){
+  		  		
 	  			if(i==1){
 	  				iv3.setImageBitmap(loadPicture());
 	  			} else if(i==2){
 	  				iv2.setImageBitmap(loadPicture());
+	  				i--;
 	  			} else {
 	  				iv1.setImageBitmap(loadPicture());
+	  				i--;
 	  			}
-  			}
-  		}
+  			
+  		
   		
   		if(requestCode == REQUEST_PHOTO_ALBUM) {
   			if(i==1){
