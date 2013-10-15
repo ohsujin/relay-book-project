@@ -8,8 +8,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="230dp"
+        android:layout_gravity="center"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -21,88 +21,116 @@
                 android:layout_width="36px"
                 android:layout_height="31px"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:src="@drawable/university" />
-
-            <AutoCompleteTextView
-                android:id="@+id/University"
-                android:layout_width="208dp"
-                android:layout_height="wrap_content"
-                android:completionHint="목록에서 클릭하세요."
-                android:completionThreshold="1"
-                android:ems="10"
-                android:hint="대학교명"
-                android:background="@null"
-                android:singleLine="true"
-                android:width="250dp" >
-
-                <requestFocus />
-            </AutoCompleteTextView>
+			
+            <LinearLayout
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:orientation="vertical" >
+		        
+		            <AutoCompleteTextView
+		                android:id="@+id/University"
+		                android:layout_width="208dp"
+		                android:layout_height="wrap_content"
+		                android:completionHint="목록에서 클릭하세요."
+		                android:completionThreshold="1"
+		                android:ems="10"
+		                android:hint="대학교명"
+		                android:background="@null"
+		                android:singleLine="true"
+		                android:width="250dp" >
+		
+		                <requestFocus />
+		            </AutoCompleteTextView>
+		            
+		            <ImageView
+			            android:id="@+id/imageView1"
+			            android:layout_width="wrap_content"
+			            android:layout_height="8dp"
+			            android:src="@drawable/line" />
+            </LinearLayout>
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="156dp"
-            android:layout_height="8dp"
-            android:src="@drawable/line" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp" >
+            android:layout_marginTop="25dp" >
 
             <ImageView
                 android:id="@+id/phone_img"
                 android:layout_width="39px"
                 android:layout_height="15px"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="17dp"
+                android:layout_marginTop="10dp"
                 android:src="@drawable/phone" />
 
-            <EditText
-                android:id="@+id/Phone"
-                android:layout_width="208dp"
-                android:layout_height="wrap_content"
-                android:editable="false"
-                android:background="@null"
-                android:ems="10"
-                android:hint="핸드폰 번호"
-                android:singleLine="true"
-                android:width="250dp" >
-            </EditText>
+            <LinearLayout
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:orientation="vertical" >
+		            
+	            <EditText
+	                android:id="@+id/Phone"
+	                android:layout_width="208dp"
+	                android:layout_height="wrap_content"
+	                android:editable="false"
+	                android:background="@null"
+	                android:ems="10"
+	                android:hint="핸드폰 번호"
+	                android:singleLine="true"
+	                android:width="250dp" >
+	            </EditText>
+	            <ImageView
+			            android:id="@+id/imageView1"
+			            android:layout_width="wrap_content"
+			            android:layout_height="8dp"
+			            android:src="@drawable/line" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp" >
+            android:layout_marginTop="25dp" >
 
             <ImageView
                 android:id="@+id/pw_img"
                 android:layout_width="36px"
                 android:layout_height="36px"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="6dp"
                 android:src="@drawable/pw" />
-
-            <EditText
-                android:id="@+id/Password"
-                android:layout_width="208dp"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:singleLine="true"
-                android:ems="10"
-                android:hint="비밀번호"
-                android:inputType="number"
-                android:maxLength="4"
-                android:password="true"
-                android:width="250dp" />
+			
+            <LinearLayout
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:orientation="vertical" >
+	            
+	            <EditText
+	                android:id="@+id/Password"
+	                android:layout_width="208dp"
+	                android:layout_height="wrap_content"
+	                android:background="@null"
+	                android:singleLine="true"
+	                android:ems="10"
+	                android:hint="비밀번호"
+	                android:inputType="number"
+	                android:maxLength="4"
+	                android:password="true"
+	                android:width="250dp" />
+	            <ImageView
+			            android:id="@+id/imageView1"
+			            android:layout_width="wrap_content"
+			            android:layout_height="8dp"
+			            android:src="@drawable/line" />
+            </LinearLayout>
         </LinearLayout>
 
         <ImageButton
             android:id="@+id/Send"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="50dp"
             android:layout_marginTop="30dp"
             android:background="#00000000"
             android:src="@drawable/creat_account"
