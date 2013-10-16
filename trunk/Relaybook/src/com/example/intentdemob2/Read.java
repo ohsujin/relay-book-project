@@ -34,20 +34,27 @@ public class Read extends Activity{
 	 URL myFileUrl = null;
 	 
 	 private static final String URL = "http://14.63.212.134:8080/MyRelayServer/Image/";
-	static String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/send.jsp";
+	static String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/Send.jsp";
 	
 	String filename = null;
 	 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.read);
-	    
+	    	
+	    int i=1;
 	    	getInform();
+	    	
 	    	
 	    	System.out.println("파일 이름 : "+filename);
 	    	
-		    ImageView img = (ImageView)findViewById(R.id.Img); // 이미지
-			ImageDownloader.download(URL+filename, img);
+		    ImageView img1 = (ImageView)findViewById(R.id.Img1); // 이미지
+		    ImageView img2 = (ImageView)findViewById(R.id.Img2); // 이미지
+		    ImageView img3 = (ImageView)findViewById(R.id.Img3); // 이미지
+		    
+			ImageDownloader.download(URL+filename+"_1.png", img1);
+			ImageDownloader.download(URL+filename+"_2.png", img2);
+			ImageDownloader.download(URL+filename+"_3.png", img3);
 			
 		    
 			String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/send.jsp";
