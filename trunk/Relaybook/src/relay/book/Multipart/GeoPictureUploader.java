@@ -16,8 +16,8 @@ public class GeoPictureUploader
 {
 	String TAG = "RelayBook";
 //    static String serviceDomain = "http://staging.abaqus.net";
-//    static String postUrl = "http://14.63.212.134/MyRelayServer/RecvBookInform.jsp";
-    static String postUrl = "http://192.168.0.9:8090/MyRelayServer/RecvBookInform.jsp";
+    static String postUrl = "http://14.63.212.134/MyRelayServer/RecvBookInform.jsp";
+//    static String postUrl = "http://121.156.253.58:8090/MyRelayServer/RecvBookInform.jsp";
     static String CRLF = "\r\n"; 
     static String twoHyphens = "--"; 
     static String boundary = "*****Relaybook*****"; 
@@ -62,6 +62,8 @@ public class GeoPictureUploader
                 FileInputStream fileInputStream1 = new FileInputStream(uploadFile1); 
                 FileInputStream fileInputStream2 = new FileInputStream(uploadFile2); 
                 FileInputStream fileInputStream3 = new FileInputStream(uploadFile3);
+                
+                StringBuffer postDataBuilder = new StringBuffer(); // 한글처리를 
                
                 URL connectURL = new URL(postUrl);
                 HttpURLConnection conn = (HttpURLConnection)connectURL.openConnection(); 
@@ -81,7 +83,7 @@ public class GeoPictureUploader
                 
                 dataStream = new DataOutputStream(conn.getOutputStream()); 
 
-                writeFormField("Subject", Subject);
+                
                 writeFormField("Title", Title);
                 writeFormField("Writer", Writer);
                 writeFormField("publisher", Publisher);
@@ -93,10 +95,11 @@ public class GeoPictureUploader
                 writeFileField("photo1", pictureFileName1, "image/jpg", fileInputStream1);
                 writeFileField("photo2", pictureFileName2, "image/jpg", fileInputStream2);
                 writeFileField("photo3", pictureFileName3, "image/jpg", fileInputStream3);
+               
                 
                 // final closing boundary line
                 dataStream.writeBytes(twoHyphens + boundary + twoHyphens + CRLF); 
-
+                
                 fileInputStream1.close(); 
                 fileInputStream2.close(); 
                 fileInputStream3.close(); 
@@ -173,7 +176,7 @@ public class GeoPictureUploader
             dataStream.writeBytes(twoHyphens + boundary + CRLF);    
             dataStream.writeBytes("Content-Disposition: form-data; name=\"" + fieldName + "\"" + CRLF);
             dataStream.writeBytes(CRLF);
-            dataStream.writeBytes(fieldValue);
+            dataStream.writeUTF(fieldValue); //파라미터의 값은 한글이 올수도 있으므로 UTF-8로 변환하여 저장해주면 서버에서 받을때 한글이 깨지지 않고 출력된다.
             dataStream.writeBytes(CRLF);
         }
         catch(Exception e)
