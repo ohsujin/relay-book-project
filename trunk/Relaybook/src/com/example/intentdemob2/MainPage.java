@@ -15,7 +15,9 @@ public class MainPage extends Activity {
         Button btn1 = (Button)findViewById(R.id.Buy);
 		btn1.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View v){
-				Intent intent = new Intent(MainPage.this, Tab.class);
+
+				Intent intent = new Intent(MainPage.this, Read.class);
+
 				startActivity(intent);
 				
 				finish();
