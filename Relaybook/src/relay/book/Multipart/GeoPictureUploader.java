@@ -10,50 +10,59 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import android.util.Log;
+
 public class GeoPictureUploader
 {
-    static String serviceDomain = "http://staging.abaqus.net";
-    static String postUrl = "http://14.63.212.134/MyRelayServer/RecvBookInform.jsp";
+	String TAG = "RelayBook";
+//    static String serviceDomain = "http://staging.abaqus.net";
+//    static String postUrl = "http://14.63.212.134/MyRelayServer/RecvBookInform.jsp";
+    static String postUrl = "http://192.168.0.9:8090/MyRelayServer/RecvBookInform.jsp";
     static String CRLF = "\r\n"; 
     static String twoHyphens = "--"; 
-    static String boundary = "*****mgd*****"; 
+    static String boundary = "*****Relaybook*****"; 
 
     private String pictureFileName = null;
-    private String name = null;
-    private String password = null;
+    private String Subject, Title, Writer, Publisher, Price,Quality,PhoneNum;
     private DataOutputStream dataStream = null;
 
     enum ReturnCode { noPicture, unknown, http201, http400, http401, http403, http404, http500};
 
-    public GeoPictureUploader(String name, String password) 
+    public GeoPictureUploader(String Subject, String Title, String Writer,String Publisher, String Price, String Quality, String PhoneNum ) 
     {
-        this.name = name;
-        this.password = password;
+        this.Subject = Subject;
+        this.Title = Title;
+        this.Writer = Writer;
+        this.Publisher = Publisher;
+        this.Price = Price;
+        this.Quality = Quality;
+        this.PhoneNum = PhoneNum;
     }
 
-    public static void setServiceDomain(String domainName)
-    {
-        serviceDomain = domainName;
-    }
+//    public static void setServiceDomain(String domainName)
+//    {
+//        serviceDomain = domainName;
+//    }
+//
+//    public static String getServiceDomain()
+//    {
+//        return serviceDomain;
+//    }
 
-    public static String getServiceDomain()
+    public ReturnCode uploadPicture(String pictureFileName1,String pictureFileName2,String pictureFileName3)
     {
-        return serviceDomain;
-    }
-
-    public ReturnCode uploadPicture(String pictureFileName,String pictureFileName1)
-    {
-    	
-    	
         this.pictureFileName = pictureFileName;
-        File uploadFile = new File(pictureFileName); 
         File uploadFile1 = new File(pictureFileName1); 
+        File uploadFile2 = new File(pictureFileName2);
+        File uploadFile3 = new File(pictureFileName3); 
 
-        if (uploadFile.exists())
+        if (uploadFile1.exists())
             try 
             { 
-                FileInputStream fileInputStream = new FileInputStream(uploadFile); 
                 FileInputStream fileInputStream1 = new FileInputStream(uploadFile1); 
+                FileInputStream fileInputStream2 = new FileInputStream(uploadFile2); 
+                FileInputStream fileInputStream3 = new FileInputStream(uploadFile3);
+               
                 URL connectURL = new URL(postUrl);
                 HttpURLConnection conn = (HttpURLConnection)connectURL.openConnection(); 
 
@@ -69,27 +78,36 @@ public class GeoPictureUploader
 
                 conn.connect();
 
+                
                 dataStream = new DataOutputStream(conn.getOutputStream()); 
 
-                writeFormField("login", name);
-                writeFormField("password", password);
-                writeFileField("photo1", pictureFileName, "image/jpg", fileInputStream);
-                writeFileField("photo1", pictureFileName1, "image/jpg", fileInputStream1);
-                
-                System.out.println("파일전송!!!!!!!");
+                writeFormField("Subject", Subject);
+                writeFormField("Title", Title);
+                writeFormField("Writer", Writer);
+                writeFormField("publisher", Publisher);
+                writeFormField("Price", Price);
+                writeFormField("Quality", Quality);
+                writeFormField("PhoneNum", PhoneNum);
 
+                // 파일전송
+                writeFileField("photo1", pictureFileName1, "image/jpg", fileInputStream1);
+                writeFileField("photo2", pictureFileName2, "image/jpg", fileInputStream2);
+                writeFileField("photo3", pictureFileName3, "image/jpg", fileInputStream3);
+                
                 // final closing boundary line
                 dataStream.writeBytes(twoHyphens + boundary + twoHyphens + CRLF); 
 
-                fileInputStream.close(); 
+                fileInputStream1.close(); 
+                fileInputStream2.close(); 
+                fileInputStream3.close(); 
                 dataStream.flush(); 
                 dataStream.close();
                 dataStream = null;
 
+                
                 String response = getResponse(conn);
-                int responseCode = conn.getResponseCode();
-
-                if (response.contains("uploaded successfully"))
+                
+                if (response.contains("RecvOK"))
                     return ReturnCode.http201;
                 else 
                     // for now assume bad name/password
@@ -129,7 +147,6 @@ public class GeoPictureUploader
             int             len = dis.read(data, 0, 1024);
 
             dis.close();
-            int responseCode = conn.getResponseCode();
 
             if (len > 0)
                 return new String(data, 0, len);
@@ -138,44 +155,11 @@ public class GeoPictureUploader
         }
         catch(Exception e)
         {
-            System.out.println("GeoPictureUploader: biffed it getting HTTPResponse");
-            //Log.e(TAG, "GeoPictureUploader: biffed it getting HTTPResponse");
+            Log.e(TAG, "GeoPictureUploader: biffed it getting HTTPResponse");
             return "";
         }
     }
 
-    /**
-     *  this mode of reading response no good either
-     */
-    private String getResponseOrig(HttpURLConnection conn)
-    {
-        InputStream is = null;
-        try 
-        {
-            is = conn.getInputStream(); 
-            // scoop up the reply from the server
-            int ch; 
-            StringBuffer sb = new StringBuffer(); 
-            while( ( ch = is.read() ) != -1 ) { 
-                sb.append( (char)ch ); 
-            } 
-            return sb.toString();   // TODO Auto-generated method stub
-        }
-        catch(Exception e)
-        {
-            System.out.println("GeoPictureUploader: biffed it getting HTTPResponse");
-            //Log.e(TAG, "GeoPictureUploader: biffed it getting HTTPResponse");
-        }
-        finally 
-        {
-            try {
-            if (is != null)
-                is.close();
-            } catch (Exception e) {}
-        }
-
-        return "";
-    }
 
     /**
      * write one form field to dataSream
