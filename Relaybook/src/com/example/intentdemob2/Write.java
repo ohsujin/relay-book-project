@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import relay.book.Multipart.GeoPictureUploader;
+
 import com.Relaybook.Option.PhoneNum;
 import com.http.Send_Recv.Sell_inform_thread;
 
@@ -229,14 +231,21 @@ public class Write extends Activity{
 			protected Void doInBackground(Void... params) {
 				// TODO Auto-generated method stub
 				 HttpFileUpload("http://14.63.212.134/MyRelayServer/RecvBookInform.jsp");
-//				HttpFileUpload("http://192.168.0.11:8090/MyRelayServer/RecvBookInform.jsp");
+//				HttpFileUpload("http://192.168.105.34:8090/MyRelayServer/TestMultipart.jsp");
 
 				return null;
 			}}
   	
 	    private boolean HttpFileUpload(String urlString) {
 	    	
+	    	GeoPictureUploader send = new GeoPictureUploader("sujin", "soft");
 	    	
+	    	send.uploadPicture(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-1.png",  Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-2.png");
+	    	
+	    	
+			return false;
+	    	
+	    	/*
 	    	try {
 				FileInputStream mFileInputStream = new FileInputStream(new File(filename));			
 				URL connectUrl = new URL(urlString);
@@ -326,6 +335,7 @@ public class Write extends Activity{
 				e.printStackTrace();
 				return false;
 			}
+			*/
 		}
 		
 		 private Object setFile(String key, float quality2) {
@@ -341,7 +351,7 @@ public class Write extends Activity{
 	        return "Content-Disposition: form-data; name=\"" + key + "\"r\n\r\n"
 	                + value;
 	    }
-		 
+
 		    /**
 		     * 업로드할 파일에 대한 메타 데이터를 설정한다.
 		     * @param key : 서버에서 사용할 파일 변수명
