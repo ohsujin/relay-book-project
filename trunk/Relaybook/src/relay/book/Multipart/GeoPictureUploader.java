@@ -83,14 +83,14 @@ public class GeoPictureUploader
                 
                 dataStream = new DataOutputStream(conn.getOutputStream()); 
 
-                
+                writeFormField("Subject", Subject);
                 writeFormField("Title", Title);
                 writeFormField("Writer", Writer);
                 writeFormField("publisher", Publisher);
                 writeFormField("Price", Price);
                 writeFormField("Quality", Quality);
                 writeFormField("PhoneNum", PhoneNum);
-
+                
                 // 파일전송
                 writeFileField("photo1", pictureFileName1, "image/jpg", fileInputStream1);
                 writeFileField("photo2", pictureFileName2, "image/jpg", fileInputStream2);
@@ -178,6 +178,7 @@ public class GeoPictureUploader
             dataStream.writeBytes(CRLF);
             dataStream.writeUTF(fieldValue); //파라미터의 값은 한글이 올수도 있으므로 UTF-8로 변환하여 저장해주면 서버에서 받을때 한글이 깨지지 않고 출력된다.
             dataStream.writeBytes(CRLF);
+            
         }
         catch(Exception e)
         {
