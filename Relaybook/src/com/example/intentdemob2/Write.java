@@ -64,8 +64,7 @@ public class Write extends Activity{
         button.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View v){
 				//MainPage.class이 부분을 이동할 곳으로 수정
-//				Intent intent = new Intent(Write.this, MainPage.class); 
-//		    	startActivity(intent);
+
 		    			    	
 		    	Subject = ((EditText) findViewById(R.id.Subject)).getText().toString();;
 		    	Title = ((EditText) findViewById(R.id.Title)).getText().toString();;
@@ -76,6 +75,8 @@ public class Write extends Activity{
 		    	
 		    	mMyThread = (MyThread) new MyThread().execute((Void) null);
 				
+				Intent intent = new Intent(Write.this, MainPage.class); 
+		    	startActivity(intent);
 			}
 		});
 		
