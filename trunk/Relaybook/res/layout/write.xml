@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:fillViewport="true" 
+    android:background="@drawable/write_bg"
+     >
+
+    <LinearLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical" >
+    
+		    <LinearLayout
+					    android:layout_width="wrap_content"
+					    android:layout_height="wrap_content"
+					    android:orientation="horizontal"
+					    android:layout_marginTop="8dp" >
+				    
+				    	<ImageView
+				    	    android:id="@+id/imgView1"
+				    	    android:layout_width="110dp"
+				    	    android:layout_height="110dp"
+						    android:layout_marginLeft="5dp"
+				    	    android:src="@drawable/sample_img1" />
+						    
+						<ImageView
+						    android:id="@+id/imgView2"
+						    android:src="@drawable/sample_img2"
+						    android:layout_width="110dp"
+						    android:layout_height="110dp"
+						    android:layout_marginLeft="10dp"
+						    />
+						    
+						<ImageView
+						    android:id="@+id/imgView3"
+						    android:src="@drawable/sample_img3"
+						    android:layout_width="110dp"
+						    android:layout_height="110dp"
+						    android:layout_marginLeft="10dp"
+						    />
+				</LinearLayout>
+    
+    
+	<Button
+			android:id="@+id/put_Image"
+		 	android:layout_width="match_parent"
+		 	android:layout_height="50dp"
+		 	android:layout_marginTop="10dp"
+			android:onClick="onClickImg"
+			android:background="#231815"
+			android:textColor="#ffffff"
+			android:text="사진 등록"
+			    />
+	
+	<LinearLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+			android:background="#ffffff">    
+	    
+	    
+	<LinearLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="15dp"
+		    android:layout_marginRight="15dp"
+		    android:orientation="vertical" >
+		
+		<LinearLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" 
+	        android:layout_marginTop="8dp">
+	        
+		    <TextView
+		        android:layout_width="60dp"
+		        android:layout_height="wrap_content"
+		        android:text="책이름"
+		    	android:textColor="#000000"
+		    	android:textStyle="bold"
+				android:textSize="22sp"
+		        android:layout_marginRight="7dp"/>
+		    <EditText
+		        android:id="@+id/Title"
+		        android:layout_width="260dp" 
+				android:background="@null"
+				android:singleLine="true"
+				android:hint="책 이름을 입력해주세요."
+		        android:layout_height="wrap_content" >
+		    </EditText>	    
+	    </LinearLayout>
+	    
+	    <ImageView
+			    android:id="@+id/imageView1"
+			    android:layout_width="wrap_content"
+	       	   	android:layout_height="8dp"
+			    android:src="@drawable/write_line" />
+	    
+	    <LinearLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" 
+	        android:layout_marginTop="8dp">
+	        <TextView
+	            android:layout_width="60dp"
+	            android:layout_height="wrap_content"
+	            android:text="저 자" 
+	            android:textColor="#000000" 
+	            android:layout_marginRight="7dp"/>
+	        <EditText
+	            android:id="@+id/Writer"
+	            android:layout_width="260dp"
+	            android:textSize="16sp"
+				android:hint="저자를 입력해주세요."
+				android:background="@null"
+				android:singleLine="true"
+	            android:layout_height="wrap_content" >
+	        </EditText>
+	   </LinearLayout>
+	   
+	   <ImageView
+			    android:id="@+id/imageView1"
+			    android:layout_width="wrap_content"
+	       	   	android:layout_height="8dp"
+			    android:src="@drawable/write_line" />
+	   
+	   <LinearLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" 
+	        android:layout_marginTop="8dp">
+	        <TextView
+	            android:layout_width="60dp"
+	            android:layout_height="wrap_content"
+	            android:text="출판사" 
+	            android:textColor="#000000" 
+	           android:layout_marginRight="7dp"/>
+	        <EditText
+	            android:id="@+id/Publisher"
+	            android:layout_width="260dp"
+	            android:textSize="16sp"
+				android:hint="출판사를 입력해주세요."
+				android:background="@null"
+				android:singleLine="true"
+	            android:layout_height="wrap_content" >
+	        </EditText>
+	   </LinearLayout>
+	   
+	   <ImageView
+			    android:id="@+id/imageView1"
+			    android:layout_width="wrap_content"
+	       	   	android:layout_height="8dp"
+			    android:src="@drawable/write_line" />
+	   
+	   <LinearLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" >
+	   		<RatingBar
+	            android:id="@+id/Quality"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            style="?android:attr/ratingBarStyleIndicator"/>
+	        
+	        <TextView
+	            android:layout_width="50dp"
+	            android:layout_height="wrap_content"
+	            android:text="가 격" 
+	            android:textColor="#000000"
+	            android:textSize="22sp"
+	            android:layout_marginTop="4dp"
+	            android:layout_marginLeft="7dp"/>
+	        <EditText
+	            android:id="@+id/Price"
+	            android:layout_width="75dp"
+	            android:inputType="number"
+	            android:singleLine="true" 
+				android:background="@null"
+	            android:layout_marginTop="4dp"
+	            android:hint="가격입력"
+	            android:maxLength="5"
+	            android:layout_height="wrap_content" >
+	        </EditText>
+	   </LinearLayout>
+	            
+	   <ImageView
+			    android:id="@+id/imageView1"
+			    android:layout_width="wrap_content"
+	       	   	android:layout_height="8dp"
+			    android:src="@drawable/write_line" />         
+	            
+		<LinearLayout
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="8dp" >
+
+		    <TextView
+		        android:layout_width="60dp"
+		        android:layout_height="wrap_content"
+		        android:layout_marginRight="7dp"
+		        android:layout_weight="3.70"
+		        android:text="교과명"
+		        android:textSize="16sp"
+		        android:textColor="#000000" />
+
+		    <EditText
+		        android:id="@+id/Subject"
+		        android:layout_width="240dp"
+	            android:singleLine="true" 
+				android:background="@null"
+	            android:hint="교과명을 입력해주세요."
+		        android:layout_height="wrap_content" >
+		    </EditText>
+		</LinearLayout>
+	    
+	    <ImageView
+			    android:id="@+id/imageView1"
+			    android:layout_width="wrap_content"
+	       	   	android:layout_height="8dp"
+			    android:src="@drawable/write_line" />
+	   
+		<LinearLayout
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="8dp" >
+		       
+	        <TextView
+	            android:layout_width="60dp"
+	            android:layout_height="wrap_content"
+	            android:text="장 소"
+	            android:textColor="#000000" 
+	            android:layout_marginTop="10dp"
+	            android:layout_marginRight="7dp"/>
+		        <RadioGroup
+				    android:id="@+id/Site"
+				    android:layout_width="wrap_content"
+				    android:orientation="horizontal"
+				    android:layout_height="wrap_content">
+					  <RadioButton
+					   android:layout_width="wrap_content"
+					   android:id="@+id/radio1"
+					   android:text="학교"
+					   android:textColor="#000000" 
+					   android:layout_height="wrap_content"
+					   android:checked="true">
+					  </RadioButton>
+					  <RadioButton
+					   android:layout_width="wrap_content"
+					   android:id="@+id/radio2"
+					   android:text="지하철역"
+					   android:textColor="#000000" 
+					   android:layout_height="wrap_content">
+					  </RadioButton>
+				</RadioGroup>
+		</LinearLayout>
+		
+	</LinearLayout>
+	</LinearLayout>
+	<ImageView
+			    android:id="@+id/imageView2"
+			    android:layout_width="wrap_content"
+	       	   	android:layout_height="42px"
+			    android:src="@drawable/write_bg_line" />
+	<Button
+	        android:id="@+id/Send"
+	        android:layout_width="match_parent"
+	        android:layout_marginTop="5dp"
+	        android:layout_height="50dp"
+	        android:text="등록하기"
+	        android:background="#231815"
+			android:textColor="#ffffff" />
+        
+        
+	</LinearLayout>
+</ScrollView>
