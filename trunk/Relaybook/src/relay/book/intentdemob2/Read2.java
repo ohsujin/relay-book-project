@@ -11,7 +11,6 @@ import org.json.*;
 
 import relay.book.Option.*;
 import relay.book.image.*;
-
 import android.app.*;
 import android.content.*;
 import android.graphics.*;
@@ -22,89 +21,90 @@ import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.*;
 
+public class Read2 extends Activity {
 
-public class Read2 extends Activity{
-	
 	String imageUrl = "http://14.63.212.134:8080/MyRelayServer/Image/";
 	Bitmap bmImg;
 	URL myFileUrl = null;
-	
+	 
+	 
 	private static final String URL = "http://14.63.212.134:8080/MyRelayServer/Image/";
 	static String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/Send.jsp";
 	
 	String filename = null;
+	 
 	
-	
+	//ViewPaper
 	private ViewPager mPager;
 	private CountDownTimer timer;  
 	private int currentPosition;
 	private int PAGE_TOTAL_NUMBER = 3;
+	//
 	
-
-	public void onCreate(Bundle savedInstanceState) {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	    setContentView(R.layout.read2);
-	    	
-	    int i=1;
-	    	getInform();
-	    	
-	    	
-	    	System.out.println("파일 이름 : "+filename);
-	    	
-		    ImageView img1 = (ImageView)findViewById(R.id.Img1); // 이미지
-		    ImageView img2 = (ImageView)findViewById(R.id.Img2); // 이미지
-		    ImageView img3 = (ImageView)findViewById(R.id.Img3); // 이미지
-		    
-			ImageDownloader.download(URL+filename+"_1.png", img1);
-			ImageDownloader.download(URL+filename+"_2.png", img2);
-			ImageDownloader.download(URL+filename+"_3.png", img3);
-			
-		    
-			String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/send.jsp";
-//			String URL = "http://14.63.212.134/MyRelayServer/JSONServer.jsp";
-//			String URL = "http://121.156.253.22/hello.py";
-//			String URL =  "http://api.androidhive.info/contacts/";
-			
-			
-			
-			
-			timer = new CountDownTimer(2*1000, 1000) {
+		setContentView(R.layout.read2);
 
-				@Override
-				public void onTick(long millisUntilFinished) {
+		int i=1;
+    	getInform();
+    	
+    	
+    	System.out.println("파일 이름 : "+filename);
+    	
+	    ImageView img1 = (ImageView)findViewById(R.id.Img1); // 이미지
+	    ImageView img2 = (ImageView)findViewById(R.id.Img2); // 이미지
+	    ImageView img3 = (ImageView)findViewById(R.id.Img3); // 이미지
+	    
+		ImageDownloader.download(URL+filename+"_1.jpg", img1);
+		ImageDownloader.download(URL+filename+"_2.jpg", img2);
+		ImageDownloader.download(URL+filename+"_3.jpg", img3);
+		
+	    
+		String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/send.jsp";
+//		String URL = "http://14.63.212.134/MyRelayServer/JSONServer.jsp";
+//		String URL = "http://121.156.253.22/hello.py";
+//		String URL =  "http://api.androidhive.info/contacts/";
+		
+		
+		//ViewPaper
+		timer = new CountDownTimer(2*1000, 1000) {
 
-				}
+			@Override
+			public void onTick(long millisUntilFinished) {
 
-				@Override
-				public void onFinish() {
-					if(currentPosition==PAGE_TOTAL_NUMBER-1)
-						mPager.setCurrentItem(0);
-					else
-						mPager.setCurrentItem(currentPosition+1);
-				}
-			};
+			}
 
-			mPager = (ViewPager)findViewById(R.id.pager);
-			mPager.setAdapter(new PagerAdapterClass(getApplicationContext()));
-			mPager.setOnPageChangeListener(new OnPageChangeListener() {
+			@Override
+			public void onFinish() {
+				if(currentPosition==PAGE_TOTAL_NUMBER-1)
+					mPager.setCurrentItem(0);
+				else
+					mPager.setCurrentItem(currentPosition+1);
+			}
+		};
 
-				@Override
-				public void onPageSelected(int position) {
-					currentPosition = position;
-					timer.cancel();
-					timer.start();
-				}
+		mPager = (ViewPager)findViewById(R.id.pager);
+		mPager.setAdapter(new PagerAdapterClass(getApplicationContext()));
+		mPager.setOnPageChangeListener(new OnPageChangeListener() {
 
-				@Override public void onPageScrolled(int arg0, float arg1, int arg2) {}
-				@Override public void onPageScrollStateChanged(int arg0) {}
-			});
-			
-			
+			@Override
+			public void onPageSelected(int position) {
+				currentPosition = position;
+				timer.cancel();
+				timer.start();
+			}
+
+			@Override public void onPageScrolled(int arg0, float arg1, int arg2) {}
+			@Override public void onPageScrollStateChanged(int arg0) {}
+		});
+		//
+		
 	}
-	
+
 	void getInform(){
 
-		  String Ph_num = PhoneNum.getPhoneNum();
+		String Ph_num = PhoneNum.getPhoneNum();
 		DefaultHttpClient client = new DefaultHttpClient();
 		
 		try {
@@ -133,28 +133,30 @@ public class Read2 extends Activity{
 			JSONObject rece = json.getJSONObject("Book_inform");
 			
 			filename = rece.getString("filename");
-    
-		    TextView Title_Title = (TextView)findViewById(R.id.Title_Title);
+  
+		
 		    TextView Title = (TextView)findViewById(R.id.Title); // 책 제목
 		    Title.setText(rece.getString("title"));
-		
-		    TextView SubjectTitle = (TextView)findViewById(R.id.Subject_Title);
+		   
 		    TextView Subject = (TextView)findViewById(R.id.Subject); // 과목명
 		    Subject.setText(rece.getString("subject"));
-		    
-		    TextView PriceTitle = (TextView)findViewById(R.id.Price_Title);
+		   
 		    TextView Price = (TextView)findViewById(R.id.Price); // 가격
 		    Price.setText(rece.getString("price"));
-		    
-		    TextView PublisherTitle = (TextView)findViewById(R.id.Publisher_Title);
+		   
 		    TextView Publisher = (TextView)findViewById(R.id.Publisher); // 출판사
 		    Publisher.setText(rece.getString("publisher"));
-		    
-		    TextView WriterTitle = (TextView)findViewById(R.id.Writer_Title);
+		 
 		    TextView Writer = (TextView)findViewById(R.id.Writer); //가격
 		    Writer.setText(rece.getString("writer"));
+		   
+		    TextView Memo = (TextView)findViewById(R.id.Memo); //가격
+		    Memo.setText(rece.getString("memo"));
 		    
-    
+		    RatingBar rating = (RatingBar) findViewById(R.id.Quality_view); 
+		    rating.setRating(Float.parseFloat(rece.getString("quality")));
+		    
+  
 			} catch (Exception e) {
 				e.printStackTrace();
 				client.getConnectionManager().shutdown();	// 연결 지연 종료		
@@ -162,36 +164,8 @@ public class Read2 extends Activity{
 			
 	}
 	
-	/* 종료묻기 */
-	public boolean onKeyDown(int keyCode, KeyEvent event){
-	     switch(keyCode){
-	     case KeyEvent.KEYCODE_BACK:
-	      String alertTitle = getResources().getString(R.string.app_name);
-	      String buttonMessage = getResources().getString(R.string.alert_msg_exit);
-	      String buttonYes = getResources().getString(R.string.button_yes);
-	      String buttonNo = getResources().getString(R.string.button_no);
-	         
-	      new AlertDialog.Builder(Read2.this)
-	      .setTitle(alertTitle)
-	      .setMessage(buttonMessage)
-	      .setPositiveButton(buttonYes, new DialogInterface.OnClickListener() {
-	       
-	       @Override
-	       public void onClick(DialogInterface dialog, int which) {
-	        // TODO Auto-generated method stub
-	        moveTaskToBack(true);
-	        finish();
-	       }
-	      })
-	      .setNegativeButton(buttonNo, null)
-	      .show();
-	     }
-	    return true;
-	}
-	
-	
-	
-	//viewpaper
+
+	//ViewPaper
 	private class PagerAdapterClass extends PagerAdapter{
 
 		private Context context;
@@ -241,5 +215,33 @@ public class Read2 extends Activity{
 		}
 
 	}
+	//
 	
+	/* 종료묻기 */
+	public boolean onKeyDown(int keyCode, KeyEvent event){
+	     switch(keyCode){
+	     case KeyEvent.KEYCODE_BACK:
+	      String alertTitle = getResources().getString(R.string.app_name);
+	      String buttonMessage = getResources().getString(R.string.alert_msg_exit);
+	      String buttonYes = getResources().getString(R.string.button_yes);
+	      String buttonNo = getResources().getString(R.string.button_no);
+	         
+	      new AlertDialog.Builder(Read2.this)
+	      .setTitle(alertTitle)
+	      .setMessage(buttonMessage)
+	      .setPositiveButton(buttonYes, new DialogInterface.OnClickListener() {
+	       
+	       @Override
+	       public void onClick(DialogInterface dialog, int which) {
+	        // TODO Auto-generated method stub
+	        moveTaskToBack(true);
+	        finish();
+	       }
+	      })
+	      .setNegativeButton(buttonNo, null)
+	      .show();
+	     }
+	    return true;
+	}
+
 }
