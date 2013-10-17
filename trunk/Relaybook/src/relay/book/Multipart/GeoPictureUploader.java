@@ -14,6 +14,7 @@ import android.util.Log;
 
 public class GeoPictureUploader
 {
+	
 	String TAG = "RelayBook";
 //    static String serviceDomain = "http://staging.abaqus.net";
     static String postUrl = "http://14.63.212.134/MyRelayServer/RecvBookInform.jsp";

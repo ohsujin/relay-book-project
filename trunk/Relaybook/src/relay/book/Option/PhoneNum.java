@@ -1,4 +1,4 @@
-package com.Relaybook.Option;
+package relay.book.Option;
 
 public class PhoneNum {
 	

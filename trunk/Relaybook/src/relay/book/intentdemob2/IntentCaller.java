@@ -1,14 +1,16 @@
-package com.example.intentdemob2;
+package relay.book.intentdemob2;
 
 
 import java.io.File;
 
 import org.json.*;
 
+import com.example.intentdemob2.R;
+
+import relay.book.Option.PhoneNum;
+import relay.book.http.Send_Recv.HttpHost;
 import relay.book.saveInform.SchoolList;
 
-import com.Relaybook.Option.PhoneNum;
-import com.http.Send_Recv.HttpHost;
 
 import android.app.*;
 import android.content.*;

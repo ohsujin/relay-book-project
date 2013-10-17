@@ -1,4 +1,4 @@
-package com.example.intentdemob2;
+package relay.book.intentdemob2;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,8 +16,11 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.json.JSONObject;
 
-import com.Relaybook.Option.PhoneNum;
-import com.relay.image.ImageDownloader;
+import com.example.intentdemob2.R;
+
+import relay.book.Option.PhoneNum;
+import relay.book.image.ImageDownloader;
+
 
 import android.app.*;
 import android.content.*;
@@ -53,9 +56,9 @@ public class Read extends Activity{
 		    ImageView img2 = (ImageView)findViewById(R.id.Img2); // 이미지
 		    ImageView img3 = (ImageView)findViewById(R.id.Img3); // 이미지
 		    
-			ImageDownloader.download(URL+filename+"_1.png", img1);
-			ImageDownloader.download(URL+filename+"_2.png", img2);
-			ImageDownloader.download(URL+filename+"_3.png", img3);
+			ImageDownloader.download(URL+filename+"_1.jpg", img1);
+			ImageDownloader.download(URL+filename+"_2.jpg", img2);
+			ImageDownloader.download(URL+filename+"_3.jpg", img3);
 			
 		    
 			String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/send.jsp";

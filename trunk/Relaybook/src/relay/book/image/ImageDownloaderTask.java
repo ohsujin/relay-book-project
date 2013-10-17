@@ -1,4 +1,4 @@
-package com.relay.image;
+package relay.book.image;
 
 import java.io.FilterInputStream;
 import java.io.IOException;
@@ -13,7 +13,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.relay.image.ImageDownloader.DownloadedDrawable;
+import relay.book.image.ImageDownloader.DownloadedDrawable;
+
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
