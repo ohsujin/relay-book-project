@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.intentdemob2"
+    package="relay.book.intentdemob2"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -44,6 +44,7 @@
         <activity android:name="relay.book.intentdemob2.Read" android:label="Read"></activity>
         <activity android:name="relay.book.intentdemob2.Buy" android:label="Buy"></activity>
         <activity android:name="relay.book.intentdemob2.Tab" android:label="Tab"></activity>
+        <activity android:name=".Read2" android:label="Read2"></activity>
         
     	
     </application>
