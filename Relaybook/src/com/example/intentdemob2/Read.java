@@ -20,11 +20,12 @@ import com.Relaybook.Option.PhoneNum;
 import com.relay.image.ImageDownloader;
 
 import android.app.*;
-import android.content.Context;
+import android.content.*;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.*;
 import android.telephony.TelephonyManager;
+import android.view.*;
 import android.widget.*;
 
 public class Read extends Activity{
@@ -124,6 +125,33 @@ public class Read extends Activity{
 				client.getConnectionManager().shutdown();	// 연결 지연 종료		
 			}
 			
+	}
+	
+	/* 종료묻기 */
+	public boolean onKeyDown(int keyCode, KeyEvent event){
+	     switch(keyCode){
+	     case KeyEvent.KEYCODE_BACK:
+	      String alertTitle = getResources().getString(R.string.app_name);
+	      String buttonMessage = getResources().getString(R.string.alert_msg_exit);
+	      String buttonYes = getResources().getString(R.string.button_yes);
+	      String buttonNo = getResources().getString(R.string.button_no);
+	         
+	      new AlertDialog.Builder(Read.this)
+	      .setTitle(alertTitle)
+	      .setMessage(buttonMessage)
+	      .setPositiveButton(buttonYes, new DialogInterface.OnClickListener() {
+	       
+	       @Override
+	       public void onClick(DialogInterface dialog, int which) {
+	        // TODO Auto-generated method stub
+	        moveTaskToBack(true);
+	        finish();
+	       }
+	      })
+	      .setNegativeButton(buttonNo, null)
+	      .show();
+	     }
+	    return true;
 	}
 	
 }

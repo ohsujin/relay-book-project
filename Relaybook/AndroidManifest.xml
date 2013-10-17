@@ -43,7 +43,7 @@
         <activity android:name=".PictureCtrlActivity" android:label="PictureCtrlActivity"></activity>
         <activity android:name=".Read" android:label="Read"></activity>
         <activity android:name=".Buy" android:label="Buy"></activity>
-        <activity android:name=".Tab" android:label="TabTest"></activity>
+        <activity android:name=".Tab" android:label="Tab"></activity>
         
     	
     </application>
