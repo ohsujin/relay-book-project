@@ -42,7 +42,6 @@ public class IntentCaller extends Activity implements View.OnClickListener {
 	             path.mkdirs();
 	     }
 	     
-	     
         EditText editText = (EditText)findViewById(R.id.Phone);
         editText.setText(getMy10DigitPhoneNumber());
         

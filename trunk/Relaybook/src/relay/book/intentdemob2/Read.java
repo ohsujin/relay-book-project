@@ -103,25 +103,27 @@ public class Read extends Activity{
 			
 			filename = rece.getString("filename");
     
-		    TextView Title_Title = (TextView)findViewById(R.id.Title_Title);
+		
 		    TextView Title = (TextView)findViewById(R.id.Title); // 책 제목
 		    Title.setText(rece.getString("title"));
-		
-		    TextView SubjectTitle = (TextView)findViewById(R.id.Subject_Title);
+		   
 		    TextView Subject = (TextView)findViewById(R.id.Subject); // 과목명
 		    Subject.setText(rece.getString("subject"));
-		    
-		    TextView PriceTitle = (TextView)findViewById(R.id.Price_Title);
+		   
 		    TextView Price = (TextView)findViewById(R.id.Price); // 가격
 		    Price.setText(rece.getString("price"));
-		    
-		    TextView PublisherTitle = (TextView)findViewById(R.id.Publisher_Title);
+		   
 		    TextView Publisher = (TextView)findViewById(R.id.Publisher); // 출판사
 		    Publisher.setText(rece.getString("publisher"));
-		    
-		    TextView WriterTitle = (TextView)findViewById(R.id.Writer_Title);
+		 
 		    TextView Writer = (TextView)findViewById(R.id.Writer); //가격
 		    Writer.setText(rece.getString("writer"));
+		   
+		    TextView Memo = (TextView)findViewById(R.id.Memo); //가격
+		    Memo.setText(rece.getString("memo"));
+		    
+		    RatingBar rating = (RatingBar) findViewById(R.id.Quality_view); 
+		    rating.setRating(Float.parseFloat(rece.getString("quality")));
 		    
     
 			} catch (Exception e) {

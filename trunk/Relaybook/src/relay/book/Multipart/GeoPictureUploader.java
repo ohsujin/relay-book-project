@@ -24,12 +24,12 @@ public class GeoPictureUploader
     static String boundary = "*****Relaybook*****"; 
 
     private String pictureFileName = null;
-    private String Subject, Title, Writer, Publisher, Price,Quality,PhoneNum;
+    private String Subject, Title, Writer, Publisher, Price,Quality,PhoneNum,Memo;
     private DataOutputStream dataStream = null;
 
     enum ReturnCode { noPicture, unknown, http201, http400, http401, http403, http404, http500};
 
-    public GeoPictureUploader(String Subject, String Title, String Writer,String Publisher, String Price, String Quality, String PhoneNum ) 
+    public GeoPictureUploader(String Subject, String Title, String Writer,String Publisher, String Price, String Quality, String PhoneNum, String Memo ) 
     {
         this.Subject = Subject;
         this.Title = Title;
@@ -38,6 +38,7 @@ public class GeoPictureUploader
         this.Price = Price;
         this.Quality = Quality;
         this.PhoneNum = PhoneNum;
+        this.Memo = Memo;
     }
 
 //    public static void setServiceDomain(String domainName)
@@ -91,6 +92,7 @@ public class GeoPictureUploader
                 writeFormField("Price", Price);
                 writeFormField("Quality", Quality);
                 writeFormField("PhoneNum", PhoneNum);
+                writeFormField("Memo", Memo);
                 
                 // 파일전송
                 writeFileField("photo1", pictureFileName1, "image/jpg", fileInputStream1);
@@ -138,6 +140,7 @@ public class GeoPictureUploader
         }
     }
 
+    
     /**
      * @param conn
      * @return
