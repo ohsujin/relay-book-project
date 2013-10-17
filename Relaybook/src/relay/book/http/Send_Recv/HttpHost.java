@@ -74,8 +74,6 @@ public class HttpHost {
 					HttpClient client = new DefaultHttpClient();
 				
 				   String postURL = "http://14.63.212.134/MyRelayServer/JSONServer.jsp";
-
-				   
 				 
 				   HttpPost post = new HttpPost(postURL);
 				   List params = new ArrayList(); // 파라미터를 List에 담아서 보냅니다.

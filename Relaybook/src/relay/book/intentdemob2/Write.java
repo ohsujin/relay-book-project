@@ -37,7 +37,7 @@ public class Write extends Activity{
 	String filename;
 	MyThread mMyThread =null;
 	
-	String Subject, Title, Writer, publisher, Price,Quality; //판매 정보를 전송하기위함 변수
+	String Subject, Title, Writer, publisher, Price,Quality,Memo; //판매 정보를 전송하기위함 변수
 	
 	String image1 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-1.jpg";
 	String image2 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-2.jpg";
@@ -72,7 +72,7 @@ public class Write extends Activity{
 		    	Writer =((EditText) findViewById(R.id.Writer)).getText().toString();;
 		    	publisher = ((EditText) findViewById(R.id.Publisher)).getText().toString();;
 		    	Price = ((EditText) findViewById(R.id.Price)).getText().toString();;
-		    	
+		    	Memo = ((EditText) findViewById(R.id.Memo)).getText().toString();;
 		    	
 		    	mMyThread = (MyThread) new MyThread().execute((Void) null);
 				
@@ -86,11 +86,10 @@ public class Write extends Activity{
         
 	    scrollview = (ScrollView) findViewById(R.id.Scroll);
 	    
-	    rating = (RatingBar) findViewById(R.id.Quality);         
-	    //tv01 = (TextView) findViewById(R.id.tv01);           
-	    rating.setStepSize((float) 0.5); //별 색깔이 1칸씩줄어들고 늘어남 0.5로하면 반칸씩 들어감         
+	    rating = (RatingBar) findViewById(R.id.Quality);                  
+	    rating.setStepSize((float) 0.5); // 별 색깔이 1칸씩줄어들고 늘어남 0.5로하면 반칸씩 들어감         
 	    rating.setRating((float) 0.0); // 처음보여줄때(색깔이 한개도없음) default 값이 0  이다 
-	    rating.setIsIndicator(false); //true - 별점만 표시 사용자가 변경 불가 , false - 사용자가 변경가능   
+	    rating.setIsIndicator(false); // true - 별점만 표시 사용자가 변경 불가 , false - 사용자가 변경가능   
 	    
 	    
 	    rating.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {               
@@ -238,7 +237,7 @@ public class Write extends Activity{
   	
 	    private void HttpFileUpload() {
 	    	
-	    	GeoPictureUploader send = new GeoPictureUploader(Subject, Title, Writer, publisher, Price,Quality,PhoneNum.getPhoneNum());
+	    	GeoPictureUploader send = new GeoPictureUploader(Subject, Title, Writer, publisher, Price,Quality,PhoneNum.getPhoneNum(),Memo);
 	    	
 	    	System.out.println("응답 : "+send.uploadPicture(image1,image2,image3));
 	    	

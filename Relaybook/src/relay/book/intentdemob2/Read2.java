@@ -22,8 +22,6 @@ import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.*;
 
-import com.Relaybook.Option.*;
-import com.relay.image.*;
 
 public class Read2 extends Activity{
 	
