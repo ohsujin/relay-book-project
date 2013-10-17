@@ -158,7 +158,8 @@
 	            android:id="@+id/Quality"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            style="?android:attr/ratingBarStyleIndicator"/>
+	            style="?android:attr/ratingBarStyleIndicator"
+	            />
 	        
 	        <TextView
 	            android:layout_width="50dp"
