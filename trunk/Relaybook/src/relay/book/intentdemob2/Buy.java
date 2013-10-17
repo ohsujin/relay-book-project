@@ -2,8 +2,6 @@ package relay.book.intentdemob2;
 
 import java.util.*;
 
-import relay.book.intentdemob2.R;
-
 import android.app.*;
 import android.content.*;
 import android.os.*;
