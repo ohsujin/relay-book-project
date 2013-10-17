@@ -98,7 +98,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         
         
         
-        Intent intent = new Intent(this, MainPage.class);        
+        Intent intent = new Intent(this, Tab.class);        
         intent.putExtra("phone", phoneEdit.getText());
         intent.putExtra("password", passwordEdit.getText());
         intent.putExtra("university", universityEdit.getText());

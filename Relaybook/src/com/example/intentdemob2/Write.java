@@ -80,8 +80,10 @@ public class Write extends Activity{
 		    	
 		    	mMyThread = (MyThread) new MyThread().execute((Void) null);
 				
-				Intent intent = new Intent(Write.this, MainPage.class); 
+				Intent intent = new Intent(Write.this, Tab.class); 
 		    	startActivity(intent);
+		    	
+		    	finish();
 			}
 		});
 		
