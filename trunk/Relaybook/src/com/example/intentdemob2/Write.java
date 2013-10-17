@@ -1,26 +1,20 @@
 package com.example.intentdemob2;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
-import relay.book.Multipart.GeoPictureUploader;
-
-import com.Relaybook.Option.PhoneNum;
-import com.http.Send_Recv.Sell_inform_thread;
-
+import relay.book.Multipart.*;
 import android.app.*;
 import android.content.*;
 import android.graphics.*;
-import android.graphics.Bitmap.CompressFormat;
 import android.net.*;
 import android.os.*;
 import android.provider.*;
 import android.provider.MediaStore.Images;
-import android.telephony.*;
 import android.view.*;
 import android.widget.*;
 import android.widget.RatingBar.OnRatingBarChangeListener;
+
+import com.Relaybook.Option.*;
 
 
 
@@ -246,8 +240,32 @@ public class Write extends Activity{
 	    	
 	    	System.out.println("응답 : "+send.uploadPicture(image1,image2,image3));
 	    	
-	    	
-	    	
-	    	
 	    }
+	    
+	    /* 종료묻기 */
+		public boolean onKeyDown(int keyCode, KeyEvent event){
+		     switch(keyCode){
+		     case KeyEvent.KEYCODE_BACK:
+		      String alertTitle = getResources().getString(R.string.app_name);
+		      String buttonMessage = getResources().getString(R.string.alert_msg_exit);
+		      String buttonYes = getResources().getString(R.string.button_yes);
+		      String buttonNo = getResources().getString(R.string.button_no);
+		         
+		      new AlertDialog.Builder(Write.this)
+		      .setTitle(alertTitle)
+		      .setMessage(buttonMessage)
+		      .setPositiveButton(buttonYes, new DialogInterface.OnClickListener() {
+		       
+		       @Override
+		       public void onClick(DialogInterface dialog, int which) {
+		        // TODO Auto-generated method stub
+		        moveTaskToBack(true);
+		        finish();
+		       }
+		      })
+		      .setNegativeButton(buttonNo, null)
+		      .show();
+		     }
+		    return true;
+		}
 }
