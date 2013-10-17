@@ -5,7 +5,7 @@ import java.io.File;
 
 import org.json.*;
 
-import com.example.intentdemob2.R;
+import relay.book.intentdemob2.R;
 
 import relay.book.Option.PhoneNum;
 import relay.book.http.Send_Recv.HttpHost;

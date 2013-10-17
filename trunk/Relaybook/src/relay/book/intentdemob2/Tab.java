@@ -1,6 +1,6 @@
 package relay.book.intentdemob2;
 
-import com.example.intentdemob2.R;
+import relay.book.intentdemob2.R;
 
 import android.app.*;
 import android.app.AlertDialog.Builder;

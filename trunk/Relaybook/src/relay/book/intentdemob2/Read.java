@@ -16,7 +16,7 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.json.JSONObject;
 
-import com.example.intentdemob2.R;
+import relay.book.intentdemob2.R;
 
 import relay.book.Option.PhoneNum;
 import relay.book.image.ImageDownloader;
@@ -36,6 +36,7 @@ public class Read extends Activity{
 	String imageUrl = "http://14.63.212.134:8080/MyRelayServer/Image/";
 	Bitmap bmImg;
 	 URL myFileUrl = null;
+	 
 	 
 	 private static final String URL = "http://14.63.212.134:8080/MyRelayServer/Image/";
 	static String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/Send.jsp";
