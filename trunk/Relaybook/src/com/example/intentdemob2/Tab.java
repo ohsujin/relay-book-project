@@ -1,11 +1,11 @@
 package com.example.intentdemob2;
 
 import android.app.*;
+import android.app.AlertDialog.Builder;
 import android.content.*;
 import android.graphics.drawable.*;
 import android.os.*;
 import android.widget.*;
-import android.widget.TabHost.TabSpec;
 
 public class Tab extends TabActivity {
 	TabHost mTab;
@@ -37,4 +37,13 @@ public class Tab extends TabActivity {
 			tabHost.setCurrentTab(0);
 
 			}
+	
+
+	
+
+
+	
+	
 }
+
+
