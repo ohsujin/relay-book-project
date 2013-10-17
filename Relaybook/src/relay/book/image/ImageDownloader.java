@@ -1,4 +1,4 @@
-package com.relay.image;
+package relay.book.image;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;

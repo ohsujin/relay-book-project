@@ -1,8 +1,11 @@
-package com.example.intentdemob2;
+package relay.book.intentdemob2;
 
 import java.io.*;
 
+import com.example.intentdemob2.R;
+
 import relay.book.Multipart.*;
+import relay.book.Option.*;
 import android.app.*;
 import android.content.*;
 import android.graphics.*;
@@ -14,7 +17,6 @@ import android.view.*;
 import android.widget.*;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 
-import com.Relaybook.Option.*;
 
 
 
@@ -37,9 +39,9 @@ public class Write extends Activity{
 	
 	String Subject, Title, Writer, publisher, Price,Quality; //판매 정보를 전송하기위함 변수
 	
-	String image1 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-1.png";
-	String image2 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-2.png";
-	String image3 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-3.png";
+	String image1 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-1.jpg";
+	String image2 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-2.jpg";
+	String image3 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-3.jpg";
 	
 	/* */
 	
@@ -145,7 +147,7 @@ public class Write extends Activity{
   		
   		//카메라 호출 intent 생성
   		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-  		File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/"  , "img-" + i +".png");
+  		File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/"  , "img-" + i +".jpg");
   		
   		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
   		startActivityForResult(intent, REQUEST_PICTURE);  		
@@ -166,7 +168,7 @@ public class Write extends Activity{
 
 
   		
-  		filename = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-" + i +".png"; //파일이름을 저장
+  		filename = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-" + i +".jpg"; //파일이름을 저장
   		
   		BitmapFactory.Options option = new BitmapFactory.Options();
   		option.inSampleSize = 8;
@@ -178,7 +180,7 @@ public class Write extends Activity{
   		 */
   		try {
   	       FileOutputStream out = new FileOutputStream(filename);
-  	       resized.compress(Bitmap.CompressFormat.PNG, 90, out);
+  	       resized.compress(Bitmap.CompressFormat.JPEG, 90, out);
   	       out.close();
 	  	} catch (Exception e) {
 	  	       e.printStackTrace();

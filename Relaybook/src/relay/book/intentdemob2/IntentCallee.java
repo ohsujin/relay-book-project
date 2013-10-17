@@ -1,4 +1,6 @@
-package com.example.intentdemob2;
+package relay.book.intentdemob2;
+
+import com.example.intentdemob2.R;
 
 import android.app.*;
 import android.content.*;
