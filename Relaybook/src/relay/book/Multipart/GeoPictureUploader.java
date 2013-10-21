@@ -18,7 +18,7 @@ public class GeoPictureUploader
 	String TAG = "RelayBook";
 //    static String serviceDomain = "http://staging.abaqus.net";
     static String postUrl = "http://14.63.212.134/MyRelayServer/RecvBookInform.jsp";
-//    static String postUrl = "http://121.156.253.58:8090/MyRelayServer/RecvBookInform.jsp";
+//    static String postUrl = "http://192.168.25.6:8090/MyRelayServer/RecvBookInform.jsp";
     static String CRLF = "\r\n"; 
     static String twoHyphens = "--"; 
     static String boundary = "*****Relaybook*****"; 

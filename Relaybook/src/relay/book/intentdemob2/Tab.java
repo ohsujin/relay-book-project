@@ -34,7 +34,7 @@ public class Tab extends TabActivity {
 			
 			tabHost.addTab(tabHost.newTabSpec("tab4")
 			          .setIndicator("옵션", img)
-			          .setContent(new Intent(this, Read2.class)));
+			          .setContent(new Intent(this, Buy2.class)));
 			
 			tabHost.setCurrentTab(0);
 
