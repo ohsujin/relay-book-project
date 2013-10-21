@@ -1,0 +1,7 @@
+int attr drawSelectorOnTop 0x7f010000
+int attr itemMargin 0x7f010002
+int attr numColumns 0x7f010001
+int[] styleable StaggeredGridView { 0x7f010000, 0x7f010001, 0x7f010002 }
+int styleable StaggeredGridView_drawSelectorOnTop 0
+int styleable StaggeredGridView_itemMargin 2
+int styleable StaggeredGridView_numColumns 1
