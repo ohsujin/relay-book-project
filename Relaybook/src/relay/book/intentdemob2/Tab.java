@@ -15,24 +15,28 @@ public class Tab extends TabActivity {
 
 			TabHost tabHost = getTabHost();
 
-			Drawable img1 = getResources().getDrawable(R.drawable.tab_buy);
+
+			Drawable img1 = getResources().getDrawable(R.drawable.tab_sell);
+
 			
 			tabHost.addTab(tabHost.newTabSpec("tab1")
 			          .setIndicator("삽니다", img1)
 			          .setContent(new Intent(this, Buy.class)));
 
-			Drawable img2 = getResources().getDrawable(R.drawable.tab_sell);
-			
+			Drawable img2 = getResources().getDrawable(R.drawable.tab_buy);
+
+
 			tabHost.addTab(tabHost.newTabSpec("tab2")
 			          .setIndicator("팝니다", img2)
 			          .setContent(new Intent(this, Write.class)));
-			
+
 			Drawable img3 = getResources().getDrawable(R.drawable.tab_shopping_basket);
+		
 			
 			tabHost.addTab(tabHost.newTabSpec("tab3")
 			          .setIndicator("장바구니", img3)
 			          .setContent(new Intent(this, Read.class)));
-			
+
 			Drawable img4 = getResources().getDrawable(R.drawable.tab_option);
 			
 			tabHost.addTab(tabHost.newTabSpec("tab4")
