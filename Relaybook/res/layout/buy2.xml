@@ -28,7 +28,7 @@
 	            android:layout_width="159dp"
 	            android:layout_height="wrap_content"
 	            android:layout_marginTop="3dp"
-	            android:hint="검색어?? 입력" >
+	            android:hint="검색어 입력" >
 	        </EditText>
 
 	        <ImageButton
