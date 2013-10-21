@@ -206,31 +206,5 @@ public class Read2 extends Activity {
 	}
 	//
 	
-	/* 종료묻기 */
-	public boolean onKeyDown(int keyCode, KeyEvent event){
-	     switch(keyCode){
-	     case KeyEvent.KEYCODE_BACK:
-	      String alertTitle = getResources().getString(R.string.app_name);
-	      String buttonMessage = getResources().getString(R.string.alert_msg_exit);
-	      String buttonYes = getResources().getString(R.string.button_yes);
-	      String buttonNo = getResources().getString(R.string.button_no);
-	         
-	      new AlertDialog.Builder(Read2.this)
-	      .setTitle(alertTitle)
-	      .setMessage(buttonMessage)
-	      .setPositiveButton(buttonYes, new DialogInterface.OnClickListener() {
-	       
-	       @Override
-	       public void onClick(DialogInterface dialog, int which) {
-	        // TODO Auto-generated method stub
-	        moveTaskToBack(true);
-	        finish();
-	       }
-	      })
-	      .setNegativeButton(buttonNo, null)
-	      .show();
-	     }
-	    return true;
-	}
 
 }
