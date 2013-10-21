@@ -4,39 +4,21 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
 import java.util.*;
-
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import relay.book.Option.PhoneNum;
-import relay.book.intentdemob2.Write.MyThread;
-
-
 import com.example.staggeredgridviewdemo.ImageItem;
 import com.example.staggeredgridviewdemo.StaggeredAdapter;
-
 import com.origamilabs.library.views.StaggeredGridView;
+import com.origamilabs.library.views.StaggeredGridView.OnItemClickListener;
 
 import android.app.*;
 import android.content.*;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Paint.Join;
 import android.os.*;
-import android.text.Editable;
-import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -67,16 +49,13 @@ public class Buy2 extends Activity implements OnItemSelectedListener{
                                //스피너 속성
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		Spinner sp = (Spinner) this.findViewById(R.id.Spinner);
-		sp.setPrompt("골라봐"); // 스피너 제목
+		sp.setPrompt("선택"); // 스피너 제목
 		sp.setAdapter(adapter);
 		sp.setOnItemSelectedListener(this);
 		
 		sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 	         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 	            // TODO Auto-generated method stub
-	            //Object item = parent.getAdapter().getItemId(position);
-//	            Object item = parent.getAdapter().getItem(position);
-//	            Log.i("select Item : ",item.toString());   
 	            
 	            /* */
 	            switch (position) {
@@ -117,13 +96,25 @@ public class Buy2 extends Activity implements OnItemSelectedListener{
 
 			}
 		});
+        
+        /*
+         *  GridView 선택
+         */
+//        ListAdapter Grid_adapter = new SimpleAdapter(this, data, resource, from, to);
+//        
+        GridView GV = (GridView)findViewById(R.layout.buy2);
+        
+        
+        
+        
+        
+  
         adapter.notifyDataSetChanged();
 	}
 	
 	//서버로 부터 항목을 받아오는 부분 
 	void send_search(String keyword){ 
 
-		  String Ph_num = PhoneNum.getPhoneNum();
 		  DefaultHttpClient client = new DefaultHttpClient();
 		
 		try {
@@ -156,6 +147,7 @@ public class Buy2 extends Activity implements OnItemSelectedListener{
 			
 			
 			if(rece.length() == 0){ //검색항목이 없을시 다음 wait를 해주어 오류를 잡아준다. ---> 검색항목이 없다는 메시지 알려줘야됨
+				
 				wait();
 			}
 		
@@ -193,6 +185,18 @@ public class Buy2 extends Activity implements OnItemSelectedListener{
 				StaggeredAdapter adapter1 = new StaggeredAdapter(Buy2.this, R.id.imageView1, urls,imageItems); // urls 의 크기를 구하여 몇개의 view가 생성되는지 확인
 				
 				gridView.setAdapter(adapter1);
+				
+				gridView.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(StaggeredGridView parent, View view,int position, long id) {
+					// TODO Auto-generated method stub
+					 Toast.makeText(Buy2.this, position + "번째 선택", Toast.LENGTH_SHORT).show();
+					 Intent myIntent = new Intent(Buy2.this, Read2.class);
+					 		Buy2.this.startActivity(myIntent); //새로운 액티비티 이동
+
+						}
+				  });
 			   
   
 			} catch (Exception e) {

@@ -46,15 +46,14 @@ public class Read2 extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.read2);
 
-		int i=1;
+		
     	getInform();
     	
 
 		String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/send.jsp";
 //		String URL = "http://14.63.212.134/MyRelayServer/JSONServer.jsp";
 //		String URL = "http://121.156.253.22/hello.py";
-//		String URL =  "http://api.androidhive.info/contacts/";
-		
+
 		
 		//ViewPaper
 		timer = new CountDownTimer(2*1000, 1000) {
@@ -87,7 +86,7 @@ public class Read2 extends Activity {
 			@Override public void onPageScrolled(int arg0, float arg1, int arg2) {}
 			@Override public void onPageScrollStateChanged(int arg0) {}
 		});
-		//
+		
 		
 	}
 
