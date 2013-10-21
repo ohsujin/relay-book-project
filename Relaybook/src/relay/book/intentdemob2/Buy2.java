@@ -97,18 +97,6 @@ public class Buy2 extends Activity implements OnItemSelectedListener{
 			}
 		});
         
-        /*
-         *  GridView 선택
-         */
-//        ListAdapter Grid_adapter = new SimpleAdapter(this, data, resource, from, to);
-//        
-        GridView GV = (GridView)findViewById(R.layout.buy2);
-        
-        
-        
-        
-        
-  
         adapter.notifyDataSetChanged();
 	}
 	
@@ -147,6 +135,9 @@ public class Buy2 extends Activity implements OnItemSelectedListener{
 			
 			
 			if(rece.length() == 0){ //검색항목이 없을시 다음 wait를 해주어 오류를 잡아준다. ---> 검색항목이 없다는 메시지 알려줘야됨
+				Toast T = Toast.makeText(getApplicationContext(), "검색항목이 없습니다.", Toast.LENGTH_SHORT);
+				T.setGravity(Gravity.TOP,0,400);
+				T.show();
 				
 				wait();
 			}
@@ -188,10 +179,15 @@ public class Buy2 extends Activity implements OnItemSelectedListener{
 				
 				gridView.setOnItemClickListener(new OnItemClickListener() {
 
+					/*
+					 * 은구야 여기가 항목 선택해서 다음 화면으로 넘어가는 부분인데 하단에 탭바버튼이랑 뒤로가기 버튼 누르면 다시 검색화면 보이게 해줘~~
+					 * @see com.origamilabs.library.views.StaggeredGridView.OnItemClickListener#onItemClick(com.origamilabs.library.views.StaggeredGridView, android.view.View, int, long)
+					 */
 				@Override
 				public void onItemClick(StaggeredGridView parent, View view,int position, long id) {
 					// TODO Auto-generated method stub
 					 Toast.makeText(Buy2.this, position + "번째 선택", Toast.LENGTH_SHORT).show();
+					 
 					 Intent myIntent = new Intent(Buy2.this, Read2.class);
 					 		Buy2.this.startActivity(myIntent); //새로운 액티비티 이동
 

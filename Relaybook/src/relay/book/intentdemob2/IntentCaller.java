@@ -79,7 +79,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
 	        }
 	      
 	        if(i == 4){
-	        	 Toast.makeText(getApplicationContext(), "서버와 통신 할 수 없습니다. 네트워크 상태를 점검해주세요.", Toast.LENGTH_LONG).show();
+	        	 Toast.makeText(getApplicationContext(), "네트워크 연결 상태가 좋지 않습니다.\n3G 또는 WIFI 연결 상태를 확인해 주세요.", Toast.LENGTH_LONG).show();
 	        	 finish();
 	        }
 	        
