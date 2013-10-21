@@ -49,18 +49,7 @@ public class Read2 extends Activity {
 		int i=1;
     	getInform();
     	
-    	
-    	System.out.println("파일 이름 : "+filename);
-    	/*
-	    ImageView img1 = (ImageView)findViewById(R.id.Img1); // 이미지
-	    ImageView img2 = (ImageView)findViewById(R.id.Img2); // 이미지
-	    ImageView img3 = (ImageView)findViewById(R.id.Img3); // 이미지
-	    
-		ImageDownloader.download(URL+filename+"_1.jpg", img1);
-		ImageDownloader.download(URL+filename+"_2.jpg", img2);
-		ImageDownloader.download(URL+filename+"_3.jpg", img3);
-		*/
-	    
+
 		String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/send.jsp";
 //		String URL = "http://14.63.212.134/MyRelayServer/JSONServer.jsp";
 //		String URL = "http://121.156.253.22/hello.py";
