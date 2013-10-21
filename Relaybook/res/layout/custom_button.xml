@@ -8,14 +8,14 @@
 	    android:id="@+id/camera"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:text="camera"
+	    android:text="카메라 찍기"
 	    android:onClick="onClickImg"
 	    />
 	<Button
 	    android:id="@+id/photoAlbum"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:text="photoAlbum1"
+	    android:text="앨범 불러오기"
 	    android:onClick="onClickImg"
 	    />
 	
