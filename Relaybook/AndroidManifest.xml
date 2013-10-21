@@ -47,7 +47,8 @@
         <activity android:name="relay.book.intentdemob2.Buy" android:label="Buy"></activity>
         <activity android:name="relay.book.intentdemob2.Buy2" android:label="Buy2"></activity>
         <activity android:name="relay.book.intentdemob2.Tab" android:label="Tab"></activity>
-        <activity android:name=".Read2" android:label="Read2"></activity>
+        <activity android:name="relay.book.intentdemob2.Read2" android:label="Read2"></activity>
+        <activity android:name="relay.book.intentdemob2.Option" android:label="Option"></activity>
         
     	
     </application>

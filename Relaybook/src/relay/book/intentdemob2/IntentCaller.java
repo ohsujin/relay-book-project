@@ -59,7 +59,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
 	        	Intent myIntent = new Intent(IntentCaller.this, Tab.class);
 	        	IntentCaller.this.startActivity(myIntent); //새로운 액티비티 이동
 	        	
-	        	//finish(); //이전 액티비티 종료
+	        	finish(); //이전 액티비티 종료
 	        	break;
 	        }else if(regi_Chk.equalsIgnoreCase("unjoin")){
 	        	System.out.println("가입안됨 : "+regi_Chk);

@@ -16,14 +16,14 @@ public class Tab extends TabActivity {
 			TabHost tabHost = getTabHost();
 
 
-			Drawable img1 = getResources().getDrawable(R.drawable.tab_sell);
+			Drawable img1 = getResources().getDrawable(R.drawable.tab_buy);
 
 			
 			tabHost.addTab(tabHost.newTabSpec("tab1")
 			          .setIndicator("삽니다", img1)
 			          .setContent(new Intent(this, Buy2.class)));
 
-			Drawable img2 = getResources().getDrawable(R.drawable.tab_buy);
+			Drawable img2 = getResources().getDrawable(R.drawable.tab_sell);
 
 
 			tabHost.addTab(tabHost.newTabSpec("tab2")
@@ -41,7 +41,7 @@ public class Tab extends TabActivity {
 			
 			tabHost.addTab(tabHost.newTabSpec("tab4")
 			          .setIndicator("옵션", img4)
-			          .setContent(new Intent(this, Buy2.class)));
+			          .setContent(new Intent(this, Option.class)));
 			
 			tabHost.setCurrentTab(0);
 
