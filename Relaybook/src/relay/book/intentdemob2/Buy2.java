@@ -44,10 +44,10 @@ import android.widget.AdapterView.OnItemSelectedListener;
 public class Buy2 extends Activity implements OnItemSelectedListener{
 	ArrayList<String> arraylist;
 	static String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/Send.jsp";
+//	static String URL_book_inform = "http://121.156.235.48:8090/MyRelayServer/Send.jsp";
 	static String imageUrl = "http://14.63.212.134:8080/MyRelayServer/Image/";
 	
 	private String urls[];
-	
 	/* 서버로 넘겨주는 값을 저장해줌 */
 	String Search_option;
 
@@ -114,8 +114,7 @@ public class Buy2 extends Activity implements OnItemSelectedListener{
 				
 				send_search(keyword);// 서버로 검색조건과 keyword를 보낸다.						 	
 				
-//				display_list(); //격자형 배열의 뷰를 생성하여 화면에 표시한다.
-				
+
 			}
 		});
         adapter.notifyDataSetChanged();
@@ -203,39 +202,6 @@ public class Buy2 extends Activity implements OnItemSelectedListener{
 			
 	}
 	
-	
-	private void display_list(){
-/* Staggered Grid View*/
-		
-		StaggeredGridView gridView = (StaggeredGridView) this.findViewById(R.id.staggeredGridView1);
-		int margin = getResources().getDimensionPixelSize(R.dimen.margin);
-		gridView.setItemMargin(margin); 
-
-		gridView.setPadding(margin, 0, margin, 0); // have the margin on the sides as well 
-		
-		/*
-		 * 검색하면 서버로부터 검색 정보를 JSON으로 불러와 urls에 이미지 경로를 넣어주고 bookInform라는 Map함수에는 책정보를 입력해준다.
-		 */
-		StaggeredAdapter adapter1 = new StaggeredAdapter(Buy2.this, R.id.imageView1, urls,getData()); // urls 의 크기를 구하여 몇개의 view가 생성되는지 확인
-		
-		gridView.setAdapter(adapter1);
-		
-	}
-	
-	private ArrayList<ImageItem> getData() {
-		final ArrayList<ImageItem> imageItems = new ArrayList<ImageItem>();
-		// retrieve String drawable array
-		
-		
-		for (int i = 0; i < 2; i++) {						
-			imageItems.add(new ImageItem("토지 " + i+"권","작가","9000원"));	 // 이부분이 커스텀 뷰의 텍스트항목에 어떤 값을 보내주는지 알려준다.
-		}
-		
-		
-		
-		return imageItems;
-	}
-
 
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,

@@ -5,7 +5,7 @@ import java.io.File;
 
 import org.json.*;
 
-import relay.book.intentdemob2.R;
+
 
 import relay.book.Option.PhoneNum;
 import relay.book.http.Send_Recv.HttpHost;
@@ -26,7 +26,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
 	
 	HttpHost http = new HttpHost();
 	private  EditText passwordEdit;
-
+	
 
 	SchoolList sch_list = new SchoolList(); //학교명단이 많아 따로 클래스로 분류
 	
@@ -46,31 +46,53 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         editText.setText(getMy10DigitPhoneNumber());
         
         PhoneNum.setPhoneNum(getMy10DigitPhoneNumber()); //PhoneNum class에 핸드폰 번호 저
-        
-        /* 서버를 통해 가입유무 확인 */
-        String regi_Chk =  http.ChkRegister(getMy10DigitPhoneNumber());
-        
-        System.out.println("regi_Chk : "+regi_Chk);
-        
-        if(regi_Chk.equalsIgnoreCase(" join")){  // 서버에서 join을 반환하면 가입된것이므로 로그인 화면을 건너 뛰게 해준다.
-        	System.out.println("가입됨: "+regi_Chk);
-
-        	Intent myIntent = new Intent(IntentCaller.this, Tab.class);
-        	IntentCaller.this.startActivity(myIntent); //새로운 액티비티 이동
-
-        	finish(); //이전 액티비티 종료
+        int i=1;
+        while(i<4){
         	
-        }else{
-        	System.out.println("가입안됨 : "+regi_Chk);
-        }
+	        /* 서버를 통해 가입유무 확인 */
+	        String regi_Chk =  http.ChkRegister(getMy10DigitPhoneNumber()).trim();
+	     
+	        
+	        if(regi_Chk.equalsIgnoreCase("join")){  // 서버에서 join을 반환하면 가입된것이므로 로그인 화면을 건너 뛰게 해준다.
+	        	System.out.println("가입됨: "+regi_Chk);
+	
+	        	Intent myIntent = new Intent(IntentCaller.this, Tab.class);
+	        	IntentCaller.this.startActivity(myIntent); //새로운 액티비티 이동
+	        	
+	        	//finish(); //이전 액티비티 종료
+	        	break;
+	        }else if(regi_Chk.equalsIgnoreCase("unjoin")){
+	        	System.out.println("가입안됨 : "+regi_Chk);
+	        	break;
+	        }else{
+	        	
+	        		Toast.makeText(getApplicationContext(), "서버와의 통신을 실패했습니다. 재접속 시도 "+i+"번", Toast.LENGTH_SHORT).show();
+		        	System.out.println("접속실패 : "+regi_Chk);
+		        	 try {
+		 				Thread.sleep(1000);
+		 			} catch (InterruptedException e) {
+		 				// TODO Auto-generated catch block
+		 				e.printStackTrace();
+		 			}
+		        	 i++;
+	        	
+	        }
+	      
+	        if(i == 4){
+	        	 Toast.makeText(getApplicationContext(), "서버와 통신 할 수 없습니다. 네트워크 상태를 점검해주세요.", Toast.LENGTH_LONG).show();
+	        	 finish();
+	        }
+	        
         /**/
-       
-        AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.University);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,sch_list.COUNTRIES);
-        textView.setAdapter(adapter);
+        }  
 
-        Button button = (Button) findViewById(R.id.Send);
-        button.setOnClickListener(this);            
+	        AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.University);
+	        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,sch_list.COUNTRIES);
+	        textView.setAdapter(adapter);
+        
+	        Button button = (Button) findViewById(R.id.Send);
+	        button.setOnClickListener(this); 
+	       
     }
     
     public String getMyPhoneNumber()

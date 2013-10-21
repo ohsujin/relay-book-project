@@ -21,7 +21,7 @@ public class Tab extends TabActivity {
 			
 			tabHost.addTab(tabHost.newTabSpec("tab1")
 			          .setIndicator("삽니다", img1)
-			          .setContent(new Intent(this, Buy.class)));
+			          .setContent(new Intent(this, Buy2.class)));
 
 			Drawable img2 = getResources().getDrawable(R.drawable.tab_buy);
 
