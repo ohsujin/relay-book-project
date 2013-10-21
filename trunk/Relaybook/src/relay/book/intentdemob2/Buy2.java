@@ -160,7 +160,6 @@ public class Buy2 extends Activity implements OnItemSelectedListener{
 				wait();
 			}
 		
-	
 			 /*
 			  * 서버로 부터 받아온 데이터를 ImageItem(Array list) 에  저장한다.
 			  */
