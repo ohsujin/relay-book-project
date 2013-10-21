@@ -69,7 +69,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,sch_list.COUNTRIES);
         textView.setAdapter(adapter);
 
-        ImageButton button = (ImageButton) findViewById(R.id.Send);
+        Button button = (Button) findViewById(R.id.Send);
         button.setOnClickListener(this);            
     }
     

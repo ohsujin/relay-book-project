@@ -28,6 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="28dp"
             android:text="책이름"
+            android:textColor="#666666"
             android:textSize="20sp" />
 
         <LinearLayout
@@ -35,7 +36,7 @@
             android:layout_height="wrap_content" >
 
             <LinearLayout
-                android:layout_width="110dp"
+                android:layout_width="95dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
             
@@ -44,6 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="저자"
+                    android:textColor="#888888"
                     android:textSize="15sp" />
 
                 <TextView
@@ -51,6 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="가격"
+                    android:textColor="#000000"
                     android:textSize="24sp"
                     android:textStyle="bold" />
             </LinearLayout>
