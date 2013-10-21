@@ -47,10 +47,8 @@ public class Read extends Activity{
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.read);
 	    	
-	    int i=1;
 	    	getInform();
-	    	
-	    	
+	    	    	
 	    	System.out.println("파일 이름 : "+filename);
 	    	
 		    ImageView img1 = (ImageView)findViewById(R.id.Img1); // 이미지
@@ -74,7 +72,7 @@ public class Read extends Activity{
 	void getInform(){
 
 		  String Ph_num = PhoneNum.getPhoneNum();
-		DefaultHttpClient client = new DefaultHttpClient();
+		  DefaultHttpClient client = new DefaultHttpClient();
 		
 		try {
 			/* 체크할 id와 pwd값 서버로 전송 */

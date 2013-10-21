@@ -172,7 +172,7 @@ public class Write extends Activity{
   		BitmapFactory.Options option = new BitmapFactory.Options();
   		option.inSampleSize = 8;
   		Bitmap src = BitmapFactory.decodeFile(filename, option);
-  		Bitmap resized = Bitmap.createScaledBitmap(src, 600, 300, true);
+  		Bitmap resized = Bitmap.createScaledBitmap(src, 350, 550, true);
 
   		/* 
   		 * 리사이즈된 bitmap 파일을 sdcard에 다시 저장해준다.
