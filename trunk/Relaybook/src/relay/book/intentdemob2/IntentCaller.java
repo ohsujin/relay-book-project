@@ -83,6 +83,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
 	        	 finish();
 	        }
 	        
+	        
         /**/
         }  
 
@@ -92,7 +93,6 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         
 	        Button button = (Button) findViewById(R.id.Send);
 	        button.setOnClickListener(this); 
-	       
     }
     
     public String getMyPhoneNumber()
