@@ -1,5 +1,6 @@
 package relay.book.intentdemob2;
 
+import relay.book.Mylist.my_book_list;
 import android.app.*;
 import android.content.*;
 import android.graphics.drawable.*;
@@ -35,7 +36,7 @@ public class Tab extends TabActivity {
 			
 			tabHost.addTab(tabHost.newTabSpec("tab3")
 			          .setIndicator("장바구니", img3)
-			          .setContent(new Intent(this, Read.class)));
+			          .setContent(new Intent(this, my_book_list.class)));
 
 			Drawable img4 = getResources().getDrawable(R.drawable.tab_option);
 			

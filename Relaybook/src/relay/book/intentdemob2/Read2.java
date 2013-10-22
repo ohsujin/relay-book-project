@@ -17,9 +17,11 @@ import android.graphics.*;
 import android.os.*;
 import android.support.v4.view.*;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.telephony.SmsManager;
 import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.*;
+import android.widget.ImageView.ScaleType;
 
 public class Read2 extends Activity {
 
@@ -46,15 +48,66 @@ public class Read2 extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.read2);
 
+		// getting intent data
+        Intent in = getIntent();
+        
+        // Get JSON values from previous intent
+        final String title = in.getStringExtra("title");
+        final String phone = in.getStringExtra("phone");
+        String school = in.getStringExtra("school");
+        String writer = in.getStringExtra("writer");
+        String price = in.getStringExtra("price");
+        String subject = in.getStringExtra("subject");
+        String memo = in.getStringExtra("memo");        
+        int relaycount = Integer.parseInt(in.getStringExtra("relaycount"));
+        String publisher = in.getStringExtra("publisher");
+        filename = in.getStringExtra("filename");
+        float quality = Float.parseFloat( in.getStringExtra("quality") );
+        
+        
 		
-    	getInform();
-    	
+        TextView Title = (TextView)findViewById(R.id.title); // 책 제목
+	    Title.setText(title);
+	    
+	    TextView Subject = (TextView)findViewById(R.id.subject); // 과목명
+	    Subject.setText(subject);
+	   
+	    TextView Price = (TextView)findViewById(R.id.price); // 가격
+	    Price.setText(price);
+	   
+	    TextView Publisher = (TextView)findViewById(R.id.publisher); // 출판사
+	    Publisher.setText(publisher);
+	 
+	    TextView Writer = (TextView)findViewById(R.id.writer); //가격
+	    Writer.setText(writer);
+	   
+	    TextView Memo = (TextView)findViewById(R.id.memo); //가격
+	    Memo.setText(memo);
+	    
+	    RatingBar Rating = (RatingBar) findViewById(R.id.quality); 
+	    Rating.setRating(quality);
+	    
+	    EditText School = (EditText)findViewById(R.id.Seller_school);
+	    School.setText(school);
+	    
+	    EditText Phone = (EditText)findViewById(R.id.Seller_phone);
+	    Phone.setText(phone);
+	    
+	    Phone.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				SmsManager smsManager = SmsManager.getDefault();
+		        String sendTo = phone;
+		        String myMessage = "-RelayBook-\n등록하신 "+title+" 책을 구매 하고 싶습니다.";
+		        smsManager.sendTextMessage(sendTo, null, myMessage, null, null);
+		        Toast.makeText(getApplicationContext(), "판매 요청이 전송되었습니다.", Toast.LENGTH_SHORT).show();
+		        finish();
+			}
+		});
+	    
+	    
 
-		String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/send.jsp";
-//		String URL = "http://14.63.212.134/MyRelayServer/JSONServer.jsp";
-//		String URL = "http://121.156.253.22/hello.py";
-
-		
 		//ViewPaper
 		timer = new CountDownTimer(2*1000, 1000) {
 
@@ -83,6 +136,7 @@ public class Read2 extends Activity {
 				timer.start();
 			}
 
+			
 			@Override public void onPageScrolled(int arg0, float arg1, int arg2) {}
 			@Override public void onPageScrollStateChanged(int arg0) {}
 		});
@@ -90,67 +144,6 @@ public class Read2 extends Activity {
 		
 	}
 
-	void getInform(){
-
-		String Ph_num = PhoneNum.getPhoneNum();
-		DefaultHttpClient client = new DefaultHttpClient();
-		
-		try {
-			/* 체크할 id와 pwd값 서버로 전송 */
-			HttpPost post = new HttpPost(URL_book_inform+"?phone="+Ph_num);
-
-			/* 지연시간 최대 5초 */
-			HttpParams params = client.getParams();
-			HttpConnectionParams.setConnectionTimeout(params, 3000);
-			HttpConnectionParams.setSoTimeout(params, 3000);
-
-			/* 데이터 보낸 뒤 서버에서 데이터를 받아오는 과정 */
-			HttpResponse response = client.execute(post);
-			BufferedReader bufreader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(),"utf-8"));
-
-			String line = null;
-			String result = "";
-
-			while ((line = bufreader.readLine()) != null) {
-				result += line;
-			}
-			
-			System.out.println(result);
-			
-			JSONObject json = new JSONObject(result);	
-			JSONObject rece = json.getJSONObject("Book_inform");
-			
-			filename = rece.getString("filename");
-  
-		
-		    TextView Title = (TextView)findViewById(R.id.Title); // 책 제목
-		    Title.setText(rece.getString("title"));
-		   
-		    TextView Subject = (TextView)findViewById(R.id.Subject); // 과목명
-		    Subject.setText(rece.getString("subject"));
-		   
-		    TextView Price = (TextView)findViewById(R.id.Price); // 가격
-		    Price.setText(rece.getString("price"));
-		   
-		    TextView Publisher = (TextView)findViewById(R.id.Publisher); // 출판사
-		    Publisher.setText(rece.getString("publisher"));
-		 
-		    TextView Writer = (TextView)findViewById(R.id.Writer); //가격
-		    Writer.setText(rece.getString("writer"));
-		   
-		    TextView Memo = (TextView)findViewById(R.id.Memo); //가격
-		    Memo.setText(rece.getString("memo"));
-		    
-		    RatingBar rating = (RatingBar) findViewById(R.id.Quality_view); 
-		    rating.setRating(Float.parseFloat(rece.getString("quality")));
-		    
-  
-			} catch (Exception e) {
-				e.printStackTrace();
-				client.getConnectionManager().shutdown();	// 연결 지연 종료		
-			}
-			
-	}
 	
 
 	//ViewPaper
@@ -174,13 +167,14 @@ public class Read2 extends Activity {
 		public Object instantiateItem(View pager, int position) {
 
 			ImageView image = new ImageView(context);
-			
+ 			
 			if(position==0){
 				ImageDownloader.download(URL+filename+"_1.jpg", image);
 			}else if(position==1){
 				ImageDownloader.download(URL+filename+"_2.jpg", image);
 			}else if(position==2){
 				ImageDownloader.download(URL+filename+"_3.jpg", image);
+				
 				image.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -204,8 +198,5 @@ public class Read2 extends Activity {
 		}
 
 	}
-	//
-	
-	
 
 }
