@@ -91,9 +91,8 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         
 	        Button button = (Button) findViewById(R.id.Send);
 	        button.setOnClickListener(this); 
-	        
-	        
     }
+	
     
     public String getMyPhoneNumber()
     {
@@ -112,7 +111,6 @@ public class IntentCaller extends Activity implements View.OnClickListener {
     	return s.replace("-", "").replace("+82", "0");
     	
     }
-    
 
     public void onClick(View v) {
         EditText phoneEdit = (EditText) findViewById(R.id.Phone);

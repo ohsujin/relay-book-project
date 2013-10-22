@@ -1,4 +1,4 @@
-package relay.book.intentdemob2;
+package relay.book.Mylist;
 
 import java.io.*;
 import java.net.*;
@@ -11,6 +11,7 @@ import org.json.*;
 
 import relay.book.Option.*;
 import relay.book.image.*;
+import relay.book.intentdemob2.R;
 import android.app.*;
 import android.content.*;
 import android.graphics.*;
@@ -23,7 +24,7 @@ import android.view.View.OnClickListener;
 import android.widget.*;
 import android.widget.ImageView.ScaleType;
 
-public class Read2 extends Activity {
+public class View_mylist extends Activity {
 
 	String imageUrl = "http://14.63.212.134:8080/MyRelayServer/Image/";
 	Bitmap bmImg;
@@ -46,7 +47,7 @@ public class Read2 extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.read2);
+		setContentView(R.layout.view_mylist);
 
 		// getting intent data
         Intent in = getIntent();
@@ -92,10 +93,8 @@ public class Read2 extends Activity {
 	    
 	    EditText Phone = (EditText)findViewById(R.id.Seller_phone);
 	    Phone.setText(phone);
-
-	    Button Request = (Button)findViewById(R.id.Request);
 	    
-	    Request.setOnClickListener(new OnClickListener() {
+	    Phone.setOnClickListener(new OnClickListener() { 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
