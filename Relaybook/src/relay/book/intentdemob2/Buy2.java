@@ -187,7 +187,7 @@ public class Buy2 extends Activity implements OnItemSelectedListener{
 				@Override
 				public void onItemClick(StaggeredGridView parent, View view,int position, long id) {
 					// TODO Auto-generated method stub
-					 Toast.makeText(Buy2.this, position + "번째 선택", Toast.LENGTH_SHORT).show();
+
 					 
 					 Intent myIntent = new Intent(Buy2.this, Read2.class);
 						 try {
