@@ -325,6 +325,7 @@
                 android:layout_width="294dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:text="Relay Count"
                 android:editable="false"
                 android:singleLine="true" />
         </LinearLayout>

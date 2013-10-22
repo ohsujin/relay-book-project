@@ -23,6 +23,7 @@ import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.*;
 import android.widget.ImageView.ScaleType;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 
 public class View_mylist extends Activity {
 
@@ -32,10 +33,8 @@ public class View_mylist extends Activity {
 	 
 	 
 	private static final String URL = "http://14.63.212.134:8080/MyRelayServer/Image/";
-	static String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/Send.jsp";
 	
 	String filename = null;
-	 
 	
 	//ViewPaper
 	private ViewPager mPager;
@@ -53,6 +52,8 @@ public class View_mylist extends Activity {
         Intent in = getIntent();
         
         // Get JSON values from previous intent
+        final String R_ID = in.getStringExtra("filename");
+        final String passwd = in.getStringExtra("passwd");        
         final String title = in.getStringExtra("title");
         final String phone = in.getStringExtra("phone");
         String school = in.getStringExtra("school");
@@ -60,7 +61,6 @@ public class View_mylist extends Activity {
         String price = in.getStringExtra("price");
         String subject = in.getStringExtra("subject");
         String memo = in.getStringExtra("memo");        
-        int relaycount = Integer.parseInt(in.getStringExtra("relaycount"));
         String publisher = in.getStringExtra("publisher");
         filename = in.getStringExtra("filename");
         float quality = Float.parseFloat( in.getStringExtra("quality") );
@@ -85,29 +85,74 @@ public class View_mylist extends Activity {
 	    TextView Memo = (TextView)findViewById(R.id.memo); //가격
 	    Memo.setText(memo);
 	    
-	    RatingBar Rating = (RatingBar) findViewById(R.id.quality); 
+	    final RatingBar Rating = (RatingBar) findViewById(R.id.quality); 
+	    
+	    
+	    Rating.setStepSize((float) 0.5); // 별 색깔이 1칸씩줄어들고 늘어남 0.5로하면 반칸씩 들어감         
+	    Rating.setRating((float) 0.0); // 처음보여줄때(색깔이 한개도없음) default 값이 0  이다 
+	    Rating.setIsIndicator(false); // true - 별점만 표시 사용자가 변경 불가 , false - 사용자가 변경가능   
+	    
+	    
+	    Rating.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {               
+	    	@Override            
+	    	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {                 
+	        
+	    	}         
+	    }); 
+	    
 	    Rating.setRating(quality);
 	    
-	    EditText School = (EditText)findViewById(R.id.Seller_school);
-	    School.setText(school);
+	    /*
+	     * 수정된 값을 EditText로 부터 가져오기
+	     */
+	    final EditText Title_update = (EditText)findViewById(R.id.title);
+	    final EditText Writer_update = (EditText)findViewById(R.id.writer);
+	    final EditText Publisher_update = (EditText)findViewById(R.id.publisher);
+	    final EditText Price_update = (EditText)findViewById(R.id.price);
+	    final EditText Subject_update = (EditText)findViewById(R.id.subject);
+	    final EditText Memo_update = (EditText)findViewById(R.id.memo);
+	    final EditText passwd_chk = (EditText)findViewById(R.id.passwd);
+	
 	    
-	    EditText Phone = (EditText)findViewById(R.id.Seller_phone);
-	    Phone.setText(phone);
 	    
-	    Phone.setOnClickListener(new OnClickListener() { 
+	    Button Request = (Button)findViewById(R.id.Request);	    
+	    Request.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				SmsManager smsManager = SmsManager.getDefault();
-		        String sendTo = phone;
-		        String myMessage = "-RelayBook-\n등록하신 "+title+" 책을 구매 하고 싶습니다.";
-		        smsManager.sendTextMessage(sendTo, null, myMessage, null, null);
-		        Toast.makeText(getApplicationContext(), "판매 요청이 전송되었습니다.", Toast.LENGTH_SHORT).show();
-		        finish();
+			
+				if(passwd_chk.getText().toString().equals(passwd)){
+			
+					JSONObject book_inform = new JSONObject();
+					JSONObject listData = new JSONObject();
+					
+					try {
+						book_inform.put("title", Title_update.getText().toString());
+						book_inform.put("writer", Writer_update.getText().toString() );
+						book_inform.put("publisher",Publisher_update.getText().toString());
+						book_inform.put("quality",+ Rating.getRating());
+						book_inform.put("price", Price_update.getText().toString());
+						book_inform.put("subject", Subject_update.getText().toString());
+						book_inform.put("Memo", Memo_update.getText().toString());
+						book_inform.put("R_ID", R_ID);
+						
+						listData.put("BookList", book_inform);
+						
+						Update_book_json update = new Update_book_json();
+						update.HttpPostData(listData.toString());
+						Toast.makeText(getApplicationContext(), "수정완료!!", Toast.LENGTH_SHORT).show();
+						finish();
+						
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}else{
+					 Toast.makeText(getApplicationContext(), "비밀번호가 틀립니다.", Toast.LENGTH_SHORT).show();
+				}
+				
+				
 			}
 		});
-	    
-	    
 
 		//ViewPaper
 		timer = new CountDownTimer(2*1000, 1000) {
@@ -199,5 +244,5 @@ public class View_mylist extends Activity {
 		}
 
 	}
-
 }
+

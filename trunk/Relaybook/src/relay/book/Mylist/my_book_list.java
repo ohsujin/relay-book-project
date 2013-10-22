@@ -32,7 +32,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 public class my_book_list extends Activity implements OnItemSelectedListener{
 	ArrayList<String> arraylist;
 	static String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/MybookList.jsp";
-//	static String URL_book_inform = "http://121.156.235.48:8090/MyRelayServer/Send.jsp";
 	static String imageUrl = "http://14.63.212.134:8080/MyRelayServer/Image/";
 	
 	private String urls[];
@@ -41,13 +40,10 @@ public class my_book_list extends Activity implements OnItemSelectedListener{
 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_book_list);
+        setContentView(R.layout.my_book_list);     
 
-      PhoneNum phone = new PhoneNum();
-     
       
-      
-        send_search(phone.getPhoneNum());// 서버로 검색조건과 keyword를 보낸다.	
+        send_search(PhoneNum.getPhoneNum());// 서버로 검색조건과 keyword를 보낸다.	
         
 	}
 	
@@ -60,7 +56,7 @@ public class my_book_list extends Activity implements OnItemSelectedListener{
 			/* 체크할 id와 pwd값 서버로 전송 */
 			String keyword1 = URLEncoder.encode(keyword, "UTF-8");//한글인코딩 처리를 위해 한번 변환해줌
 			
-			HttpPost post = new HttpPost(URL_book_inform+"?serch_option="+Search_option+"&keyword="+keyword1);
+			HttpPost post = new HttpPost(URL_book_inform+"?keyword="+keyword1);
 
 			/* 지연시간 최대 5초 */
 			HttpParams params = client.getParams();
@@ -138,17 +134,17 @@ public class my_book_list extends Activity implements OnItemSelectedListener{
 				public void onItemClick(StaggeredGridView parent, View view,int position, long id) {
 					// TODO Auto-generated method stub
 					 
-					 Intent myIntent = new Intent(my_book_list.this, Read2.class);
+					 Intent myIntent = new Intent(my_book_list.this, View_mylist.class);
 					 try {
 							myIntent.putExtra("title", rece.getJSONObject(position).getString("title").toString() );	
 							myIntent.putExtra("writer", rece.getJSONObject(position).getString("writer").toString() );
 							myIntent.putExtra("price", rece.getJSONObject(position).getString("price").toString() );
 							myIntent.putExtra("subject", rece.getJSONObject(position).getString("subject").toString() );
 							myIntent.putExtra("memo", rece.getJSONObject(position).getString("memo").toString() );
-							myIntent.putExtra("relaycount", rece.getJSONObject(position).getString("relaycount").toString() );
 							myIntent.putExtra("publisher", rece.getJSONObject(position).getString("publisher").toString() );
 							myIntent.putExtra("filename", rece.getJSONObject(position).getString("filename").toString() );
 							myIntent.putExtra("quality", rece.getJSONObject(position).getString("quality").toString() );
+							myIntent.putExtra("passwd", rece.getJSONObject(position).getString("passwd").toString() );
 							
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block

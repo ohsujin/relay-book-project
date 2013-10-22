@@ -79,6 +79,8 @@ public class Write extends Activity{
 				Intent intent = new Intent(Write.this, Tab.class); 
 		    	startActivity(intent);
 		    	
+		    	Toast.makeText(getApplicationContext(), "등록 되었습니다.", Toast.LENGTH_SHORT).show();
+		    	
 		    	finish();
 			}
 		});
