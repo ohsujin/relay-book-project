@@ -125,6 +125,23 @@
 			        android:layout_width="wrap_content"
 		 	        android:layout_height="8dp"
 			        android:src="@drawable/line" />
+	            <EditText
+	                android:id="@+id/RePassword"
+	                android:layout_width="208dp"
+	                android:layout_height="wrap_content"
+	                android:background="@null"
+	                android:singleLine="true"
+	                android:ems="10"
+	                android:hint="비밀번호 재확인"
+	                android:inputType="number"
+	                android:maxLength="4"
+	                android:password="true"
+	                android:width="250dp" />
+	            <ImageView
+			        android:id="@+id/imageView1"
+			        android:layout_width="wrap_content"
+		 	        android:layout_height="8dp"
+			        android:src="@drawable/line" />
             </LinearLayout>
         </LinearLayout>
 
