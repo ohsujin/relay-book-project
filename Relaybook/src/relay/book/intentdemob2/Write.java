@@ -120,6 +120,7 @@ public class Write extends Activity{
     		builder.setView(customLayout);
     		dialog = builder.create();
     		dialog.show();
+    		Toast.makeText(getApplicationContext(), "책표지를 포함한 총 3장을 찍으셔야합니다.", Toast.LENGTH_LONG).show();
     		break;
     	case R.id.camera:
     		dialog.dismiss();
@@ -128,6 +129,7 @@ public class Write extends Activity{
     		dialog.dismiss();
     		takePicture();
     		++i;
+    		Toast.makeText(getApplicationContext(), "책표지를 포함한 총 3장, 연속 촬영을 시작합니다.", Toast.LENGTH_LONG).show();
     		dialog.dismiss();
     		takePicture();
     		

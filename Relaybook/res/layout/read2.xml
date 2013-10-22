@@ -37,11 +37,6 @@
             android:layout_marginRight="15dp"
             android:orientation="vertical" >
 
-            <ImageView
-                android:id="@+id/ImageView01"
-                android:layout_width="wrap_content"
-                android:layout_height="8dp"
-                android:src="@drawable/write_line" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -234,6 +229,14 @@
                     android:hint="메모를 입력해주세요."
                     android:textSize="16sp" />
             </LinearLayout>
+            
+            <ImageView
+                android:id="@+id/ImageView01"
+                android:layout_width="wrap_content"
+                android:layout_height="8dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/write_line" />
+            
         </LinearLayout>
     </LinearLayout>
 
@@ -244,8 +247,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp" >
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/ImageView05"
@@ -284,7 +286,7 @@
                 android:layout_marginLeft="13dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/university" />
+                android:src="@drawable/msg_icon" />
 
             <EditText
                 android:id="@+id/Seller_phone"
@@ -295,6 +297,8 @@
                 android:background="@null"
                 android:editable="false"
                 android:singleLine="true" />
+            
+            
         </LinearLayout>
 
         <ImageView
@@ -313,7 +317,7 @@
                 android:layout_marginLeft="13dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/university" />
+                android:src="@drawable/relay_num1" />
 
             <EditText
                 android:id="@+id/Relay_count"
@@ -330,6 +334,14 @@
             android:layout_width="match_parent"
             android:layout_height="8dp"
             android:src="@drawable/write_line" />
+        
+        <Button
+		        android:id="@+id/Request"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="구매요청"
+		        android:background="@drawable/btn_bg"
+				android:textColor="#ffffff" />
     </LinearLayout>
 
 </LinearLayout>
