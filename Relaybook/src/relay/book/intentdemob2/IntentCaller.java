@@ -26,6 +26,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
 	
 	HttpHost http = new HttpHost();
 	private  EditText passwordEdit;
+	private  EditText RepasswordEdit;
 	
 
 	SchoolList sch_list = new SchoolList(); //학교명단이 많아 따로 클래스로 분류
@@ -75,16 +76,14 @@ public class IntentCaller extends Activity implements View.OnClickListener {
 		 				e.printStackTrace();
 		 			}
 		        	 i++;
-	        	
 	        }
 	      
 	        if(i == 4){
 	        	 Toast.makeText(getApplicationContext(), "네트워크 연결 상태가 좋지 않습니다.\n3G 또는 WIFI 연결 상태를 확인해 주세요.", Toast.LENGTH_LONG).show();
 	        	 finish();
 	        }
-	        
-	        
         /**/
+	        
         }  
 
 	        AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.University);
@@ -93,6 +92,8 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         
 	        Button button = (Button) findViewById(R.id.Send);
 	        button.setOnClickListener(this); 
+	        
+	        
     }
     
     public String getMyPhoneNumber()
@@ -117,8 +118,11 @@ public class IntentCaller extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         EditText phoneEdit = (EditText) findViewById(R.id.Phone);
         passwordEdit = (EditText) findViewById(R.id.Password);
+        RepasswordEdit = (EditText) findViewById(R.id.RePassword);
         AutoCompleteTextView universityEdit = (AutoCompleteTextView) findViewById(R.id.University);
         
+        String passwd = passwordEdit.getText().toString();
+        String repasswd = RepasswordEdit.getText().toString();
         
         
         Intent intent = new Intent(this, Tab.class);        
@@ -126,30 +130,39 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         intent.putExtra("password", passwordEdit.getText());
         intent.putExtra("university", universityEdit.getText());
         
-        startActivity(intent);
-        finish();
+      
         
-        
-        /* 서버로 넘기기 */
-        JSONObject regi = new JSONObject();
-		JSONArray arr = new JSONArray();
-		JSONObject listData = new JSONObject();
-		
-		try {
+        System.out.println("선택 항목 : "+universityEdit.getText().toString());
+    	    		
+        if(universityEdit.getText().toString().equals("")){
+        	Toast.makeText(getApplicationContext(), "학교를 선택해 주세요.", Toast.LENGTH_LONG).show();
+		}else if(passwd.equals("") || passwd.length() < 4){
+			Toast.makeText(getApplicationContext(), "4자리 비밀번호를 입력해 주세요.", Toast.LENGTH_LONG).show();
+		}else{
+				try {
+				
+		        /* 서버로 넘기기 */
+		        JSONObject regi = new JSONObject();
+				JSONObject listData = new JSONObject();
+				
+				regi.put("phone", phoneEdit.getText().toString());
+				regi.put("school", universityEdit.getText().toString() );
+				regi.put("passwd",passwordEdit.getText().toString());
+				
+				listData.put("Register", regi);
+				
+				http.HttpPostData(listData.toString());
+				
+				
 			
-			regi.put("phone", phoneEdit.getText().toString());
-			regi.put("school", universityEdit.getText().toString() );
-			regi.put("passwd",passwordEdit.getText().toString());
-			
-			listData.put("Register", regi);
-			
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
+        startActivity(intent);
+	    finish();
+        	
 		
-		http.HttpPostData(listData.toString());
-
-	}
-       
+	}      
 }
