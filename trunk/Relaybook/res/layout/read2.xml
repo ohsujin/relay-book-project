@@ -1,209 +1,338 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Scroll"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/list_bg"
-    tools:context=".MainActivity" >
+    android:layout_height="match_parent" 
+    android:fillViewport="true" 
+    android:background="@drawable/write_bg"
+     >
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="323dp"
-        android:layout_height="180dp"
-        android:layout_above="@+id/bottom"
-        android:layout_below="@+id/ll_title_layout" >
-    </android.support.v4.view.ViewPager>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/pager_left_btn"
+    <LinearLayout
+        android:layout_width="157dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center" >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_gravity="center" >
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginTop="80dp"
-        android:text="left" />
+        android:background="#ffffff" >
 
-    <Button
-        android:id="@+id/pager_right_btn"
-        android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/ImageView01"
+                android:layout_width="wrap_content"
+                android:layout_height="8dp"
+                android:src="@drawable/write_line" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" >
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="7dp"
+                    android:text="책이름"
+                    android:textColor="#000000"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/title"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:editable="false"
+                    android:hint="책 이름을 입력해주세요."
+                    android:singleLine="true" >
+
+                    <requestFocus />
+                </EditText>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="8dp"
+                android:src="@drawable/write_line" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" >
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="7dp"
+                    android:text="저 자"
+                    android:textColor="#000000" />
+
+                <EditText
+                    android:id="@+id/writer"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:editable="false"
+                    android:hint="저자를 입력해주세요."
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="8dp"
+                android:src="@drawable/write_line" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" >
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="7dp"
+                    android:text="출판사"
+                    android:textColor="#000000" />
+
+                <EditText
+                    android:id="@+id/publisher"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:editable="false"
+                    android:hint="출판사를 입력해주세요."
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="8dp"
+                android:src="@drawable/write_line" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <RatingBar
+                    android:id="@+id/quality"
+                    style="?android:attr/ratingBarStyleIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginTop="4dp"
+                    android:text="가 격"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+                <EditText
+                    android:id="@+id/price"
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:editable="false"
+                    android:gravity="right"
+                    android:hint="가격입력"
+                    android:inputType="number"
+                    android:maxLength="5"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="4dp"
+                    android:editable="false"
+                    android:text="원"
+                    android:textColor="#000000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" >
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="3.70"
+                    android:text="교과명"
+                    android:textColor="#000000" />
+
+                <EditText
+                    android:id="@+id/subject"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.70"
+                    android:background="@null"
+                    android:editable="false"
+                    android:hint="교과명을 입력해주세요."
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="8dp"
+                android:src="@drawable/write_line" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" >
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="3.70"
+                    android:text="메모"
+                    android:textColor="#000000" />
+
+                <EditText
+                    android:id="@+id/memo"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.70"
+                    android:background="@null"
+                    android:editable="false"
+                    android:hint="메모를 입력해주세요."
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="80dp"
-        android:text="right" />
+        android:orientation="vertical" >
 
-    
-    
-    
-    
-    <ScrollView
-	    android:id="@+id/Scroll"
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent" 
-	    android:layout_marginTop="190dp"
-	    android:fillViewport="true" >
-	
-		<LinearLayout 
-			android:layout_width="285dp"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="30dp"
-			android:orientation="vertical" >
-	
-			<LinearLayout 
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="10dp" >
-				
-				<TextView
-				    android:id="@+id/Title_Title"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="책 제목 : "
-					android:textColor="#000000" />
-				
-				<!-- 밑에 뷰가 DB의 책 제목 받아올 뷰 -->
-				<TextView 
-				    android:id="@+id/Title"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:textColor="#000000" />
-			</LinearLayout>
-			
-			<LinearLayout 
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="10dp" >
-				
-				<TextView
-				    android:id="@+id/Subject_Title"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="과목명 : "
-					android:textColor="#000000" />
-				
-				<!-- 밑에 뷰가 DB의 과목명 제목 받아올 뷰 -->
-				<TextView 
-				    android:id="@+id/Subject"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:textColor="#000000" />
-			</LinearLayout>
-			
-			<LinearLayout 
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="10dp" >
-				
-				<TextView
-				    android:id="@+id/Price_Title"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="가격 : "
-					android:textColor="#000000" />
-				
-				<!-- 밑에 뷰가 DB의 가격 받아올 뷰 -->
-				<TextView 
-				    android:id="@+id/Price"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:textColor="#000000" />
-			</LinearLayout>
-			
-			<LinearLayout 
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="10dp" >
-				
-				<TextView
-				    android:id="@+id/Publisher_Title"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="출판사 : "
-					android:textColor="#000000" />
-				
-				<!-- 밑에 뷰가 DB의 출판사 받아올 뷰 -->
-				<TextView 
-				    android:id="@+id/Publisher"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:textColor="#000000" />
-			</LinearLayout>
-	
-			<LinearLayout 
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="10dp" >
-				
-				<TextView
-				    android:id="@+id/Writer_Title"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="저자 : "
-					android:textColor="#000000" />
-				
-				<!-- 밑에 뷰가 DB의 저자 받아올 뷰 -->
-				<TextView 
-				    android:id="@+id/Writer"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:textColor="#000000" />
-				
-			</LinearLayout>
-			
-			<LinearLayout 
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="10dp" >
-				
-				<TextView
-				    android:id="@+id/Memo_Title"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="메모 : "
-					android:textColor="#000000" />
-				
-				<!-- 밑에 뷰가 DB의 메모 받아올 뷰 -->
-				<TextView 
-				    android:id="@+id/Memo"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:textColor="#000000" />
-				
-			</LinearLayout>
-		
-			<LinearLayout 
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="10dp" >
-				
-				<TextView
-				    android:id="@+id/Qulity_Title"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="상태 : "
-					android:textColor="#000000" />
-				
-				<!-- 밑에 뷰가 DB의 저자 받아올 뷰 -->
-				
-			</LinearLayout>
-	
-			<RatingBar
-			    android:id="@+id/Quality_view"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    style="?android:attr/ratingBarStyleIndicator"
-			    android:isIndicator="true" />
-			
-			<TextView android:layout_height="wrap_content"                           
-		            android:layout_width="wrap_content"
-		            android:layout_gravity="right" 
-		            android:textColor="#000000"                      
-		            android:id="@+id/tv01" />  
-				
-		</LinearLayout>
-	</ScrollView>
-    
-    
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp" >
+
+            <ImageView
+                android:id="@+id/ImageView05"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/university" />
+
+            <EditText
+                android:id="@+id/Seller_school"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="12dp"
+                android:layout_width="294dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:editable="false"
+                android:textSize="18sp"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ImageView04"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:src="@drawable/write_line" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp" >
+
+            <ImageView
+                android:id="@+id/ImageView03"
+                android:layout_marginLeft="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/university" />
+
+            <EditText
+                android:id="@+id/Seller_phone"
+                android:layout_marginLeft="13dp"
+                android:layout_width="294dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:editable="false"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ImageView02"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:src="@drawable/write_line" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" >
+
+            <ImageView
+                android:id="@+id/shcool"
+                android:layout_marginLeft="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/university" />
+
+            <EditText
+                android:id="@+id/Relay_count"
+                android:layout_marginLeft="13dp"
+                android:layout_width="294dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:editable="false"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ImageView03"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:src="@drawable/write_line" />
+    </LinearLayout>
+
+</LinearLayout>
+
+</ScrollView>
 

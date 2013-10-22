@@ -18,6 +18,7 @@ public class MainActivity extends Activity {
 		
 		finish(); //이전 액티비티 종료	
 
+		
     	//Intent myIntent = new Intent(MainActivity.this, IntentCaller.class);
     	//MainActivity.this.startActivity(myIntent); //새로운 액티비티 이동
     	

@@ -28,7 +28,6 @@ public class IntentCaller extends Activity implements View.OnClickListener {
 	private  EditText passwordEdit;
 	private  EditText RepasswordEdit;
 	
-
 	SchoolList sch_list = new SchoolList(); //학교명단이 많아 따로 클래스로 분류
 	
 	
@@ -124,20 +123,19 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         String passwd = passwordEdit.getText().toString();
         String repasswd = RepasswordEdit.getText().toString();
         
-        
+  
         Intent intent = new Intent(this, Tab.class);        
         intent.putExtra("phone", phoneEdit.getText());
         intent.putExtra("password", passwordEdit.getText());
         intent.putExtra("university", universityEdit.getText());
         
-      
-        
-        System.out.println("선택 항목 : "+universityEdit.getText().toString());
     	    		
         if(universityEdit.getText().toString().equals("")){
         	Toast.makeText(getApplicationContext(), "학교를 선택해 주세요.", Toast.LENGTH_LONG).show();
 		}else if(passwd.equals("") || passwd.length() < 4){
 			Toast.makeText(getApplicationContext(), "4자리 비밀번호를 입력해 주세요.", Toast.LENGTH_LONG).show();
+		}else if(passwd.equals(repasswd) != true){
+			Toast.makeText(getApplicationContext(), "비밀번호가 일치 하지 않습니다.\n 다시 입력 해주세요.", Toast.LENGTH_LONG).show();
 		}else{
 				try {
 				
@@ -153,16 +151,15 @@ public class IntentCaller extends Activity implements View.OnClickListener {
 				
 				http.HttpPostData(listData.toString());
 				
-				
+				 startActivity(intent);
+				 finish();
 			
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		}
-        startActivity(intent);
-	    finish();
-        	
-		
-	}      
+
+    }
+    }
 }
+        	
