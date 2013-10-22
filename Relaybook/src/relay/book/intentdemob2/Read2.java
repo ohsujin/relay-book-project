@@ -21,7 +21,7 @@ import android.telephony.SmsManager;
 import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.*;
-import android.widget.ImageView.ScaleType;
+
 
 public class Read2 extends Activity {
 

@@ -9,13 +9,14 @@
 
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="584dp"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="157dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center" >
+        android:layout_gravity="center_vertical|center"
+        android:fitsSystemWindows="true" >
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
@@ -63,12 +64,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:editable="false"
                     android:hint="책 이름을 입력해주세요."
-                    android:singleLine="true" >
-
-                    <requestFocus />
-                </EditText>
+                    android:singleLine="true" />
             </LinearLayout>
 
             <ImageView
@@ -95,7 +92,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:editable="false"
                     android:hint="저자를 입력해주세요."
                     android:singleLine="true"
                     android:textSize="16sp" />
@@ -125,7 +121,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:editable="false"
                     android:hint="출판사를 입력해주세요."
                     android:singleLine="true"
                     android:textSize="16sp" />
@@ -146,6 +141,7 @@
                     style="?android:attr/ratingBarStyleIndicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+                
 
                 <TextView
                     android:layout_width="50dp"
@@ -163,7 +159,6 @@
                     android:layout_marginTop="4dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:editable="false"
                     android:gravity="right"
                     android:hint="가격입력"
                     android:inputType="number"
@@ -199,7 +194,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3.70"
                     android:background="@null"
-                    android:editable="false"
                     android:hint="교과명을 입력해주세요."
                     android:singleLine="true"
                     android:textSize="16sp" />
@@ -230,7 +224,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3.70"
                     android:background="@null"
-                    android:editable="false"
                     android:hint="메모를 입력해주세요."
                     android:textSize="16sp" />
             </LinearLayout>
@@ -242,94 +235,54 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="50dp"
+	    android:orientation="horizontal" 
+	    android:background="#cd5c5c">
+
+		<TextView
+		    android:layout_width="60dp"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center"
+		    android:layout_marginRight="7dp"
+		    android:layout_weight="3.70"
+		    android:textSize="20sp"
+		    android:text="비밀번호"
+		    android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/passwd"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp" >
+            android:layout_gravity="center"
+            android:layout_weight="0.96"
+            android:background="@null"
+            android:textSize="20sp"
+            android:ems="10"
+            android:hint="비밀번호를 입력해 주세요."
+            android:inputType="number"
+            android:maxLength="4"
+            android:password="true"/>
 
-            <ImageView
-                android:id="@+id/ImageView05"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="13dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/university" />
+</LinearLayout>
 
-            <EditText
-                android:id="@+id/Seller_school"
-                android:layout_marginLeft="13dp"
-                android:layout_marginTop="12dp"
-                android:layout_width="294dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:editable="false"
-                android:textSize="18sp"
-                android:singleLine="true" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="7dp"
+    android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/Request"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bg"
+            android:text="수정하기"
+            android:textColor="#ffffff" />
+
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/ImageView04"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:src="@drawable/write_line" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp" >
-
-            <ImageView
-                android:id="@+id/ImageView03"
-                android:layout_marginLeft="13dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/university" />
-
-            <EditText
-                android:id="@+id/Seller_phone"
-                android:layout_marginLeft="13dp"
-                android:layout_width="294dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:editable="false"
-                android:singleLine="true" />
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/ImageView02"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:src="@drawable/write_line" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" >
-
-            <ImageView
-                android:id="@+id/shcool"
-                android:layout_marginLeft="13dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/university" />
-
-            <EditText
-                android:id="@+id/Relay_count"
-                android:layout_marginLeft="13dp"
-                android:layout_width="294dp"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:editable="false"
-                android:singleLine="true" />
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/ImageView03"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:src="@drawable/write_line" />
     </LinearLayout>
 
 </LinearLayout>
