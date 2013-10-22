@@ -93,7 +93,9 @@ public class Read2 extends Activity {
 	    EditText Phone = (EditText)findViewById(R.id.Seller_phone);
 	    Phone.setText(phone);
 	    
-	    Phone.setOnClickListener(new OnClickListener() {
+	    Button Request = (Button)findViewById(R.id.Request);
+	    
+	    Request.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
