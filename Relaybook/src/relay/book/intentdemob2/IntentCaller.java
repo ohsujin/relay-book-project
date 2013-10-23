@@ -45,7 +45,8 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         EditText editText = (EditText)findViewById(R.id.Phone);
         editText.setText(getMy10DigitPhoneNumber());
         
-        PhoneNum.setPhoneNum(getMy10DigitPhoneNumber()); //PhoneNum class에 핸드폰 번호 저
+        PhoneNum.setPhoneNum(getMy10DigitPhoneNumber()); //PhoneNum class에 핸드폰 번호 저장하여 다른 class에서 전화번호를 불러올수 있게 해준다.
+        
         int i=1;
         while(i<4){
         	
@@ -93,7 +94,7 @@ public class IntentCaller extends Activity implements View.OnClickListener {
 	        button.setOnClickListener(this); 
     }
 	
-    
+    /* 전화번호 불러오기 */
     public String getMyPhoneNumber()
     {
     	TelephonyManager mTelephonyMgr;
