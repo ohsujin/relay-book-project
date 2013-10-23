@@ -33,11 +33,11 @@
 		                android:id="@+id/University"
 		                android:layout_width="208dp"
 		                android:layout_height="wrap_content"
+		                android:background="@null"
 		                android:completionHint="목록에서 클릭하세요."
 		                android:completionThreshold="1"
 		                android:ems="10"
 		                android:hint="대학교명"
-		                android:background="@null"
 		                android:singleLine="true"
 		                android:width="250dp" >
 		

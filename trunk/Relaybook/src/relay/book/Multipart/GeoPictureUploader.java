@@ -1,11 +1,10 @@
 package relay.book.Multipart;
-import java.io.ByteArrayOutputStream;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -16,14 +15,13 @@ public class GeoPictureUploader
 {
 	
 	String TAG = "RelayBook";
-//    static String serviceDomain = "http://staging.abaqus.net";
+
     static String postUrl = "http://14.63.212.134/MyRelayServer/RecvBookInform.jsp";
-//    static String postUrl = "http://192.168.25.6:8090/MyRelayServer/RecvBookInform.jsp";
     static String CRLF = "\r\n"; 
     static String twoHyphens = "--"; 
     static String boundary = "*****Relaybook*****"; 
 
-    private String pictureFileName = null;
+    
     private String Subject, Title, Writer, Publisher, Price,Quality,PhoneNum,Memo;
     private DataOutputStream dataStream = null;
 
@@ -41,19 +39,9 @@ public class GeoPictureUploader
         this.Memo = Memo;
     }
 
-//    public static void setServiceDomain(String domainName)
-//    {
-//        serviceDomain = domainName;
-//    }
-//
-//    public static String getServiceDomain()
-//    {
-//        return serviceDomain;
-//    }
-
     public ReturnCode uploadPicture(String pictureFileName1,String pictureFileName2,String pictureFileName3)
     {
-        this.pictureFileName = pictureFileName;
+    	
         File uploadFile1 = new File(pictureFileName1); 
         File uploadFile2 = new File(pictureFileName2);
         File uploadFile3 = new File(pictureFileName3); 
@@ -65,7 +53,6 @@ public class GeoPictureUploader
                 FileInputStream fileInputStream2 = new FileInputStream(uploadFile2); 
                 FileInputStream fileInputStream3 = new FileInputStream(uploadFile3);
                 
-                StringBuffer postDataBuilder = new StringBuffer(); // 한글처리를 
                
                 URL connectURL = new URL(postUrl);
                 HttpURLConnection conn = (HttpURLConnection)connectURL.openConnection(); 
@@ -231,7 +218,7 @@ public class GeoPictureUploader
                 bufferSize = Math.min(bytesAvailable, maxBufferSize); 
                 bytesRead = fis.read(buffer, 0, bufferSize); 
             } 
-
+            
             // closing CRLF
             dataStream.writeBytes(CRLF);
         }
@@ -241,7 +228,4 @@ public class GeoPictureUploader
             //Log.e(TAG, "GeoPictureUploader.writeFormField: got: " + e.getMessage());
         }
     }
-
-
-
 }

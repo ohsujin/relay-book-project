@@ -32,7 +32,7 @@ public class Write extends Activity{
 	String boundary = "*****";	
 	/* ++++ ++++ ++++ ++++ ++++ ++++ */
 	
-	
+
 	/* 파일 업로드를 위한 인자값 */
 	String filename;
 	MyThread mMyThread =null;
@@ -65,8 +65,7 @@ public class Write extends Activity{
         button.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View v){
 				//MainPage.class이 부분을 이동할 곳으로 수정
-
-		    			    	
+    	
 		    	Subject = ((EditText) findViewById(R.id.Subject)).getText().toString();;
 		    	Title = ((EditText) findViewById(R.id.Title)).getText().toString();;
 		    	Writer =((EditText) findViewById(R.id.Writer)).getText().toString();;
@@ -106,8 +105,7 @@ public class Write extends Activity{
 	    iv1 = (ImageView) findViewById(R.id.imgView1);
 	    iv2 = (ImageView) findViewById(R.id.imgView2);
 	    iv3 = (ImageView) findViewById(R.id.imgView3);
-        
-     
+	    
 	}
 	
 	//button 클릭
@@ -122,7 +120,7 @@ public class Write extends Activity{
     		builder.setView(customLayout);
     		dialog = builder.create();
     		dialog.show();
-    		Toast.makeText(getApplicationContext(), "책표지를 포함한 총 3장을 찍으셔야합니다.", Toast.LENGTH_LONG).show();
+    		Toast.makeText(getApplicationContext(), "책표지를 포함한 총 3장을 찍어주세요.", Toast.LENGTH_LONG).show();
     		break;
     	case R.id.camera:
     		dialog.dismiss();
@@ -169,8 +167,6 @@ public class Write extends Activity{
   	//촬영한 사진을 수정하기 위해서
   	Bitmap loadPicture() {
 
-
-  		
   		filename = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-" + i +".jpg"; //파일이름을 저장
   		
   		BitmapFactory.Options option = new BitmapFactory.Options();
@@ -212,8 +208,6 @@ public class Write extends Activity{
 	  				i--;
 	  			}
   			
-  		
-  		
   		if(requestCode == REQUEST_PHOTO_ALBUM) {
   			if(i==1){
   				iv3.setImageURI(data.getData());
@@ -231,22 +225,16 @@ public class Write extends Activity{
   	 */
 	    public class MyThread extends AsyncTask<Void, Void, Void> {
 
-	    	
 			@Override
 			protected Void doInBackground(Void... params) {
 				// TODO Auto-generated method stub
-				 HttpFileUpload();
+				GeoPictureUploader send = new GeoPictureUploader(Subject, Title, Writer, publisher, Price,Quality,PhoneNum.getPhoneNum(),Memo);
+		    	
+		    	System.out.println("응답 : "+send.uploadPicture(image1,image2,image3));
 
 				return null;
 			}}
   	
-	    private void HttpFileUpload() {
-	    	
-	    	GeoPictureUploader send = new GeoPictureUploader(Subject, Title, Writer, publisher, Price,Quality,PhoneNum.getPhoneNum(),Memo);
-	    	
-	    	System.out.println("응답 : "+send.uploadPicture(image1,image2,image3));
-	    	
-	    }
 	    
 	    /* 종료묻기 */
 		public boolean onKeyDown(int keyCode, KeyEvent event){
