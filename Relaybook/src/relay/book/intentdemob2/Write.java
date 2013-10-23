@@ -73,14 +73,19 @@ public class Write extends Activity{
 		    	Price = ((EditText) findViewById(R.id.Price)).getText().toString();;
 		    	Memo = ((EditText) findViewById(R.id.Memo)).getText().toString();;
 		    	
-		    	mMyThread = (MyThread) new MyThread().execute((Void) null);
-				
-				Intent intent = new Intent(Write.this, Tab.class); 
-		    	startActivity(intent);
+		    	if( Title.equals("") | Writer.equals("") | Price.equals("") ){
+		    		Toast.makeText(getApplicationContext(), "책의 제목과 저자 가격은 필수 입력 항목 입니다.", Toast.LENGTH_SHORT).show();
+		    	}else{
 		    	
-		    	Toast.makeText(getApplicationContext(), "등록 되었습니다.", Toast.LENGTH_SHORT).show();
-		    	
-		    	finish();
+			    	mMyThread = (MyThread) new MyThread().execute((Void) null);
+					
+					Intent intent = new Intent(Write.this, Tab.class); 
+			    	startActivity(intent);
+			    	
+			    	Toast.makeText(getApplicationContext(), "등록 되었습니다.", Toast.LENGTH_SHORT).show();
+			    	
+			    	finish();
+		    	}
 			}
 		});
 		

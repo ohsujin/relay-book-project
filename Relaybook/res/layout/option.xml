@@ -17,5 +17,15 @@
         android:layout_centerVertical="true"
         android:text="준비중입니다." />
 
+    <Button
+        android:id="@+id/SignOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/btn_bg"
+        android:text="회원탈퇴"
+        android:textSize="20sp"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>
