@@ -36,8 +36,7 @@ public class my_book_list extends Activity implements OnItemSelectedListener{
 	
 	private String urls[];
 	/* 서버로 넘겨주는 값을 저장해줌 */
-	String Search_option="phone";
-
+	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_book_list);     
@@ -81,8 +80,8 @@ public class my_book_list extends Activity implements OnItemSelectedListener{
 			final JSONArray rece = json.getJSONArray("Book_inform");
 			
 			
-			if(rece.length() == 0){ //검색항목이 없을시 다음 wait를 해주어 오류를 잡아준다. ---> 검색항목이 없다는 메시지 알려줘야됨
-				Toast T = Toast.makeText(getApplicationContext(), "검색항목이 없습니다.", Toast.LENGTH_SHORT);
+			if(rece.length() == 0){ //검색항목이 없을시 다음 wait를 해주어 오류를 잡아준다.
+				Toast T = Toast.makeText(getApplicationContext(), "등록된 항목이 없습니다.", Toast.LENGTH_SHORT);
 				T.setGravity(Gravity.TOP,0,400);
 				T.show();
 				
