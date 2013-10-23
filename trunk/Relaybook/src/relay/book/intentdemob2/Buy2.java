@@ -27,7 +27,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 public class Buy2 extends Activity implements OnItemSelectedListener{
 	ArrayList<String> arraylist;
 	static String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/Send.jsp";
-//	static String URL_book_inform = "http://121.156.235.48:8090/MyRelayServer/Send.jsp";
 	static String imageUrl = "http://14.63.212.134:8080/MyRelayServer/Image/";
 	
 	private String urls[];
@@ -150,13 +149,10 @@ public class Buy2 extends Activity implements OnItemSelectedListener{
 			 
 			 urls = new String[rece.length()];
 			 
-			 System.out.println("사이즈 : "+rece.length());
 			 
 			 for (int i = 0; i < rece.length(); i++) {						
 					imageItems.add(new ImageItem(rece.getJSONObject(i).getString("title").toString(),rece.getJSONObject(i).getString("writer").toString(),rece.getJSONObject(i).getString("price").toString()+"원"));	 // 이부분이 커스텀 뷰의 텍스트항목에 어떤 값을 보내주는지 알려준다.
 					urls[i] = imageUrl + rece.getJSONObject(i).getString("filename").toString()+"_1.jpg";
-					System.out.println("이미지 경로 : "+urls[i]);
-					
 				}
 			 
 			 

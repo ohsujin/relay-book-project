@@ -15,7 +15,7 @@ import android.telephony.*;
 import android.view.*;
 import android.widget.*;
 
-public class PictureCtrlActivity extends Activity {
+public class CopyOfPictureCtrlActivity extends Activity {
 	static int REQUEST_PICTURE = 1;
 	static int REQUEST_PHOTO_ALBUM = 2;
 	
