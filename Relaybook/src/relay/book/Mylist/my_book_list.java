@@ -16,6 +16,8 @@ import org.json.JSONObject;
 import relay.book.Option.PhoneNum;
 import relay.book.intentdemob2.R;
 import relay.book.intentdemob2.Read2;
+import relay.book.intentdemob2.Tab;
+import relay.book.reservation.View_reserV;
 
 import com.example.staggeredgridviewdemo.ImageItem;
 import com.example.staggeredgridviewdemo.StaggeredAdapter;
@@ -34,20 +36,53 @@ public class my_book_list extends Activity implements OnItemSelectedListener{
 	static String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/MybookList.jsp";
 	static String imageUrl = "http://14.63.212.134:8080/MyRelayServer/Image/";
 	
+	//activity 새로 고침을 위한 Context 변수
+	public static Context mConetext;
+	
 	private String urls[];
 	/* 서버로 넘겨주는 값을 저장해줌 */
 	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        mConetext = this;
+        
         setContentView(R.layout.my_book_list);     
+        
+        final TextView top_title = (TextView)findViewById(R.id.textView1);
+        
+        
+        final ToggleButton tb = (ToggleButton)this.findViewById(R.id.toggleButton1);
+        
+        tb.setOnClickListener(new View.OnClickListener() { 
+            public void onClick(View v) { 
+                if (tb.isChecked()) { 
+                 tb.setBackgroundDrawable(getResources().getDrawable(R.drawable.blankstar)); 
+                 top_title.setText(getResources().getText(0, "찜 목록"));
+                 
+                 send_search(PhoneNum.getPhoneNum(),"R");// 내가 찜한 책의 목록을 받아온다. | R = Reservation_book
+                 
+                 
+                } else { 
+                 tb.setBackgroundDrawable(getResources().getDrawable(R.drawable.fullstar)); 
+                 top_title.setText(getResources().getText(0, "내 책관리하기"));
+                 	
+//                 	Intent Tab_view = new Intent(my_book_list.this, Tab.class);
+//                 	startActivity(Tab_view);
+//                 	System.out.println("@@@@");
 
+                 send_search(PhoneNum.getPhoneNum(),"M");// 내가 등록한 책의 목록을 받아온다. | M = My_book
+                 
+                }
+             } 
+        });
       
-        send_search(PhoneNum.getPhoneNum());// 서버로 검색조건과 keyword를 보낸다.	
+        send_search(PhoneNum.getPhoneNum(),"M");// 서버로 검색조건과 keyword를 보낸다.
         
 	}
 	
 	//서버로 부터 항목을 받아오는 부분 
-	void send_search(String keyword){ 
+	void send_search(String keyword,final String option){ 
 
 		  DefaultHttpClient client = new DefaultHttpClient();
 		
@@ -55,7 +90,7 @@ public class my_book_list extends Activity implements OnItemSelectedListener{
 			/* 체크할 id와 pwd값 서버로 전송 */
 			String keyword1 = URLEncoder.encode(keyword, "UTF-8");//한글인코딩 처리를 위해 한번 변환해줌
 			
-			HttpPost post = new HttpPost(URL_book_inform+"?keyword="+keyword1);
+			HttpPost post = new HttpPost(URL_book_inform+"?keyword="+keyword1+"&option="+option);
 
 			/* 지연시간 최대 5초 */
 			HttpParams params = client.getParams();
@@ -86,7 +121,7 @@ public class my_book_list extends Activity implements OnItemSelectedListener{
 				T.show();
 				
 				wait();
-			}
+			}else{
 		
 			 /*
 			  * 서버로 부터 받아온 데이터를 ImageItem(Array list) 에  저장한다.
@@ -123,6 +158,8 @@ public class my_book_list extends Activity implements OnItemSelectedListener{
 				
 				gridView.setAdapter(adapter1);
 				
+				
+				
 				gridView.setOnItemClickListener(new OnItemClickListener() {
 
 					/*
@@ -143,20 +180,28 @@ public class my_book_list extends Activity implements OnItemSelectedListener{
 							myIntent.putExtra("publisher", rece.getJSONObject(position).getString("publisher").toString() );
 							myIntent.putExtra("filename", rece.getJSONObject(position).getString("filename").toString() );
 							myIntent.putExtra("quality", rece.getJSONObject(position).getString("quality").toString() );
-							myIntent.putExtra("passwd", rece.getJSONObject(position).getString("passwd").toString() );
+							myIntent.putExtra("section", rece.getJSONObject(position).getString("section").toString() );
+							
+							if(option.equals("M")){  // mybook 과 reservationbook에서 사용하는 항목이 다르므로 구별해준다.
+								myIntent.putExtra("passwd", rece.getJSONObject(position).getString("passwd").toString() );
+							}else{
+								myIntent.putExtra("relaycount", rece.getJSONObject(position).getString("relaycount").toString() );
+								myIntent.putExtra("school", rece.getJSONObject(position).getString("school").toString() );
+								myIntent.putExtra("phone", rece.getJSONObject(position).getString("phone").toString() );
+							}
 							
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					 
-					 
+					 myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					 my_book_list.this.startActivity(myIntent); //새로운 액티비티 이동
 
 						}
 				  });
 			   
-  
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				client.getConnectionManager().shutdown();	// 연결 지연 종료		

@@ -26,12 +26,6 @@ public class Write extends Activity{
 	RatingBar rating;     
 	TextView tv01;
 	
-	/* multipart 전송규약을 위한 인자값*/
-	String lineEnd = "\r\n";
-	String twoHyphens = "--";
-	String boundary = "*****";	
-	/* ++++ ++++ ++++ ++++ ++++ ++++ */
-	
 
 	/* 파일 업로드를 위한 인자값 */
 	String filename;
@@ -102,7 +96,7 @@ public class Write extends Activity{
 	    	@Override            
 	    	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {                 
 	    		Toast.makeText(getApplicationContext(), "평점 : " + rating, Toast.LENGTH_SHORT).show();
-	    		//tv01.setText("평점 : " + rating);    
+	    		
 	    		Quality = Float.toString(rating);
 	    	}         
 	    }); 
@@ -127,6 +121,7 @@ public class Write extends Activity{
     		dialog.show();
     		Toast.makeText(getApplicationContext(), "책표지를 포함한 총 3장을 찍어주세요.", Toast.LENGTH_LONG).show();
     		break;
+    		
     	case R.id.camera:
     		dialog.dismiss();
     		takePicture();
@@ -137,8 +132,8 @@ public class Write extends Activity{
     		Toast.makeText(getApplicationContext(), "책표지를 포함한 총 3장, 연속 촬영을 시작합니다.", Toast.LENGTH_LONG).show();
     		dialog.dismiss();
     		takePicture();
-    		
     		break;
+    		
     	case R.id.photoAlbum:
     		dialog.dismiss();
     		photoAlbum();

@@ -39,9 +39,9 @@ public class IntentCaller extends Activity implements View.OnClickListener {
         /* 이미지 저장 폴더 생성 */
         File path = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/");
 	     if(! path.isDirectory()) {
-	             path.mkdirs();
+	             path.mkdirs();	            
 	     }
-	     
+
         EditText editText = (EditText)findViewById(R.id.Phone);
         editText.setText(getMy10DigitPhoneNumber());
         

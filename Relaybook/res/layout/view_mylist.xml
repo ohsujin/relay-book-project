@@ -55,7 +55,7 @@
                     android:layout_marginRight="7dp"
                     android:text="책이름"
                     android:textColor="#000000"
-                    android:textSize="22sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -150,7 +150,7 @@
                     android:layout_marginTop="4dp"
                     android:text="가 격"
                     android:textColor="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/price"
@@ -274,7 +274,7 @@
     android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/Request"
+            android:id="@+id/adjust"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_bg"
