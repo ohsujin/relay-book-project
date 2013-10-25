@@ -187,6 +187,8 @@ public class Buy2 extends Activity implements OnItemSelectedListener{
 					 
 					 Intent myIntent = new Intent(Buy2.this, Read2.class);
 						 try {
+							  
+							myIntent.putExtra("R_ID", rece.getJSONObject(position).getString("R_ID").toString() );
 							myIntent.putExtra("title", rece.getJSONObject(position).getString("title").toString() );
 							myIntent.putExtra("school", rece.getJSONObject(position).getString("school").toString() );
 							myIntent.putExtra("phone", rece.getJSONObject(position).getString("phone").toString() );

@@ -1,4 +1,4 @@
-package relay.book.Mylist;
+package relay.book.reservation;
 
 import java.io.*;
 import java.net.*;
@@ -9,6 +9,7 @@ import org.apache.http.impl.client.*;
 import org.apache.http.params.*;
 import org.json.*;
 
+import relay.book.Mylist.Update_book_json;
 import relay.book.Option.*;
 import relay.book.image.*;
 import relay.book.intentdemob2.R;
@@ -26,21 +27,16 @@ import android.widget.*;
 import android.widget.ImageView.ScaleType;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 
-public class View_mylist extends Activity {
+public class View_reserV extends Activity {
 
 	String imageUrl = "http://14.63.212.134:8080/MyRelayServer/Image/";
 	Bitmap bmImg;
 	URL myFileUrl = null;
-	
-	/* 1,0 -> Mybook , Reservation 으로 정의 */
-	static int Mybook = 1;
-	static int ReservationBook = 0;
+	 
 	 
 	private static final String URL = "http://14.63.212.134:8080/MyRelayServer/Image/";
 	
 	String filename = null;
-	String passwd = null;
-	Button Request = null;
 	
 	//ViewPaper
 	private ViewPager mPager;
@@ -52,15 +48,17 @@ public class View_mylist extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.view_mylist);
 
-		
 		// getting intent data
         Intent in = getIntent();
         
         // Get JSON values from previous intent
         final String R_ID = in.getStringExtra("filename");
+        final String passwd = in.getStringExtra("passwd");        
         final String title = in.getStringExtra("title");
-      
+        final String phone = in.getStringExtra("phone");
+        String school = in.getStringExtra("school");
         String writer = in.getStringExtra("writer");
         String price = in.getStringExtra("price");
         String subject = in.getStringExtra("subject");
@@ -70,44 +68,7 @@ public class View_mylist extends Activity {
         float quality = Float.parseFloat( in.getStringExtra("quality") );
         
         
-        int section = Integer.parseInt(in.getStringExtra("section"));
-        /*
-         * section이 1이면 Mybook list를 불러오고 0이면 reservation list를 불러온다.
-         */
-        System.out.println("section : "+section);
-        
-        switch (section) {
-        
-		case 1:  // 1 = Mybook
-			passwd = in.getStringExtra("passwd");   
-			
-			setContentView(R.layout.view_mylist);
-			 Request = (Button)findViewById(R.id.adjust);	 
-			break;
-		case 0:  // 0 = ReservationBook
-			setContentView(R.layout.view_reserv);
-			
-			
-			
-			 final String phone = in.getStringExtra("phone");
-		     String school = in.getStringExtra("school");
-		     int relaycount = Integer.parseInt(in.getStringExtra("relaycount"));
-		      
-			 TextView School = (TextView)findViewById(R.id.Seller_school); // 판매자 학교
-			 School.setText(school);
-			 
-			 TextView Phone = (TextView)findViewById(R.id.Seller_phone); // 판매자 전화번호
-			 Phone.setText(phone);
-			 
-			 Request = (Button)findViewById(R.id.Seller_Change);	  
-			 
-			break;
-
-		default:
-			break;
-		}
-        
-       
+		
         TextView Title = (TextView)findViewById(R.id.title); // 책 제목
 	    Title.setText(title);
 	    
@@ -128,20 +89,18 @@ public class View_mylist extends Activity {
 	    
 	    final RatingBar Rating = (RatingBar) findViewById(R.id.quality); 
 	    
-
-	   
 	    
-	    if(section == Mybook ){
-	    	Rating.setStepSize((float) 0.5); // 별 색깔이 1칸씩줄어들고 늘어남 0.5로하면 반칸씩 들어감         
-	 	    Rating.setRating((float) 0.0); // 처음보여줄때(색깔이 한개도없음) default 값이 0  이다 
-	 	    Rating.setIsIndicator(false); // true - 별점만 표시 사용자가 변경 불가 , false - 사용자가 변경가능   
-		    Rating.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {               
-		    	@Override            
-		    	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {                 
-		        
-		    	}         
-		    }); 
-	    }
+	    Rating.setStepSize((float) 0.5); // 별 색깔이 1칸씩줄어들고 늘어남 0.5로하면 반칸씩 들어감         
+	    Rating.setRating((float) 0.0); // 처음보여줄때(색깔이 한개도없음) default 값이 0  이다 
+	    Rating.setIsIndicator(false); // true - 별점만 표시 사용자가 변경 불가 , false - 사용자가 변경가능   
+	    
+	    
+	    Rating.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {               
+	    	@Override            
+	    	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {                 
+	        
+	    	}         
+	    }); 
 	    
 	    Rating.setRating(quality);
 	    
@@ -158,13 +117,11 @@ public class View_mylist extends Activity {
 	
 	    
 	    
-	      
+	    Button Request = (Button)findViewById(R.id.adjust);	    
 	    Request.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-			/*
-			 * R 일떄와 M 일때를 구분해서 코딩해야함
-			 */
+			
 				if(passwd_chk.getText().toString().equals(passwd)){
 			
 					JSONObject book_inform = new JSONObject();
@@ -187,8 +144,9 @@ public class View_mylist extends Activity {
 						Toast.makeText(getApplicationContext(), "수정완료!!", Toast.LENGTH_SHORT).show();
 						finish();
 						
+						
+						Intent Tab_view = new Intent(View_reserV.this, Tab.class);
 					
-						Intent Tab_view = new Intent(View_mylist.this, Tab.class);
 						startActivity(Tab_view);
 						
 					} catch (JSONException e) {
@@ -196,13 +154,13 @@ public class View_mylist extends Activity {
 						e.printStackTrace();
 					}
 				}else{
-					 Toast.makeText(getApplicationContext(), "비밀번호가 틀립니다.", Toast.LENGTH_SHORT).show();
+					 Toast.makeText(getApplicationContext(), "비밀번호가 @틀립니다.", Toast.LENGTH_SHORT).show();
 				}
 				
 				
 			}
 		});
-	    
+
 		//ViewPaper
 		timer = new CountDownTimer(2*1000, 1000) {
 
@@ -219,9 +177,7 @@ public class View_mylist extends Activity {
 					mPager.setCurrentItem(currentPosition+1);
 			}
 		};
-		
-		
-		
+
 		mPager = (ViewPager)findViewById(R.id.pager);
 		mPager.setAdapter(new PagerAdapterClass(getApplicationContext()));
 		mPager.setOnPageChangeListener(new OnPageChangeListener() {

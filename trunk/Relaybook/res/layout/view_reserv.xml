@@ -9,13 +9,14 @@
 
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="584dp"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="157dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center" >
+        android:layout_gravity="center_vertical|center"
+        android:fitsSystemWindows="true" >
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
@@ -37,6 +38,11 @@
             android:layout_marginRight="15dp"
             android:orientation="vertical" >
 
+            <ImageView
+                android:id="@+id/ImageView01"
+                android:layout_width="wrap_content"
+                android:layout_height="8dp"
+                android:src="@drawable/write_line" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -60,10 +66,7 @@
                     android:background="@null"
                     android:editable="false"
                     android:hint="책 이름을 입력해주세요."
-                    android:singleLine="true" >
-
-                    <requestFocus />
-                </EditText>
+                    android:singleLine="true" />
             </LinearLayout>
 
             <ImageView
@@ -141,6 +144,7 @@
                     style="?android:attr/ratingBarStyleIndicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+                
 
                 <TextView
                     android:layout_width="50dp"
@@ -229,14 +233,6 @@
                     android:hint="메모를 입력해주세요."
                     android:textSize="16sp" />
             </LinearLayout>
-            
-            <ImageView
-                android:id="@+id/ImageView01"
-                android:layout_width="wrap_content"
-                android:layout_height="8dp"
-                android:layout_marginBottom="5dp"
-                android:src="@drawable/write_line" />
-            
         </LinearLayout>
     </LinearLayout>
 
@@ -247,27 +243,27 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content" >
 
             <ImageView
                 android:id="@+id/ImageView05"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="13dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="12dp"
                 android:src="@drawable/university" />
 
             <EditText
                 android:id="@+id/Seller_school"
-                android:layout_marginLeft="13dp"
-                android:layout_marginTop="12dp"
                 android:layout_width="294dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="12dp"
                 android:layout_weight="1"
                 android:background="@null"
                 android:editable="false"
-                android:textSize="18sp"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <ImageView
@@ -283,22 +279,20 @@
 
             <ImageView
                 android:id="@+id/ImageView03"
-                android:layout_marginLeft="13dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
                 android:src="@drawable/msg_icon" />
 
             <EditText
                 android:id="@+id/Seller_phone"
-                android:layout_marginLeft="13dp"
                 android:layout_width="294dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
                 android:layout_weight="1"
                 android:background="@null"
                 android:editable="false"
                 android:singleLine="true" />
-            
-            
         </LinearLayout>
 
         <ImageView
@@ -314,20 +308,21 @@
 
             <ImageView
                 android:id="@+id/shcool"
-                android:layout_marginLeft="13dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
                 android:src="@drawable/relay_num1" />
 
             <EditText
                 android:id="@+id/Relay_count"
-                android:layout_marginLeft="13dp"
                 android:layout_width="294dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:layout_weight="1"
                 android:background="@null"
-                android:text="Relay Count"
                 android:editable="false"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="Relay Count" />
         </LinearLayout>
 
         <ImageView
@@ -335,14 +330,14 @@
             android:layout_width="match_parent"
             android:layout_height="8dp"
             android:src="@drawable/write_line" />
-        
+
         <Button
-		        android:id="@+id/Request"
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:text="구매요청"
-		        android:background="@drawable/btn_bg"
-				android:textColor="#ffffff" />
+            android:id="@+id/Seller_Change"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bg"
+            android:text="구매확인"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
 </LinearLayout>

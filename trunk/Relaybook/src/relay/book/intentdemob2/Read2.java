@@ -2,7 +2,10 @@ package relay.book.intentdemob2;
 
 
 import java.net.*;
+
+import relay.book.Option.PhoneNum;
 import relay.book.image.*;
+import relay.book.reservation.Reservation_book;
 import android.app.*;
 import android.content.*;
 import android.graphics.*;
@@ -44,6 +47,7 @@ public class Read2 extends Activity {
         Intent in = getIntent();
         
         // Get JSON values from previous intent
+        final String R_ID = in.getStringExtra("R_ID");
         final String title = in.getStringExtra("title");
         final String phone = in.getStringExtra("phone");
         String school = in.getStringExtra("school");
@@ -95,11 +99,16 @@ public class Read2 extends Activity {
 		        String sendTo = phone;
 		        String myMessage = "-RelayBook-\n등록하신 "+title+" 책을 구매 하고 싶습니다.";
 		        smsManager.sendTextMessage(sendTo, null, myMessage, null, null);
-		        Toast.makeText(getApplicationContext(), "판매 요청이 전송되었습니다.", Toast.LENGTH_SHORT).show();
+		        Toast.makeText(getApplicationContext(), "구매 요청이 전송되었습니다.", Toast.LENGTH_SHORT).show();
+		        
+		        
+		        //구매 예약 목록에 추가해주기
+		        Reservation_book.send_reserV(PhoneNum.getPhoneNum(), R_ID);
+		        
+		        
 		        finish();
 			}
 		});
-	    
 	    
 
 		//ViewPaper
