@@ -17,7 +17,7 @@ import relay.book.Option.PhoneNum;
 import relay.book.intentdemob2.R;
 import relay.book.intentdemob2.Read2;
 import relay.book.intentdemob2.Tab;
-import relay.book.reservation.View_reserV;
+
 
 import com.example.staggeredgridviewdemo.ImageItem;
 import com.example.staggeredgridviewdemo.StaggeredAdapter;
@@ -36,16 +36,14 @@ public class my_book_list extends Activity implements OnItemSelectedListener{
 	static String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/MybookList.jsp";
 	static String imageUrl = "http://14.63.212.134:8080/MyRelayServer/Image/";
 	
-	//activity 새로 고침을 위한 Context 변수
-	public static Context mConetext;
+
 	
 	private String urls[];
 	/* 서버로 넘겨주는 값을 저장해줌 */
 	
 	public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onResume();
         
-        mConetext = this;
         
         setContentView(R.layout.my_book_list);     
         
@@ -53,29 +51,24 @@ public class my_book_list extends Activity implements OnItemSelectedListener{
         
         
         final ToggleButton tb = (ToggleButton)this.findViewById(R.id.toggleButton1);
-        
-        tb.setOnClickListener(new View.OnClickListener() { 
-            public void onClick(View v) { 
-                if (tb.isChecked()) { 
-                 tb.setBackgroundDrawable(getResources().getDrawable(R.drawable.blankstar)); 
-                 top_title.setText(getResources().getText(0, "찜 목록"));
-                 
-                 send_search(PhoneNum.getPhoneNum(),"R");// 내가 찜한 책의 목록을 받아온다. | R = Reservation_book
-                 
-                 
-                } else { 
-                 tb.setBackgroundDrawable(getResources().getDrawable(R.drawable.fullstar)); 
-                 top_title.setText(getResources().getText(0, "내 책관리하기"));
-                 	
-//                 	Intent Tab_view = new Intent(my_book_list.this, Tab.class);
-//                 	startActivity(Tab_view);
-//                 	System.out.println("@@@@");
-
-                 send_search(PhoneNum.getPhoneNum(),"M");// 내가 등록한 책의 목록을 받아온다. | M = My_book
-                 
-                }
-             } 
-        });
+	        tb.setOnClickListener(new View.OnClickListener() { 
+	            public void onClick(View v) { 
+	                if (tb.isChecked()) { 
+	                 tb.setBackgroundDrawable(getResources().getDrawable(R.drawable.blankstar)); 
+	                 top_title.setText(getResources().getText(0, "찜 목록"));
+	                 
+	                 send_search(PhoneNum.getPhoneNum(),"R");// 내가 찜한 책의 목록을 받아온다. | R = Reservation_book
+	                 
+	                 
+	                } else { 
+	                 tb.setBackgroundDrawable(getResources().getDrawable(R.drawable.fullstar)); 
+	                 top_title.setText(getResources().getText(0, "내 책관리하기"));   
+	
+	                 send_search(PhoneNum.getPhoneNum(),"M");// 내가 등록한 책의 목록을 받아온다. | M = My_book
+	                 
+	                }
+	             } 
+	        });
       
         send_search(PhoneNum.getPhoneNum(),"M");// 서버로 검색조건과 keyword를 보낸다.
         
@@ -120,7 +113,7 @@ public class my_book_list extends Activity implements OnItemSelectedListener{
 				T.setGravity(Gravity.TOP,0,400);
 				T.show();
 				
-				wait();
+			
 			}else{
 		
 			 /*
@@ -181,6 +174,7 @@ public class my_book_list extends Activity implements OnItemSelectedListener{
 							myIntent.putExtra("filename", rece.getJSONObject(position).getString("filename").toString() );
 							myIntent.putExtra("quality", rece.getJSONObject(position).getString("quality").toString() );
 							myIntent.putExtra("section", rece.getJSONObject(position).getString("section").toString() );
+							myIntent.putExtra("active", rece.getJSONObject(position).getString("active").toString() );
 							
 							if(option.equals("M")){  // mybook 과 reservationbook에서 사용하는 항목이 다르므로 구별해준다.
 								myIntent.putExtra("passwd", rece.getJSONObject(position).getString("passwd").toString() );

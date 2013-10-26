@@ -13,6 +13,7 @@ import relay.book.Option.*;
 import relay.book.image.*;
 import relay.book.intentdemob2.R;
 import relay.book.intentdemob2.Tab;
+import relay.book.reservation.Reservation_book;
 import android.app.*;
 import android.content.*;
 import android.graphics.*;
@@ -31,6 +32,8 @@ public class View_mylist extends Activity {
 	String imageUrl = "http://14.63.212.134:8080/MyRelayServer/Image/";
 	Bitmap bmImg;
 	URL myFileUrl = null;
+	
+	
 	
 	/* 1,0 -> Mybook , Reservation 으로 정의 */
 	static int Mybook = 1;
@@ -68,7 +71,9 @@ public class View_mylist extends Activity {
         String publisher = in.getStringExtra("publisher");
         filename = in.getStringExtra("filename");
         float quality = Float.parseFloat( in.getStringExtra("quality") );
+        final int active = Integer.parseInt(in.getStringExtra("active"));
         
+        System.out.println("활성화 정도 : "+active);
         
         int section = Integer.parseInt(in.getStringExtra("section"));
         /*
@@ -76,19 +81,47 @@ public class View_mylist extends Activity {
          */
         System.out.println("section : "+section);
         
-        switch (section) {
+        switch (section) { // section 이란 내가 올린 책인지 내가 찜한 책인지를 구분해주는 값이다 이를 통해 각이가들 layout을 구분해주어 하나의 activty에서 두개의 레이아웃을 사용하게 한다.
         
 		case 1:  // 1 = Mybook
 			passwd = in.getStringExtra("passwd");   
 			
-			setContentView(R.layout.view_mylist);
-			 Request = (Button)findViewById(R.id.adjust);	 
+			 setContentView(R.layout.view_mylist);
+			 Request = (Button)findViewById(R.id.adjust);	
+			 
+			 Button Sell_complete = (Button)findViewById(R.id.sell_complete);
+			 
+			 if(active == 0){
+				 Sell_complete.setText("판매하기");
+			 }
+			 
+			 Sell_complete.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Update_book_json update = new Update_book_json();
+				
+				if(active == 0){//판매 활성화
+					update.Enalbe_sell(filename);
+					Toast.makeText(getApplicationContext(), "판매시작!!", Toast.LENGTH_SHORT).show();
+					
+				}else{//판매완료하기
+					
+					update.Complete_Sell(filename);
+					Toast.makeText(getApplicationContext(), "판매완료!!", Toast.LENGTH_SHORT).show();
+				}
+					finish();
+					
+					Intent Tab_view = new Intent(View_mylist.this, Tab.class);
+					startActivity(Tab_view);
+				
+					}
+			 });
+			 
 			break;
-		case 0:  // 0 = ReservationBook
+		case 0:  // 0 = ReservationBook 
 			setContentView(R.layout.view_reserv);
 			
-			
-			
+		
 			 final String phone = in.getStringExtra("phone");
 		     String school = in.getStringExtra("school");
 		     int relaycount = Integer.parseInt(in.getStringExtra("relaycount"));
@@ -99,7 +132,27 @@ public class View_mylist extends Activity {
 			 TextView Phone = (TextView)findViewById(R.id.Seller_phone); // 판매자 전화번호
 			 Phone.setText(phone);
 			 
-			 Request = (Button)findViewById(R.id.Seller_Change);	  
+			 //판매완료 버튼을 누르면 수행되는 부분
+			 Button change = (Button)findViewById(R.id.Seller_Change);	 
+			 
+			 if(active == 1){
+				 change.setEnabled(false);
+				 change.setText("구매대기...");
+			 }
+			 
+			 change.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						
+						Reservation_book.Chnage_seller(PhoneNum.getPhoneNum(), filename);
+						Toast.makeText(getApplicationContext(), "RelayBook 등록!!", Toast.LENGTH_SHORT).show();
+						finish();
+					
+						Intent Tab_view = new Intent(View_mylist.this, Tab.class);
+						startActivity(Tab_view);
+						
+					}
+					 });
 			 
 			break;
 
@@ -158,50 +211,52 @@ public class View_mylist extends Activity {
 	
 	    
 	    
-	      
-	    Request.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-			/*
-			 * R 일떄와 M 일때를 구분해서 코딩해야함
-			 */
-				if(passwd_chk.getText().toString().equals(passwd)){
-			
-					JSONObject book_inform = new JSONObject();
-					JSONObject listData = new JSONObject();
+	    if(section == Mybook){  
+			    Request.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+					/*
+					 * R 일떄와 M 일때를 구분해서 코딩해야함
+					 */
+						System.out.println("비번 : "+passwd);
+						if(passwd_chk.getText().toString().equals(passwd)){
 					
-					try {
-						book_inform.put("title", Title_update.getText().toString());
-						book_inform.put("writer", Writer_update.getText().toString() );
-						book_inform.put("publisher",Publisher_update.getText().toString());
-						book_inform.put("quality",+ Rating.getRating());
-						book_inform.put("price", Price_update.getText().toString());
-						book_inform.put("subject", Subject_update.getText().toString());
-						book_inform.put("Memo", Memo_update.getText().toString());
-						book_inform.put("R_ID", R_ID);
+							JSONObject book_inform = new JSONObject();
+							JSONObject listData = new JSONObject();
+							
+							try {
+								book_inform.put("title", Title_update.getText().toString());
+								book_inform.put("writer", Writer_update.getText().toString() );
+								book_inform.put("publisher",Publisher_update.getText().toString());
+								book_inform.put("quality",+ Rating.getRating());
+								book_inform.put("price", Price_update.getText().toString());
+								book_inform.put("subject", Subject_update.getText().toString());
+								book_inform.put("Memo", Memo_update.getText().toString());
+								book_inform.put("R_ID", R_ID);
+								
+								listData.put("BookList", book_inform);
+								
+								Update_book_json update = new Update_book_json();
+								update.HttpPostData(listData.toString());
+								Toast.makeText(getApplicationContext(), "수정완료!!", Toast.LENGTH_SHORT).show();
+								finish();
+								
+							
+								Intent Tab_view = new Intent(View_mylist.this, Tab.class);
+								startActivity(Tab_view);
+								
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}else{
+							 Toast.makeText(getApplicationContext(), "비밀번호가 틀립니다.", Toast.LENGTH_SHORT).show();
+						}
 						
-						listData.put("BookList", book_inform);
 						
-						Update_book_json update = new Update_book_json();
-						update.HttpPostData(listData.toString());
-						Toast.makeText(getApplicationContext(), "수정완료!!", Toast.LENGTH_SHORT).show();
-						finish();
-						
-					
-						Intent Tab_view = new Intent(View_mylist.this, Tab.class);
-						startActivity(Tab_view);
-						
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
 					}
-				}else{
-					 Toast.makeText(getApplicationContext(), "비밀번호가 틀립니다.", Toast.LENGTH_SHORT).show();
-				}
-				
-				
-			}
-		});
+				});
+	    }
 	    
 		//ViewPaper
 		timer = new CountDownTimer(2*1000, 1000) {
