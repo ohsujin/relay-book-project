@@ -20,17 +20,21 @@
 
 	        <TextView
 	            android:id="@+id/textView1"
-	            android:layout_width="202dp"
+	            android:layout_width="wrap_content"
 	            android:layout_height="match_parent"
 	            android:layout_weight="0.97"
-	            android:gravity="center_vertical|center_horizontal"
+	            android:gravity="center"
 	            android:text="내 책 관리하기"
-	            android:textSize="@dimen/size" />
+	            android:layout_marginLeft="50dp"
+	            android:textColor="#ffffff"
+	            android:textSize="20dp" />
 
 	        <ToggleButton
 	            android:id="@+id/toggleButton1"
-	            android:layout_width="wrap_content"
-	            android:layout_height="match_parent"
+	            android:layout_width="32dp"
+	            android:layout_height="32dp"
+	            android:layout_marginRight="5dp"
+	            android:layout_marginBottom="15dp"
 	            android:background="@drawable/fullstar"
 	            android:text="ToggleButton"
 				android:textOff=""
