@@ -129,9 +129,9 @@ public class Write extends Activity{
     		dialog.dismiss();
     		takePicture();
     		++i;
-    		Toast.makeText(getApplicationContext(), "책표지를 포함한 총 3장, 연속 촬영을 시작합니다.", Toast.LENGTH_LONG).show();
     		dialog.dismiss();
     		takePicture();
+    		Toast.makeText(getApplicationContext(), "책표지를 포함한 총 3장, 연속 촬영을 시작합니다.", Toast.LENGTH_LONG).show();
     		break;
     		
     	case R.id.photoAlbum:
@@ -152,6 +152,7 @@ public class Write extends Activity{
   		
   		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
   		startActivityForResult(intent, REQUEST_PICTURE);  		
+  		System.out.println("사진찍기 테스트");
   	}
   	
   	//사진 불러오기
