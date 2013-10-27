@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
 			// Do Something
 			public void run() {
 				Intent intent = new Intent(MainActivity.this,
-						IntentCaller.class);
+						RelayBookLogin.class);
 				startActivity(intent);
 				finish();
 			}

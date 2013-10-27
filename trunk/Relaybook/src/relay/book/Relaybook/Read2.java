@@ -32,7 +32,7 @@ public class Read2 extends Activity {
 	private CountDownTimer timer;
 	private int currentPosition;
 	private int PAGE_TOTAL_NUMBER = 3;
-
+	
 	//
 
 	@Override
@@ -40,6 +40,9 @@ public class Read2 extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.read2);
 
+		//상단 이미지의 위치를 표시해주기 위한 imageview
+		final ImageView topImg = (ImageView) findViewById(R.id.TopImg);
+		
 		// getting intent data
 		Intent in = getIntent();
 
@@ -104,7 +107,10 @@ public class Read2 extends Activity {
 				finish();
 			}
 		});
-
+		
+		//현재 이미지뷰의 위치를 표시해주기 위한 변수
+		
+		
 		// ViewPaper
 		timer = new CountDownTimer(2 * 1000, 1000) {
 
@@ -115,10 +121,19 @@ public class Read2 extends Activity {
 
 			@Override
 			public void onFinish() {
-				if (currentPosition == PAGE_TOTAL_NUMBER - 1)
+				if (currentPosition == PAGE_TOTAL_NUMBER - 1){
+					topImg.setImageDrawable( getResources().getDrawable(R.drawable.top1) );
+					
 					mPager.setCurrentItem(0);
-				else
+				}
+				else{
+					if(currentPosition == 0)
+						topImg.setImageDrawable( getResources().getDrawable(R.drawable.top2) );
+					else
+						topImg.setImageDrawable( getResources().getDrawable(R.drawable.top3) );
+					
 					mPager.setCurrentItem(currentPosition + 1);
+				}
 			}
 		};
 
@@ -129,6 +144,7 @@ public class Read2 extends Activity {
 			@Override
 			public void onPageSelected(int position) {
 				currentPosition = position;
+				
 				timer.cancel();
 				timer.start();
 			}
