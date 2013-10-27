@@ -18,7 +18,7 @@ import android.view.*;
 
 import android.widget.*;
 
-public class IntentCaller extends Activity implements View.OnClickListener {
+public class RelayBookLogin extends Activity implements View.OnClickListener {
 
 	HttpHost http = new HttpHost();
 	private EditText passwordEdit;
@@ -57,8 +57,8 @@ public class IntentCaller extends Activity implements View.OnClickListener {
 														// 로그인 화면을 건너 뛰게 해준다.
 				System.out.println("가입됨: " + regi_Chk);
 
-				Intent myIntent = new Intent(IntentCaller.this, Tab.class);
-				IntentCaller.this.startActivity(myIntent); // 새로운 액티비티 이동
+				Intent myIntent = new Intent(RelayBookLogin.this, Tab.class);
+				RelayBookLogin.this.startActivity(myIntent); // 새로운 액티비티 이동
 
 				finish(); // 이전 액티비티 종료
 				break;

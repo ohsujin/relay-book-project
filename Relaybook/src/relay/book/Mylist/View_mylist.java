@@ -1,32 +1,34 @@
 package relay.book.Mylist;
 
-import java.io.*;
-import java.net.*;
+import java.net.URL;
 
-import org.apache.http.*;
-import org.apache.http.client.methods.*;
-import org.apache.http.impl.client.*;
-import org.apache.http.params.*;
-import org.json.*;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import relay.book.Option.*;
+import relay.book.Option.PhoneNum;
 import relay.book.Relaybook.R;
 import relay.book.Relaybook.Tab;
-
-import relay.book.image.*;
+import relay.book.image.ImageDownloader;
 import relay.book.reservation.Reservation_book;
-import android.app.*;
-import android.content.*;
-import android.graphics.*;
-import android.os.*;
-import android.support.v4.view.*;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.telephony.SmsManager;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.*;
-import android.widget.ImageView.ScaleType;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class View_mylist extends Activity {
 
@@ -51,11 +53,15 @@ public class View_mylist extends Activity {
 	private int PAGE_TOTAL_NUMBER = 3;
 
 	//
-
+	ImageView topImg;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		
+		
+				
 		// getting intent data
 		Intent in = getIntent();
 
@@ -89,6 +95,9 @@ public class View_mylist extends Activity {
 
 			setContentView(R.layout.view_mylist);
 			Adjust = (Button) findViewById(R.id.adjust);
+			
+			//상단 이미지의 위치를 표시해주기 위한 imageview
+			topImg = (ImageView) findViewById(R.id.TopImg);
 
 			Button Sell_complete = (Button) findViewById(R.id.sell_complete);
 
@@ -129,6 +138,8 @@ public class View_mylist extends Activity {
 			break;
 		case 0: // 0 = ReservationBook -> view_reserv.xml이 호출될 경우
 			setContentView(R.layout.view_reserv);
+			//상단 이미지의 위치를 표시해주기 위한 imageview
+			topImg = (ImageView) findViewById(R.id.TopImg);
 
 			final String phone = in.getStringExtra("phone");
 			String school = in.getStringExtra("school");
@@ -293,10 +304,18 @@ public class View_mylist extends Activity {
 
 			@Override
 			public void onFinish() {
-				if (currentPosition == PAGE_TOTAL_NUMBER - 1)
+				if (currentPosition == PAGE_TOTAL_NUMBER - 1){
+					topImg.setImageDrawable( getResources().getDrawable(R.drawable.top1) );
 					mPager.setCurrentItem(0);
-				else
+				}
+				else{
+					if(currentPosition == 0)
+						topImg.setImageDrawable( getResources().getDrawable(R.drawable.top2) );
+					else
+						topImg.setImageDrawable( getResources().getDrawable(R.drawable.top3) );
+				
 					mPager.setCurrentItem(currentPosition + 1);
+				}
 			}
 		};
 
