@@ -1,7 +1,7 @@
 package relay.book.Option;
 
 public class PhoneNum {
-	
+
 	static String phoneNum;
 
 	public static String getPhoneNum() {
@@ -11,7 +11,5 @@ public class PhoneNum {
 	public static void setPhoneNum(String phoneNum) {
 		PhoneNum.phoneNum = phoneNum;
 	}
-	
-	
 
 }
