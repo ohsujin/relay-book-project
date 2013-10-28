@@ -1,6 +1,5 @@
 package com.example.staggeredgridviewdemo;
 
-import android.graphics.Bitmap;
 
 /**
  * @author javatechig {@link http://javatechig.com} 각각의 커스텀 뷰의 이미지와,텍스트를 수정하기 위한

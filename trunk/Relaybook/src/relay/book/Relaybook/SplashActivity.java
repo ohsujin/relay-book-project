@@ -2,9 +2,12 @@ package relay.book.Relaybook;
 
 
 
-import android.app.*;
-import android.os.*;
-import android.view.*;
+import relay.book.intentdemob2.R;
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.Window;
 
 public class SplashActivity extends Activity {
 

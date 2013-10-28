@@ -1,20 +1,30 @@
 package relay.book.Relaybook;
 
-import java.net.*;
+import java.net.URL;
 
 import relay.book.Option.PhoneNum;
-import relay.book.image.*;
+import relay.book.image.ImageDownloader;
+import relay.book.intentdemob2.R;
 import relay.book.reservation.Reservation_book;
-import android.app.*;
-import android.content.*;
-import android.graphics.*;
-import android.os.*;
-import android.support.v4.view.*;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.telephony.SmsManager;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class Read2 extends Activity {
 

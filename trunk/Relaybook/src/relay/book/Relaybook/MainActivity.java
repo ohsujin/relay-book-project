@@ -1,9 +1,11 @@
 package relay.book.Relaybook;
 
 
-import android.app.*;
-import android.content.*;
-import android.os.*;
+import relay.book.intentdemob2.R;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
 
 public class MainActivity extends Activity {
 

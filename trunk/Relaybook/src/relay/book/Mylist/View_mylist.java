@@ -6,9 +6,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import relay.book.Option.PhoneNum;
-import relay.book.Relaybook.R;
 import relay.book.Relaybook.Tab;
 import relay.book.image.ImageDownloader;
+import relay.book.intentdemob2.R;
 import relay.book.reservation.Reservation_book;
 import android.app.Activity;
 import android.content.Context;

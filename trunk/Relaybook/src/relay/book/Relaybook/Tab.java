@@ -2,11 +2,13 @@ package relay.book.Relaybook;
 
 import relay.book.Mylist.my_book_list;
 import relay.book.Option.Option;
-import android.app.*;
-import android.content.*;
-import android.graphics.drawable.*;
-import android.os.*;
-import android.widget.*;
+import relay.book.intentdemob2.R;
+import android.app.Activity;
+import android.app.TabActivity;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.widget.TabHost;
 
 public class Tab extends TabActivity {
 	TabHost mTab;

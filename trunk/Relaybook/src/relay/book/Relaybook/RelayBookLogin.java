@@ -2,21 +2,25 @@ package relay.book.Relaybook;
 
 import java.io.File;
 
-import org.json.*;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import relay.book.Option.PhoneNum;
-
 import relay.book.http.Send_Recv.HttpHost;
+import relay.book.intentdemob2.R;
 import relay.book.saveInform.SchoolList;
-
-import android.app.*;
-import android.content.*;
-import android.os.*;
-import android.telephony.*;
-
-import android.view.*;
-
-import android.widget.*;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Environment;
+import android.telephony.TelephonyManager;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class RelayBookLogin extends Activity implements View.OnClickListener {
 
