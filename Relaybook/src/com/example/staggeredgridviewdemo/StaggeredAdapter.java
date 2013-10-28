@@ -1,16 +1,13 @@
 package com.example.staggeredgridviewdemo;
 
 import java.util.ArrayList;
-import java.util.Map;
 
-import relay.book.Relaybook.R;
+import relay.book.intentdemob2.R;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.staggeredgridviewdemo.loader.ImageLoader;

@@ -8,9 +8,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.telephony.TelephonyManager;
 
 public class Sell_inform_thread extends AsyncTask<Void, Void, Void> {
 

@@ -1,11 +1,7 @@
 package relay.book.Relaybook;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.http.HttpResponse;
@@ -16,17 +12,17 @@ import org.apache.http.params.HttpParams;
 import org.json.JSONObject;
 
 import relay.book.Option.PhoneNum;
-
 import relay.book.image.ImageDownloader;
-
-import android.app.*;
-import android.content.*;
+import relay.book.intentdemob2.R;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.*;
-import android.telephony.TelephonyManager;
-import android.view.*;
-import android.widget.*;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 public class Read extends Activity {
 
