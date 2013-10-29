@@ -250,21 +250,15 @@ public class View_mylist extends Activity {
 						JSONObject listData = new JSONObject();
 
 						try {
-							book_inform.put("title", Title_update.getText()
-									.toString());
-							book_inform.put("writer", Writer_update.getText()
-									.toString());
-							book_inform.put("publisher", Publisher_update
-									.getText().toString());
+							book_inform.put("title", Title_update.getText().toString());
+							book_inform.put("writer", Writer_update.getText().toString());
+							book_inform.put("publisher", Publisher_update.getText().toString());
 							book_inform.put("quality", +Rating.getRating());
-							book_inform.put("price", Price_update.getText()
-									.toString());
-							book_inform.put("subject", Subject_update.getText()
-									.toString());
-							book_inform.put("Memo", Memo_update.getText()
-									.toString());
+							book_inform.put("price", Price_update.getText().toString());
+							book_inform.put("subject", Subject_update.getText().toString());
+							book_inform.put("Memo", Memo_update.getText().toString());
 							book_inform.put("R_ID", R_ID);
-
+							
 							listData.put("BookList", book_inform);
 
 							Update_book_json update = new Update_book_json();

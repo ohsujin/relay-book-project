@@ -54,8 +54,7 @@ public class RelayBookLogin extends Activity implements View.OnClickListener {
 		while (i < 4) {
 
 			/* 서버를 통해 가입유무 확인 */
-			String regi_Chk = http.ChkRegister(getMy10DigitPhoneNumber())
-					.trim();
+			String regi_Chk = http.ChkRegister(getMy10DigitPhoneNumber()).trim();
 
 			if (regi_Chk.equalsIgnoreCase("join")) { // 서버에서 join을 반환하면 가입된것이므로
 														// 로그인 화면을 건너 뛰게 해준다.
@@ -72,8 +71,7 @@ public class RelayBookLogin extends Activity implements View.OnClickListener {
 			} else {
 
 				Toast.makeText(getApplicationContext(),
-						"서버와의 통신을 실패했습니다. 재접속 시도 " + i + "번",
-						Toast.LENGTH_SHORT).show();
+						"서버와의 통신을 실패했습니다. 재접속 시도 " + i + "번",Toast.LENGTH_SHORT).show();
 				System.out.println("접속실패 : " + regi_Chk);
 				try {
 					Thread.sleep(1000);
@@ -86,8 +84,7 @@ public class RelayBookLogin extends Activity implements View.OnClickListener {
 
 			if (i == 4) {
 				Toast.makeText(getApplicationContext(),
-						"네트워크 연결 상태가 좋지 않습니다.\n3G 또는 WIFI 연결 상태를 확인해 주세요.",
-						Toast.LENGTH_LONG).show();
+						"네트워크 연결 상태가 좋지 않습니다.\n3G 또는 WIFI 연결 상태를 확인해 주세요.",	Toast.LENGTH_LONG).show();
 				finish();
 			}
 			/**/
@@ -95,8 +92,7 @@ public class RelayBookLogin extends Activity implements View.OnClickListener {
 		}
 
 		AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.University);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_dropdown_item_1line, sch_list.COUNTRIES);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, sch_list.Schools);
 		textView.setAdapter(adapter);
 
 		Button button = (Button) findViewById(R.id.Send);

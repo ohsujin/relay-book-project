@@ -105,11 +105,9 @@ public class Read2 extends Activity {
 				// TODO Auto-generated method stub
 				SmsManager smsManager = SmsManager.getDefault();
 				String sendTo = phone;
-				String myMessage = "-RelayBook-\n등록하신 " + title
-						+ " 책을 구매 하고 싶습니다.";
+				String myMessage = "-RelayBook-\n등록하신 " + title + " 책을 구매 하고 싶습니다.";
 				smsManager.sendTextMessage(sendTo, null, myMessage, null, null);
-				Toast.makeText(getApplicationContext(), "구매 요청이 전송되었습니다.",
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "구매 요청이 전송되었습니다.",  Toast.LENGTH_SHORT).show();
 
 				// 구매 예약 목록에 추가해주기
 				Reservation_book.send_reserV(PhoneNum.getPhoneNum(), R_ID);

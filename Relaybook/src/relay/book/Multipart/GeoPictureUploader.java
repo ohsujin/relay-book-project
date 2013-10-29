@@ -84,17 +84,13 @@ public class GeoPictureUploader {
 				writeFormField("PhoneNum", PhoneNum);
 				writeFormField("Memo", Memo);
 
-				// 파일전송
-				writeFileField("photo1", pictureFileName1, "image/jpg",
-						fileInputStream1);
-				writeFileField("photo2", pictureFileName2, "image/jpg",
-						fileInputStream2);
-				writeFileField("photo3", pictureFileName3, "image/jpg",
-						fileInputStream3);
+				// 3개의 이미지 파일전송
+				writeFileField("photo1", pictureFileName1, "image/jpg",fileInputStream1);
+				writeFileField("photo2", pictureFileName2, "image/jpg",fileInputStream2);
+				writeFileField("photo3", pictureFileName3, "image/jpg",fileInputStream3);
 
 				// final closing boundary line
-				dataStream
-						.writeBytes(twoHyphens + boundary + twoHyphens + CRLF);
+				dataStream.writeBytes(twoHyphens + boundary + twoHyphens + CRLF);
 
 				fileInputStream1.close();
 				fileInputStream2.close();
@@ -113,19 +109,16 @@ public class GeoPictureUploader {
 			} catch (MalformedURLException mue) {
 				// Log.e(Tag, "error: " + mue.getMessage(), mue);
 				System.out
-						.println("GeoPictureUploader.uploadPicture: Malformed URL: "
-								+ mue.getMessage());
+						.println("GeoPictureUploader.uploadPicture: Malformed URL: "+ mue.getMessage());
 				return ReturnCode.http400;
 			} catch (IOException ioe) {
 				// Log.e(Tag, "error: " + ioe.getMessage(), ioe);
-				System.out.println("GeoPictureUploader.uploadPicture: IOE: "
-						+ ioe.getMessage());
+				System.out.println("GeoPictureUploader.uploadPicture: IOE: "+ ioe.getMessage());
 				return ReturnCode.http500;
 			} catch (Exception e) {
 				// Log.e(Tag, "error: " + ioe.getMessage(), ioe);
 				System.out
-						.println("GeoPictureUploader.uploadPicture: unknown: "
-								+ e.getMessage());
+						.println("GeoPictureUploader.uploadPicture: unknown: "+ e.getMessage());
 				return ReturnCode.unknown;
 			}
 		else {
@@ -173,10 +166,7 @@ public class GeoPictureUploader {
 			dataStream.writeBytes(CRLF);
 
 		} catch (Exception e) {
-			System.out.println("GeoPictureUploader.writeFormField: got: "
-					+ e.getMessage());
-			// Log.e(TAG, "GeoPictureUploader.writeFormField: got: " +
-			// e.getMessage());
+			System.out.println("GeoPictureUploader.writeFormField: got: "+ e.getMessage());
 		}
 	}
 
@@ -219,10 +209,8 @@ public class GeoPictureUploader {
 			// closing CRLF
 			dataStream.writeBytes(CRLF);
 		} catch (Exception e) {
-			System.out.println("GeoPictureUploader.writeFormField: got: "
-					+ e.getMessage());
-			// Log.e(TAG, "GeoPictureUploader.writeFormField: got: " +
-			// e.getMessage());
+			System.out.println("GeoPictureUploader.writeFormField: got: "+ e.getMessage());
+		
 		}
 	}
 }

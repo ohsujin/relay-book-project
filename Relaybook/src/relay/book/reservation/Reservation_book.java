@@ -22,12 +22,11 @@ public class Reservation_book {
 		try {
 			/* 체크할 id와 pwd값 서버로 전송 */
 			String phone1 = URLEncoder.encode(phone, "UTF-8");// 한글인코딩 처리를 위해 한번
-																// 변환해줌
+															 // 변환해줌
 			String R_ID1 = URLEncoder.encode(R_ID, "UTF-8");// 한글인코딩 처리를 위해 한번
 															// 변환해줌
 
-			HttpPost post = new HttpPost(URL_book_inform + "?phone=" + phone1
-					+ "&R_ID=" + R_ID1);
+			HttpPost post = new HttpPost(URL_book_inform + "?phone=" + phone1 + "&R_ID=" + R_ID1);
 
 			/* 지연시간 최대 5초 */
 			HttpParams params = client.getParams();
