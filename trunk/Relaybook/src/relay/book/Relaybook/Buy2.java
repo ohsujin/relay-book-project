@@ -170,9 +170,7 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 						.getString("writer").toString(), rece.getJSONObject(i)
 						.getString("price").toString()
 						+ "원")); // 이부분이 커스텀 뷰의 텍스트항목에 어떤 값을 보내주는지 알려준다.
-				urls[i] = imageUrl
-						+ rece.getJSONObject(i).getString("filename")
-								.toString() + "_1.jpg";
+				urls[i] = imageUrl + rece.getJSONObject(i).getString("filename").toString() + "_1.jpg";
 			}
 
 			/*
@@ -180,8 +178,7 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 			 */
 			/* Staggered Grid View */
 
-			StaggeredGridView gridView = (StaggeredGridView) this
-					.findViewById(R.id.staggeredGridView1);
+			StaggeredGridView gridView = (StaggeredGridView) this.findViewById(R.id.staggeredGridView1);
 			int margin = getResources().getDimensionPixelSize(R.dimen.margin);
 			gridView.setItemMargin(margin);
 
@@ -216,43 +213,19 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 					Intent myIntent = new Intent(Buy2.this, Read2.class);
 					try {
 
-						myIntent.putExtra("R_ID", rece.getJSONObject(position)
-								.getString("R_ID").toString());
-						myIntent.putExtra("title", rece.getJSONObject(position)
-								.getString("title").toString());
-						myIntent.putExtra("school", rece
-								.getJSONObject(position).getString("school")
-								.toString());
-						myIntent.putExtra("phone", rece.getJSONObject(position)
-								.getString("phone").toString());
-						myIntent.putExtra("writer", rece
-								.getJSONObject(position).getString("writer")
-								.toString());
-						myIntent.putExtra("price", rece.getJSONObject(position)
-								.getString("price").toString());
-						myIntent.putExtra(
-								"subject",
-								rece.getJSONObject(position)
-										.getString("subject").toString());
-						myIntent.putExtra("memo", rece.getJSONObject(position)
-								.getString("memo").toString());
-						myIntent.putExtra(
-								"relaycount",
-								rece.getJSONObject(position)
-										.getString("relaycount").toString());
-						myIntent.putExtra(
-								"publisher",
-								rece.getJSONObject(position)
-										.getString("publisher").toString());
-						myIntent.putExtra(
-								"filename",
-								rece.getJSONObject(position)
-										.getString("filename").toString());
-						myIntent.putExtra(
-								"quality",
-								rece.getJSONObject(position)
-										.getString("quality").toString());
-
+						myIntent.putExtra("R_ID", rece.getJSONObject(position).getString("R_ID").toString());
+						myIntent.putExtra("title", rece.getJSONObject(position).getString("title").toString());
+						myIntent.putExtra("school", rece.toString());
+						myIntent.putExtra("phone", rece.getJSONObject(position).getString("phone").toString());
+						myIntent.putExtra("writer", rece.getJSONObject(position).getString("writer").toString());
+						myIntent.putExtra("price", rece.getJSONObject(position).getString("price").toString());
+						myIntent.putExtra("subject",rece.getJSONObject(position).getString("subject").toString());
+						myIntent.putExtra("memo", rece.getJSONObject(position).getString("memo").toString());
+						myIntent.putExtra("relaycount",	rece.getJSONObject(position).getString("relaycount").toString());
+						myIntent.putExtra("publisher",rece.getJSONObject(position).getString("publisher").toString());
+						myIntent.putExtra("filename",rece.getJSONObject(position).getString("filename").toString());
+						myIntent.putExtra("quality",rece.getJSONObject(position).getString("quality").toString());
+						
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

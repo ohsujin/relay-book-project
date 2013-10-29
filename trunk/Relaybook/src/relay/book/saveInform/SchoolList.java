@@ -1,7 +1,7 @@
 package relay.book.saveInform;
 
 public class SchoolList {
-	public static final String[] COUNTRIES = new String[] { "가톨릭대", "건국대",
+	public static final String[] Schools = new String[] { "가톨릭대", "건국대",
 			"경희대", "고려대", "광운대", "국민대", "덕성여대", "동국대", "동덕여대", "명지대", "삼육대",
 			"상명대(서울)", "상명대(천안)", "서강대", "서경대", "서울과학기술대", "서울대", "서울시립대",
 			"서울여대", "성공회대", "성균관대", "성신여대", "홍익대(서울)", "세종대", "숙명여대", "숭실대",

@@ -33,12 +33,10 @@ public class StaggeredAdapter extends ArrayAdapter<String> {
 
 		if (convertView == null) {
 			LayoutInflater layoutInflator = LayoutInflater.from(getContext());
-			convertView = layoutInflator.inflate(R.layout.row_staggered_demo,
-					null);
+			convertView = layoutInflator.inflate(R.layout.row_staggered_demo,null);
 
 			holder = new ViewHolder();
-			holder.imageView = (ScaleImageView) convertView
-					.findViewById(R.id.imageView1);
+			holder.imageView = (ScaleImageView) convertView.findViewById(R.id.imageView1);
 			holder.Title = (TextView) convertView.findViewById(R.id.title);
 			holder.Writer = (TextView) convertView.findViewById(R.id.writer);
 			holder.Price = (TextView) convertView.findViewById(R.id.price);
