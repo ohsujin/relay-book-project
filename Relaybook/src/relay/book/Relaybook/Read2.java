@@ -95,7 +95,7 @@ public class Read2 extends Activity {
 		School.setText(school);
 
 		EditText Phone = (EditText) findViewById(R.id.Seller_phone);
-		Phone.setText(phone);
+		Phone.setText("구매요청 후 공개");
 
 		Button Request = (Button) findViewById(R.id.Request);
 
@@ -130,20 +130,14 @@ public class Read2 extends Activity {
 			@Override
 			public void onFinish() {
 				if (currentPosition == PAGE_TOTAL_NUMBER - 1){
-					topImg.setImageDrawable( getResources().getDrawable(R.drawable.top1) );
-					
 					mPager.setCurrentItem(0);
 				}
 				else{
-					if(currentPosition == 0)
-						topImg.setImageDrawable( getResources().getDrawable(R.drawable.top2) );
-					else
-						topImg.setImageDrawable( getResources().getDrawable(R.drawable.top3) );
-					
 					mPager.setCurrentItem(currentPosition + 1);
 				}
 			}
 		};
+		
 
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPager.setAdapter(new PagerAdapterClass(getApplicationContext()));
@@ -152,6 +146,13 @@ public class Read2 extends Activity {
 			@Override
 			public void onPageSelected(int position) {
 				currentPosition = position;
+				
+				if(currentPosition == 0)
+					topImg.setImageDrawable( getResources().getDrawable(R.drawable.top1) );
+				else if(currentPosition == 1)
+					topImg.setImageDrawable( getResources().getDrawable(R.drawable.top2) );
+				else
+					topImg.setImageDrawable( getResources().getDrawable(R.drawable.top3) );
 				
 				timer.cancel();
 				timer.start();

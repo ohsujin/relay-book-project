@@ -43,12 +43,9 @@ public class Write extends Activity {
 	String Subject, Title, Writer, publisher, Price, Quality, Memo; // 판매 정보를
 																	// 전송하기위함 변수
 
-	String image1 = Environment.getExternalStorageDirectory().getAbsolutePath()
-			+ "/Relaybook/" + "/img-1.jpg";
-	String image2 = Environment.getExternalStorageDirectory().getAbsolutePath()
-			+ "/Relaybook/" + "/img-2.jpg";
-	String image3 = Environment.getExternalStorageDirectory().getAbsolutePath()
-			+ "/Relaybook/" + "/img-3.jpg";
+	String image1 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-1.jpg";
+	String image2 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-2.jpg";
+	String image3 = Environment.getExternalStorageDirectory().getAbsolutePath()	+ "/Relaybook/" + "/img-3.jpg";
 
 	/* */
 

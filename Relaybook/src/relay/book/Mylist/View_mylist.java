@@ -58,10 +58,7 @@ public class View_mylist extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		
-		
-				
 		// getting intent data
 		Intent in = getIntent();
 
@@ -84,109 +81,109 @@ public class View_mylist extends Activity {
 		/*
 		 * section이 1이면 Mybook list를 불러오고 0이면 reservation list를 불러온다.
 		 */
-		System.out.println("section : " + section);
 
 		switch (section) { // section 이란 내가 올린 책인지 내가 찜한 책인지를 구분해주는 값이다 이를 통해
 							// 각이가들 layout을 구분해주어 하나의 activty에서 두개의 레이아웃을 사용하게
 							// 한다.
 
-		case 1: // 1 = Mybook
-			passwd = in.getStringExtra("passwd");
-
-			setContentView(R.layout.view_mylist);
-			Adjust = (Button) findViewById(R.id.adjust);
-			
-			//상단 이미지의 위치를 표시해주기 위한 imageview
-			topImg = (ImageView) findViewById(R.id.TopImg);
-
-			Button Sell_complete = (Button) findViewById(R.id.sell_complete);
-
-			if (active == 0) {
-				Sell_complete.setText("판매하기");
-			}
-
-			Sell_complete.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Update_book_json update = new Update_book_json();
-
-					if (active == 0) {// 판매 활성화
-						update.Enalbe_sell(filename);
-						Toast.makeText(getApplicationContext(), "판매시작!!",
-								Toast.LENGTH_SHORT).show();
-
-					} else {// 판매완료하기
-
-						update.Complete_Sell(filename);
-						Toast.makeText(getApplicationContext(), "판매완료!!",
-								Toast.LENGTH_SHORT).show();
+			case 1: // 1 = Mybook
+				passwd = in.getStringExtra("passwd");
+	
+				setContentView(R.layout.view_mylist);
+				Adjust = (Button) findViewById(R.id.adjust);
+				
+				//상단 이미지의 위치를 표시해주기 위한 imageview
+				topImg = (ImageView) findViewById(R.id.TopImg);
+	
+				Button Sell_complete = (Button) findViewById(R.id.sell_complete);
+				Sell_complete.setBackgroundResource(R.drawable.btn_sell_complete); // 내글 관리하기 항목
+	
+				if (active == 0) {
+					Sell_complete.setText("판매하기");
+				}
+	
+				Sell_complete.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Update_book_json update = new Update_book_json();
+	
+						if (active == 0) {// 판매 활성화
+							update.Enalbe_sell(filename);
+							Toast.makeText(getApplicationContext(), "판매시작!!",Toast.LENGTH_SHORT).show();
+	
+						} else {// 판매완료하기
+	
+							update.Complete_Sell(filename);
+							Toast.makeText(getApplicationContext(), "판매완료!!",Toast.LENGTH_SHORT).show();
+						}
+						/*
+						 * Stack에 쌓여있는 Tab activity를 종료해주어 tab actitvty가 중복생성 되는걸 막아준다.
+						 */
+						Tab TabActivity = (Tab)Tab.TabActivity;
+						
+						TabActivity.finish();
+						finish();
+	
+						Intent Tab_view = new Intent(View_mylist.this, Tab.class);
+						startActivity(Tab_view);
+	
 					}
-					/*
-					 * Stack에 쌓여있는 Tab activity를 종료해주어 tab actitvty가 중복생성 되는걸 막아준다.
-					 */
-					Tab TabActivity = (Tab)Tab.TabActivity;
-					
-					TabActivity.finish();
-					finish();
-
-					Intent Tab_view = new Intent(View_mylist.this, Tab.class);
-					startActivity(Tab_view);
+				});
+	
+				break;
+			case 0: // 0 = ReservationBook -> view_reserv.xml이 호출될 경우
+				setContentView(R.layout.view_reserv);
+				//상단 이미지의 위치를 표시해주기 위한 imageview
+				topImg = (ImageView) findViewById(R.id.TopImg);
+	
+				final String phone = in.getStringExtra("phone");
+				String school = in.getStringExtra("school");
+				int relaycount = Integer.parseInt(in.getStringExtra("relaycount"));
+	
+				TextView School = (TextView) findViewById(R.id.Seller_school); // 판매자
+																				// 학교
+				School.setText(school);
+	
+				TextView Phone = (TextView) findViewById(R.id.Seller_phone); // 판매자
+																				// 전화번호
+				Phone.setText(phone);
+	
+				// 판매완료 버튼을 누르면 수행되는 부분
+				Button change = (Button) findViewById(R.id.Seller_Change);
+				
+				
+				if (active == 1) {
+					change.setEnabled(false);
+					change.setText("구매대기...");
 
 				}
-			});
-
-			break;
-		case 0: // 0 = ReservationBook -> view_reserv.xml이 호출될 경우
-			setContentView(R.layout.view_reserv);
-			//상단 이미지의 위치를 표시해주기 위한 imageview
-			topImg = (ImageView) findViewById(R.id.TopImg);
-
-			final String phone = in.getStringExtra("phone");
-			String school = in.getStringExtra("school");
-			int relaycount = Integer.parseInt(in.getStringExtra("relaycount"));
-
-			TextView School = (TextView) findViewById(R.id.Seller_school); // 판매자
-																			// 학교
-			School.setText(school);
-
-			TextView Phone = (TextView) findViewById(R.id.Seller_phone); // 판매자
-																			// 전화번호
-			Phone.setText(phone);
-
-			// 판매완료 버튼을 누르면 수행되는 부분
-			Button change = (Button) findViewById(R.id.Seller_Change);
-
-			if (active == 1) {
-				change.setEnabled(false);
-				change.setText("구매대기");
-			}
-
-			change.setOnClickListener(new Button.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-
-					Reservation_book.Chnage_seller(PhoneNum.getPhoneNum(),filename);
-					
-					/*
-					 * Stack에 쌓여있는 Tab activity를 종료해주어 tab actitvty가 중복생성 되는걸 막아준다.
-					 */
-					Tab TabActivity = (Tab)Tab.TabActivity;
-					
-					TabActivity.finish();
-					finish();//현재 보이는 activity를 종료해준다.
-					
-					/* 새로운 activity 생성*/
-					Intent Tab_view = new Intent(View_mylist.this, Tab.class);
-					startActivity(Tab_view);
-					
-					Toast.makeText(getApplicationContext(), "RelayBook 등록!!",Toast.LENGTH_SHORT).show();
-				}
-			});
-
-			break;
-
-		default:
-			break;
+	
+				change.setOnClickListener(new Button.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+	
+						Reservation_book.Chnage_seller(PhoneNum.getPhoneNum(),filename);
+						
+						/*
+						 * Stack에 쌓여있는 Tab activity를 종료해주어 tab actitvty가 중복생성 되는걸 막아준다.
+						 */
+						Tab TabActivity = (Tab)Tab.TabActivity;
+						
+						TabActivity.finish();
+						finish();//현재 보이는 activity를 종료해준다.
+						
+						/* 새로운 activity 생성*/
+						Intent Tab_view = new Intent(View_mylist.this, Tab.class);
+						startActivity(Tab_view);
+						
+						Toast.makeText(getApplicationContext(), "RelayBook 등록!!",Toast.LENGTH_SHORT).show();
+					}
+				});
+	
+				break;
+	
+			default:
+				break;
 		}
 
 		TextView Title = (TextView) findViewById(R.id.title); // 책 제목
@@ -299,15 +296,9 @@ public class View_mylist extends Activity {
 			@Override
 			public void onFinish() {
 				if (currentPosition == PAGE_TOTAL_NUMBER - 1){
-					topImg.setImageDrawable( getResources().getDrawable(R.drawable.top1) );
 					mPager.setCurrentItem(0);
 				}
-				else{
-					if(currentPosition == 0)
-						topImg.setImageDrawable( getResources().getDrawable(R.drawable.top2) );
-					else
-						topImg.setImageDrawable( getResources().getDrawable(R.drawable.top3) );
-				
+				else{	
 					mPager.setCurrentItem(currentPosition + 1);
 				}
 			}
@@ -320,6 +311,14 @@ public class View_mylist extends Activity {
 			@Override
 			public void onPageSelected(int position) {
 				currentPosition = position;
+				
+				if(currentPosition == 0)
+					topImg.setImageDrawable( getResources().getDrawable(R.drawable.top1) );
+				else if(currentPosition == 1)
+					topImg.setImageDrawable( getResources().getDrawable(R.drawable.top2) );
+				else
+					topImg.setImageDrawable( getResources().getDrawable(R.drawable.top3) );
+				
 				timer.cancel();
 				timer.start();
 			}
