@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import relay.book.Option.PhoneNum;
+import relay.book.Relaybook.Tab;
 import relay.book.intentdemob2.R;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -39,7 +40,8 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 	ArrayList<String> arraylist;
 	static String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/MybookList.jsp";
 	static String imageUrl = "http://14.63.212.134:8080/MyRelayServer/Image/";
-
+	static 	int i=1;
+	
 	private String urls[];
 
 	/* 서버로 넘겨주는 값을 저장해줌 */
@@ -67,9 +69,8 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 					tb.setBackgroundDrawable(getResources().getDrawable(R.drawable.fullstar));
 					top_title.setText(getResources().getText(0, "내 책관리하기"));
 
-					send_search(PhoneNum.getPhoneNum(), "M");// 내가 등록한 책의 목록을
-																// 받아온다. | M =
-																// My_book
+					send_search(PhoneNum.getPhoneNum(), "M");// 내가 등록한 책의 목록을 받아온다. | M = My_book
+																
 
 				}
 			}
@@ -111,7 +112,6 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 			}
 			
 			//JSON object 출력 확인
-			//System.out.println(result);
 
 			JSONObject json = new JSONObject(result);
 			final JSONArray rece = json.getJSONArray("Book_inform");
@@ -120,7 +120,11 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 				Toast T = Toast.makeText(getApplicationContext(),"등록된 항목이 없습니다.", Toast.LENGTH_SHORT);
 				T.setGravity(Gravity.TOP, 0, 400);
 				T.show();
-
+				
+				//gridview로 보여줄 항목이 없는 경우 아무런 리스트도 나오지 않게 하기 위해 null을 입력한다.
+				StaggeredGridView gridView = (StaggeredGridView) this.findViewById(R.id.staggeredGridView1);
+				gridView.setAdapter(null);
+		
 			} else {
 
 				/*
@@ -140,9 +144,6 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 							rece.getJSONObject(i).getString("price").toString()	+ "원")); 
 					/* */
 					urls[i] = imageUrl + rece.getJSONObject(i).getString("filename").toString() + "_1.jpg";
-					
-					System.out.println("이미지 경로 : " + urls[i]);
-
 				}
 
 				/*
@@ -150,10 +151,8 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 				 *
 				/* Staggered Grid View */
 
-				StaggeredGridView gridView = (StaggeredGridView) this
-						.findViewById(R.id.staggeredGridView1);
-				int margin = getResources().getDimensionPixelSize(
-						R.dimen.margin);
+				StaggeredGridView gridView = (StaggeredGridView) this.findViewById(R.id.staggeredGridView1);
+				int margin = getResources().getDimensionPixelSize(R.dimen.margin);
 				gridView.setItemMargin(margin);
 
 				gridView.setPadding(margin, 0, margin, 0); // have the margin on
@@ -163,9 +162,8 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 				 * 검색하면 서버로부터 검색 정보를 JSON으로 불러와 urls에 이미지 경로를 넣어주고 bookInform라는
 				 * Map함수에는 책정보를 입력해준다.
 				 */
-				StaggeredAdapter adapter1 = new StaggeredAdapter(
-						my_book_list.this, R.id.imageView1, urls, imageItems); // urls의 크기를 구하여 몇개의 view가 생성되는지 확인한다.
-				gridView.setAdapter(adapter1);
+				StaggeredAdapter adapter = new StaggeredAdapter(my_book_list.this, R.id.imageView1, urls, imageItems); // urls의 크기를 구하여 몇개의 view가 생성되는지 확인한다.
+				gridView.setAdapter(adapter);
 
 				gridView.setOnItemClickListener(new OnItemClickListener() {
 
