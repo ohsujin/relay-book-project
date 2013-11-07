@@ -14,8 +14,7 @@ import relay.book.intentdemob2.R;
 import android.app.*;
 import android.content.*;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.View;
+import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
@@ -56,16 +55,6 @@ public class Option extends Activity {
 								}).setNegativeButton(buttonNo, null).show();
 			}
 		});
-		
-		
-		
-		
-		
-	
-		
-		
-		
-
 	}
 
 	void Delete_member(String phone) {
@@ -110,6 +99,34 @@ public class Option extends Activity {
 			client.getConnectionManager().shutdown(); // 연결 지연 종료
 		}
 
+	}
+	
+	/* 종료묻기 */
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		switch (keyCode) {
+		case KeyEvent.KEYCODE_BACK:
+			String alertTitle = getResources().getString(R.string.app_name);
+			String buttonMessage = getResources().getString(
+					R.string.alert_msg_exit);
+			String buttonYes = getResources().getString(R.string.button_yes);
+			String buttonNo = getResources().getString(R.string.button_no);
+
+			new AlertDialog.Builder(Option.this)
+					.setTitle(alertTitle)
+					.setMessage(buttonMessage)
+					.setPositiveButton(buttonYes,
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// TODO Auto-generated method stub
+									moveTaskToBack(true);
+									finish();
+								}
+							}).setNegativeButton(buttonNo, null).show();
+		}
+		return true;
 	}
 
 }
