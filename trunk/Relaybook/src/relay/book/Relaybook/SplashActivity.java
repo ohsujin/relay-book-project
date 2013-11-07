@@ -19,6 +19,7 @@ public class SplashActivity extends Activity {
 
 		setContentView(R.layout.splash);
 		Handler handler = new Handler() {
+			@Override
 			public void handleMessage(Message msg) {
 				finish();
 			}

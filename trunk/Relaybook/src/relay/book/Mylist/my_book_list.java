@@ -15,7 +15,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import relay.book.Option.PhoneNum;
-import relay.book.Relaybook.Tab;
 import relay.book.intentdemob2.R;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -46,6 +45,7 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 
 	/* 서버로 넘겨주는 값을 저장해줌 */
 
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onResume();
 
@@ -55,6 +55,7 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 
 		final ToggleButton tb = (ToggleButton) this.findViewById(R.id.toggleButton1);
 		tb.setOnClickListener(new View.OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				if (tb.isChecked()) {
 					tb.setBackgroundDrawable(getResources().getDrawable(
@@ -234,6 +235,7 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 	}
 
 	/* 종료묻기 */
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		switch (keyCode) {
 		case KeyEvent.KEYCODE_BACK:

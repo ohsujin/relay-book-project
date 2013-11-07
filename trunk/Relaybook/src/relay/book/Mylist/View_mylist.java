@@ -379,6 +379,7 @@ public class View_mylist extends Activity {
 			return arg0 == arg1;
 		}
 
+		@Override
 		public void destroyItem(View pager, int position, Object view) {
 			((ViewPager) pager).removeView((View) view);
 		}

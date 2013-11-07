@@ -92,7 +92,7 @@ public class RelayBookLogin extends Activity implements View.OnClickListener {
 		}
 
 		AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.University);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, sch_list.Schools);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, SchoolList.Schools);
 		textView.setAdapter(adapter);
 
 		Button button = (Button) findViewById(R.id.Send);
@@ -114,6 +114,7 @@ public class RelayBookLogin extends Activity implements View.OnClickListener {
 
 	}
 
+	@Override
 	public void onClick(View v) {
 		EditText phoneEdit = (EditText) findViewById(R.id.Phone);
 		passwordEdit = (EditText) findViewById(R.id.Password);

@@ -43,12 +43,14 @@ public class Write extends Activity {
 	Context mContext = this;
 	ImageView iv1, iv2, iv3;
 
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.write);
 
 		Button button = (Button) findViewById(R.id.Send); //
 		button.setOnClickListener(new Button.OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				// MainPage.class이 부분을 이동할 곳으로 수정
 
@@ -124,6 +126,7 @@ public class Write extends Activity {
 		.setTitle("ISBN을 입력하시오.")
 		.setView(linear)
 		.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+			@Override
 			public void onClick(DialogInterface dialog, int whichButton) {
 				EditText number = (EditText)linear.findViewById(R.id.isbn_number);	
 			}
@@ -271,6 +274,7 @@ public class Write extends Activity {
 	}
 
 	/* 종료묻기 */
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		switch (keyCode) {
 		case KeyEvent.KEYCODE_BACK:

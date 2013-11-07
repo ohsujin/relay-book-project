@@ -16,6 +16,7 @@ public class Tab extends TabActivity {
 	
 	public static Activity TabActivity;
 
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab);
