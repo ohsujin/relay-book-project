@@ -190,7 +190,9 @@ public class Read2 extends Activity {
 		public Object instantiateItem(View pager, int position) {
 
 			ImageView image = new ImageView(context);
-
+			image.setScaleType(ImageView.ScaleType.FIT_XY);
+			
+			
 			if (position == 0) {
 				ImageDownloader.download(URL + filename + "_1.jpg", image);
 			} else if (position == 1) {
@@ -216,6 +218,7 @@ public class Read2 extends Activity {
 			return arg0 == arg1;
 		}
 
+		@Override
 		public void destroyItem(View pager, int position, Object view) {
 			((ViewPager) pager).removeView((View) view);
 		}
