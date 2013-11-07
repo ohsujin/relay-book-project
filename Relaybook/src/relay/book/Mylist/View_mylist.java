@@ -353,6 +353,7 @@ public class View_mylist extends Activity {
 		public Object instantiateItem(View pager, int position) {
 
 			ImageView image = new ImageView(context);
+			image.setScaleType(ImageView.ScaleType.FIT_XY);
 
 			if (position == 0) {
 				ImageDownloader.download(URL + filename + "_1.jpg", image);

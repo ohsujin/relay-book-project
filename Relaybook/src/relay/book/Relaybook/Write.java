@@ -112,6 +112,9 @@ public class Write extends Activity {
 		iv2 = (ImageView) findViewById(R.id.imgView2);
 		iv3 = (ImageView) findViewById(R.id.imgView3);
 
+		iv1.setScaleType(ImageView.ScaleType.FIT_XY);
+		iv2.setScaleType(ImageView.ScaleType.FIT_XY);
+		iv3.setScaleType(ImageView.ScaleType.FIT_XY);
 		
 		Button isbn_button = (Button) findViewById(R.id.isbn_but);
 		
