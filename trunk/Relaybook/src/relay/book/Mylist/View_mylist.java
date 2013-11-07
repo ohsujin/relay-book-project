@@ -154,7 +154,7 @@ public class View_mylist extends Activity {
 				
 				if (active == 1) {
 					change.setEnabled(false);
-					change.setText("구매대기...");
+					change.setText("구매 대기중");
 
 				}
 	
