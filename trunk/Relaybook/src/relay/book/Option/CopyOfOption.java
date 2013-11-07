@@ -9,10 +9,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
-import relay.book.Relaybook.*;
 import relay.book.intentdemob2.R;
-import android.app.*;
-import android.content.*;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -20,7 +18,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class Option extends Activity {
+public class CopyOfOption extends Activity {
 
 	static String URL_delete_member = "http://14.63.212.134/MyRelayServer/Member_out.jsp";
 
@@ -34,37 +32,11 @@ public class Option extends Activity {
 		button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String alertTitle = getResources().getString(R.string.app_name);
-				String buttonMessage = getResources().getString(
-						R.string.alert_msg_out);
-				String buttonYes = getResources().getString(R.string.button_yes);
-				String buttonNo = getResources().getString(R.string.button_no);
+				// TODO Auto-generated method stub
+				Delete_member(PhoneNum.getPhoneNum());
 
-				new AlertDialog.Builder(Option.this)
-						.setTitle(alertTitle)
-						.setMessage(buttonMessage)
-						.setPositiveButton(buttonYes,
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										// TODO Auto-generated method stub
-										Delete_member(PhoneNum.getPhoneNum());
-
-									}
-								}).setNegativeButton(buttonNo, null).show();
 			}
 		});
-		
-		
-		
-		
-		
-	
-		
-		
-		
 
 	}
 

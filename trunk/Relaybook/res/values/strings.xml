@@ -9,6 +9,6 @@
     <string name="button_yes">예</string>
     <string name="button_no">아니오</string>
     <string name="alert_msg_exit">정말로 종료 하시겠습니까?</string>
-
+	<string name="alert_msg_out">정말로 회원탈퇴 하시겠습니까?</string>
     
 </resources>
