@@ -9,7 +9,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
-import relay.book.Relaybook.*;
 import relay.book.intentdemob2.R;
 import android.app.*;
 import android.content.*;
@@ -102,6 +101,7 @@ public class Option extends Activity {
 	}
 	
 	/* 종료묻기 */
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		switch (keyCode) {
 		case KeyEvent.KEYCODE_BACK:

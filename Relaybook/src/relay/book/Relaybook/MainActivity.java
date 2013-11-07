@@ -22,6 +22,7 @@ public class MainActivity extends Activity {
 		Handler mHandler = new Handler();
 		mHandler.postDelayed(new Runnable() {
 			// Do Something
+			@Override
 			public void run() {
 				Intent intent = new Intent(MainActivity.this,
 						RelayBookLogin.class);

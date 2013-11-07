@@ -46,6 +46,7 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 	/* 서버로 넘겨주는 값을 저장해줌 */
 	String Search_option;
 
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.buy2);
@@ -66,6 +67,7 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 		sp.setOnItemSelectedListener(this);
 
 		sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
@@ -89,6 +91,7 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 				}
 			}
 
+			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 				// TODO Auto-generated method stub
 
@@ -98,6 +101,7 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 
 		ImageButton button = (ImageButton) findViewById(R.id.Search_btn);
 		button.setOnClickListener(new Button.OnClickListener() {
+			@Override
 			public void onClick(View v) {
 
 				String keyword = ((EditText) findViewById(R.id.Search_Text))
@@ -254,6 +258,7 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 	}
 
 	/* 종료묻기 */
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		switch (keyCode) {
 		case KeyEvent.KEYCODE_BACK:
