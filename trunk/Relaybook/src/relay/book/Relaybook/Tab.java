@@ -1,6 +1,7 @@
 package relay.book.Relaybook;
 
 import relay.book.Mylist.my_book_list;
+import relay.book.NaverOpenAPI.NaverOpenAPI;
 import relay.book.Option.Option;
 import relay.book.intentdemob2.R;
 import android.app.Activity;
@@ -13,9 +14,11 @@ import android.widget.TabHost;
 public class Tab extends TabActivity {
 	TabHost mTab;
 	static boolean First = true;
-	
+	static NaverOpenAPI NOA = new NaverOpenAPI();
+	 
 	public static Activity TabActivity;
-
+	public static String ISBN_num=null; 
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,12 +44,20 @@ public class Tab extends TabActivity {
 		Drawable img4 = getResources().getDrawable(R.drawable.tab_option);
 		tabHost.addTab(tabHost.newTabSpec("tab4").setIndicator("옵션", img4)
 				.setContent(new Intent(this, Option.class)));
-
+		
+		/* 바코드로 찍은 ISBN 값을 가져온다 */
+		Intent intent = getIntent();   // 값을 받기 위한 Intent 생성
+		ISBN_num = intent.getStringExtra("ISBN");
+		NOA.Search_book(ISBN_num);
+		/* ++++++++++++++++++ */
+		
 		/* 최초 실행시 삽니다 화면을 보여주고 이후에 탭뷰가 다시 실행 될때는 장바구니 항목을 실행한다. */
 		if (First) {
 			tabHost.setCurrentTab(0);
 			First = false;
-		} else {
+		}else if(ISBN_num != null){
+			tabHost.setCurrentTab(1);
+		}else {
 			tabHost.setCurrentTab(2);
 			
 			
