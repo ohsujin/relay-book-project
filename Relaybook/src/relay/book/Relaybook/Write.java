@@ -2,15 +2,24 @@ package relay.book.Relaybook;
 
 import java.io.*;
 
-import relay.book.Multipart.*;
-import relay.book.Option.*;
-import relay.book.intentdemob2.*;
-import android.app.*;
-import android.content.*;
-import android.graphics.*;
-import android.net.*;
-import android.os.*;
-import android.provider.*;
+
+import relay.book.Multipart.GeoPictureUploader;
+import relay.book.NaverOpenAPI.NaverOpenAPI;
+import relay.book.Option.PhoneNum;
+import relay.book.intentdemob2.R;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
 import android.view.*;
 import android.widget.*;
@@ -26,7 +35,6 @@ public class Write extends Activity {
 	MyThread mMyThread = null;
 
 	String Subject, Title, Writer, publisher, Price, Quality, Memo; // 판매 정보를
-																	// 전송하기위함 변수
 
 	String image1 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-1.jpg";
 	String image2 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/" + "/img-2.jpg";
@@ -34,6 +42,8 @@ public class Write extends Activity {
 
 	/* */
 
+	EditText ISBN;
+	
 	static int i = 1;
 
 	static int REQUEST_PICTURE = 1;
@@ -42,11 +52,30 @@ public class Write extends Activity {
 	/** Called when the activity is first created. */
 	Context mContext = this;
 	ImageView iv1, iv2, iv3;
+	
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.write);
+		
+//		Button ISBN_btn = (Button) findViewById(R.id.isbn_btn); //
+//		ISBN_btn.setOnClickListener(new Button.OnClickListener() {
+//			public void onClick(View v) {
+//				String ISBN = ((EditText) findViewById(R.id.ISBN_in)).getText().toString();
+//				NaverOpenAPI NOA = new NaverOpenAPI();
+//				
+//				NOA.Search_book(ISBN);
+//				
+//				 ((EditText) findViewById(R.id.Title)).setText(NOA.getTitle());
+//				 ((EditText) findViewById(R.id.Writer)).setText(NOA.getAuthor());
+//				 ((EditText) findViewById(R.id.Publisher)).setText(NOA.getPublisher());
+//				 
+//				 
+//			}
+//		});
+		
 
 		Button button = (Button) findViewById(R.id.Send); //
 		button.setOnClickListener(new Button.OnClickListener() {
@@ -80,7 +109,7 @@ public class Write extends Activity {
 					Intent intent = new Intent(Write.this, Tab.class);
 					startActivity(intent);
 					
-					System.out.println("설마 난 무조건 실행??");
+					
 					
 					Toast.makeText(getApplicationContext(), "등록 되었습니다.",Toast.LENGTH_SHORT).show();
 
@@ -116,7 +145,7 @@ public class Write extends Activity {
 		iv2.setScaleType(ImageView.ScaleType.FIT_XY);
 		iv3.setScaleType(ImageView.ScaleType.FIT_XY);
 		
-		Button isbn_button = (Button) findViewById(R.id.isbn_but);
+
 		
 	}
 
@@ -124,14 +153,24 @@ public class Write extends Activity {
 	public void mOnClick_isbn(View v) {
 		final LinearLayout linear = (LinearLayout)
 			View.inflate(this, R.layout.isbn_btn, null);
-	
+
 		new AlertDialog.Builder(this)
 		.setTitle("ISBN을 입력하시오.")
 		.setView(linear)
 		.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int whichButton) {
-				EditText number = (EditText)linear.findViewById(R.id.isbn_number);	
+				
+//				String ISBN = ((EditText) findViewById(R.id.isbn_number)).getText().toString();
+				EditText isbn = (EditText) findViewById(R.id.isbn_number);
+				
+				NaverOpenAPI NOA = new NaverOpenAPI();
+				
+				NOA.Search_book("9788996094036");
+				System.out.println("ISBN : "+ isbn.toString());
+				 ((EditText) findViewById(R.id.Title)).setText(NOA.getTitle());
+				 ((EditText) findViewById(R.id.Writer)).setText(NOA.getAuthor());
+				 ((EditText) findViewById(R.id.Publisher)).setText(NOA.getPublisher());
 			}
 		})
 		.show();
