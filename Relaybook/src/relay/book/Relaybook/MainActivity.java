@@ -17,8 +17,8 @@ public class MainActivity extends Activity {
 		
 		setContentView(R.layout.activity_main);
 		
-		finish(); // 이전 액티비티 종료
-
+		finish(); 
+		
 		Handler mHandler = new Handler();
 		mHandler.postDelayed(new Runnable() {
 			// Do Something
