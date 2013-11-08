@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
     package="relay.book.intentdemob2"
-    android:versionCode="13"
-    android:versionName="0.5" >
+    android:versionCode="16"
+    android:versionName="0.52" >
 
 
   <uses-sdk
