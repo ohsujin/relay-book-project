@@ -11,11 +11,11 @@
         android:onClick="onClickImg"
         android:text="카메라 찍기" />
 
-    <Button
+    <!-- <Button
         android:id="@+id/photoAlbum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClickImg"
-        android:text="앨범 불러오기" />
+        android:text="앨범 불러오기" /> -->
 
 </LinearLayout>

@@ -52,22 +52,6 @@ public class Write extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.write);
 		
-//		Button ISBN_btn = (Button) findViewById(R.id.isbn_btn); //
-//		ISBN_btn.setOnClickListener(new Button.OnClickListener() {
-//			public void onClick(View v) {
-//				String ISBN = ((EditText) findViewById(R.id.ISBN_in)).getText().toString();
-//				NaverOpenAPI NOA = new NaverOpenAPI();
-//				
-//				NOA.Search_book(ISBN);
-//				
-//				 ((EditText) findViewById(R.id.Title)).setText(NOA.getTitle());
-//				 ((EditText) findViewById(R.id.Writer)).setText(NOA.getAuthor());
-//				 ((EditText) findViewById(R.id.Publisher)).setText(NOA.getPublisher());
-//				 
-//				 
-//			}
-//		});
-		
 
 		Button button = (Button) findViewById(R.id.Send); //
 		button.setOnClickListener(new Button.OnClickListener() {
@@ -159,7 +143,7 @@ public class Write extends Activity {
 				
 				NaverOpenAPI NOA = new NaverOpenAPI();
 				
-				NOA.Search_book(ISBN);
+				NOA.Search_book(ISBN); // 팝업창에 입력한 ISBN값을 네이버로 넘겨줘야함
 				//System.out.println("ISBN : "+ ISBN);
 				
 				((EditText) findViewById(R.id.Title)).setText(NOA.getTitle());
@@ -180,8 +164,7 @@ public class Write extends Activity {
 		switch (v.getId()) {
 		case R.id.put_Image:
 			AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-			View customLayout = View.inflate(mContext, R.layout.custom_button,
-					null);
+			View customLayout = View.inflate(mContext, R.layout.custom_button,null);
 			builder.setView(customLayout);
 			dialog = builder.create();
 			dialog.show();
@@ -196,15 +179,14 @@ public class Write extends Activity {
 				  i++;
 				  takePicture();
 			  }
-		
 			Toast.makeText(getApplicationContext(),
 					"책표지를 포함한 총 3장, 연속 촬영을 시작합니다.", Toast.LENGTH_LONG).show();
 			break;
 
-		case R.id.photoAlbum:
-			dialog.dismiss();
-			photoAlbum();
-			break;
+//		case R.id.photoAlbum:
+//			dialog.dismiss();
+//			photoAlbum();
+//			break;
 		}
 
 	}
