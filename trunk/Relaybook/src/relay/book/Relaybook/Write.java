@@ -161,13 +161,15 @@ public class Write extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int whichButton) {
 				
-//				String ISBN = ((EditText) findViewById(R.id.isbn_number)).getText().toString();
-				EditText isbn = (EditText) findViewById(R.id.isbn_number);
+				String ISBN = ((EditText) findViewById(R.id.isbn_number)).getText().toString(); //이부분에서 값이 안넘어가는듯 무슨 핸들러를 쓰라는것 같은데...
+				
+//				EditText isbn = (EditText) findViewById(R.id.isbn_number);
 				
 				NaverOpenAPI NOA = new NaverOpenAPI();
 				
-				NOA.Search_book("9788996094036");
-				System.out.println("ISBN : "+ isbn.toString());
+				NOA.Search_book(ISBN);
+				System.out.println("ISBN : "+ ISBN);
+				
 				 ((EditText) findViewById(R.id.Title)).setText(NOA.getTitle());
 				 ((EditText) findViewById(R.id.Writer)).setText(NOA.getAuthor());
 				 ((EditText) findViewById(R.id.Publisher)).setText(NOA.getPublisher());
