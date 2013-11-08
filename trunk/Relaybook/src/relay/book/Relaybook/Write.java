@@ -2,24 +2,16 @@ package relay.book.Relaybook;
 
 import java.io.*;
 
-
-import relay.book.Multipart.GeoPictureUploader;
-import relay.book.NaverOpenAPI.NaverOpenAPI;
-import relay.book.Option.PhoneNum;
-import relay.book.intentdemob2.R;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
+import relay.book.Multipart.*;
+import relay.book.NaverOpenAPI.*;
+import relay.book.Option.*;
+import relay.book.intentdemob2.*;
+import android.app.*;
+import android.content.*;
+import android.graphics.*;
+import android.net.*;
+import android.os.*;
+import android.provider.*;
 import android.provider.MediaStore.Images;
 import android.view.*;
 import android.widget.*;
@@ -161,18 +153,18 @@ public class Write extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int whichButton) {
 				
-				String ISBN = ((EditText) findViewById(R.id.isbn_number)).getText().toString(); //이부분에서 값이 안넘어가는듯 무슨 핸들러를 쓰라는것 같은데...
+				String ISBN = ((EditText) linear.findViewById(R.id.isbn_number)).getText().toString(); //이부분에서 값이 안넘어가는듯 무슨 핸들러를 쓰라는것 같은데...
 				
 //				EditText isbn = (EditText) findViewById(R.id.isbn_number);
 				
 				NaverOpenAPI NOA = new NaverOpenAPI();
 				
 				NOA.Search_book(ISBN);
-				System.out.println("ISBN : "+ ISBN);
+				//System.out.println("ISBN : "+ ISBN);
 				
-				 ((EditText) findViewById(R.id.Title)).setText(NOA.getTitle());
-				 ((EditText) findViewById(R.id.Writer)).setText(NOA.getAuthor());
-				 ((EditText) findViewById(R.id.Publisher)).setText(NOA.getPublisher());
+				((EditText) findViewById(R.id.Title)).setText(NOA.getTitle());
+				((EditText) findViewById(R.id.Writer)).setText(NOA.getAuthor());
+				((EditText) findViewById(R.id.Publisher)).setText(NOA.getPublisher());
 			}
 		})
 		.show();

@@ -15,7 +15,7 @@ public class NaverOpenAPI{
 	boolean inItem = false, inTitle = false, inAuthor = false, inPublisher = false;
 	 String title = null, author = null, publisher = null;
 	 
-	 void Search_book(String ISBN){
+	 public void Search_book(String ISBN){
 		
 		 try {
 			URL url = new URL("http://openapi.naver.com/search?key=c19d4fb6af5f59ddada2d0ded393fd77&target=book_adv&query=art&d_isbn="+ISBN);
