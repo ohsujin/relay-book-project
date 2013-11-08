@@ -64,7 +64,7 @@
   <string name="msg_default_format">Format</string>
   <string name="msg_default_meta">Metadata</string>
   <string name="msg_default_mms_subject">Hi</string>
-  <string name="msg_default_status">Place a barcode inside the viewfinder rectangle to scan it.</string>
+  <string name="msg_default_status">책의 바코드를 네모칸에 맞쳐 주세요.</string>
   <string name="msg_default_time">Time</string>
   <string name="msg_default_type">Type</string>
   <string name="msg_encode_barcode_failed">Could not generate the requested barcode.</string>
