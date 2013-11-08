@@ -1,21 +1,37 @@
 package relay.book.Relaybook;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
 
-import relay.book.Multipart.*;
-import relay.book.NaverOpenAPI.*;
-import relay.book.Option.*;
-import relay.book.intentdemob2.*;
-import android.app.*;
-import android.content.*;
-import android.graphics.*;
-import android.net.*;
-import android.os.*;
-import android.provider.*;
+import relay.book.Multipart.GeoPictureUploader;
+import relay.book.NaverOpenAPI.NaverOpenAPI;
+import relay.book.Option.PhoneNum;
+import relay.book.intentdemob2.R;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
-import android.view.*;
-import android.widget.*;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class Write extends Activity {
 	ScrollView scrollview;
@@ -36,6 +52,7 @@ public class Write extends Activity {
 
 	EditText ISBN;
 	
+	
 	static int i = 1;
 
 	static int REQUEST_PICTURE = 1;
@@ -44,15 +61,22 @@ public class Write extends Activity {
 	/** Called when the activity is first created. */
 	Context mContext = this;
 	ImageView iv1, iv2, iv3;
-	
-	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.write);
+	
 		
-
+		findViewById(R.id.isbn_btn).setOnClickListener(scanAnything);//바코드 activity 호출
+	
+		
+		if(Tab.ISBN_num != null){	//CaptureActivity에서 찍은 바코드 정보를 Tab activity에 static으로 저장하여 ISBN_num 값이 null일때는 책정보를 자동기입하지 말고 null이 아닐때만 네이버에서 받아온 책정보를 자동으로 기입한다.
+			((EditText) findViewById(R.id.Title)).setText(Tab.NOA.getTitle());
+			((EditText) findViewById(R.id.Writer)).setText(Tab.NOA.getAuthor());
+			((EditText) findViewById(R.id.Publisher)).setText(Tab.NOA.getPublisher());
+		}
+		
 		Button button = (Button) findViewById(R.id.Send); //
 		button.setOnClickListener(new Button.OnClickListener() {
 			@Override
@@ -124,6 +148,18 @@ public class Write extends Activity {
 
 		
 	}
+	
+	private final Button.OnClickListener scanAnything = new Button.OnClickListener() {
+	    @Override
+	    public void onClick(View v) {
+	      Intent i = new Intent(Write.this, com.google.zxing.client.android.CaptureActivity.class );
+	      startActivity(i);
+	    }
+	  };
+
+	
+	  
+	  
 
 	//isbn버튼
 	public void mOnClick_isbn(View v) {

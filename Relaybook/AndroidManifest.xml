@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
     package="relay.book.intentdemob2"
-    android:versionCode="16"
+    android:versionCode="17"
     android:versionName="0.52" >
 
 
@@ -15,7 +15,8 @@
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.SEND_SMS"/>
     <uses-permission android:name="android.permission.INTERNET" />
-
+	<uses-permission android:name="android.permission.CAMERA"/>
+	
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -49,8 +50,92 @@
         <activity android:name="relay.book.Relaybook.Read2" android:label="Read2"></activity>
         <activity android:name="relay.book.Option.Option" android:label="Option"></activity>
 
-        
-    	
+         <activity android:name="com.google.zxing.client.android.CaptureActivity"
+			   android:screenOrientation="landscape"
+			   android:configChanges="orientation|keyboardHidden"
+			   android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+			   android:windowSoftInputMode="stateAlwaysHidden">
+			   <intent-filter>
+			      <category android:name="android.intent.category.DEFAULT"/>
+			   </intent-filter>
+			   <intent-filter>
+			      <action android:name="com.google.zxing.client.android.SCAN"/>
+			      <category android:name="android.intent.category.DEFAULT"/>
+			    </intent-filter>
+			</activity>
+			
+			<activity
+            android:name="com.google.zxing.client.android.encode.EncodeActivity"
+            android:label="@string/share_name" >
+            <intent-filter>
+                <action android:name="com.google.zxing.client.android.ENCODE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <!-- This allows us to handle the Share button in Contacts. -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/x-vcard" />
+            </intent-filter>
+            <!-- This allows us to handle sharing any plain text . -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.google.zxing.client.android.book.SearchBookContentsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/sbc_name"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.google.zxing.client.android.wifi.WifiActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/wa_name"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.google.zxing.client.android.share.ShareActivity"
+            android:label="@string/share_name"
+            android:screenOrientation="user"
+            android:theme="@android:style/Theme.Light" >
+            <intent-filter>
+                <action android:name="com.google.zxing.client.android.SHARE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.google.zxing.client.android.share.BookmarkPickerActivity"
+            android:label="@string/bookmark_picker_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.PICK" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.google.zxing.client.android.share.AppPickerActivity"
+            android:configChanges="orientation"
+            android:label="@string/app_picker_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.PICK" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
