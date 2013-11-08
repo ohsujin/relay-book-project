@@ -1,37 +1,21 @@
 package relay.book.Relaybook;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
 
-import relay.book.Multipart.GeoPictureUploader;
-import relay.book.NaverOpenAPI.NaverOpenAPI;
-import relay.book.Option.PhoneNum;
-import relay.book.intentdemob2.R;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
+import relay.book.Multipart.*;
+import relay.book.NaverOpenAPI.*;
+import relay.book.Option.*;
+import relay.book.intentdemob2.*;
+import android.app.*;
+import android.content.*;
+import android.graphics.*;
+import android.net.*;
+import android.os.*;
+import android.provider.*;
 import android.provider.MediaStore.Images;
-import android.view.KeyEvent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
+import android.view.*;
+import android.widget.*;
 import android.widget.RatingBar.OnRatingBarChangeListener;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class Write extends Activity {
 	ScrollView scrollview;
@@ -167,7 +151,7 @@ public class Write extends Activity {
 			View.inflate(this, R.layout.isbn_btn, null);
 
 		new AlertDialog.Builder(this)
-		.setTitle("ISBN을 입력하시오.")
+		.setTitle("ISBN")
 		.setView(linear)
 		.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 			@Override
@@ -204,8 +188,11 @@ public class Write extends Activity {
 			builder.setView(customLayout);
 			dialog = builder.create();
 			dialog.show();
-			Toast.makeText(getApplicationContext(), "책표지를 포함한 총 3장을 찍어주세요.",
-					Toast.LENGTH_LONG).show();
+			Toast toast = Toast.makeText(getApplicationContext(), "앞 표지, 책 내용, 뒤 표지 총 3장을 찍어주세요.",
+					Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER, 0, 150);
+			toast.show();
+
 			break;
 
 		case R.id.camera:
@@ -216,7 +203,7 @@ public class Write extends Activity {
 				  takePicture();
 			  }
 			Toast.makeText(getApplicationContext(),
-					"책표지를 포함한 총 3장, 연속 촬영을 시작합니다.", Toast.LENGTH_LONG).show();
+					"책 표지를 포함한 총 3장, 연속 촬영을 시작합니다.", Toast.LENGTH_LONG).show();
 			break;
 
 //		case R.id.photoAlbum:
