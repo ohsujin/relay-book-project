@@ -1,40 +1,25 @@
 package relay.book.Relaybook;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URLEncoder;
-import java.util.ArrayList;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.apache.http.*;
+import org.apache.http.client.methods.*;
+import org.apache.http.impl.client.*;
+import org.apache.http.params.*;
+import org.json.*;
 
-import relay.book.intentdemob2.R;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.View;
-import android.widget.AdapterView;
+import relay.book.intentdemob2.*;
+import android.app.*;
+import android.content.*;
+import android.os.*;
+import android.view.*;
+import android.widget.*;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.example.staggeredgridviewdemo.ImageItem;
-import com.example.staggeredgridviewdemo.StaggeredAdapter;
-import com.origamilabs.library.views.StaggeredGridView;
+import com.example.staggeredgridviewdemo.*;
+import com.origamilabs.library.views.*;
 import com.origamilabs.library.views.StaggeredGridView.OnItemClickListener;
 
 public class Buy2 extends Activity implements OnItemSelectedListener {
@@ -158,75 +143,123 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 				T.setGravity(Gravity.TOP, 0, 400);
 				T.show();
 
-				//gridview로 보여줄 항목이 없는 경우 아무런 리스트도 나오지 않게 하기 위해 null을 입력한다.
-				StaggeredGridView gridView = (StaggeredGridView) this.findViewById(R.id.staggeredGridView1);
+				// gridview로 보여줄 항목이 없는 경우 아무런 리스트도 나오지 않게 하기 위해 null을 입력한다.
+				StaggeredGridView gridView = (StaggeredGridView) this
+						.findViewById(R.id.staggeredGridView1);
 				gridView.setAdapter(null);
-			}else{
+			} else {
 				/*
 				 * 서버로 부터 받아온 데이터를 ImageItem(Array list) 에 저장한다.
 				 */
 				final ArrayList<ImageItem> imageItems = new ArrayList<ImageItem>();
-	
+
 				urls = new String[rece.length()];
-	
+
 				for (int i = 0; i < rece.length(); i++) {
 					imageItems.add(new ImageItem(rece.getJSONObject(i)
-							.getString("title").toString(), rece.getJSONObject(i)
-							.getString("writer").toString(), rece.getJSONObject(i)
-							.getString("price").toString()+ "원")); // 이부분이 커스텀 뷰의 텍스트항목에 어떤 값을 보내주는지 알려준다.
-					urls[i] = imageUrl + rece.getJSONObject(i).getString("filename").toString() + "_1.jpg";
+							.getString("title").toString(), rece
+							.getJSONObject(i).getString("writer").toString(),
+							rece.getJSONObject(i).getString("price").toString()
+									+ "원")); // 이부분이 커스텀 뷰의 텍스트항목에 어떤 값을 보내주는지
+												// 알려준다.
+					urls[i] = imageUrl
+							+ rece.getJSONObject(i).getString("filename")
+									.toString() + "_1.jpg";
 				}
-	
+
 				/*
 				 * 서버로 부터 받아온 데이터를 그리드뷰로 표시해주는 부분 시작
 				 */
 				/* Staggered Grid View */
-	
-				StaggeredGridView gridView = (StaggeredGridView) this.findViewById(R.id.staggeredGridView1);
-				int margin = getResources().getDimensionPixelSize(R.dimen.margin);
+
+				StaggeredGridView gridView = (StaggeredGridView) this
+						.findViewById(R.id.staggeredGridView1);
+				int margin = getResources().getDimensionPixelSize(
+						R.dimen.margin);
 				gridView.setItemMargin(margin);
-	
-				gridView.setPadding(margin, 0, margin, 0); // have the margin on the
+
+				gridView.setPadding(margin, 0, margin, 0); // have the margin on
+															// the
 															// sides as well
-				
+
 				/*
 				 * 검색하면 서버로부터 검색 정보를 JSON으로 불러와 urls에 이미지 경로를 넣어주고 bookInform라는
 				 * Map함수에는 책정보를 입력해준다.
 				 */
-				StaggeredAdapter adapter = new StaggeredAdapter(Buy2.this,	R.id.imageView1, urls, imageItems); // urls 의 크기를 구하여 몇개의 view가 생성되는지 확인
-	
+				StaggeredAdapter adapter = new StaggeredAdapter(Buy2.this,
+						R.id.imageView1, urls, imageItems); // urls 의 크기를 구하여
+															// 몇개의 view가 생성되는지
+															// 확인
+
 				gridView.setAdapter(adapter);
-	
+
 				gridView.setOnItemClickListener(new OnItemClickListener() {
-	
+
 					/*
 					 * 각 View를 클릭해서 상세 정보를 볼수 있도록 다음 activity로 값을 넘겨준다.
 					 * 
 					 * @see com.origamilabs.library.views.StaggeredGridView.
 					 * OnItemClickListener
-					 * #onItemClick(com.origamilabs.library.views.StaggeredGridView,
-					 * android.view.View, int, long)
+					 * #onItemClick(com.origamilabs.library.views
+					 * .StaggeredGridView, android.view.View, int, long)
 					 */
 					@Override
-					public void onItemClick(StaggeredGridView parent, View view,int position, long id) {
+					public void onItemClick(StaggeredGridView parent,
+							View view, int position, long id) {
 						// TODO Auto-generated method stub
-	
+
 						Intent myIntent = new Intent(Buy2.this, Read2.class);
 						try {
-	
-							myIntent.putExtra("R_ID", rece.getJSONObject(position).getString("R_ID").toString());
-							myIntent.putExtra("title", rece.getJSONObject(position).getString("title").toString());
-							myIntent.putExtra("school", rece.getJSONObject(position).getString("school").toString());
-							myIntent.putExtra("phone", rece.getJSONObject(position).getString("phone").toString());
-							myIntent.putExtra("writer", rece.getJSONObject(position).getString("writer").toString());
-							myIntent.putExtra("price", rece.getJSONObject(position).getString("price").toString());
-							myIntent.putExtra("subject",rece.getJSONObject(position).getString("subject").toString());
-							myIntent.putExtra("memo", rece.getJSONObject(position).getString("memo").toString());
-							myIntent.putExtra("relaycount",	rece.getJSONObject(position).getString("relaycount").toString());
-							myIntent.putExtra("publisher",rece.getJSONObject(position).getString("publisher").toString());
-							myIntent.putExtra("filename",rece.getJSONObject(position).getString("filename").toString());
-							myIntent.putExtra("quality",rece.getJSONObject(position).getString("quality").toString());
-							
+
+							myIntent.putExtra(
+									"R_ID",
+									rece.getJSONObject(position)
+											.getString("R_ID").toString());
+							myIntent.putExtra(
+									"title",
+									rece.getJSONObject(position)
+											.getString("title").toString());
+							myIntent.putExtra(
+									"school",
+									rece.getJSONObject(position)
+											.getString("school").toString());
+							myIntent.putExtra(
+									"phone",
+									rece.getJSONObject(position)
+											.getString("phone").toString());
+							myIntent.putExtra(
+									"writer",
+									rece.getJSONObject(position)
+											.getString("writer").toString());
+							myIntent.putExtra(
+									"price",
+									rece.getJSONObject(position)
+											.getString("price").toString());
+							myIntent.putExtra(
+									"subject",
+									rece.getJSONObject(position)
+											.getString("subject").toString());
+							myIntent.putExtra(
+									"memo",
+									rece.getJSONObject(position)
+											.getString("memo").toString());
+							myIntent.putExtra(
+									"relaycount",
+									rece.getJSONObject(position)
+											.getString("relaycount").toString());
+							myIntent.putExtra(
+									"publisher",
+									rece.getJSONObject(position)
+											.getString("publisher").toString());
+							myIntent.putExtra(
+									"filename",
+									rece.getJSONObject(position)
+											.getString("filename").toString());
+							myIntent.putExtra(
+									"quality",
+									rece.getJSONObject(position)
+											.getString("quality").toString());
+
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -239,9 +272,8 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 			e.printStackTrace();
 			client.getConnectionManager().shutdown(); // 연결 지연 종료
 		}
-		
+
 	}
-	
 
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
