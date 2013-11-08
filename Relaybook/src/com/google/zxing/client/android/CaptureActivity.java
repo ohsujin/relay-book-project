@@ -271,55 +271,6 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   }
 
   @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    super.onCreateOptionsMenu(menu);
-    menu.add(0, SHARE_ID, 0, R.string.menu_share)
-        .setIcon(android.R.drawable.ic_menu_share);
-    menu.add(0, HISTORY_ID, 0, R.string.menu_history)
-        .setIcon(android.R.drawable.ic_menu_recent_history);
-    menu.add(0, SETTINGS_ID, 0, R.string.menu_settings)
-        .setIcon(android.R.drawable.ic_menu_preferences);
-    menu.add(0, HELP_ID, 0, R.string.menu_help)
-        .setIcon(android.R.drawable.ic_menu_help);
-    menu.add(0, ABOUT_ID, 0, R.string.menu_about)
-        .setIcon(android.R.drawable.ic_menu_info_details);
-    return true;
-  }
-
-  // Don't display the share menu item if the result overlay is showing.
-  @Override
-  public boolean onPrepareOptionsMenu(Menu menu) {
-    super.onPrepareOptionsMenu(menu);
-    menu.findItem(SHARE_ID).setVisible(lastResult == null);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-     
-      case SETTINGS_ID: {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        intent.setClassName(this, PreferencesActivity.class.getName());
-        startActivity(intent);
-        break;
-      }
-     
-      case ABOUT_ID:
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getString(R.string.title_about) + versionName);
-        builder.setMessage(getString(R.string.msg_about) + "\n\n" + getString(R.string.zxing_url));
-        builder.setIcon(R.drawable.ic_launcher);
-        builder.setPositiveButton(R.string.button_open_browser, aboutListener);
-        builder.setNegativeButton(R.string.button_cancel, null);
-        builder.show();
-        break;
-    }
-    return super.onOptionsItemSelected(item);
-  }
-
-  @Override
 public void surfaceCreated(SurfaceHolder holder) {
     if (!hasSurface) {
       hasSurface = true;
@@ -492,7 +443,7 @@ public void surfaceChanged(SurfaceHolder holder, int format, int width, int heig
     // Since this message will only be shown for a second, just tell the user what kind of
     // barcode was found (e.g. contact info) rather than the full contents, which they won't
     // have time to read.
-    statusView.setText(getString(resultHandler.getDisplayTitle()));
+//    statusView.setText(getString(resultHandler.getDisplayTitle()));
 
     if (copyToClipboard && !resultHandler.areContentsSecure()) {
       ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
@@ -529,31 +480,6 @@ public void surfaceChanged(SurfaceHolder holder, int format, int width, int heig
           resultHandler.getDisplayContents().toString());
       handler.sendMessageDelayed(message, INTENT_RESULT_DURATION);
     }
-  }
-
-  /**
-   * We want the help screen to be shown automatically the first time a new version of the app is
-   * run. The easiest way to do this is to check android:versionCode from the manifest, and compare
-   * it to a value stored as a preference.
-   */
-  private boolean showHelpOnFirstLaunch() {
-    try {
-      PackageInfo info = getPackageManager().getPackageInfo(PACKAGE_NAME, 0);
-      int currentVersion = info.versionCode;
-      // Since we're paying to talk to the PackageManager anyway, it makes sense to cache the app
-      // version name here for display in the about box later.
-      this.versionName = info.versionName;
-      SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-      int lastVersion = prefs.getInt(PreferencesActivity.KEY_HELP_VERSION_SHOWN, 0);
-      if (currentVersion > lastVersion) {
-        prefs.edit().putInt(PreferencesActivity.KEY_HELP_VERSION_SHOWN, currentVersion).commit();
-        
-        return true;
-      }
-    } catch (PackageManager.NameNotFoundException e) {
-      Log.w(TAG, e);
-    }
-    return false;
   }
 
   private void initCamera(SurfaceHolder surfaceHolder) {
