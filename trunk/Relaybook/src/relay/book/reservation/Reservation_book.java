@@ -56,8 +56,7 @@ public class Reservation_book {
 			String R_ID1 = URLEncoder.encode(R_ID, "UTF-8");// 한글인코딩 처리를 위해 한번
 															// 변환해줌
 
-			HttpPost post = new HttpPost(URL_Complete_Sell + "?phone=" + phone1
-					+ "&R_ID=" + R_ID1);
+			HttpPost post = new HttpPost(URL_Complete_Sell + "?phone=" + phone1+ "&R_ID=" + R_ID1);
 
 			/* 지연시간 최대 5초 */
 			HttpParams params = client.getParams();

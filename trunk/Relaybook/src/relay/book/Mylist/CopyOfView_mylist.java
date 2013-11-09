@@ -108,7 +108,7 @@ public class CopyOfView_mylist extends Activity {
 						Update_book_json update = new Update_book_json();
 	
 						if (active == 0) {// 판매 활성화
-							update.Enalbe_sell(filename);
+//							update.Enalbe_sell(filename);
 							Toast.makeText(getApplicationContext(), "판매시작!!",Toast.LENGTH_SHORT).show();
 	
 						} else {// 판매완료하기
