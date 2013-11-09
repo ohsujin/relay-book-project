@@ -34,7 +34,10 @@ public class View_mylist extends Activity {
 	private static final String URL = "http://14.63.212.134:8080/MyRelayServer/Image/";
 
 	String filename = null;
+	/* Mybook 항목에서 필요한 값 */
 	String passwd = null;
+	String Reser_date = null;
+	/* */
 	Button Adjust = null;
 
 	// ViewPaper
@@ -67,12 +70,10 @@ public class View_mylist extends Activity {
 		String subject = in.getStringExtra("subject");
 		String memo = in.getStringExtra("memo");
 		String publisher = in.getStringExtra("publisher");
-		String Reser_date = in.getStringExtra("Reser_date");
+		
 		filename = in.getStringExtra("filename");
 		float quality = Float.parseFloat(in.getStringExtra("quality"));
 		final int active = Integer.parseInt(in.getStringExtra("active"));
-
-		System.out.println("활성화 정도 : " + active);
 
 		int section = Integer.parseInt(in.getStringExtra("section"));
 		/*
@@ -85,7 +86,7 @@ public class View_mylist extends Activity {
 
 		case 1: // 1 = Mybook
 			passwd = in.getStringExtra("passwd");
-
+			Reser_date = in.getStringExtra("Reser_date");
 			setContentView(R.layout.view_mylist);
 			
 			//날짜선택
@@ -157,14 +158,13 @@ public class View_mylist extends Activity {
 
 			final String phone = in.getStringExtra("phone");
 			String school = in.getStringExtra("school");
-			int relaycount = Integer.parseInt(in.getStringExtra("relaycount"));
+//			int relaycount = Integer.parseInt(in.getStringExtra("relaycount"));
 
 			TextView School = (TextView) findViewById(R.id.Seller_school); // 판매자
 																			// 학교
 			School.setText(school);
 
-			TextView Phone = (TextView) findViewById(R.id.Seller_phone); // 판매자
-																			// 전화번호
+			TextView Phone = (TextView) findViewById(R.id.Seller_phone); // 판매자 전화번호
 			Phone.setText(phone);
 
 			// 판매완료 버튼을 누르면 수행되는 부분
