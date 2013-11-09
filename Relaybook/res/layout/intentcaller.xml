@@ -1,163 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_bg"
-    android:orientation="vertical" >
+    android:fillViewport="true" >   
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="230dp"
-        android:orientation="vertical" >
-
+    
+    
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <ImageView
-                android:id="@+id/university_img"
-                android:layout_width="36px"
-                android:layout_height="31px"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/university" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <AutoCompleteTextView
-                    android:id="@+id/University"
-                    android:layout_width="208dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:completionHint="목록에서 클릭하세요."
-                    android:completionThreshold="1"
-                    android:ems="10"
-                    android:hint="대학교명"
-                    android:singleLine="true"
-                    android:width="250dp" >
-
-                    <requestFocus />
-                </AutoCompleteTextView>
-
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="8dp"
-                    android:src="@drawable/line" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp" >
-
-            <ImageView
-                android:id="@+id/phone_img"
-                android:layout_width="39px"
-                android:layout_height="15px"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/phone" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <EditText
-                    android:id="@+id/Phone"
-                    android:layout_width="208dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:editable="false"
-                    android:ems="10"
-                    android:hint="핸드폰 번호"
-                    android:singleLine="true"
-                    android:width="250dp" >
-                </EditText>
-
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="8dp"
-                    android:src="@drawable/line" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp" >
-
-            <ImageView
-                android:id="@+id/pw_img"
-                android:layout_width="36px"
-                android:layout_height="36px"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/pw" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <EditText
-                    android:id="@+id/Password"
-                    android:layout_width="208dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:ems="10"
-                    android:hint="비밀번호"
-                    android:inputType="number"
-                    android:maxLength="4"
-                    android:password="true"
-                    android:singleLine="true"
-                    android:width="250dp" />
-
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="8dp"
-                    android:src="@drawable/line" />
-
-                <EditText
-                    android:id="@+id/RePassword"
-                    android:layout_width="208dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:background="@null"
-                    android:ems="10"
-                    android:hint="비밀번호 재확인"
-                    android:inputType="number"
-                    android:maxLength="4"
-                    android:password="true"
-                    android:singleLine="true"
-                    android:width="250dp" />
-
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="8dp"
-                    android:src="@drawable/line" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/Send"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/btn_bg"
-            android:text="계정 생성"
-            android:textColor="#ffffff"
-            android:width="280dp" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-</LinearLayout>
+            <ImageView
+                    android:id="@+id/login_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="379px"
+                    android:src="@drawable/login_img" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/university_img"
+                    android:layout_width="36px"
+                    android:layout_height="31px"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/university" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/University"
+                        android:layout_width="208dp"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:completionHint="목록에서 클릭하세요."
+                        android:completionThreshold="1"
+                        android:ems="10"
+                        android:hint="대학교명"
+                        android:singleLine="true"
+                        android:width="250dp" >
+
+                        <requestFocus />
+                    </AutoCompleteTextView>
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="8dp"
+                        android:src="@drawable/line" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center" >
+
+                <ImageView
+                    android:id="@+id/phone_img"
+                    android:layout_width="39px"
+                    android:layout_height="15px"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/phone" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <EditText
+                        android:id="@+id/Phone"
+                        android:layout_width="208dp"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:editable="false"
+                        android:ems="10"
+                        android:hint="핸드폰 번호"
+                        android:singleLine="true"
+                        android:width="250dp" >
+                    </EditText>
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="8dp"
+                        android:src="@drawable/line" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center" >
+
+                <ImageView
+                    android:id="@+id/pw_img"
+                    android:layout_width="36px"
+                    android:layout_height="36px"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/pw" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <EditText
+                        android:id="@+id/Password"
+                        android:layout_width="208dp"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:ems="10"
+                        android:hint="비밀번호"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:password="true"
+                        android:singleLine="true"
+                        android:width="250dp" />
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="8dp"
+                        android:src="@drawable/line" />
+
+                    <EditText
+                        android:id="@+id/RePassword"
+                        android:layout_width="208dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@null"
+                        android:ems="10"
+                        android:hint="비밀번호 재확인"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:password="true"
+                        android:singleLine="true"
+                        android:width="250dp" />
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="8dp"
+                        android:src="@drawable/line" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/Send"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginLeft="45dp"
+                android:background="@drawable/btn_bg"
+                android:text="계정 생성"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+</ScrollView>

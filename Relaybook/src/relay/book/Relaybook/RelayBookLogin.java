@@ -16,14 +16,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.telephony.TelephonyManager;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.*;
 
 public class RelayBookLogin extends Activity implements View.OnClickListener {
 
+	ScrollView scrollview;
+	
 	HttpHost http = new HttpHost();
 	private EditText passwordEdit;
 	private EditText RepasswordEdit;
@@ -35,6 +33,8 @@ public class RelayBookLogin extends Activity implements View.OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.intentcaller);
 
+		scrollview = (ScrollView) findViewById(R.id.Scroll);
+		
 		/* 이미지 저장 폴더 생성 */
 		File path = new File(Environment.getExternalStorageDirectory()
 				.getAbsolutePath() + "/Relaybook/");

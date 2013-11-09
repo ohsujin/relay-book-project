@@ -51,9 +51,7 @@ public class Write extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.write);
 	
-		
 		findViewById(R.id.isbn_btn).setOnClickListener(scanAnything);//바코드 activity 호출
-	
 		
 		if(Tab.ISBN_num != null){	//CaptureActivity에서 찍은 바코드 정보를 Tab activity에 static으로 저장하여 ISBN_num 값이 null일때는 책정보를 자동기입하지 말고 null이 아닐때만 네이버에서 받아온 책정보를 자동으로 기입한다.
 			((EditText) findViewById(R.id.Title)).setText(Tab.NOA.getTitle());
