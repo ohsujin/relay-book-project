@@ -49,6 +49,7 @@ public class View_mylist extends Activity {
 	//날짜
 	int mYear, mMonth, mDay;
 	TextView mTxtDate;
+	String Reservation_date = null; //서버로 예약일값을 넘기기위한 변수
 	//
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class View_mylist extends Activity {
 		String subject = in.getStringExtra("subject");
 		String memo = in.getStringExtra("memo");
 		String publisher = in.getStringExtra("publisher");
+		String Reser_date = in.getStringExtra("Reser_date");
 		filename = in.getStringExtra("filename");
 		float quality = Float.parseFloat(in.getStringExtra("quality"));
 		final int active = Integer.parseInt(in.getStringExtra("active"));
@@ -85,6 +87,7 @@ public class View_mylist extends Activity {
 			passwd = in.getStringExtra("passwd");
 
 			setContentView(R.layout.view_mylist);
+			
 			//날짜선택
 			mTxtDate = (TextView)findViewById(R.id.txtdate);
 
@@ -120,9 +123,8 @@ public class View_mylist extends Activity {
 
 					if (active == 0) {// 판매 활성화
 
-						update.Enalbe_sell(filename);
-						Toast.makeText(getApplicationContext(), "판매시작!!",
-								Toast.LENGTH_SHORT).show();
+						update.Enalbe_sell(filename,Reservation_date);
+						Toast.makeText(getApplicationContext(), "예약판매 등록완료!!", Toast.LENGTH_SHORT).show();
 
 					} else {// 판매완료하기
 
@@ -178,8 +180,7 @@ public class View_mylist extends Activity {
 				@Override
 				public void onClick(View v) {
 
-					Reservation_book.Chnage_seller(PhoneNum.getPhoneNum(),
-							filename);
+					Reservation_book.Chnage_seller(PhoneNum.getPhoneNum(),filename);
 
 					/*
 					 * Stack에 쌓여있는 Tab activity를 종료해주어 tab actitvty가 중복생성 되는걸
@@ -194,8 +195,7 @@ public class View_mylist extends Activity {
 					Intent Tab_view = new Intent(View_mylist.this, Tab.class);
 					startActivity(Tab_view);
 
-					Toast.makeText(getApplicationContext(), "RelayBook 등록!!",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "RelayBook 등록!!",Toast.LENGTH_SHORT).show();
 				}
 			});
 
@@ -237,6 +237,9 @@ public class View_mylist extends Activity {
 
 				}
 			});
+			
+			mTxtDate.setText(Reser_date);
+			
 		}
 
 		Rating.setRating(quality);
@@ -439,5 +442,6 @@ public class View_mylist extends Activity {
 	
 	void UpdateNow() {
 		mTxtDate.setText(String.format("%d년 %d월 %d일", mYear, mMonth + 1, mDay));
+		Reservation_date = String.format("%d-%d-%d", mYear, mMonth + 1, mDay);
 	}
 }
