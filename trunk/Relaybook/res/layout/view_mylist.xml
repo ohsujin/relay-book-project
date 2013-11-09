@@ -242,6 +242,41 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="8dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="4dp"
+                android:text="예약판매일 설정"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/txtdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="7dp"
+                android:text="date"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btnchangedate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="mOnClick_date"
+                android:text="판매일 선택" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="8dp"
