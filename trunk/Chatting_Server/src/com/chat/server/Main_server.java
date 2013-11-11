@@ -49,12 +49,11 @@ class ChatThread extends Thread {
 
 		try {
 
-			PrintWriter pw = new PrintWriter(new OutputStreamWriter(	
-			// Socket으로부터 outputStream을 얻어 PrintWriter형 객체 pw를 생성. 
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(sock.getOutputStream()));	
+			// Socket으로부터 outputStream을 얻어 PrintWriter형 객체 pw를 생성. (outputStream : 쓰기)
 			// 클라이언트로의 전송을 위해 필요. 
-					sock.getOutputStream()));
-			br = new BufferedReader(
-					new InputStreamReader(sock.getInputStream()));  
+					
+			br = new BufferedReader(new InputStreamReader(sock.getInputStream()));  
 					// Socket으로부터 InputStream을 얻어 BufferedReader형 객체 br를 생성. 
 					// 클라이언트로부터의 입력을 위해 필요. 
 			id = br.readLine(); //br을 한줄씩읽어 String형 id에 담는다
