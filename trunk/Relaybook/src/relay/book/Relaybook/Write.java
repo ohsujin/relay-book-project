@@ -134,6 +134,7 @@ public class Write extends Activity {
 	private final Button.OnClickListener scanAnything = new Button.OnClickListener() {
 	    @Override
 	    public void onClick(View v) {
+	    	finish();
 	      Intent i = new Intent(Write.this, com.google.zxing.client.android.CaptureActivity.class );
 	      startActivity(i);
 	    }
