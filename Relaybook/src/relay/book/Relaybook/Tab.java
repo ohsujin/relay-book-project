@@ -18,6 +18,7 @@ public class Tab extends TabActivity {
 	 
 	public static Activity TabActivity;
 	public static String ISBN_num=null; 
+	public static String barcode_back=null; 
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -51,11 +52,14 @@ public class Tab extends TabActivity {
 		NOA.Search_book(ISBN_num);
 		/* ++++++++++++++++++ */
 		
+		Intent intent2 = getIntent();   // 값을 받기 위한 Intent 생성
+		barcode_back = intent2.getStringExtra("bar_back");
+		
 		/* 최초 실행시 삽니다 화면을 보여주고 이후에 탭뷰가 다시 실행 될때는 장바구니 항목을 실행한다. */
 		if (First) {
 			tabHost.setCurrentTab(0);
 			First = false;
-		}else if(ISBN_num != null){
+		}else if((ISBN_num != null) || (barcode_back != null)){
 			tabHost.setCurrentTab(1);
 		}else {
 			tabHost.setCurrentTab(2);
