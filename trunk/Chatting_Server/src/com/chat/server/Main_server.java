@@ -1,14 +1,8 @@
 package com.chat.server;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
 public class Main_server {
 	private final static int SERVER_PORT = 10001;
@@ -41,20 +35,29 @@ class ChatThread extends Thread {
 	private String id;
 	private BufferedReader br;
 	private boolean initFlag = false;
-
+    /*
+	OutputStream is= null;
+	OutputStreamWriter osw=null;
+	BufferedWriter pw =null;
+	*/
 	public ChatThread(Socket sock, HashMap hm) { // 소켓과 해시맵을 받는 생성자
 		//필드에 저장
 		this.sock = sock; 
 		this.hm = hm;
 
+		
 		try {
-
+			/*
+			is = sock.getOutputStream();
+			 osw = new OutputStreamWriter(is);
+			 pw = new BufferedWriter(osw);
+			*/
 			PrintWriter pw = new PrintWriter(new OutputStreamWriter(sock.getOutputStream()));	
 			// Socket으로부터 outputStream을 얻어 PrintWriter형 객체 pw를 생성. (outputStream : 쓰기)
 			// 클라이언트로의 전송을 위해 필요. 
 					
 			br = new BufferedReader(new InputStreamReader(sock.getInputStream()));  
-					// Socket으로부터 InputStream을 얻어 BufferedReader형 객체 br를 생성. 
+					// Socket으로부터 InputStream을 얻어 BufferedReader형 객체 br를 생성. (InputStream : 읽기)
 					// 클라이언트로부터의 입력을 위해 필요. 
 			id = br.readLine(); //br을 한줄씩읽어 String형 id에 담는다
 			broadcast(id + " is connected"); //접속된 전체 Client에게 id를 보낸다.
