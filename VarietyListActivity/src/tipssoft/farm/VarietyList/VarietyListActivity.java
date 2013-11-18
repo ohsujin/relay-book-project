@@ -88,7 +88,6 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	   try {
 	    socket = new Socket("192.168.0.9", 10002);
 	    toServer = new PrintStream(socket.getOutputStream(),true,"UTF-8");
-	    
 	    fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));
 	    
 	    String chat_msg = null;
@@ -122,6 +121,7 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 					m_time_format.format(new Date()));
 		   m_adapter.add(data);
 			ed_msg.setText("");
+			m_list.smoothScrollToPosition(m_adapter.getCount() - 1);
 		  }
 	}; 
 
