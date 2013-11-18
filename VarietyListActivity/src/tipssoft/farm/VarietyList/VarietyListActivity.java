@@ -58,9 +58,7 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 		/**/
 
 		// 버튼에 리스너를 등록한다.
-		Button btn = (Button) findViewById(R.id.recv);
-		btn.setOnClickListener(this);
-		btn = (Button) findViewById(R.id.send);
+		Button btn = (Button) findViewById(R.id.send);
 		btn.setOnClickListener(this);
 		// btn = (Button) findViewById(R.id.btn3);
 		// btn.setOnClickListener(this);
@@ -86,7 +84,7 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	  
 	  public void run() { // 서버 메시지 수신 (무한반복)
 	   try {
-	    socket = new Socket("192.168.0.9", 10002);
+	    socket = new Socket("192.168.0.11", 10001);
 	    toServer = new PrintStream(socket.getOutputStream(),true,"UTF-8");
 	    fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));
 	    
