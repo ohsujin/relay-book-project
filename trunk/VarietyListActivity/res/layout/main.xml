@@ -18,14 +18,14 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/btn1"
+            android:id="@+id/recv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:text="받는 메시지" />
 
         <Button
-            android:id="@+id/btn2"
+            android:id="@+id/send"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
