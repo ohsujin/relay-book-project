@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package relay.book.GCM;
+package relay.book.intentdemob2;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -26,12 +26,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import relay.book.Option.PhoneNum;
+
 import android.content.Context;
 import android.util.Log;
 
 import com.google.android.gcm.GCMRegistrar;
-import static relay.book.GCM.CommonUtilities.SERVER_URL;
-import static relay.book.GCM.CommonUtilities.TAG;
+import static relay.book.intentdemob2.CommonUtilities.SERVER_URL;
+import static relay.book.intentdemob2.CommonUtilities.TAG;
 
 /**
  * Helper class used to communicate with the demo server.
@@ -47,11 +49,12 @@ public final class ServerUtilities {
      *
      * @return whether the registration succeeded or not.
      */
-    static boolean register(final Context context, final String regId) {
+    public static boolean register(final Context context, final String regId) {
         Log.i(TAG, "registering device (regId = " + regId + ")");
         String serverUrl = SERVER_URL + "/register";
         Map<String, String> params = new HashMap<String, String>();
         params.put("regId", regId);
+        params.put("phone",  PhoneNum.getPhoneNum());
         long backoff = BACKOFF_MILLI_SECONDS + random.nextInt(1000);
         // Once GCM returns a registration id, we need to register it in the
         // demo server. As the server might be down, we will retry it a couple
@@ -59,11 +62,9 @@ public final class ServerUtilities {
         for (int i = 1; i <= MAX_ATTEMPTS; i++) {
             Log.d(TAG, "Attempt #" + i + " to register");
             try {
-               
                 post(serverUrl, params);
                 GCMRegistrar.setRegisteredOnServer(context, true);
-          
-                
+                System.out.println("전화번호 전송?"+params.get("phone"));
                 return true;
             } catch (IOException e) {
                 // Here we are simplifying and retrying on any error; in a real
@@ -100,6 +101,7 @@ public final class ServerUtilities {
         params.put("regId", regId);
         try {
             post(serverUrl, params);
+            
             GCMRegistrar.setRegisteredOnServer(context, false);
        
         } catch (IOException e) {

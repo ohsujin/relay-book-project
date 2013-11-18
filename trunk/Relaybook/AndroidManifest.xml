@@ -1,27 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
     package="relay.book.intentdemob2"
     android:versionCode="18"
-    android:versionName="0.52" >
+    android:versionName="0.61" >
 
-
-  <uses-sdk
+    <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="8" />
-  
-	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="android.permission.SEND_SMS"/>
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- GCM 관련 퍼미션 -->
+    <permission
+        android:name="relay.book.intentdemob2.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="relay.book.intentdemob2.permission.C2D_MESSAGE" />
+    <!-- GCM 받기 -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <!-- GCM을 받으려면 구글 계정 필요 -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- 메시지 받을 때 wake up 하기 위해 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+	<uses-permission android:name="android.permission.VIBRATE"/>
 	
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="RelayBook"
         android:theme="@android:style/Theme.NoTitleBar" >
+
+        <!-- GCM 리시버 -->
+        <receiver
+            android:name="com.google.android.gcm.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="relay.book.intentdemob2" /> <!-- 젤리빈 부터는 category 빼도 된다 -->
+            </intent-filter>
+        </receiver>
+
+        <!-- GCM 리시버에서 돌리는 서비스 -->
+        <service android:name="relay.book.intentdemob2.GCMIntentService" /> <!-- 서비스명 변경하면 안됨 -->
+
         <activity
             android:name="relay.book.Relaybook.MainActivity"
             android:label="RelayBook" >
@@ -31,40 +60,68 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity 
-			android:name="relay.book.Relaybook.SplashActivity" 
-           	android:screenOrientation="portrait" 
-			android:configChanges="orientation|keyboardHidden"
-			android:theme="@android:style/Theme.NoTitleBar" >
-		</activity>
-        
-        
-        <activity android:name="relay.book.Relaybook.RelayBookLogin" android:label="RelayBook"></activity>
-        <activity android:name="relay.book.Relaybook.Write" android:label="Write"></activity>
-        <activity android:name="relay.book.Relaybook.Read" android:label="Read"></activity>
-        <activity android:name="relay.book.Relaybook.Buy" android:label="Buy"></activity>
-        <activity android:name="relay.book.Relaybook.Buy2" android:label="Buy2"></activity>
-        <activity android:name="relay.book.Relaybook.Tab" android:label="RelayBook" ></activity>
-        <activity android:name="relay.book.Mylist.my_book_list" android:label="my_book_list" ></activity>
-        <activity android:name="relay.book.Mylist.View_mylist" android:label="View_mylist"></activity>
-        <activity android:name="relay.book.Relaybook.Read2" android:label="Read2"></activity>
-        <activity android:name="relay.book.Option.Option" android:label="Option"></activity>
+        <activity
+            android:name="relay.book.Relaybook.SplashActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="relay.book.Relaybook.RelayBookLogin"
+            android:label="RelayBook" >
+        </activity>
+        <activity
+            android:name="relay.book.Relaybook.Write"
+            android:label="Write" >
+        </activity>
+        <activity
+            android:name="relay.book.Relaybook.Read"
+            android:label="Read" >
+        </activity>
+        <activity
+            android:name="relay.book.Relaybook.Buy"
+            android:label="Buy" >
+        </activity>
+        <activity
+            android:name="relay.book.Relaybook.Buy2"
+            android:label="Buy2" >
+        </activity>
+        <activity
+            android:name="relay.book.Relaybook.Tab"
+            android:label="RelayBook" >
+        </activity>
+        <activity
+            android:name="relay.book.Mylist.my_book_list"
+            android:label="my_book_list" >
+        </activity>
+        <activity
+            android:name="relay.book.Mylist.View_mylist"
+            android:label="View_mylist" >
+        </activity>
+        <activity
+            android:name="relay.book.Relaybook.Read2"
+            android:label="Read2" >
+        </activity>
+        <activity
+            android:name="relay.book.Option.Option"
+            android:label="Option" >
+        </activity>
+        <activity
+            android:name="com.google.zxing.client.android.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.zxing.client.android.SCAN" />
 
-         <activity android:name="com.google.zxing.client.android.CaptureActivity"
-			   android:screenOrientation="landscape"
-			   android:configChanges="orientation|keyboardHidden"
-			   android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-			   android:windowSoftInputMode="stateAlwaysHidden">
-			   <intent-filter>
-			      <category android:name="android.intent.category.DEFAULT"/>
-			   </intent-filter>
-			   <intent-filter>
-			      <action android:name="com.google.zxing.client.android.SCAN"/>
-			      <category android:name="android.intent.category.DEFAULT"/>
-			    </intent-filter>
-			</activity>
-			
-			<activity
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name="com.google.zxing.client.android.encode.EncodeActivity"
             android:label="@string/share_name" >
             <intent-filter>
@@ -135,6 +192,11 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="relay.book.intentdemob2.NotificationActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+             >
         </activity>
     </application>
 

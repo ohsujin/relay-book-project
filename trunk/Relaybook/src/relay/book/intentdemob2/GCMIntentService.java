@@ -13,20 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package relay.book.GCM;
+package relay.book.intentdemob2;
 
-import com.google.android.gcm.GCMBaseIntentService;
-import com.google.android.gcm.GCMRegistrar;
+import static relay.book.intentdemob2.CommonUtilities.SENDER_ID;
 
-import relay.book.intentdemob2.R;
+import java.util.List;
+
+import relay.book.Relaybook.MainActivity;
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningTaskInfo;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import static relay.book.GCM.CommonUtilities.SENDER_ID;
+import com.google.android.gcm.GCMBaseIntentService;
+import com.google.android.gcm.GCMRegistrar;
 
 /**
  * IntentService responsible for handling GCM messages.
@@ -73,7 +79,7 @@ public class GCMIntentService extends GCMBaseIntentService {
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notification = new Notification(icon, message, when);
         String title = context.getString(R.string.app_name);
-        Intent notificationIntent = new Intent(context, DemoActivity.class);
+        Intent notificationIntent = new Intent(context, MainActivity.class);
         // set intent so it does not start a new activity
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                 Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -87,12 +93,53 @@ public class GCMIntentService extends GCMBaseIntentService {
 	@Override
 	protected void onError(Context arg0, String arg1) {
 		// TODO Auto-generated method stub
+	
 		
 	}
-
+	//서버로 부터 메시지가 오면 실행 되는 부분
 	@Override
-	protected void onMessage(Context arg0, Intent arg1) {
+	protected void onMessage(Context context, Intent intent) {
 		// TODO Auto-generated method stub
+//		Log.i(TAG, "Received message");
+//        String message = getString(R.string.gcm_message);
+//        displayMessage(context, message);
+//        // notifies user
+//        generateNotification(context, message);
+		
+		NotificationManager notificationManager = (NotificationManager)context.getSystemService(Activity.NOTIFICATION_SERVICE);
+		Notification notification = new Notification();
+		notification.vibrate = new long[] { 500, 100, 500, 100 };
+		
+				
+		String c2dm_msg = intent.getStringExtra("Reservation");;
+		
+		if (intent.getAction().equals("com.google.android.c2dm.intent.RECEIVE")){ 
+			   c2dm_msg = intent.getExtras().getString("msg");
+			   System.out.println("받은 메시지 : "+c2dm_msg);
+			 }
+			  ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+			  List<RunningTaskInfo> runList = am.getRunningTasks(10);
+			  ComponentName name = runList.get(0).topActivity;
+			  String className = name.getClassName();
+			  boolean isAppRunning = false;
+
+			  if(className.contains("relay.book.intentdemob2")) {
+				  isAppRunning = true;
+			  }
+			  
+			  if(isAppRunning == true) {//앱이 실행 중일 경우 
+				  Intent run_intent = new Intent();
+				  run_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				  run_intent.setComponent(new ComponentName("relay.book.intentdemob2", "relay.book.Relaybook.MainActivity"));
+				  generateNotification(context, c2dm_msg);
+//			      startActivity(run_intent);
+			  } else {//앱이 실행 중이 아닐 경우
+				   Intent start_intent = new Intent();
+				   start_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				   start_intent.setComponent(new ComponentName("relay.book.intentdemob2", "relay.book.Relaybook.MainActivity"));
+				   generateNotification(context,c2dm_msg);
+//				   startActivity(start_intent);
+			  } 
 		
 	}
 
