@@ -43,18 +43,15 @@ public class RelayBookLogin extends Activity implements View.OnClickListener {
 		}
 
 		EditText editText = (EditText) findViewById(R.id.Phone);
-		editText.setText(getMy10DigitPhoneNumber());
+		editText.setText(PhoneNum.getPhoneNum());
 
-		PhoneNum.setPhoneNum(getMy10DigitPhoneNumber()); // PhoneNum class에 핸드폰
-															// 번호 저장하여 다른
-															// class에서 전화번호를
-															// 불러올수 있게 해준다.
+		
 
 		int i = 1;
 		while (i < 4) {
 
 			/* 서버를 통해 가입유무 확인 */
-			String regi_Chk = http.ChkRegister(getMy10DigitPhoneNumber()).trim();
+			String regi_Chk = http.ChkRegister(PhoneNum.getPhoneNum()).trim();
 
 			if (regi_Chk.equalsIgnoreCase("join")) { // 서버에서 join을 반환하면 가입된것이므로
 														// 로그인 화면을 건너 뛰게 해준다.
@@ -99,20 +96,7 @@ public class RelayBookLogin extends Activity implements View.OnClickListener {
 		button.setOnClickListener(this);
 	}
 
-	/* 전화번호 불러오기 */
-	public String getMyPhoneNumber() {
-		TelephonyManager mTelephonyMgr;
-		mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
-		return mTelephonyMgr.getLine1Number();
-	}
-
-	public String getMy10DigitPhoneNumber() {
-		String s = getMyPhoneNumber();
-		// return s.substring(0);
-		return s.replace("-", "").replace("+82", "0");
-
-	}
 
 	@Override
 	public void onClick(View v) {
