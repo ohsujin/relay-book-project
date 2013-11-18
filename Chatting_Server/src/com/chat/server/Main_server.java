@@ -84,7 +84,7 @@ class ChatThread extends Thread {
 				if (line.indexOf("/to") == 0) //라인값을 인자로 갖는 귓속말 메소드 호출
 					sendmsg(line);
 				else
-					broadcast(id + ":" + line); //전체 접속자에게 id와 line를 보낸다(전체 메세지 전송 메소드)
+					broadcast(line); //전체 접속자에게 id와 line를 보낸다(전체 메세지 전송 메소드)
 
 			}
 		} catch (Exception ex) {
