@@ -32,6 +32,8 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	private PrintStream toServer; // 메시지 송신
 	private BufferedReader fromServer; // 메시지 수신
 
+	
+	ExamData data = null;
 	/**/
 
 	/** Called when the activity is first created. */
@@ -39,6 +41,16 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		/* 서버 접속*/
+		 try {
+			   // 소켓 수신 스레드 시작
+			   MyChatThread th = new MyChatThread();
+			   th.start();
+			  } catch (Exception e) {
+			   e.printStackTrace();
+			  }    
+		/* */
 
 		/**/
 		ed_msg = (EditText) findViewById(R.id.ed_msg);
@@ -46,9 +58,9 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 		/**/
 
 		// 버튼에 리스너를 등록한다.
-		Button btn = (Button) findViewById(R.id.btn1);
+		Button btn = (Button) findViewById(R.id.recv);
 		btn.setOnClickListener(this);
-		btn = (Button) findViewById(R.id.btn2);
+		btn = (Button) findViewById(R.id.send);
 		btn.setOnClickListener(this);
 		// btn = (Button) findViewById(R.id.btn3);
 		// btn.setOnClickListener(this);
@@ -66,18 +78,60 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 		m_date_format = new SimpleDateFormat("yyyy/MM/dd", Locale.KOREA);
 		m_time_format = new SimpleDateFormat("HH:mm:ss", Locale.KOREA);
 	}
+	
+	// 채팅 메시지 수신 스레드 클래스 선언
+	 class MyChatThread extends Thread {
+	  public MyChatThread() {
+	  }
+	  
+	  public void run() { // 서버 메시지 수신 (무한반복)
+	   try {
+	    socket = new Socket("192.168.0.9", 10002);
+	    toServer = new PrintStream(socket.getOutputStream(),true,"UTF-8");
+	    
+	    fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));
+	    
+	    String chat_msg = null;
+	    String all_msg = "";
+	    while ((chat_msg = fromServer.readLine()) != null) {
+	     all_msg += chat_msg + "\n";
+	     //txt_chat.setText(all_msg);
+	                    String chat = chat_msg;
+	                    Message msg = handler.obtainMessage(1, chat);
+	                    handler.sendMessage(msg);
+	                    
+	                    // **++++++++**++++++++**++++++++**++++++++**++++++++**++++++++
+	                    
+	                   
+	                    
+	    }      
+	   } catch (Exception e) {
+	    e.printStackTrace();
+	   }
+	  }
+	 }
+	 
+	 Handler handler = new Handler() {
+		  
+		  public void handleMessage(Message msg) {
+		   super.handleMessage(msg);
+//		   txt_chat.setText((CharSequence)msg.obj);
+		   ed_msg.setText("");
+		   
+		   data = new ExamData((byte) 0, (String)msg.obj,
+					m_time_format.format(new Date()));
+		   m_adapter.add(data);
+			ed_msg.setText("");
+		  }
+	}; 
 
 	// 버튼이 눌렸을 때 호출되는 이벤트 핸들러
 	public void onClick(View view) {
 		ExamData data = null;
+
 		switch (view.getId()) {
-		case R.id.btn1:
-			// 첫번째 버튼이 눌리면 상대방이 이야기하는 듯한 데이터를 구성한다.
-			data = new ExamData((byte) 0, ed_msg.getText().toString(),
-					m_time_format.format(new Date()));
-			ed_msg.setText("");
-			break;
-		case R.id.btn2:
+		
+		case R.id.send:
 			// 소켓으로 메시지 전송
 			if (toServer != null) {
 				toServer.println(ed_msg.getText().toString());
@@ -92,10 +146,7 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 			
 
 			break;
-		// case R.id.btn3 :
-		// 날짜가 출력되는 데이터를 구성한다.
-		// data = new ExamData((byte)2, m_date_format.format(new Date()), null);
-		// break;
+	
 		}
 		// 어댑터에 데이터를 추가한다.
 		m_adapter.add(data);
