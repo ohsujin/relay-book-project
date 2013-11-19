@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="relay.book.intentdemob2"
-    android:versionCode="18"
-    android:versionName="0.61" >
+    android:versionCode="19"
+    android:versionName="0.62" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -43,7 +43,6 @@
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-
                 <category android:name="relay.book.intentdemob2" /> <!-- 젤리빈 부터는 category 빼도 된다 -->
             </intent-filter>
         </receiver>
@@ -55,11 +54,19 @@
             android:name="relay.book.Relaybook.MainActivity"
             android:label="RelayBook" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                	<action android:name="android.intent.action.MAIN" />
+                	<category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            
+              <!-- custom scheme(execute url) -->
+            <intent-filter>
+                <data  android:scheme="RB" android:host="RelayBook"/>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+       
         <activity
             android:name="relay.book.Relaybook.SplashActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -117,7 +124,6 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="com.google.zxing.client.android.SCAN" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -126,23 +132,18 @@
             android:label="@string/share_name" >
             <intent-filter>
                 <action android:name="com.google.zxing.client.android.ENCODE" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <!-- This allows us to handle the Share button in Contacts. -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="text/x-vcard" />
             </intent-filter>
             <!-- This allows us to handle sharing any plain text . -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
@@ -152,8 +153,7 @@
             android:label="@string/sbc_name"
             android:screenOrientation="landscape" >
             <intent-filter>
-                <action android:name="com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" />
-
+                <action android:name="com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" />s
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -170,7 +170,6 @@
             android:theme="@android:style/Theme.Light" >
             <intent-filter>
                 <action android:name="com.google.zxing.client.android.SHARE" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -179,7 +178,6 @@
             android:label="@string/bookmark_picker_name" >
             <intent-filter>
                 <action android:name="android.intent.action.PICK" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -189,7 +187,6 @@
             android:label="@string/app_picker_name" >
             <intent-filter>
                 <action android:name="android.intent.action.PICK" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

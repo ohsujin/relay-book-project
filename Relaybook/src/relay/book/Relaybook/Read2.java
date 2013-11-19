@@ -1,14 +1,20 @@
 package relay.book.Relaybook;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Map;
 
 import relay.book.Option.PhoneNum;
 import relay.book.image.ImageDownloader;
+import relay.book.intentdemob2.KakaoLink;
 import relay.book.intentdemob2.R;
 import relay.book.reservation.Reservation_book;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -26,12 +32,16 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+@SuppressLint("ShowToast")
 public class Read2 extends Activity {
 
 	String imageUrl = "http://14.63.212.134:8080/MyRelayServer/Image/";
 	Bitmap bmImg;
 	URL myFileUrl = null;
 
+	private String encoding = "UTF-8";
+	String title = null;
+	
 	private static final String URL = "http://14.63.212.134:8080/MyRelayServer/Image/";
 	static String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/Send.jsp";
 
@@ -58,7 +68,7 @@ public class Read2 extends Activity {
 
 		// Get JSON values from previous intent
 		final String R_ID = in.getStringExtra("R_ID");
-		final String title = in.getStringExtra("title");
+		title = in.getStringExtra("title");
 		final String phone = in.getStringExtra("phone");
 		String school = in.getStringExtra("school");
 		String writer = in.getStringExtra("writer");
@@ -166,18 +176,66 @@ public class Read2 extends Activity {
 			public void onPageScrollStateChanged(int arg0) {
 			}
 		});
-
 	}
+		
+		/*
+		 * 카톡 공유를 위한 리스너 등록
+		 */
+		public void Share_KaKao(View v) throws NameNotFoundException {
+			ArrayList<Map<String, String>> metaInfoArray = new ArrayList<Map<String, String>>();
+
+			// If application is support Android platform.
+			Map<String, String> metaInfoAndroid = new Hashtable<String, String>(1);
+			metaInfoAndroid.put("os", "android");
+			metaInfoAndroid.put("devicetype", "phone");
+			metaInfoAndroid.put("installurl", "market://details?id=relay.book.intentdemob2");
+			metaInfoAndroid.put("executeurl", "RB://RelayBook");
+			
+			
+			// add to array
+			metaInfoArray.add(metaInfoAndroid);
+		
+			
+			// Recommended: Use application context for parameter. 
+			KakaoLink kakaoLink = KakaoLink.getLink(getApplicationContext());
+			
+			// check, intent is available.
+			if(!kakaoLink.isAvailableIntent()) {		
+				Toast.makeText(getApplicationContext(), "카톡을 설치해주세요.",Toast.LENGTH_LONG);
+				return;
+			}
+			
+			/**
+			 * @param activity
+			 * @param url
+			 * @param message
+			 * @param appId
+			 * @param appVer
+			 * @param appName
+			 * @param encoding
+			 * @param metaInfoArray
+			 */
+			kakaoLink.openKakaoAppLink(
+					this, 
+					"http://link.kakao.com/?test-android-app", 
+					title+" 책이 RelayBook에 등록되어 있습니다~!! 어플을 설치하고 확인해 보세요.",  
+					"relay.book.intentdemob2", 
+					getPackageManager().getPackageInfo("relay.book.intentdemob2", 0).versionName,
+					"Relaybook",
+					encoding, 
+					metaInfoArray);
+		}
+
+
+
 
 	// ViewPaper
 	private class PagerAdapterClass extends PagerAdapter {
 
 		private Context context;
-		private LayoutInflater mInflater;
-
 		public PagerAdapterClass(Context c) {
 			context = c;
-			mInflater = LayoutInflater.from(c);
+			LayoutInflater.from(c);
 		}
 
 		@Override
