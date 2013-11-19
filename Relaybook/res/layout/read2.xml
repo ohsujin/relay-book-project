@@ -261,7 +261,8 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="75px"
+                android:layout_marginRight="10dp" >
 
                 <ImageView
                     android:id="@+id/ImageView05"
@@ -284,9 +285,11 @@
                     android:textSize="18sp" />
 
                 <Button
+                    android:layout_marginTop="5px"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:text="카톡으로 공유하기" 
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:background="@drawable/kakao_btn"
                     android:onClick="Share_KaKao"/>
 
             </LinearLayout>
