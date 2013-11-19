@@ -191,7 +191,6 @@ public class Read2 extends Activity {
 			metaInfoAndroid.put("installurl", "market://details?id=relay.book.intentdemob2");
 			metaInfoAndroid.put("executeurl", "RB://RelayBook");
 			
-			
 			// add to array
 			metaInfoArray.add(metaInfoAndroid);
 		
