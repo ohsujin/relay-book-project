@@ -193,7 +193,6 @@ public class Read2 extends Activity {
 			
 			// add to array
 			metaInfoArray.add(metaInfoAndroid);
-		
 			
 			// Recommended: Use application context for parameter. 
 			KakaoLink kakaoLink = KakaoLink.getLink(getApplicationContext());

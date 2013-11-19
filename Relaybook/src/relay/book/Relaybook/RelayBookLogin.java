@@ -133,6 +133,7 @@ public class RelayBookLogin extends Activity implements View.OnClickListener {
 				regi.put("phone", phoneEdit.getText().toString());
 				regi.put("school", universityEdit.getText().toString());
 				regi.put("passwd", passwordEdit.getText().toString());
+				
 
 				listData.put("Register", regi);
 
