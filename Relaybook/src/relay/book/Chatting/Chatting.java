@@ -5,6 +5,7 @@ import java.net.*;
 import java.text.*;
 import java.util.*;
 
+import relay.book.Option.PhoneNum;
 import relay.book.intentdemob2.*;
 import android.app.*;
 import android.content.*;
@@ -35,6 +36,7 @@ public class Chatting extends Activity implements OnClickListener {
 	
 //	
 	ExamData data = null;
+	String Seller_phone = null;
 	/**/
 
 	/** Called when the activity is first created. */
@@ -43,8 +45,11 @@ public class Chatting extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.chatting_main);
 		
-		/* 서버 접속*/
+		// getting intent data
+		Intent in = getIntent();
+		Seller_phone = in.getStringExtra("phone");
 		
+		/* 서버 접속*/
 		 try {
 			   // 소켓 수신 스레드 시작
 			   MyChatThread th = new MyChatThread();
@@ -89,7 +94,7 @@ public class Chatting extends Activity implements OnClickListener {
 	  public void run() { // 서버 메시지 수신 (무한반복)
 	   try {
 
-	    socket = new Socket("192.168.0.73", 10001);
+	    socket = new Socket("121.156.235.145", 10001);
 
 	    toServer = new PrintStream(socket.getOutputStream(),true,"UTF-8");
 	    fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));
@@ -98,7 +103,7 @@ public class Chatting extends Activity implements OnClickListener {
 	    /*
 	     * 사용자 ID 지정하기
 	     */
-	    toServer.println("수진"); //사용자 ID 입력 -> 전화번호로 대체하기
+	    toServer.println(PhoneNum.getPhoneNum()); //사용자 ID 입력 -> 전화번호로 대체하기
 		toServer.flush();
 		/* */
 		
@@ -133,6 +138,10 @@ public class Chatting extends Activity implements OnClickListener {
 		  }
 	}; 
 
+	/*
+	 * 서버로 메시지 보내기
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
 	// 버튼이 눌렸을 때 호출되는 이벤트 핸들러
 	public void onClick(View view) {
 		ExamData data = null;
@@ -142,7 +151,9 @@ public class Chatting extends Activity implements OnClickListener {
 		case R.id.send:
 			// 소켓으로 메시지 전송
 			if (toServer != null) {
-				toServer.println(ed_msg.getText().toString());
+				
+				
+				toServer.println("/to "+ Seller_phone + ed_msg.getText().toString()); // "/to [상대방 id] 를 써주어 1:1 채팅이 되게 한다.
 				toServer.flush();
 			}
 			

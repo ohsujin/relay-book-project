@@ -136,7 +136,13 @@ public class Read2 extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(Read2.this, relay.book.Chatting.Chatting.class);
-				startActivity(intent);
+				try{
+					intent.putExtra("phone", phone);
+				}catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+				Read2.this.startActivity(intent);
 				
 			}
 		});
