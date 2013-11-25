@@ -1,16 +1,10 @@
 package relay.book.Relaybook;
 
-
-import com.google.android.gcm.GCMRegistrar;
-
 import relay.book.Option.PhoneNum;
 import relay.book.intentdemob2.R;
-import relay.book.intentdemob2.ServerUtilities;
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.telephony.TelephonyManager;
@@ -25,10 +19,7 @@ public class MainActivity extends Activity {
 		
 		PhoneNum.setPhoneNum(getMy10DigitPhoneNumber()); 
 		
-		
-		
 		startActivity(new Intent(this, SplashActivity.class));
-		
 		setContentView(R.layout.activity_main);
 		
 		finish(); 

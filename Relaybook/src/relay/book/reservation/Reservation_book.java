@@ -38,6 +38,7 @@ public class Reservation_book {
 
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 
 		}
 	}
@@ -79,7 +80,7 @@ public class Reservation_book {
 			System.out.println(result);
 		} catch (Exception e) {
 			// TODO: handle exception
-
+			e.printStackTrace();
 		}
 	}
 
