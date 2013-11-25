@@ -98,7 +98,7 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	    /*
 	     * 사용자 ID 지정하기
 	     */
-	    toServer.println("수진"); //사용자 ID 입력 -> 전화번호로 대체하기
+	    toServer.println("bea"); //사용자 ID 입력 -> 전화번호로 대체하기
 		toServer.flush();
 		/* */
 		
@@ -133,8 +133,12 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 		  }
 	}; 
 
+	/*
+	 * 서버로 메시지 보내기
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
 	// 버튼이 눌렸을 때 호출되는 이벤트 핸들러
-	public void onClick(View view) {
+	public void onClick(View view) { 
 		ExamData data = null;
 
 		switch (view.getId()) {
@@ -142,7 +146,7 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 		case R.id.send:
 			// 소켓으로 메시지 전송
 			if (toServer != null) {
-				toServer.println(ed_msg.getText().toString());
+				toServer.println("/to 수진 "+ed_msg.getText().toString()); // "/to [상대방 id] 를 써주어 1:1 채팅이 되게 한다.
 				toServer.flush();
 			}
 			
