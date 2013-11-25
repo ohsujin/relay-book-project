@@ -195,6 +195,14 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
              >
         </activity>
+        <activity
+            android:name="relay.book.Chatting.Chatting"
+            android:label="Chatting" >
+        </activity>
+        <activity
+            android:name="relay.book.Chatting.ExamData"
+            android:label="ExamData" >
+        </activity>
     </application>
 
 </manifest>

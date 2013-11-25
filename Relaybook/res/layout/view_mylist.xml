@@ -245,9 +245,9 @@
             android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="8dp" >
+            android:layout_marginTop="8dp"
+            android:visibility="gone" >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -261,8 +261,8 @@
                 android:id="@+id/txtdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:layout_marginRight="7dp"
+                android:layout_marginTop="4dp"
                 android:text="date"
                 android:textColor="#000000"
                 android:textSize="20sp" />
@@ -273,7 +273,6 @@
                 android:layout_height="wrap_content"
                 android:onClick="mOnClick_date"
                 android:text="판매일 선택" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -285,8 +284,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#86d100"
-                android:orientation="horizontal" >
+               android:orientation="horizontal" >
 
                 <TextView
                     android:layout_width="60dp"
@@ -319,13 +317,27 @@
             android:layout_marginTop="7dp"
             android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/adjust"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_bg"
-                android:text="수정하기"
-                android:textColor="#ffffff" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/adjust"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_bg"
+                    android:text="수정하기"
+                    android:textColor="#ffffff" />
+
+                <Button
+                    android:id="@+id/Chatting_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5px"
+                    android:background="@drawable/chat_btn"
+                    android:gravity="right" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/sell_complete"

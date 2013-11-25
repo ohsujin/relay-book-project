@@ -89,6 +89,19 @@ public class View_mylist extends Activity {
 			Reser_date = in.getStringExtra("Reser_date");
 			setContentView(R.layout.view_mylist);
 			
+			/*채팅버튼*/
+			Button Chat_btn = (Button) findViewById(R.id.Chatting_btn);
+
+			Chat_btn.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(View_mylist.this, relay.book.Chatting.Chatting.class);
+					startActivity(intent);
+					
+				}
+			});
+			/*채팅버튼*/
+			
 			//날짜선택
 			mTxtDate = (TextView)findViewById(R.id.txtdate);
 
