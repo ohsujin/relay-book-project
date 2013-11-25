@@ -129,6 +129,20 @@ public class Read2 extends Activity {
 		//현재 이미지뷰의 위치를 표시해주기 위한 변수
 		
 		
+		/*채팅버튼*/
+		Button Chat_btn = (Button) findViewById(R.id.Chatting_btn);
+
+		Chat_btn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(Read2.this, relay.book.Chatting.Chatting.class);
+				startActivity(intent);
+				
+			}
+		});
+		/*채팅버튼*/
+		
+		
 		// ViewPaper
 		timer = new CountDownTimer(2 * 1000, 1000) {
 
