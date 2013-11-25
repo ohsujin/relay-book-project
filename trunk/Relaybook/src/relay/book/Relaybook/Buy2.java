@@ -186,8 +186,9 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 				 * 검색하면 서버로부터 검색 정보를 JSON으로 불러와 urls에 이미지 경로를 넣어주고 bookInform라는
 				 * Map함수에는 책정보를 입력해준다.
 				 */
+				String active = "1";
 				StaggeredAdapter adapter = new StaggeredAdapter(Buy2.this,
-						R.id.imageView1, urls, imageItems); // urls 의 크기를 구하여
+						R.id.imageView1, urls, imageItems, active); // urls 의 크기를 구하여
 															// 몇개의 view가 생성되는지
 															// 확인
 

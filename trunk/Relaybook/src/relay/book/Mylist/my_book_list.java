@@ -19,17 +19,12 @@ import relay.book.intentdemob2.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.*;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.View;
+import android.view.*;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
+import android.widget.*;
 
 import com.example.staggeredgridviewdemo.ImageItem;
 import com.example.staggeredgridviewdemo.StaggeredAdapter;
@@ -63,9 +58,7 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 							R.drawable.blankstar));
 					top_title.setText(getResources().getText(0, "찜 목록"));
 
-					send_search(PhoneNum.getPhoneNum(), "R");// 내가 찜한 책의 목록을
-																// 받아온다. | R =
-																// Reservation_book
+					send_search(PhoneNum.getPhoneNum(), "R");// 내가 찜한 책의 목록을받아온다. | R = Reservation_book
 
 				} else {
 					tb.setBackgroundDrawable(getResources().getDrawable(R.drawable.fullstar));
@@ -140,11 +133,14 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 
 				for (int i = 0; i < rece.length(); i++) {
 					// 이부분이 커스텀 뷰의 텍스트항목에 어떤 값을 보내주는지 알려준다.
-					imageItems.add(new ImageItem(rece.getJSONObject(i)
-							.getString("title").toString(), rece
-							.getJSONObject(i).getString("writer").toString(),
+					imageItems.add(new ImageItem(rece.getJSONObject(i).getString("title").toString(),
+							rece.getJSONObject(i).getString("writer").toString(),
 							rece.getJSONObject(i).getString("price").toString()	+ "원")); 
-					/* */
+					
+					
+					System.out.println("active : "+rece.getJSONObject(i).getString("active").toString());
+					
+					
 					urls[i] = imageUrl + rece.getJSONObject(i).getString("filename").toString() + "_1.jpg";
 				}
 
@@ -159,12 +155,12 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 
 				gridView.setPadding(margin, 0, margin, 0); // have the margin on
 															// the sides as well
-
+				
 				/*
 				 * 검색하면 서버로부터 검색 정보를 JSON으로 불러와 urls에 이미지 경로를 넣어주고 bookInform라는
 				 * Map함수에는 책정보를 입력해준다.
 				 */
-				StaggeredAdapter adapter = new StaggeredAdapter(my_book_list.this, R.id.imageView1, urls, imageItems); // urls의 크기를 구하여 몇개의 view가 생성되는지 확인한다.
+				StaggeredAdapter adapter = new StaggeredAdapter(my_book_list.this, R.id.imageView1, urls, imageItems, rece.getJSONObject(i).getString("active").toString()); // urls의 크기를 구하여 몇개의 view가 생성되는지 확인한다.
 				gridView.setAdapter(adapter);
 
 				gridView.setOnItemClickListener(new OnItemClickListener() {
