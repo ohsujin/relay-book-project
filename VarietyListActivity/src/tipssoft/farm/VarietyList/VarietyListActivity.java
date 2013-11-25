@@ -33,6 +33,7 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	private BufferedReader fromServer; // 메시지 수신
 
 	
+//	
 	ExamData data = null;
 	/**/
 
@@ -43,10 +44,12 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.main);
 		
 		/* 서버 접속*/
+		
 		 try {
 			   // 소켓 수신 스레드 시작
 			   MyChatThread th = new MyChatThread();
 			   th.start();
+			   
 			  } catch (Exception e) {
 			   e.printStackTrace();
 			  }    
@@ -68,6 +71,7 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 		// 사용자 정의 어댑터 객체를 생성한다.
 		m_adapter = new ExamAdapter(data_list);
 
+		
 		// 리스트를 얻어서 어댑터를 설정한다.
 		m_list = (ListView) findViewById(R.id.var_list);
 		m_list.setAdapter(m_adapter);
@@ -81,13 +85,23 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	 class MyChatThread extends Thread {
 	  public MyChatThread() {
 	  }
-	  
+
 	  public void run() { // 서버 메시지 수신 (무한반복)
 	   try {
-	    socket = new Socket("192.168.0.11", 10001);
+
+	    socket = new Socket("192.168.0.73", 10001);
+
 	    toServer = new PrintStream(socket.getOutputStream(),true,"UTF-8");
 	    fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));
 	    
+
+	    /*
+	     * 사용자 ID 지정하기
+	     */
+	    toServer.println("수진"); //사용자 ID 입력 -> 전화번호로 대체하기
+		toServer.flush();
+		/* */
+		
 	    String chat_msg = null;
 	    String all_msg = "";
 	    while ((chat_msg = fromServer.readLine()) != null) {
@@ -96,10 +110,6 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	                    String chat = chat_msg;
 	                    Message msg = handler.obtainMessage(1, chat);
 	                    handler.sendMessage(msg);
-	                    
-	                    // **++++++++**++++++++**++++++++**++++++++**++++++++**++++++++
-	                    
-	                   
 	                    
 	    }      
 	   } catch (Exception e) {
@@ -140,8 +150,6 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 			data = new ExamData((byte) 1, ed_msg.getText().toString(),
 					m_time_format.format(new Date()));
 			ed_msg.setText("");
-
-			
 
 			break;
 	
