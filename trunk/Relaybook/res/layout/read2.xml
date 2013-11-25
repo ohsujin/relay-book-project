@@ -324,10 +324,9 @@
                 
                 <Button
                     android:id="@+id/Chatting_btn"
-                    android:layout_marginTop="5px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
+                	android:layout_marginRight="10dp"
                     android:background="@drawable/chat_btn"
                     />
             </LinearLayout>
