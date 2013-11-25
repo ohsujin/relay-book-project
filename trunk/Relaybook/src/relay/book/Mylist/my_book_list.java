@@ -133,14 +133,12 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 
 				for (int i = 0; i < rece.length(); i++) {
 					// 이부분이 커스텀 뷰의 텍스트항목에 어떤 값을 보내주는지 알려준다.
+
 					imageItems.add(new ImageItem(rece.getJSONObject(i).getString("title").toString(),
 							rece.getJSONObject(i).getString("writer").toString(),
-							rece.getJSONObject(i).getString("price").toString()	+ "원")); 
-					
-					
-					System.out.println("active : "+rece.getJSONObject(i).getString("active").toString());
-					
-					
+							rece.getJSONObject(i).getString("price").toString()	+ "원",
+							rece.getJSONObject(i).getString("active").toString()) ); 
+
 					urls[i] = imageUrl + rece.getJSONObject(i).getString("filename").toString() + "_1.jpg";
 				}
 
@@ -160,7 +158,7 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 				 * 검색하면 서버로부터 검색 정보를 JSON으로 불러와 urls에 이미지 경로를 넣어주고 bookInform라는
 				 * Map함수에는 책정보를 입력해준다.
 				 */
-				StaggeredAdapter adapter = new StaggeredAdapter(my_book_list.this, R.id.imageView1, urls, imageItems, rece.getJSONObject(i).getString("active").toString()); // urls의 크기를 구하여 몇개의 view가 생성되는지 확인한다.
+				StaggeredAdapter adapter = new StaggeredAdapter(my_book_list.this, R.id.imageView1, urls, imageItems); // urls의 크기를 구하여 몇개의 view가 생성되는지 확인한다.
 				gridView.setAdapter(adapter);
 
 				gridView.setOnItemClickListener(new OnItemClickListener() {

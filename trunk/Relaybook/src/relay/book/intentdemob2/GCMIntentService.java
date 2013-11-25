@@ -114,8 +114,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 		String c2dm_msg = intent.getStringExtra("Reservation");;
 		
 		if (intent.getAction().equals("com.google.android.c2dm.intent.RECEIVE")){ 
-			   c2dm_msg = intent.getExtras().getString("msg");
-			   System.out.println("받은 메시지 : "+c2dm_msg);
+			   c2dm_msg = intent.getExtras().getString("Reservation"); // Server에서 "Reservation"이란 파라메터로 메시지를 보낸것을 받아온다.
 			 }
 			  ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
 			  List<RunningTaskInfo> runList = am.getRunningTasks(10);

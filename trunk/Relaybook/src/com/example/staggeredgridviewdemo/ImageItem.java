@@ -10,12 +10,22 @@ public class ImageItem {
 	private String title;
 	private String writer;
 	private String price;
+	private int active;
 
-	public ImageItem(String title, String writer, String price) {
+	public ImageItem(String title, String writer, String price, String active) {
 		super();
 		this.title = title;
 		this.writer = writer;
 		this.price = price;
+		this.active = Integer.parseInt(active);
+	}
+	
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
 	}
 
 	public String getTitle() {
