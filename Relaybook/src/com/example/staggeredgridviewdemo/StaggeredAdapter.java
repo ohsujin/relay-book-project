@@ -7,11 +7,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.widget.*;
 
 import com.example.staggeredgridviewdemo.loader.ImageLoader;
 import com.example.staggeredgridviewdemo.views.ScaleImageView;
+
 
 public class StaggeredAdapter extends ArrayAdapter<String> {
 
@@ -19,11 +19,16 @@ public class StaggeredAdapter extends ArrayAdapter<String> {
 	private ArrayList<ImageItem> book_list = new ArrayList<ImageItem>();;
 	static int i = 0;
 
+	String active_chk;
+	
 	public StaggeredAdapter(Context context, int textViewResourceId,
-			String[] objects, ArrayList<ImageItem> arrayList) {
+			String[] objects, ArrayList<ImageItem> arrayList, String active) {
 		super(context, textViewResourceId, objects);
 		mLoader = new ImageLoader(context);
 		this.book_list = arrayList;
+		
+		active_chk = active;
+
 	}
 
 	@Override
@@ -41,11 +46,26 @@ public class StaggeredAdapter extends ArrayAdapter<String> {
 			holder.Writer = (TextView) convertView.findViewById(R.id.writer);
 			holder.Price = (TextView) convertView.findViewById(R.id.price);
 			convertView.setTag(holder);
+			
+			/*판매중or예약중선택 시작*/
+			
+			ImageView finger_img1 = (ImageView)convertView.findViewById(R.id.finger_img);
+			ImageView finger_img2 = (ImageView)convertView.findViewById(R.id.finger_img2);
+			
+			if(active_chk.equals("0"))
+			{
+				finger_img2.setVisibility(View.VISIBLE);
+			} else if(active_chk.equals("1")){
+				finger_img1.setVisibility(View.VISIBLE);
+			}
+			/*끝*/
 		}
 
 		holder = (ViewHolder) convertView.getTag();
 
 		ImageItem item = book_list.get(position);
+		
+		
 
 		holder.Title.setText(item.getTitle());// 항목을 불러와야됨
 		holder.Writer.setText(item.getWriter());
@@ -53,6 +73,7 @@ public class StaggeredAdapter extends ArrayAdapter<String> {
 
 		mLoader.DisplayImage(getItem(position), holder.imageView);
 
+		
 		return convertView;
 	}
 

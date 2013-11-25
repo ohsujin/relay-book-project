@@ -44,7 +44,7 @@
         <com.origamilabs.library.views.StaggeredGridView
             android:id="@+id/staggeredGridView1"
             android:layout_width="match_parent"
-            android:layout_height="456dp"
+            android:layout_height="match_parent"
             staggered:drawSelectorOnTop="true"
             staggered:numColumns="2" >
         </com.origamilabs.library.views.StaggeredGridView>
