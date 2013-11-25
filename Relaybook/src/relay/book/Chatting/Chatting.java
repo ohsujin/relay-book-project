@@ -152,8 +152,8 @@ public class Chatting extends Activity implements OnClickListener {
 			// 소켓으로 메시지 전송
 			if (toServer != null) {
 				
-				
-				toServer.println("/to "+ Seller_phone + ed_msg.getText().toString()); // "/to [상대방 id] 를 써주어 1:1 채팅이 되게 한다.
+				toServer.println("/to "+Seller_phone+" "+ ed_msg.getText().toString()); // "/to [상대방 id] 를 써주어 1:1 채팅이 되게 한다.
+				System.out.println("/to 01047316774 "+ ed_msg.getText().toString());
 				toServer.flush();
 			}
 			
