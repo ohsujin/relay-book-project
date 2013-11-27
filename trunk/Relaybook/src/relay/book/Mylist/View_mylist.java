@@ -16,6 +16,7 @@ import android.graphics.*;
 import android.os.*;
 import android.support.v4.view.*;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.*;
@@ -70,6 +71,8 @@ public class View_mylist extends Activity {
 		String subject = in.getStringExtra("subject");
 		String memo = in.getStringExtra("memo");
 		String publisher = in.getStringExtra("publisher");
+	
+		final int Relaycount = Integer.parseInt(in.getStringExtra("relaycount"))+1;
 		
 		filename = in.getStringExtra("filename");
 		float quality = Float.parseFloat(in.getStringExtra("quality"));
@@ -136,8 +139,8 @@ public class View_mylist extends Activity {
 					Update_book_json update = new Update_book_json();
 
 					if (active == 0) {// 판매 활성화
-
-						update.Enalbe_sell(filename,Reservation_date);
+						
+						update.Enalbe_sell(filename,Reservation_date,Relaycount);
 						Toast.makeText(getApplicationContext(), "예약판매 등록완료!!", Toast.LENGTH_SHORT).show();
 
 					} else {// 판매완료하기
@@ -275,7 +278,7 @@ public class View_mylist extends Activity {
 					/*
 					 * R 일떄와 M 일때를 구분해서 코딩해야함
 					 */
-					System.out.println("비번 : " + passwd);
+			
 					if (passwd_chk.getText().toString().equals(passwd)) {
 
 						JSONObject book_inform = new JSONObject();
@@ -296,7 +299,7 @@ public class View_mylist extends Activity {
 							book_inform.put("Memo", Memo_update.getText()
 									.toString());
 							book_inform.put("R_ID", R_ID);
-
+						
 							listData.put("BookList", book_inform);
 
 							Update_book_json update = new Update_book_json();
@@ -454,7 +457,7 @@ public class View_mylist extends Activity {
 	};
 	
 	void UpdateNow() {
-		mTxtDate.setText(String.format("%d년 %d월 %d일", mYear, mMonth + 1, mDay));
+		mTxtDate.setText(String.format("%d-%d-%d", mYear, mMonth + 1, mDay));		
 		Reservation_date = String.format("%d-%d-%d", mYear, mMonth + 1, mDay);
 	}
 }
