@@ -193,6 +193,7 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 							if (option.equals("M")) { // mybook 과 reservationbook에서 사용하는 항목이 다르므로 구별해준다
 								myIntent.putExtra("passwd",	rece.getJSONObject(position).getString("passwd").toString());
 								myIntent.putExtra("Reser_date",rece.getJSONObject(position).getString("Reser_date").toString());
+								myIntent.putExtra("relaycount",rece.getJSONObject(position).getString("relaycount").toString());
 							} else {
 								myIntent.putExtra("relaycount",rece.getJSONObject(position).getString("relaycount").toString());
 								myIntent.putExtra("school",rece.getJSONObject(position).getString("school").toString());
