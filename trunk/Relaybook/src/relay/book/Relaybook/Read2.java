@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.view.PagerAdapter;
@@ -127,6 +128,15 @@ public class Read2 extends Activity {
 		});
 		
 		//현재 이미지뷰의 위치를 표시해주기 위한 변수
+		
+		/*
+		 * RelayCount 적용
+		 * 여러개의 R.id 파일을 불러오기 위해 getIdentifier() 를 이용하여 매칭해주었다.
+		 */
+		int count_image = this.getResources().getIdentifier("relay_num"+in.getStringExtra("relaycount"), "drawable",this.getPackageName());
+		((ImageView)findViewById(R.id.count)).setImageResource(count_image);
+		
+
 		
 		
 		/*채팅버튼*/
