@@ -1,21 +1,18 @@
 package relay.book.Relaybook;
 
-import com.google.android.gcm.GCMRegistrar;
-
-import relay.book.Mylist.my_book_list;
-import relay.book.NaverOpenAPI.NaverOpenAPI;
-import relay.book.Option.Option;
-import relay.book.intentdemob2.R;
-import relay.book.intentdemob2.ServerUtilities;
-import android.app.Activity;
-import android.app.TabActivity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.TabHost;
+import relay.book.Mylist.*;
+import relay.book.NaverOpenAPI.*;
+import relay.book.Option.*;
+import relay.book.intentdemob2.*;
+import android.app.*;
+import android.content.*;
+import android.graphics.drawable.*;
+import android.os.*;
+import android.support.v4.view.*;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.*;
+import android.view.View.OnClickListener;
+import android.widget.*;
 
 public class Tab extends TabActivity {
 	TabHost mTab;
@@ -27,10 +24,93 @@ public class Tab extends TabActivity {
 	public static String barcode_back=null; 
 	
 	AsyncTask<Void, Void, Void> mRegisterTask;
+	
+	// ViewPaper
+	private ViewPager mPager;
+	private CountDownTimer timer;
+	private int currentPosition;
+	private int PAGE_TOTAL_NUMBER = 5;
+		
+	//
+		
+	/*튜토리얼 다시 보지 않기*/
+	CheckBox chAgree;
+	SharedPreferences mSharedPref;
+	SharedPreferences.Editor mSharedPrefEditor;
+	/* */
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab);
+		/* 튜토리얼 */
+		Window win = getWindow();
+		win.setContentView(R.layout.tab);
+
+		LayoutInflater inflater = (LayoutInflater)getSystemService(
+				Context.LAYOUT_INFLATER_SERVICE);
+		final LinearLayout linear = (LinearLayout)inflater.inflate(R.layout.tutorial, null);
+		LinearLayout.LayoutParams paramlinear = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.MATCH_PARENT);
+		win.addContentView(linear, paramlinear);
+		
+		Button btnclose = (Button)win.findViewById(R.id.btnclose);
+		btnclose.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				linear.setVisibility(View.GONE);
+			}
+		});
+		
+		/*튜토리얼 다시 보지 않기*/
+		mSharedPref = getSharedPreferences("Test", 0);
+		mSharedPrefEditor = mSharedPref.edit();
+
+		chAgree = (CheckBox) findViewById(R.id.checkBox1);
+		chAgree.setChecked(mSharedPref.getBoolean("Agreed", false));
+
+		if(chAgree.isChecked() == true)
+		{
+			linear.setVisibility(View.GONE);
+		}
+		
+		/**/
+		
+		//ViewPaper 시작
+		timer = new CountDownTimer(2*1300, 1300) {
+
+			@Override
+			public void onTick(long millisUntilFinished) {
+
+			}
+
+			@Override
+			public void onFinish() {
+				if(currentPosition==PAGE_TOTAL_NUMBER-1)
+					mPager.setCurrentItem(0);
+				else
+					mPager.setCurrentItem(currentPosition+1);
+			}
+		};
+
+		mPager = (ViewPager)findViewById(R.id.pager);
+		mPager.setAdapter(new PagerAdapterClass(getApplicationContext()));
+		mPager.setOnPageChangeListener(new OnPageChangeListener() {
+
+			@Override
+			public void onPageSelected(int position) {
+				currentPosition = position;
+				timer.cancel();
+				timer.start();
+			}
+
+			@Override public void onPageScrolled(int arg0, float arg1, int arg2) {}
+			@Override public void onPageScrollStateChanged(int arg0) {}
+		});
+		//ViewPaper 끝
+		/* */
+		
+		
 		
 		/*
 		 * GCM 등록
@@ -126,4 +206,72 @@ public class Tab extends TabActivity {
 		}
 	}
 
+	/*튜토리얼 다시 보지 않기*/
+	@Override
+	protected void onPause() {
+		super.onPause();
+		
+		if (chAgree.isChecked())
+			mSharedPrefEditor.putBoolean("Agreed", true);
+		else
+			mSharedPrefEditor.putBoolean("Agreed", false);
+		
+		mSharedPrefEditor.commit();
+	}
+
+	/**/
+	
+	private class PagerAdapterClass extends PagerAdapter{
+
+		private Context context;
+		private LayoutInflater mInflater;
+
+		public PagerAdapterClass(Context c){
+			context = c;
+			mInflater = LayoutInflater.from(c);
+		}
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return PAGE_TOTAL_NUMBER;
+		}
+
+		@Override
+		public Object instantiateItem(View pager, int position) {
+
+			ImageView image = new ImageView(context);
+			if(position==0){
+				image.setImageResource(R.drawable.tutorial_img1);
+			}else if(position==1){
+				image.setImageResource(R.drawable.tutorial_img2);
+			}else if(position==2){
+				image.setImageResource(R.drawable.tutorial_img3);
+			}else if(position==3){
+				image.setImageResource(R.drawable.tutorial_img4);
+			}else if(position==4){
+				image.setImageResource(R.drawable.tutorial_img5);
+				image.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+
+					}
+				});
+			}
+
+			((ViewPager)pager).addView(image, 0);
+			return image;
+		}
+
+		@Override
+		public boolean isViewFromObject(View arg0, Object arg1) {
+
+			return arg0==arg1;
+		}
+
+		public void destroyItem(View pager, int position, Object view) {    
+			((ViewPager)pager).removeView((View)view);
+		}
+
+	}
 }
