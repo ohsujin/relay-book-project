@@ -100,22 +100,19 @@ public class GCMIntentService extends GCMBaseIntentService {
 	@Override
 	protected void onMessage(Context context, Intent intent) {
 		// TODO Auto-generated method stub
-//		Log.i(TAG, "Received message");
-//        String message = getString(R.string.gcm_message);
-//        displayMessage(context, message);
-//        // notifies user
-//        generateNotification(context, message);
+		Log.i(TAG, "Received message");
 		
+		//진동 활성화
 		NotificationManager notificationManager = (NotificationManager)context.getSystemService(Activity.NOTIFICATION_SERVICE);
 		Notification notification = new Notification();
 		notification.vibrate = new long[] { 500, 100, 500, 100 };
-		
+		notificationManager.notify(0, notification);  
 				
 		String c2dm_msg = intent.getStringExtra("Reservation");;
 		
-		if (intent.getAction().equals("com.google.android.c2dm.intent.RECEIVE")){ 
-			   c2dm_msg = intent.getExtras().getString("Reservation"); // Server에서 "Reservation"이란 파라메터로 메시지를 보낸것을 받아온다.
-			 }
+			  if (intent.getAction().equals("com.google.android.c2dm.intent.RECEIVE")){ 
+				  	c2dm_msg = intent.getExtras().getString("Reservation"); // Server에서 "Reservation"이란 파라메터로 메시지를 보낸것을 받아온다.
+			  }
 			  ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
 			  List<RunningTaskInfo> runList = am.getRunningTasks(10);
 			  ComponentName name = runList.get(0).topActivity;
@@ -138,8 +135,9 @@ public class GCMIntentService extends GCMBaseIntentService {
 				   start_intent.setComponent(new ComponentName("relay.book.intentdemob2", "relay.book.Relaybook.MainActivity"));
 				   generateNotification(context,c2dm_msg);
 //				   startActivity(start_intent);
-			  } 
-		
+			  }
+			 
+
 	}
 
 }
