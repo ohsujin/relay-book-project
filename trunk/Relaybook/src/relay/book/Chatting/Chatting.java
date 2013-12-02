@@ -37,6 +37,7 @@ public class Chatting extends Activity implements OnClickListener {
 //	
 	ExamData data = null;
 	String Seller_phone = null;
+	int phone_chk = 0;
 	/**/
 
 	/** Called when the activity is first created. */
@@ -94,7 +95,7 @@ public class Chatting extends Activity implements OnClickListener {
 	  public void run() { // 서버 메시지 수신 (무한반복)
 	   try {
 
-	    socket = new Socket("121.156.235.145", 10001);
+	    socket = new Socket("203.237.179.102", 10001);
 
 	    toServer = new PrintStream(socket.getOutputStream(),true,"UTF-8");
 	    fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));
@@ -128,10 +129,19 @@ public class Chatting extends Activity implements OnClickListener {
 		  public void handleMessage(Message msg) {
 		   super.handleMessage(msg);
 //		   txt_chat.setText((CharSequence)msg.obj);
-		   ed_msg.setText("");
+//		   ed_msg.setText("");
+		  
 		   
-		   data = new ExamData((byte) 0, (String)msg.obj,
-					m_time_format.format(new Date()));
+		   if(phone_chk == 0){
+			   String buy_phone_num = String.format("%s",(String)msg.obj);
+			   Seller_phone = buy_phone_num;
+			   phone_chk++;
+		   }
+		   
+		   System.out.println("Seller_phone " + Seller_phone);
+		   
+		   data = new ExamData((byte) 0, (String)msg.obj, m_time_format.format(new Date()));
+		   
 		   m_adapter.add(data);
 			ed_msg.setText("");
 			m_list.smoothScrollToPosition(m_adapter.getCount() - 1);
