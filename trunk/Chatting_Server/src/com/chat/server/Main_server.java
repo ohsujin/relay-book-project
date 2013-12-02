@@ -43,10 +43,10 @@ class ChatThread extends Thread{
 		   id = br.readLine();
 //		   broadcast(id + " is connected");
 		   System.out.println("connected user id is "+id);
-	
+		   
 	   	   synchronized(hm){
-	   	   hm.put(this.id, pw);
-	   }
+	   		   hm.put(this.id, pw);
+	   	   }
 	 	 initFlag = true;
 	   
 	  	}catch(Exception ex){ System.out.println(ex); }
@@ -72,6 +72,7 @@ class ChatThread extends Thread{
 	   catch(Exception ex){}
 	  }
 	 }
+	 
 	 public void sendmsg(String msg){
 	  int start = msg.indexOf(" ")+1;
 	  int end = msg.indexOf(" ",start);
