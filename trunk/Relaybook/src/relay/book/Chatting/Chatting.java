@@ -14,6 +14,8 @@ import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.*;
 
+import java.util.Collection;
+
 public class Chatting extends Activity implements OnClickListener {
 	// 리스트뷰를 구성하는 리스트뷰와 어댑터 변수
 	private ExamAdapter m_adapter = null;
@@ -131,6 +133,12 @@ public class Chatting extends Activity implements OnClickListener {
 //		   txt_chat.setText((CharSequence)msg.obj);
 //		   ed_msg.setText("");
 		  
+		   String MSG=(String)msg.obj;
+		   
+		   int start = MSG.indexOf(" ")+1;
+		   int end = MSG.indexOf(" ",start);
+		   String to = MSG.substring(start,end);
+		   String msg2 = MSG.substring(end+1);
 		   
 		   if(phone_chk == 0){
 			   String buy_phone_num = String.format("%s",(String)msg.obj);
@@ -138,9 +146,10 @@ public class Chatting extends Activity implements OnClickListener {
 			   phone_chk++;
 		   }
 		   
-		   System.out.println("Seller_phone " + Seller_phone);
+		   System.out.println("Seller_phone " + to);
 		   
 		   data = new ExamData((byte) 0, (String)msg.obj, m_time_format.format(new Date()));
+		   
 		   
 		   m_adapter.add(data);
 			ed_msg.setText("");
@@ -163,7 +172,7 @@ public class Chatting extends Activity implements OnClickListener {
 			if (toServer != null) {
 				
 				toServer.println("/to "+Seller_phone+" "+ ed_msg.getText().toString()); // "/to [상대방 id] 를 써주어 1:1 채팅이 되게 한다.
-				System.out.println("/to 01047316774 "+ ed_msg.getText().toString());
+				
 				toServer.flush();
 			}
 			
