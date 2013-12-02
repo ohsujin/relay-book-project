@@ -10,9 +10,12 @@ import android.graphics.drawable.*;
 import android.os.*;
 import android.support.v4.view.*;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.*;
 import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.*;
+
+import com.google.android.gcm.*;
 
 public class Tab extends TabActivity {
 	TabHost mTab;
@@ -114,54 +117,54 @@ public class Tab extends TabActivity {
 		
 		/*
 		 * GCM 등록
-//		 */
-//		GCMRegistrar.checkDevice(this);
-//		GCMRegistrar.checkManifest(this);
-//		final String regId = GCMRegistrar.getRegistrationId(this);
-//		
-//		if (regId.equals("")) {// 등록이 안된경우
-//			GCMRegistrar.register(this, "337077831410");
-//			Log.e("Relaybook", "등록됨 regId = "+regId);
-//		} else {
-//			Log.e("Relaybook", "이미 등록 regId = "+regId);
-//			
-//			if (GCMRegistrar.isRegisteredOnServer(this)) {
-//                // Skips registration.
-//            } else {
-//                // Try to register again, but not in the UI thread.
-//                // It's also necessary to cancel the thread onDestroy(),
-//                // hence the use of AsyncTask instead of a raw thread.
-//                final Context context = this;
-//                
-//                mRegisterTask = new AsyncTask<Void, Void, Void>() {           	
-//                	
-//                    @Override
-//                    protected Void doInBackground(Void... params) {
-//   
-//                        boolean registered = ServerUtilities.register(context, regId);
-//                        // At this point all attempts to register with the app
-//                        // server failed, so we need to unregister the device
-//                        // from GCM - the app will try to register again when
-//                        // it is restarted. Note that GCM will send an
-//                        // unregistered callback upon completion, but
-//                        // GCMIntentService.onUnregistered() will ignore it.
-//                        if (!registered) {
-//                            GCMRegistrar.unregister(context);
-//                        }
-//                        return null;
-//                    }
-//
-//                    @Override
-//                    protected void onPostExecute(Void result) {
-//                        mRegisterTask = null;
-//                    }
-//
-//                };
-//                mRegisterTask.execute(null, null, null);
-//            }
-//        	
-//		}
-//		/* */
+		 */
+		GCMRegistrar.checkDevice(this);
+		GCMRegistrar.checkManifest(this);
+		final String regId = GCMRegistrar.getRegistrationId(this);
+		
+		if (regId.equals("")) {// 등록이 안된경우
+			GCMRegistrar.register(this, "337077831410");
+			Log.e("Relaybook", "등록됨 regId = "+regId);
+		} else {
+			Log.e("Relaybook", "이미 등록 regId = "+regId);
+			
+			if (GCMRegistrar.isRegisteredOnServer(this)) {
+                // Skips registration.
+            } else {
+                // Try to register again, but not in the UI thread.
+                // It's also necessary to cancel the thread onDestroy(),
+                // hence the use of AsyncTask instead of a raw thread.
+                final Context context = this;
+                
+                mRegisterTask = new AsyncTask<Void, Void, Void>() {           	
+                	
+                    @Override
+                    protected Void doInBackground(Void... params) {
+   
+                        boolean registered = ServerUtilities.register(context, regId);
+                        // At this point all attempts to register with the app
+                        // server failed, so we need to unregister the device
+                        // from GCM - the app will try to register again when
+                        // it is restarted. Note that GCM will send an
+                        // unregistered callback upon completion, but
+                        // GCMIntentService.onUnregistered() will ignore it.
+                        if (!registered) {
+                            GCMRegistrar.unregister(context);
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void result) {
+                        mRegisterTask = null;
+                    }
+
+                };
+                mRegisterTask.execute(null, null, null);
+            }
+        	
+		}
+		/* */
 		
 		TabActivity = Tab.this;
 
