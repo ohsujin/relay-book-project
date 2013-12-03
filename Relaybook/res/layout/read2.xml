@@ -328,6 +328,7 @@
                     android:layout_height="wrap_content"
                 	android:layout_marginRight="10dp"
                     android:background="@drawable/chat_btn"
+                    android:visibility="gone"
                     />
             </LinearLayout>
 

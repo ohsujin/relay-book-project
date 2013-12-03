@@ -5,7 +5,7 @@ import java.net.*;
 import java.text.*;
 import java.util.*;
 
-import relay.book.Option.PhoneNum;
+import relay.book.Option.*;
 import relay.book.intentdemob2.*;
 import android.app.*;
 import android.content.*;
@@ -22,7 +22,7 @@ public class Chatting extends Activity implements OnClickListener {
 	private ListView m_list = null;
 
 	// 대화 상대방의 별명을 저장하는 변수
-	private String m_user_name = "판매자";
+	private String m_user_name = " ";
 
 	// 시간출력시 사용할 포맷 객체 변수
 	private SimpleDateFormat m_date_format = null;
@@ -138,17 +138,17 @@ public class Chatting extends Activity implements OnClickListener {
 		   int start = MSG.indexOf(" ")+1;
 		   int end = MSG.indexOf(" ",start);
 		   String to = MSG.substring(start,end);
-		   String msg2 = MSG.substring(end+1);
+		   String msg2 = MSG.substring(end+3);
 		   
 		   if(phone_chk == 0){
 			   String buy_phone_num = String.format("%s",(String)msg.obj);
-			   Seller_phone = buy_phone_num;
+			   Seller_phone = to;
 			   phone_chk++;
 		   }
-		   
+			  
 		   System.out.println("Seller_phone " + to);
 		   
-		   data = new ExamData((byte) 0, (String)msg.obj, m_time_format.format(new Date()));
+		   data = new ExamData((byte) 0, msg2, m_time_format.format(new Date()));
 		   
 		   
 		   m_adapter.add(data);
