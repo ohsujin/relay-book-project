@@ -1,21 +1,40 @@
 package relay.book.Relaybook;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
 
-import relay.book.Multipart.*;
-import relay.book.NaverOpenAPI.*;
-import relay.book.Option.*;
-import relay.book.intentdemob2.*;
-import android.app.*;
-import android.content.*;
-import android.graphics.*;
-import android.net.*;
-import android.os.*;
-import android.provider.*;
-import android.provider.MediaStore.Images;
-import android.view.*;
-import android.widget.*;
+import relay.book.Multipart.GeoPictureUploader;
+import relay.book.Multipart.GeoPictureUploader.ReturnCode;
+import relay.book.NaverOpenAPI.NaverOpenAPI;
+import relay.book.Option.PhoneNum;
+import relay.book.intentdemob2.R;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class Write extends Activity {
 	ScrollView scrollview;
@@ -90,10 +109,6 @@ public class Write extends Activity {
 					
 					Intent intent = new Intent(Write.this, Tab.class);
 					startActivity(intent);
-					
-					Toast.makeText(getApplicationContext(), "등록 되었습니다.",Toast.LENGTH_SHORT).show();
-
-
 				}
 			}
 		});
@@ -294,20 +309,51 @@ public class Write extends Activity {
 
 	}
 
+	
 	/*
 	 * 파일 업로드
 	 */
-	public class MyThread extends AsyncTask<Void, Void, Void> {
+	public class MyThread extends AsyncTask<Void, String, String> {
 
+		ReturnCode Upload_chk;
+		private ProgressDialog mDlg;
+	    private Context mContext;
+		  
 		@Override
-		protected Void doInBackground(Void... params) {
-			// TODO Auto-generated method stub
+		protected String doInBackground(Void... params) {
+			//그림파일과 함께 책정보도 보낸다.
 			GeoPictureUploader send = new GeoPictureUploader(Subject, Title,Writer, publisher, Price, Quality, PhoneNum.getPhoneNum(),Memo);
 
-			System.out.println("응답 : " 	+ send.uploadPicture(image1, image2, image3));
+			Upload_chk = send.uploadPicture(image1, image2, image3);
+			
+			System.out.println("응답 : " 	+ Upload_chk);
+			
 
-			return null;
+			return Upload_chk.toString();
 		}
+		
+		
+		/*
+		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+		 * 역활 : doInBackground(…)가 리턴하는 값을 바탕으로 UI스레드에 background 작업 결과를 표현하도록 구현 함.
+		 * 기능 : 서버로 부터 받은 응답을 이용하여 등록성공 여부 확인을 하게 해준다.
+		 */
+		protected void onPostExecute(String result) {
+			
+			if(result.equals("http201")){
+				Toast T = Toast.makeText(getApplicationContext(),
+						"등록 성공!!", Toast.LENGTH_SHORT);
+				T.setGravity(Gravity.TOP, 0, 400);
+				T.show();
+			}else{
+				Toast T = Toast.makeText(getApplicationContext(),
+						"등록 실패!!", Toast.LENGTH_SHORT);
+				T.setGravity(Gravity.TOP, 0, 400);
+				T.show();
+			}
+		}
+
+
 	}
 
 	/* 종료묻기 */
