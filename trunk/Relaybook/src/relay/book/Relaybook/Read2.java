@@ -22,6 +22,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.telephony.SmsManager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -116,10 +117,18 @@ public class Read2 extends Activity {
 				String sendTo = phone;
 				String myMessage = "-RelayBook-\n등록하신 " + title + " 책을 구매 하고 싶습니다.";
 				smsManager.sendTextMessage(sendTo, null, myMessage, null, null);
-				Toast.makeText(getApplicationContext(), "구매 요청이 전송되었습니다.",  Toast.LENGTH_SHORT).show();
+			
 
 				// 구매 예약 목록에 추가해주기
-				Reservation_book.send_reserV(PhoneNum.getPhoneNum(), R_ID);
+				String status_chk = Reservation_book.send_reserV(PhoneNum.getPhoneNum(), R_ID);
+				
+				System.out.println("상태 : "+status_chk);
+				
+				if(status_chk.equals("reserV") | status_chk.equals("duplicate")){
+					Toast.makeText(getApplicationContext(), "구매 요청이 전송되었습니다.",  Toast.LENGTH_SHORT).show();
+				}else{
+					Toast.makeText(getApplicationContext(), "구매 요청 실패.\n다시 시도해주세요.",  Toast.LENGTH_SHORT).show();
+				}
 
 				finish();
 			}
