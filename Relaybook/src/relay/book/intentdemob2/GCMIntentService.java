@@ -65,9 +65,6 @@ public class GCMIntentService extends GCMBaseIntentService {
             Log.i(TAG, "Ignoring unregister callback");
         }
     }
-
-   
-
    
     /**
      * Issues a notification to inform the user that server has sent a message.
@@ -105,8 +102,17 @@ public class GCMIntentService extends GCMBaseIntentService {
 		//진동 활성화
 		NotificationManager notificationManager = (NotificationManager)context.getSystemService(Activity.NOTIFICATION_SERVICE);
 		Notification notification = new Notification();
-		notification.vibrate = new long[] { 500, 100, 500, 100 };
+		notification.vibrate = new long[] { 500, 1000, 0, 0 };
+										//	( 순서대로 대기시간, 진동시간, 대기시간, 진동시간 이런 식으로 반복이다.)
 		notificationManager.notify(0, notification);  
+		
+		
+		 //---------MsgShowActivity 호출--------------------
+        Intent		msgshowintnet	= new Intent(context, MsgShowActivity.class);
+        msgshowintnet.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        msgshowintnet.putExtra("msg", intent.getStringExtra("Reservation"));
+        context.startActivity(msgshowintnet);
+        //--------------------------------------------------
 				
 		String c2dm_msg = intent.getStringExtra("Reservation");;
 		

@@ -1,5 +1,7 @@
 package relay.book.Relaybook;
 
+import com.google.android.gcm.GCMRegistrar;
+
 import relay.book.Mylist.*;
 import relay.book.NaverOpenAPI.*;
 import relay.book.Option.*;
@@ -10,12 +12,11 @@ import android.graphics.drawable.*;
 import android.os.*;
 import android.support.v4.view.*;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.*;
+import android.util.Log;
 import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.*;
 
-import com.google.android.gcm.*;
 
 public class Tab extends TabActivity {
 	TabHost mTab;

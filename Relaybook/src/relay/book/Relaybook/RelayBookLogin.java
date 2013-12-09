@@ -10,11 +10,9 @@ import relay.book.http.Send_Recv.HttpHost;
 import relay.book.intentdemob2.R;
 import relay.book.saveInform.SchoolList;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.*;
 
@@ -36,8 +34,7 @@ public class RelayBookLogin extends Activity implements View.OnClickListener {
 		scrollview = (ScrollView) findViewById(R.id.Scroll);
 		
 		/* 이미지 저장 폴더 생성 */
-		File path = new File(Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + "/Relaybook/");
+		File path = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/");
 		if (!path.isDirectory()) {
 			path.mkdirs();
 		}
@@ -45,9 +42,8 @@ public class RelayBookLogin extends Activity implements View.OnClickListener {
 		EditText editText = (EditText) findViewById(R.id.Phone);
 		editText.setText(PhoneNum.getPhoneNum());
 
-		
-
 		int i = 1;
+		
 		while (i < 4) {
 
 			/* 서버를 통해 가입유무 확인 */
@@ -134,7 +130,6 @@ public class RelayBookLogin extends Activity implements View.OnClickListener {
 				regi.put("school", universityEdit.getText().toString());
 				regi.put("passwd", passwordEdit.getText().toString());
 				
-
 				listData.put("Register", regi);
 
 				http.HttpPostData(listData.toString());

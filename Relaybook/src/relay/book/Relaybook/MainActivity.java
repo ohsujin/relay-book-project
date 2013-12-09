@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 public class MainActivity extends Activity {
 
@@ -18,6 +17,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		PhoneNum.setPhoneNum(getMy10DigitPhoneNumber()); 
+		 
+		System.out.println("전화번호 : "+getMy10DigitPhoneNumber());
 		
 		startActivity(new Intent(this, SplashActivity.class));
 		setContentView(R.layout.activity_main);
@@ -50,8 +51,16 @@ public class MainActivity extends Activity {
 
 	public String getMy10DigitPhoneNumber() {
 		String s = getMyPhoneNumber();
-		// return s.substring(0);
-		return s.replace("-", "").replace("+82", "0");
-
+		
+		
+		try
+		{
+			s.replace("-", "").replace("+82", "0");
+			return s;
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return "01012345678";
+		}
 	}
 }

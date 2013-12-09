@@ -91,8 +91,6 @@ public class Write extends Activity {
 					Intent intent = new Intent(Write.this, Tab.class);
 					startActivity(intent);
 					
-					
-					
 					Toast.makeText(getApplicationContext(), "등록 되었습니다.",Toast.LENGTH_SHORT).show();
 
 
@@ -110,10 +108,8 @@ public class Write extends Activity {
 
 		rating.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 			@Override
-			public void onRatingChanged(RatingBar ratingBar, float rating,
-					boolean fromUser) {
-				Toast.makeText(getApplicationContext(), "평점 : " + rating,
-						Toast.LENGTH_SHORT).show();
+			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+				Toast.makeText(getApplicationContext(), "평점 : " + rating, Toast.LENGTH_SHORT).show();
 
 				Quality = Float.toString(rating);
 			}
@@ -131,6 +127,9 @@ public class Write extends Activity {
 		
 	}
 	
+	/*
+	 * ISBN 바코드 activity 호출
+	 */
 	private final Button.OnClickListener scanAnything = new Button.OnClickListener() {
 	    @Override
 	    public void onClick(View v) {
@@ -158,12 +157,12 @@ public class Write extends Activity {
 				
 				String ISBN = ((EditText) linear.findViewById(R.id.isbn_number)).getText().toString(); //이부분에서 값이 안넘어가는듯 무슨 핸들러를 쓰라는것 같은데...
 				
-//				EditText isbn = (EditText) findViewById(R.id.isbn_number);
-				
 				NaverOpenAPI NOA = new NaverOpenAPI();
 				
 				NOA.Search_book(ISBN); // 팝업창에 입력한 ISBN값을 네이버로 넘겨줘야함
 				//System.out.println("ISBN : "+ ISBN);
+				
+				System.out.println("ISBN 호출호출 호호출출");
 				
 				((EditText) findViewById(R.id.Title)).setText(NOA.getTitle());
 				((EditText) findViewById(R.id.Writer)).setText(NOA.getAuthor());
@@ -172,6 +171,7 @@ public class Write extends Activity {
 		})
 		.show();
 	}
+	
 	
 	// button 클릭
 	Dialog dialog;
@@ -227,14 +227,14 @@ public class Write extends Activity {
 	}
 
 	// 사진 불러오기
-	void photoAlbum() {
-		// photo Album 호출 intent 생성
-		Intent intent = new Intent(Intent.ACTION_PICK);
-
-		intent.setType(Images.Media.CONTENT_TYPE);
-		intent.setData(Images.Media.EXTERNAL_CONTENT_URI);
-		startActivityForResult(intent, REQUEST_PHOTO_ALBUM);
-	}
+//	void photoAlbum() {
+//		// photo Album 호출 intent 생성
+//		Intent intent = new Intent(Intent.ACTION_PICK);
+//
+//		intent.setType(Images.Media.CONTENT_TYPE);
+//		intent.setData(Images.Media.EXTERNAL_CONTENT_URI);
+//		startActivityForResult(intent, REQUEST_PHOTO_ALBUM);
+//	}
 
 	// 촬영한 사진을 수정하기 위해서
 	Bitmap loadPicture() {
@@ -302,12 +302,9 @@ public class Write extends Activity {
 		@Override
 		protected Void doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			GeoPictureUploader send = new GeoPictureUploader(Subject, Title,
-					Writer, publisher, Price, Quality, PhoneNum.getPhoneNum(),
-					Memo);
+			GeoPictureUploader send = new GeoPictureUploader(Subject, Title,Writer, publisher, Price, Quality, PhoneNum.getPhoneNum(),Memo);
 
-			System.out.println("응답 : "
-					+ send.uploadPicture(image1, image2, image3));
+			System.out.println("응답 : " 	+ send.uploadPicture(image1, image2, image3));
 
 			return null;
 		}

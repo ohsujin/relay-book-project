@@ -135,20 +135,24 @@ public class Chatting extends Activity implements OnClickListener {
 		  
 		   String MSG=(String)msg.obj;
 		   
+		   System.out.println("서버로 부터 받은 메시지 : "+MSG);
+		   
 		   int start = MSG.indexOf(" ")+1;
 		   int end = MSG.indexOf(" ",start);
 		   String to = MSG.substring(start,end);
 		   String msg2 = MSG.substring(end+3);
 		   
 		   if(phone_chk == 0){
-			   String buy_phone_num = String.format("%s",(String)msg.obj);
+
 			   Seller_phone = to;
+
 			   phone_chk++;
 		   }
 			  
 		   System.out.println("Seller_phone " + to);
 		   
-		   data = new ExamData((byte) 0, msg2, m_time_format.format(new Date()));
+		   data = new ExamData((byte) 0,msg2, m_time_format.format(new Date()));
+
 		   
 		   
 		   m_adapter.add(data);

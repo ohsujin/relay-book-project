@@ -16,7 +16,6 @@ import android.graphics.*;
 import android.os.*;
 import android.support.v4.view.*;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.*;
@@ -443,6 +442,7 @@ public class View_mylist extends Activity {
 					mYear, mMonth, mDay).show();
 			break;
 
+			
 		}
 	}
 	

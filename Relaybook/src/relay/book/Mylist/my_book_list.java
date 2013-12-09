@@ -133,7 +133,6 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 
 				for (int i = 0; i < rece.length(); i++) {
 					// 이부분이 커스텀 뷰의 텍스트항목에 어떤 값을 보내주는지 알려준다.
-
 					imageItems.add(new ImageItem(rece.getJSONObject(i).getString("title").toString(),
 							rece.getJSONObject(i).getString("writer").toString(),
 							rece.getJSONObject(i).getString("price").toString()	+ "원",
@@ -188,14 +187,12 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 							myIntent.putExtra("quality",rece.getJSONObject(position).getString("quality").toString());
 							myIntent.putExtra("section",rece.getJSONObject(position).getString("section").toString());
 							myIntent.putExtra("active",rece.getJSONObject(position).getString("active").toString());
-							
+							myIntent.putExtra("relaycount",rece.getJSONObject(position).getString("relaycount").toString());
 							
 							if (option.equals("M")) { // mybook 과 reservationbook에서 사용하는 항목이 다르므로 구별해준다
 								myIntent.putExtra("passwd",	rece.getJSONObject(position).getString("passwd").toString());
 								myIntent.putExtra("Reser_date",rece.getJSONObject(position).getString("Reser_date").toString());
-								myIntent.putExtra("relaycount",rece.getJSONObject(position).getString("relaycount").toString());
 							} else {
-								myIntent.putExtra("relaycount",rece.getJSONObject(position).getString("relaycount").toString());
 								myIntent.putExtra("school",rece.getJSONObject(position).getString("school").toString());
 								myIntent.putExtra("phone",rece.getJSONObject(position).getString("phone").toString());
 							}
