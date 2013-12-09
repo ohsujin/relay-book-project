@@ -52,6 +52,7 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.buy2);
 
+		
 		arraylist = new ArrayList<String>();
 		arraylist.add("책이름");
 		arraylist.add("저자");

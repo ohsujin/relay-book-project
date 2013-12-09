@@ -16,7 +16,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.view.PagerAdapter;
@@ -76,7 +75,6 @@ public class Read2 extends Activity {
 		String price = in.getStringExtra("price");
 		String subject = in.getStringExtra("subject");
 		String memo = in.getStringExtra("memo");
-		int relaycount = Integer.parseInt(in.getStringExtra("relaycount"));
 		String publisher = in.getStringExtra("publisher");
 		filename = in.getStringExtra("filename");
 		float quality = Float.parseFloat(in.getStringExtra("quality"));
@@ -137,8 +135,6 @@ public class Read2 extends Activity {
 		((ImageView)findViewById(R.id.count)).setImageResource(count_image);
 		
 
-		
-		
 		/*채팅버튼*/
 		Button Chat_btn = (Button) findViewById(R.id.Chatting_btn);
 

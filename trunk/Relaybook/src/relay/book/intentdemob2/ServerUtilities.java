@@ -64,7 +64,9 @@ public final class ServerUtilities {
             try {
                 post(serverUrl, params);
                 GCMRegistrar.setRegisteredOnServer(context, true);
+                
                 System.out.println("전화번호 전송?"+params.get("phone"));
+                
                 return true;
             } catch (IOException e) {
                 // Here we are simplifying and retrying on any error; in a real
@@ -110,7 +112,6 @@ public final class ServerUtilities {
             // We could try to unregister again, but it is not necessary:
             // if the server tries to send a message to the device, it will get
             // a "NotRegistered" error message and should unregister the device.
-          
         }
     }
 
