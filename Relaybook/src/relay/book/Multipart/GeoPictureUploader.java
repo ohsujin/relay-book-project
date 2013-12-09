@@ -24,7 +24,7 @@ public class GeoPictureUploader {
 			Memo;
 	private DataOutputStream dataStream = null;
 
-	enum ReturnCode {
+	public enum ReturnCode {
 		noPicture, unknown, http201, http400, http401, http403, http404, http500
 	};
 

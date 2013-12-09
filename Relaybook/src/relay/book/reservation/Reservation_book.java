@@ -15,7 +15,7 @@ public class Reservation_book {
 	static String URL_book_inform = "http://14.63.212.134:8080/MyRelayServer/Reservation_List.jsp";
 
 	// 문자를 보낸 항목을 Reservation 테이블에 입력한다.
-	public static void send_reserV(String phone, String R_ID) {
+	public static String send_reserV(String phone, String R_ID) {
 
 		DefaultHttpClient client = new DefaultHttpClient();
 
@@ -35,12 +35,26 @@ public class Reservation_book {
 
 			/* 데이터 보낸 뒤 서버에서 데이터를 받아오는 과정 */
 			HttpResponse response = client.execute(post);
+			
+			BufferedReader bufreader = new BufferedReader(
+					new InputStreamReader(response.getEntity().getContent(),
+							"utf-8"));
+
+			String line = null;
+			String result = "";
+
+			while ((line = bufreader.readLine()) != null) {
+				result += line;
+			}
+			
+			return result;
 
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-
+			return "error";
 		}
+		
 	}
 
 	// 구매완료한 책의 소유주를 바꾼다.

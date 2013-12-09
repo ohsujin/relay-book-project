@@ -59,8 +59,7 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 		arraylist.add("교과명");
 		arraylist.add("학교명");
 
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, arraylist);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arraylist);
 		// 스피너 속성
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		Spinner sp = (Spinner) this.findViewById(R.id.Spinner);
@@ -161,8 +160,7 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 				T.show();
 
 				// gridview로 보여줄 항목이 없는 경우 아무런 리스트도 나오지 않게 하기 위해 null을 입력한다.
-				StaggeredGridView gridView = (StaggeredGridView) this
-						.findViewById(R.id.staggeredGridView1);
+				StaggeredGridView gridView = (StaggeredGridView) this.findViewById(R.id.staggeredGridView1);
 				gridView.setAdapter(null);
 			} else {
 				/*
@@ -188,10 +186,8 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 				 */
 				/* Staggered Grid View */
 
-				StaggeredGridView gridView = (StaggeredGridView) this
-						.findViewById(R.id.staggeredGridView1);
-				int margin = getResources().getDimensionPixelSize(
-						R.dimen.margin);
+				StaggeredGridView gridView = (StaggeredGridView) this.findViewById(R.id.staggeredGridView1);
+				int margin = getResources().getDimensionPixelSize(R.dimen.margin);
 				gridView.setItemMargin(margin);
 
 				gridView.setPadding(margin, 0, margin, 0); // have the margin on
@@ -202,12 +198,9 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 				 * 검색하면 서버로부터 검색 정보를 JSON으로 불러와 urls에 이미지 경로를 넣어주고 bookInform라는
 				 * Map함수에는 책정보를 입력해준다.
 				 */
-
-				StaggeredAdapter adapter = new StaggeredAdapter(Buy2.this,
-						R.id.imageView1, urls, imageItems); // urls 의 크기를 구하여
-															// 몇개의 view가 생성되는지
-															// 확인
-
+				StaggeredAdapter adapter = new StaggeredAdapter(Buy2.this,R.id.imageView1, urls, imageItems); // urls 의 크기를 구하여
+																											 // 몇개의 view가 생성되는지
+																											// 확인
 				gridView.setAdapter(adapter);
 
 				gridView.setOnItemClickListener(new OnItemClickListener() {
