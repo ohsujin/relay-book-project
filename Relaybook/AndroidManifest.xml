@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="relay.book.intentdemob2"
-    android:versionCode="20"
+    android:versionCode="21"
     android:versionName="0.7" >
 
     <uses-sdk
@@ -29,6 +29,9 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 	<uses-permission android:name="android.permission.VIBRATE"/>
+	
+	
+	
 	
     <application
         android:allowBackup="true"
@@ -58,6 +61,8 @@
                 	<category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             
+            
+            
               <!-- custom scheme(execute url) -->
             <intent-filter>
                 <data  android:scheme="RB" android:host="RelayBook"/>
@@ -69,8 +74,8 @@
         
         <!-- 팝업 띄우기 -->
          <activity
-            android:name="com.example.gcmclienttest.MsgShowActivity"
-            android:label="Popup"
+            android:name="relay.book.intentdemob2.MsgShowActivity"
+            android:label="RelayBook"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
        
