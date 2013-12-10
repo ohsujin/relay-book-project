@@ -180,6 +180,14 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 							+ rece.getJSONObject(i).getString("filename")
 									.toString() + "_1.jpg";
 				}
+				
+				/*
+				 * 검색하면 서버로부터 검색 정보를 JSON으로 불러와 urls에 이미지 경로를 넣어주고 bookInform라는
+				 * Map함수에는 책정보를 입력해준다.
+				 */
+				StaggeredAdapter adapter = new StaggeredAdapter(Buy2.this,R.id.imageView1, urls, imageItems); // urls 의 크기를 구하여
+																											 // 몇개의 view가 생성되는지
+																											// 확인
 
 				/*
 				 * 서버로 부터 받아온 데이터를 그리드뷰로 표시해주는 부분 시작
@@ -193,14 +201,8 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 				gridView.setPadding(margin, 0, margin, 0); // have the margin on
 															// the
 															// sides as well
-
-				/*
-				 * 검색하면 서버로부터 검색 정보를 JSON으로 불러와 urls에 이미지 경로를 넣어주고 bookInform라는
-				 * Map함수에는 책정보를 입력해준다.
-				 */
-				StaggeredAdapter adapter = new StaggeredAdapter(Buy2.this,R.id.imageView1, urls, imageItems); // urls 의 크기를 구하여
-																											 // 몇개의 view가 생성되는지
-																											// 확인
+				
+				
 				gridView.setAdapter(adapter);
 
 				gridView.setOnItemClickListener(new OnItemClickListener() {

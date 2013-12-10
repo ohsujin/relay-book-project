@@ -21,6 +21,6 @@
         android:layout_alignRight="@+id/msgtest"
         android:layout_below="@+id/msgtest"
         android:layout_marginTop="16dp"
-        android:text="닫기" />
+        android:text="확인" />
 
 </RelativeLayout>

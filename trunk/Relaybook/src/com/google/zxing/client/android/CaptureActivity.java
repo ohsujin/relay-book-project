@@ -279,7 +279,7 @@ public final class CaptureActivity extends Activity implements
 				}
 				return true;
 			}
-			//글쓰기 화면을 돌아가기
+			//글쓰기 화면으로 돌아가기
 			finish();
 			Intent Back = new Intent(this, relay.book.Relaybook.Tab.class);
 			String WriteTab = "back";
@@ -415,8 +415,7 @@ public final class CaptureActivity extends Activity implements
 	}
 
 	// Put up our own UI for how to handle the decoded contents.
-	private void handleDecodeInternally(Result rawResult,
-			ResultHandler resultHandler, Bitmap barcode) {
+	private void handleDecodeInternally(Result rawResult, ResultHandler resultHandler, Bitmap barcode) {
 		statusView.setVisibility(View.GONE);
 		viewfinderView.setVisibility(View.GONE);
 		resultView.setVisibility(View.VISIBLE);
@@ -437,8 +436,7 @@ public final class CaptureActivity extends Activity implements
 
 		DateFormat formatter = DateFormat.getDateTimeInstance(DateFormat.SHORT,
 				DateFormat.SHORT);
-		String formattedTime = formatter.format(new Date(rawResult
-				.getTimestamp()));
+		String formattedTime = formatter.format(new Date(rawResult.getTimestamp()));
 		TextView timeTextView = (TextView) findViewById(R.id.time_text_view);
 		timeTextView.setText(formattedTime);
 
@@ -446,8 +444,8 @@ public final class CaptureActivity extends Activity implements
 		View metaTextViewLabel = findViewById(R.id.meta_text_view_label);
 		metaTextView.setVisibility(View.GONE);
 		metaTextViewLabel.setVisibility(View.GONE);
-		Map<ResultMetadataType, Object> metadata = rawResult
-				.getResultMetadata();
+		Map<ResultMetadataType, Object> metadata = rawResult.getResultMetadata();
+		
 		if (metadata != null) {
 			StringBuilder metadataText = new StringBuilder(20);
 			for (Map.Entry<ResultMetadataType, Object> entry : metadata
@@ -465,7 +463,7 @@ public final class CaptureActivity extends Activity implements
 		}
 
 		TextView contentsTextView = (TextView) findViewById(R.id.contents_text_view);
-		CharSequence displayContents = resultHandler.getDisplayContents();
+		CharSequence displayContents = resultHandler.getDisplayContents(); // ISBN 값이 저장되는 부분
 		contentsTextView.setText(displayContents);
 
 		/*

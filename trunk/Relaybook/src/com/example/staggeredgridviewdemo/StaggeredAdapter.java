@@ -16,7 +16,7 @@ import com.example.staggeredgridviewdemo.views.ScaleImageView;
 public class StaggeredAdapter extends ArrayAdapter<String> {
 
 	private ImageLoader mLoader;
-	private ArrayList<ImageItem> book_list = new ArrayList<ImageItem>();;
+	private ArrayList<ImageItem> book_list = new ArrayList<ImageItem>();
 	static int i = 0;
 	
 	public StaggeredAdapter(Context context, int textViewResourceId,
@@ -24,8 +24,6 @@ public class StaggeredAdapter extends ArrayAdapter<String> {
 		super(context, textViewResourceId, objects);
 		mLoader = new ImageLoader(context);
 		this.book_list = arrayList;
-	
-
 	}
 
 	@Override
@@ -43,19 +41,17 @@ public class StaggeredAdapter extends ArrayAdapter<String> {
 			holder.Writer = (TextView) convertView.findViewById(R.id.writer);
 			holder.Price = (TextView) convertView.findViewById(R.id.price);
 			convertView.setTag(holder);
-			
-			
 		}
 
 		holder = (ViewHolder) convertView.getTag();
 
-		ImageItem item = book_list.get(position);
+		ImageItem item = book_list.get(position);//gridView의 위치에 맞는 데이터를 가져온다.
 
-		holder.Title.setText(item.getTitle());// 항목을 불러와야됨
+		holder.Title.setText(item.getTitle());// Buy2.java로 부터 넘어온 title,writer,price 정보를 각각의 gridView에 표시해준다.
 		holder.Writer.setText(item.getWriter());
 		holder.Price.setText(item.getPrice());
 
-		mLoader.DisplayImage(getItem(position), holder.imageView);
+		mLoader.DisplayImage(getItem(position), holder.imageView); //각 position에 맞는 url을 가져와 사진을 다운로드하여 gridview에 표시한다.
 
 		/*판매중or예약중선택 시작*/
 		

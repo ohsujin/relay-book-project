@@ -155,38 +155,6 @@ public class Write extends Activity {
 	  };
 
 	
-	  
-	  
-
-	//isbn버튼
-	public void mOnClick_isbn(View v) {
-		final LinearLayout linear = (LinearLayout)
-			View.inflate(this, R.layout.isbn_btn, null);
-
-		new AlertDialog.Builder(this)
-		.setTitle("ISBN")
-		.setView(linear)
-		.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int whichButton) {
-				
-				String ISBN = ((EditText) linear.findViewById(R.id.isbn_number)).getText().toString(); //이부분에서 값이 안넘어가는듯 무슨 핸들러를 쓰라는것 같은데...
-				
-				NaverOpenAPI NOA = new NaverOpenAPI();
-				
-				NOA.Search_book(ISBN); // 팝업창에 입력한 ISBN값을 네이버로 넘겨줘야함
-				//System.out.println("ISBN : "+ ISBN);
-				
-				System.out.println("ISBN 호출호출 호호출출");
-				
-				((EditText) findViewById(R.id.Title)).setText(NOA.getTitle());
-				((EditText) findViewById(R.id.Writer)).setText(NOA.getAuthor());
-				((EditText) findViewById(R.id.Publisher)).setText(NOA.getPublisher());
-			}
-		})
-		.show();
-	}
-	
 	
 	// button 클릭
 	Dialog dialog;
@@ -202,8 +170,7 @@ public class Write extends Activity {
 			builder.setView(customLayout);
 			dialog = builder.create();
 			dialog.show();
-			Toast toast = Toast.makeText(getApplicationContext(), "앞 표지, 책 내용, 뒤 표지 총 3장을 찍어주세요.",
-					Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(getApplicationContext(), "앞 표지, 책 내용, 뒤 표지 총 3장을 찍어주세요.",Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 150);
 			toast.show();
 
@@ -216,8 +183,7 @@ public class Write extends Activity {
 				  i++;
 				  takePicture();
 			  }
-			Toast.makeText(getApplicationContext(),
-					"책 표지를 포함한 총 3장, 연속 촬영을 시작합니다.", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(),"책 표지를 포함한 총 3장, 연속 촬영을 시작합니다.", Toast.LENGTH_LONG).show();
 			break;
 
 //		case R.id.photoAlbum:
@@ -233,12 +199,11 @@ public class Write extends Activity {
 
 		// 카메라 호출 intent 생성
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		File file = new File(Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + "/Relaybook/", "img-" + i + ".jpg");
+		File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Relaybook/", "img-" + i + ".jpg");
 
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
 		startActivityForResult(intent, REQUEST_PICTURE);
-	
+
 	}
 
 	// 사진 불러오기
@@ -316,8 +281,6 @@ public class Write extends Activity {
 	public class MyThread extends AsyncTask<Void, String, String> {
 
 		ReturnCode Upload_chk;
-		private ProgressDialog mDlg;
-	    private Context mContext;
 		  
 		@Override
 		protected String doInBackground(Void... params) {
@@ -327,7 +290,6 @@ public class Write extends Activity {
 			Upload_chk = send.uploadPicture(image1, image2, image3);
 			
 			System.out.println("응답 : " 	+ Upload_chk);
-			
 
 			return Upload_chk.toString();
 		}
