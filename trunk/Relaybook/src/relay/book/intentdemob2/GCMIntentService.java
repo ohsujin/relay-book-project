@@ -107,7 +107,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 		notificationManager.notify(0, notification);  
 		
 		
-		 //---------MsgShowActivity 호출--------------------
+		 //---------MsgShowActivity 호출 (Pop up창 띄우기)--------------------
         Intent		msgshowintnet	= new Intent(context, MsgShowActivity.class);
         msgshowintnet.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         msgshowintnet.putExtra("msg", intent.getStringExtra("Reservation"));
@@ -115,6 +115,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         //--------------------------------------------------
 				
 		String c2dm_msg = intent.getStringExtra("Reservation");;
+
 		
 			  if (intent.getAction().equals("com.google.android.c2dm.intent.RECEIVE")){ 
 				  	c2dm_msg = intent.getExtras().getString("Reservation"); // Server에서 "Reservation"이란 파라메터로 메시지를 보낸것을 받아온다.

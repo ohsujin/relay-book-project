@@ -22,8 +22,8 @@ public class MsgShowActivity extends Activity {
 		
 		Intent		intent	 = getIntent();
 		
-		msgText.setText(intent.getStringExtra("msg"));
-		System.out.println("팝업 띄우자");
+		msgText.setText(intent.getStringExtra("msg")+"\n판매 예약일 변경을 원하시면 예약판매일을 변경해 주세요.");
+		
 		Button	button	= (Button)findViewById(R.id.button1);
 		button.setOnClickListener(new OnClickListener() {
 			
