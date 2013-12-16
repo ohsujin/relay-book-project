@@ -19,7 +19,7 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	private ListView m_list = null;
 
 	// 대화 상대방의 별명을 저장하는 변수
-	private String m_user_name = "판매자";
+	//private String m_user_name = "판매자";
 
 	// 시간출력시 사용할 포맷 객체 변수
 	private SimpleDateFormat m_date_format = null;
@@ -33,7 +33,6 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	private BufferedReader fromServer; // 메시지 수신
 
 	
-//	
 	ExamData data = null;
 	/**/
 
@@ -41,15 +40,13 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.chatting_main);
 		
 		/* 서버 접속*/
-		
 		 try {
 			   // 소켓 수신 스레드 시작
 			   MyChatThread th = new MyChatThread();
 			   th.start();
-			   
 			  } catch (Exception e) {
 			   e.printStackTrace();
 			  }    
@@ -71,7 +68,6 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 		// 사용자 정의 어댑터 객체를 생성한다.
 		m_adapter = new ExamAdapter(data_list);
 
-		
 		// 리스트를 얻어서 어댑터를 설정한다.
 		m_list = (ListView) findViewById(R.id.var_list);
 		m_list.setAdapter(m_adapter);
@@ -85,23 +81,13 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	 class MyChatThread extends Thread {
 	  public MyChatThread() {
 	  }
-
+	  
 	  public void run() { // 서버 메시지 수신 (무한반복)
 	   try {
-
-	    socket = new Socket("192.168.0.73", 10001);
-
+	    socket = new Socket("192.168.0.89", 10001);
 	    toServer = new PrintStream(socket.getOutputStream(),true,"UTF-8");
 	    fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));
 	    
-
-	    /*
-	     * 사용자 ID 지정하기
-	     */
-	    toServer.println("bea"); //사용자 ID 입력 -> 전화번호로 대체하기
-		toServer.flush();
-		/* */
-		
 	    String chat_msg = null;
 	    String all_msg = "";
 	    while ((chat_msg = fromServer.readLine()) != null) {
@@ -110,6 +96,10 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	                    String chat = chat_msg;
 	                    Message msg = handler.obtainMessage(1, chat);
 	                    handler.sendMessage(msg);
+	                    
+	                    // **++++++++**++++++++**++++++++**++++++++**++++++++**++++++++
+	                    
+	                   
 	                    
 	    }      
 	   } catch (Exception e) {
@@ -133,12 +123,8 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 		  }
 	}; 
 
-	/*
-	 * 서버로 메시지 보내기
-	 * @see android.view.View.OnClickListener#onClick(android.view.View)
-	 */
 	// 버튼이 눌렸을 때 호출되는 이벤트 핸들러
-	public void onClick(View view) { 
+	public void onClick(View view) {
 		ExamData data = null;
 
 		switch (view.getId()) {
@@ -146,7 +132,7 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 		case R.id.send:
 			// 소켓으로 메시지 전송
 			if (toServer != null) {
-				toServer.println("/to 수진 "+ed_msg.getText().toString()); // "/to [상대방 id] 를 써주어 1:1 채팅이 되게 한다.
+				toServer.println(ed_msg.getText().toString());
 				toServer.flush();
 			}
 			
@@ -154,6 +140,8 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 			data = new ExamData((byte) 1, ed_msg.getText().toString(),
 					m_time_format.format(new Date()));
 			ed_msg.setText("");
+
+			
 
 			break;
 	
@@ -247,12 +235,11 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 				// 뷰 타입에 따라 값을 설정한다.
 				if (type == 0) {
 					TextView user_tv = null, msg_tv = null, date_tv = null;
-					user_tv = (TextView) view.findViewById(R.id.user_view1);
 					msg_tv = (TextView) view.findViewById(R.id.message_view1);
 					date_tv = (TextView) view.findViewById(R.id.date_view1);
 
 					// 이름, 메세지, 시간정보를 텍스트뷰에 설정한다.
-					user_tv.setText(m_user_name);
+					//user_tv.setText(m_user_name);
 					msg_tv.setText(data.data1);
 					date_tv.setText(data.data2);
 				} else if (type == 1) {
