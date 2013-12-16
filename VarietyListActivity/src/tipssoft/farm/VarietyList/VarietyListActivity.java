@@ -1,17 +1,32 @@
 package tipssoft.farm.VarietyList;
 
-import java.io.*;
-import java.net.*;
-import java.text.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.StringTokenizer;
 
-import android.app.*;
-import android.content.*;
-import android.os.*;
-import android.view.*;
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.*;
-import android.widget.AdapterView.*;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class VarietyListActivity extends Activity implements OnClickListener, OnItemSelectedListener {
 	// 리스트뷰를 구성하는 리스트뷰와 어댑터 변수
@@ -38,8 +53,9 @@ public class VarietyListActivity extends Activity implements OnClickListener, On
 	static Boolean nick_name=true;
 	static String my_id=null;
 
-	static ArrayList<String> nickname = new ArrayList<String>();
+	ArrayList<String> nickname;
 	String userID = null;
+	ArrayList<String> arraylist;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -57,33 +73,18 @@ public class VarietyListActivity extends Activity implements OnClickListener, On
 //			}
 //		});
 		
-		Spinner spinner = (Spinner)findViewById(R.id.spinner);
-      	
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nickname);
-			spinner.setAdapter(adapter);
-			spinner.setPrompt("선택"); // 스피너 제목
-			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			spinner.setSelection(0);
+			nickname = new ArrayList<String>();
 		
-			spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-				@Override
-				public void onItemSelected(AdapterView<?> parent, View view,
-						int position, long id) {
-					// TODO Auto-generated method stub
+			arraylist = new ArrayList<String>();
+			arraylist.add("유저선택");
+		
+      	
+//			ArrayAdapter adapter = new ArrayAdapter(this,R.layout.spinner, nickname);
+//			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//			spinner.setPrompt("구분을 선택하세요.");
 
-					/* */
-					userID = nickname.get(position);
-					
-					System.out.println("아이디 : "+userID);
-				}
 
-				@Override
-				public void onNothingSelected(AdapterView<?> parent) {
-					// TODO Auto-generated method stub
-
-				}
-
-			});
+			
 		
 		/* 서버 접속*/
 		 try {
@@ -340,14 +341,16 @@ public class VarietyListActivity extends Activity implements OnClickListener, On
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 			long arg3) {
-		// TODO Auto-generated method stub
+//		userID = nickname.get(arg2);
+//		
+		System.out.println("아이디 : "+nickname.get(arg2));
 		
 	}
 
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method 
 		
 	}
 }
