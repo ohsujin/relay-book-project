@@ -38,7 +38,7 @@ public class VarietyListActivity extends Activity implements OnClickListener, On
 	static Boolean nick_name=true;
 	static String my_id=null;
 
-	final ArrayList<String> nickname = new ArrayList<String>();
+	ArrayList<String> nickname = new ArrayList<String>();
 	String userID = null;
 	
 	/** Called when the activity is first created. */
@@ -47,15 +47,15 @@ public class VarietyListActivity extends Activity implements OnClickListener, On
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.chatting_main);
 		
-		Button button = (Button) findViewById(R.id.exit_btn);
-		button.setOnClickListener(new Button.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-				finish();
-
-			}
-		});
+//		Button button = (Button) findViewById(R.id.exit_btn);
+//		button.setOnClickListener(new Button.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//
+//				finish();
+//
+//			}
+//		});
 		
 		Spinner spinner = (Spinner)findViewById(R.id.spinner);
       	
@@ -65,8 +65,6 @@ public class VarietyListActivity extends Activity implements OnClickListener, On
 			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spinner.setSelection(0);
 		
-			spinner.setOnItemSelectedListener(this);
-
 			spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 				@Override
 				public void onItemSelected(AdapterView<?> parent, View view,
@@ -176,9 +174,11 @@ public class VarietyListActivity extends Activity implements OnClickListener, On
 			   
 			   StringTokenizer token = new StringTokenizer(list,",");
 			   
+			   nickname = new ArrayList<String>();
+			   
 			   while(token.hasMoreTokens()){
 				   String user_id = token.nextToken().replace(" ", "");
-				   System.out.println("리스트 : "+user_id);
+				
 				   nickname.add(user_id);
 			   }
 			   
