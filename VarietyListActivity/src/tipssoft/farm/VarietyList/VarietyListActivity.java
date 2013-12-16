@@ -1,29 +1,16 @@
 package tipssoft.farm.VarietyList;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.net.Socket;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.net.*;
+import java.text.*;
+import java.util.*;
 
-import android.app.Activity;
-import android.content.Context;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.app.*;
+import android.content.*;
+import android.os.*;
+import android.view.*;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 
 public class VarietyListActivity extends Activity implements OnClickListener {
 	// 리스트뷰를 구성하는 리스트뷰와 어댑터 변수
@@ -50,11 +37,26 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	static Boolean nick_name=true;
 	static String my_id=null;
 
+	final ArrayList<String> nickname = null;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.chatting_main);
+		
+		
+		Spinner spinner = (Spinner)findViewById(R.id.spinner);
+      
+		if(nickname == null){
+			
+		}else{
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nickname);
+			spinner.setAdapter(adapter);
+			spinner.setPrompt("선택"); // 스피너 제목
+			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			spinner.setSelection(0);
+		}
 		
 		/* 서버 접속*/
 		 try {
@@ -146,7 +148,7 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 			   StringTokenizer token = new StringTokenizer(list,",");
 			   
 			   while(token.hasMoreTokens()){
-				   System.out.println(token.nextToken().replace(" ", ""));   
+				   nickname.add(token.nextToken().replace(" ", ""));
 			   }
 			   
 			   
