@@ -87,7 +87,7 @@ public class Update_book_json {
 
 	}
 
-	public void Enalbe_sell(String R_ID,String Reser_date,int RelayCount) {
+	public void Enalbe_sell(String R_ID, String Reser_date, int RelayCount) {
 
 		DefaultHttpClient client = new DefaultHttpClient();
 
@@ -96,7 +96,8 @@ public class Update_book_json {
 			String postURL = "http://14.63.212.134/MyRelayServer/Enable_sell.jsp";
 
 			/* 체크할 id와 pwd값 서버로 전송 */
-			HttpPost post = new HttpPost(postURL + "?R_ID=" + R_ID + "&Reser_date=" + Reser_date+"&RelayCount=" + RelayCount);
+			HttpPost post = new HttpPost(postURL + "?R_ID=" + R_ID
+					+ "&Reser_date=" + Reser_date + "&RelayCount=" + RelayCount);
 
 			/* 지연시간 최대 5초 */
 			HttpParams params = client.getParams();

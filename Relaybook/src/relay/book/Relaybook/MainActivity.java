@@ -50,13 +50,12 @@ public class MainActivity extends Activity {
 	}
 
 	public String getMy10DigitPhoneNumber() {
-		String s = getMyPhoneNumber();
 		
+		String s = getMyPhoneNumber();
 		
 		try
 		{
-			s.replace("-", "").replace("+82", "0");
-			return s;
+			return s.replace("-", "").replace("+82", "0");
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
