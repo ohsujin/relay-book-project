@@ -1,32 +1,18 @@
 package tipssoft.farm.VarietyList;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.net.Socket;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.net.*;
+import java.text.*;
+import java.util.*;
 
-import android.app.Activity;
-import android.content.Context;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.app.*;
+import android.content.*;
+import android.graphics.Paint.Join;
+import android.os.*;
+import android.view.*;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
+import android.widget.AdapterView.*;
 
 public class VarietyListActivity extends Activity implements OnClickListener, OnItemSelectedListener {
 	// 리스트뷰를 구성하는 리스트뷰와 어댑터 변수
@@ -53,9 +39,9 @@ public class VarietyListActivity extends Activity implements OnClickListener, On
 	static Boolean nick_name=true;
 	static String my_id=null;
 
-	ArrayList<String> nickname;
+	static ArrayList<String> nickname = new ArrayList<String>();
 	String userID = null;
-	ArrayList<String> arraylist;
+	Spinner spinner;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -63,28 +49,27 @@ public class VarietyListActivity extends Activity implements OnClickListener, On
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.chatting_main);
 		
-//		Button button = (Button) findViewById(R.id.exit_btn);
-//		button.setOnClickListener(new Button.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//
-//				finish();
-//
-//			}
-//		});
+		Button button = (Button) findViewById(R.id.exit_btn);
+		button.setOnClickListener(new Button.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				data = new ExamData((byte) 1, "/quit",
+						m_time_format.format(new Date()));
+				finish();
+
+			}
+		});
 		
-			nickname = new ArrayList<String>();
-		
-			arraylist = new ArrayList<String>();
-			arraylist.add("유저선택");
-		
+		spinner = (Spinner)findViewById(R.id.spinner);
       	
-//			ArrayAdapter adapter = new ArrayAdapter(this,R.layout.spinner, nickname);
-//			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//			spinner.setPrompt("구분을 선택하세요.");
-
-
-			
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nickname);
+			spinner.setPrompt("선택"); // 스피너 제목
+			spinner.setAdapter(adapter);
+			adapter.notifyDataSetChanged();
+			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//			spinner.setSelection(0);
+		
 		
 		/* 서버 접속*/
 		 try {
@@ -182,6 +167,8 @@ public class VarietyListActivity extends Activity implements OnClickListener, On
 				
 				   nickname.add(user_id);
 			   }
+			   
+			 
 			   
 			   
 		   }else{
@@ -341,16 +328,17 @@ public class VarietyListActivity extends Activity implements OnClickListener, On
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 			long arg3) {
-//		userID = nickname.get(arg2);
-//		
-		System.out.println("아이디 : "+nickname.get(arg2));
+		// TODO Auto-generated method stub
+		userID = nickname.get(arg2);
 		
+		System.out.println("아이디 : "+userID);
+	
 	}
 
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method 
+		// TODO Auto-generated method stub
 		
 	}
 }
