@@ -11,8 +11,9 @@ import android.os.*;
 import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.*;
+import android.widget.AdapterView.*;
 
-public class VarietyListActivity extends Activity implements OnClickListener {
+public class VarietyListActivity extends Activity implements OnClickListener, OnItemSelectedListener {
 	// 리스트뷰를 구성하는 리스트뷰와 어댑터 변수
 	private ExamAdapter m_adapter = null;
 	private ListView m_list = null;
@@ -38,6 +39,7 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	static String my_id=null;
 
 	final ArrayList<String> nickname = new ArrayList<String>();
+	String userID = null;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -45,6 +47,15 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.chatting_main);
 		
+		Button button = (Button) findViewById(R.id.exit_btn);
+		button.setOnClickListener(new Button.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				finish();
+
+			}
+		});
 		
 		Spinner spinner = (Spinner)findViewById(R.id.spinner);
       	
@@ -54,6 +65,27 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spinner.setSelection(0);
 		
+			spinner.setOnItemSelectedListener(this);
+
+			spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+				@Override
+				public void onItemSelected(AdapterView<?> parent, View view,
+						int position, long id) {
+					// TODO Auto-generated method stub
+
+					/* */
+					userID = nickname.get(position);
+					
+					System.out.println("아이디 : "+userID);
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> parent) {
+					// TODO Auto-generated method stub
+
+				}
+
+			});
 		
 		/* 서버 접속*/
 		 try {
@@ -302,5 +334,20 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 			}
 			return view;
 		}
+	}
+
+
+	@Override
+	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+			long arg3) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onNothingSelected(AdapterView<?> arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
