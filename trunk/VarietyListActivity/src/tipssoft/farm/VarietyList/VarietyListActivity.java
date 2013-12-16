@@ -38,7 +38,7 @@ public class VarietyListActivity extends Activity implements OnClickListener, On
 	static Boolean nick_name=true;
 	static String my_id=null;
 
-	ArrayList<String> nickname = new ArrayList<String>();
+	static ArrayList<String> nickname = new ArrayList<String>();
 	String userID = null;
 	
 	/** Called when the activity is first created. */
@@ -174,7 +174,7 @@ public class VarietyListActivity extends Activity implements OnClickListener, On
 			   
 			   StringTokenizer token = new StringTokenizer(list,",");
 			   
-			   nickname = new ArrayList<String>();
+			   nickname.clear(); //스피너 중복제거
 			   
 			   while(token.hasMoreTokens()){
 				   String user_id = token.nextToken().replace(" ", "");
