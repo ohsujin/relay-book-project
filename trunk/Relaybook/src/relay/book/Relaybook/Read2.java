@@ -129,6 +129,7 @@ public class Read2 extends Activity {
 				}else{
 					Toast.makeText(getApplicationContext(), "구매 요청 실패.\n다시 시도해주세요.",  Toast.LENGTH_SHORT).show();
 				}
+				
 
 				finish();
 			}
