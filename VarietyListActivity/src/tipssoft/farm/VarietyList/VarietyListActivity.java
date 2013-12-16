@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.StringTokenizer;
 
 import android.app.Activity;
 import android.content.Context;
@@ -101,7 +102,6 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	    toServer = new PrintStream(socket.getOutputStream(),true,"UTF-8");
 	    fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));
 	    
-	    
 	    String chat_msg = null;
 	    String all_msg = "";
 	    while ((chat_msg = fromServer.readLine()) != null) {
@@ -129,13 +129,26 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 		   
 		   String MSG=(String)msg.obj;
 		   
-		   System.out.println("뭐지 ? " + MSG);
-		   
 		   int start = MSG.indexOf("");
 		   int end = MSG.indexOf(" ",start);
 		   String to = MSG.substring(start,end);
 		   
+		   /*
+		    * 서버에 저장된 id 리스트를 받아서 분리한다.
+		    */
 		   if(to.equals(my_id)){
+			   
+		   }else if(to.equals("list")){	   
+			   int S = MSG.indexOf(" : ");
+			   int E = MSG.indexOf("]");
+			   String list = MSG.substring(8,E);
+			   
+			   StringTokenizer token = new StringTokenizer(list,",");
+			   
+			   while(token.hasMoreTokens()){
+				   System.out.println(token.nextToken().replace(" ", ""));   
+			   }
+			   
 			   
 		   }else{
 		   
@@ -168,10 +181,9 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 					m_time_format.format(new Date()));
 			
 
-			if(nick_name){
+			if(nick_name){ //최초 접속시 사용자의 닉네임을 기억해준다.
 				my_id = ed_msg.getText().toString();
 				nick_name=false;
-				System.out.println("유저 아이디 : "+my_id);
 			}
 			ed_msg.setText("");
 
