@@ -1,17 +1,28 @@
 package tipssoft.farm.VarietyList;
 
-import java.io.*;
-import java.net.*;
-import java.text.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
-import android.app.*;
-import android.content.*;
-import android.os.*;
-import android.view.*;
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.*;
-import android.widget.*;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class VarietyListActivity extends Activity implements OnClickListener {
 	// 리스트뷰를 구성하는 리스트뷰와 어댑터 변수
@@ -35,6 +46,8 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	
 	ExamData data = null;
 	/**/
+	static Boolean nick_name=true;
+	static String my_id=null;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -84,9 +97,10 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	  
 	  public void run() { // 서버 메시지 수신 (무한반복)
 	   try {
-	    socket = new Socket("192.168.0.89", 10001);
+	    socket = new Socket("192.168.0.73", 10001);
 	    toServer = new PrintStream(socket.getOutputStream(),true,"UTF-8");
 	    fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));
+	    
 	    
 	    String chat_msg = null;
 	    String all_msg = "";
@@ -96,10 +110,9 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	                    String chat = chat_msg;
 	                    Message msg = handler.obtainMessage(1, chat);
 	                    handler.sendMessage(msg);
+	                    System.out.println("from server : "+chat);
+	  // **++++++++**++++++++**++++++++**++++++++**++++++++**++++++++
 	                    
-	                    // **++++++++**++++++++**++++++++**++++++++**++++++++**++++++++
-	                    
-	                   
 	                    
 	    }      
 	   } catch (Exception e) {
@@ -113,13 +126,27 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 		  public void handleMessage(Message msg) {
 		   super.handleMessage(msg);
 //		   txt_chat.setText((CharSequence)msg.obj);
-		   ed_msg.setText("");
 		   
-		   data = new ExamData((byte) 0, (String)msg.obj,
-					m_time_format.format(new Date()));
-		   m_adapter.add(data);
-			ed_msg.setText("");
-			m_list.smoothScrollToPosition(m_adapter.getCount() - 1);
+		   String MSG=(String)msg.obj;
+		   
+		   System.out.println("뭐지 ? " + MSG);
+		   
+		   int start = MSG.indexOf("");
+		   int end = MSG.indexOf(" ",start);
+		   String to = MSG.substring(start,end);
+		   
+		   if(to.equals(my_id)){
+			   
+		   }else{
+		   
+			   ed_msg.setText("");
+			   
+			   data = new ExamData((byte) 0, (String)msg.obj,
+						m_time_format.format(new Date()));
+			   m_adapter.add(data);
+				ed_msg.setText("");
+				m_list.smoothScrollToPosition(m_adapter.getCount() - 1);
+		   }
 		  }
 	}; 
 
@@ -139,9 +166,14 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 			// 두번째 버튼이 눌리면 내가 이야기하는 듯한 데이터를 구성한다.
 			data = new ExamData((byte) 1, ed_msg.getText().toString(),
 					m_time_format.format(new Date()));
-			ed_msg.setText("");
-
 			
+
+			if(nick_name){
+				my_id = ed_msg.getText().toString();
+				nick_name=false;
+				System.out.println("유저 아이디 : "+my_id);
+			}
+			ed_msg.setText("");
 
 			break;
 	
