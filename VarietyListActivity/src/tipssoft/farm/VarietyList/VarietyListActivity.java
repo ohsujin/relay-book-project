@@ -37,7 +37,7 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 	static Boolean nick_name=true;
 	static String my_id=null;
 
-	final ArrayList<String> nickname = null;
+	final ArrayList<String> nickname = new ArrayList<String>();
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -47,16 +47,13 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 		
 		
 		Spinner spinner = (Spinner)findViewById(R.id.spinner);
-      
-		if(nickname == null){
-			
-		}else{
+      	
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nickname);
 			spinner.setAdapter(adapter);
 			spinner.setPrompt("선택"); // 스피너 제목
 			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spinner.setSelection(0);
-		}
+		
 		
 		/* 서버 접속*/
 		 try {
@@ -148,7 +145,9 @@ public class VarietyListActivity extends Activity implements OnClickListener {
 			   StringTokenizer token = new StringTokenizer(list,",");
 			   
 			   while(token.hasMoreTokens()){
-				   nickname.add(token.nextToken().replace(" ", ""));
+				   String user_id = token.nextToken().replace(" ", "");
+				   System.out.println("리스트 : "+user_id);
+				   nickname.add(user_id);
 			   }
 			   
 			   
