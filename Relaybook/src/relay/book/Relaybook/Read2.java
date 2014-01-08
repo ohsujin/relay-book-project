@@ -145,34 +145,32 @@ public class Read2 extends Activity {
 		((ImageView)findViewById(R.id.count)).setImageResource(count_image);
 		
 
-		/*채팅버튼*/
-		Button Chat_btn = (Button) findViewById(R.id.Chatting_btn);
-
-		Chat_btn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(Read2.this, relay.book.Chatting.Chatting.class);
-				try{
-					intent.putExtra("phone", phone);
-				}catch (Exception e) {
-					// TODO: handle exception
-					e.printStackTrace();
-				}
-				Read2.this.startActivity(intent);
-				
-			}
-		});
-		/*채팅버튼*/
+//		/*채팅버튼*/
+//		Button Chat_btn = (Button) findViewById(R.id.Chatting_btn);
+//
+//		Chat_btn.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent(Read2.this, relay.book.Chatting.Chatting.class);
+//				try{
+//					intent.putExtra("phone", phone);
+//				}catch (Exception e) {
+//					// TODO: handle exception
+//					e.printStackTrace();
+//				}
+//				Read2.this.startActivity(intent);
+//				
+//			}
+//		});
+//		/*채팅버튼*/
 		
 		
-		// ViewPaper
+		// ViewPaper 서버로 부터 다운받은 3장의 이미지를 출력해준다.
 		timer = new CountDownTimer(2 * 1000, 1000) {
 
 			@Override
 			public void onTick(long millisUntilFinished) {
-
 			}
-
 			@Override
 			public void onFinish() {
 				if (currentPosition == PAGE_TOTAL_NUMBER - 1){
@@ -214,7 +212,7 @@ public class Read2 extends Activity {
 		});
 	}
 		
-		/*
+		/**
 		 * 카톡 공유를 위한 리스너 등록
 		 */
 		public void Share_KaKao(View v) throws NameNotFoundException {

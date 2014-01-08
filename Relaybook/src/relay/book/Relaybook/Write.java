@@ -72,7 +72,10 @@ public class Write extends Activity {
 	
 		findViewById(R.id.isbn_btn).setOnClickListener(scanAnything);//바코드 activity 호출
 		
-		if(Tab.ISBN_num != null){	//CaptureActivity에서 찍은 바코드 정보를 Tab activity에 static으로 저장하여 ISBN_num 값이 null일때는 책정보를 자동기입하지 말고 null이 아닐때만 네이버에서 받아온 책정보를 자동으로 기입한다.
+		/*
+		 * CaptureActivity에서 찍은 바코드 정보를 Tab activity에 static으로 저장하여 ISBN_num 값이 null일때는 책정보를 자동기입하지 말고 null이 아닐때만 네이버에서 받아온 책정보를 자동으로 기입한다.
+		 */
+		if(Tab.ISBN_num != null){	
 			((EditText) findViewById(R.id.Title)).setText(Tab.NOA.getTitle());
 			((EditText) findViewById(R.id.Writer)).setText(Tab.NOA.getAuthor());
 			((EditText) findViewById(R.id.Publisher)).setText(Tab.NOA.getPublisher());
@@ -216,7 +219,7 @@ public class Write extends Activity {
 //		startActivityForResult(intent, REQUEST_PHOTO_ALBUM);
 //	}
 
-	// 촬영한 사진을 수정하기 위해서
+	// 촬영한 사진을 압축하기 위해서
 	Bitmap loadPicture() {
 	
 		filename = Environment.getExternalStorageDirectory().getAbsolutePath()
@@ -284,9 +287,10 @@ public class Write extends Activity {
 		  
 		@Override
 		protected String doInBackground(Void... params) {
-			//그림파일과 함께 책정보도 보낸다.
+			//이미지 파일과 함께 책정보도 보낸다.
 			GeoPictureUploader send = new GeoPictureUploader(Subject, Title,Writer, publisher, Price, Quality, PhoneNum.getPhoneNum(),Memo);
 
+			//이미지 파일을 보내고 최종적으로 uploadPicture를 통해 책정보와 이미지 파일이 서버로 전송된다.
 			Upload_chk = send.uploadPicture(image1, image2, image3);
 			
 			System.out.println("응답 : " 	+ Upload_chk);

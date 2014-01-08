@@ -49,29 +49,23 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 
 		final TextView top_title = (TextView) findViewById(R.id.textView1);
 
-		final ToggleButton tb = (ToggleButton) this
-				.findViewById(R.id.toggleButton1);
+		final ToggleButton tb = (ToggleButton) this.findViewById(R.id.toggleButton1);
 		tb.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (tb.isChecked()) {
-					tb.setBackgroundDrawable(getResources().getDrawable(
-							R.drawable.blankstar));
+					tb.setBackgroundDrawable(getResources().getDrawable(R.drawable.blankstar));
 					top_title.setText(getResources().getText(0, "찜 목록"));
 
-					send_search(PhoneNum.getPhoneNum(), "R");// 내가 찜한 책의
-																// 목록을받아온다. | R
-																// =
-																// Reservation_book
+					send_search(PhoneNum.getPhoneNum(), "R");// 내가 찜한 책의 목록을받아온다.
+															// R = Reservation_book
 
 				} else {
-					tb.setBackgroundDrawable(getResources().getDrawable(
-							R.drawable.fullstar));
+					tb.setBackgroundDrawable(getResources().getDrawable(R.drawable.fullstar));
 					top_title.setText(getResources().getText(0, "내 책관리하기"));
 
-					send_search(PhoneNum.getPhoneNum(), "M");// 내가 등록한 책의 목록을
-																// 받아온다. | M =
-																// My_book
+					send_search(PhoneNum.getPhoneNum(), "M");// 내가 등록한 책의 목록을 받아온다.
+														 	//  M = My_book
 
 				}
 			}
@@ -92,8 +86,7 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 																	// 위해 한번
 																	// 변환해줌
 
-			HttpPost post = new HttpPost(URL_book_inform + "?keyword="
-					+ keyword1 + "&option=" + option);
+			HttpPost post = new HttpPost(URL_book_inform + "?keyword=" + keyword1 + "&option=" + option);
 
 			/* 지연시간 최대 5초 */
 			HttpParams params = client.getParams();
@@ -103,8 +96,7 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 			/* 데이터 보낸 뒤 서버에서 데이터를 받아오는 과정 */
 			HttpResponse response = client.execute(post);
 			BufferedReader bufreader = new BufferedReader(
-					new InputStreamReader(response.getEntity().getContent(),
-							"utf-8"));
+					new InputStreamReader(response.getEntity().getContent(),"utf-8"));
 
 			String line = null;
 			String result = "";
@@ -125,8 +117,7 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 				T.show();
 
 				// gridview로 보여줄 항목이 없는 경우 아무런 리스트도 나오지 않게 하기 위해 null을 입력한다.
-				StaggeredGridView gridView = (StaggeredGridView) this
-						.findViewById(R.id.staggeredGridView1);
+				StaggeredGridView gridView = (StaggeredGridView) this.findViewById(R.id.staggeredGridView1);
 				gridView.setAdapter(null);
 
 			} else {
@@ -160,10 +151,8 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 				 * /* Staggered Grid View
 				 */
 
-				StaggeredGridView gridView = (StaggeredGridView) this
-						.findViewById(R.id.staggeredGridView1);
-				int margin = getResources().getDimensionPixelSize(
-						R.dimen.margin);
+				StaggeredGridView gridView = (StaggeredGridView) this.findViewById(R.id.staggeredGridView1);
+				int margin = getResources().getDimensionPixelSize(R.dimen.margin);
 				gridView.setItemMargin(margin);
 
 				gridView.setPadding(margin, 0, margin, 0); // have the margin on
@@ -256,8 +245,7 @@ public class my_book_list extends Activity implements OnItemSelectedListener {
 								myIntent.putExtra(
 										"Reser_date",
 										rece.getJSONObject(position)
-												.getString("Reser_date")
-												.toString());
+												.getString("Reser_date").toString());
 							} else {
 								myIntent.putExtra(
 										"school",

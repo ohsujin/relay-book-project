@@ -82,7 +82,7 @@ public class View_mylist extends Activity {
 		 * section이 1이면 Mybook list를 불러오고 0이면 reservation list를 불러온다.
 		 */
 
-		switch (section) { // section 이란 내가 올린 책인지 내가 찜한 책인지를 구분해주는 값이다 이를 통해
+	switch (section) { // section 이란 내가 올린 책인지 내가 찜한 책인지를 구분해주는 값이다 이를 통해
 							// 각이가들 layout을 구분해주어 하나의 activty에서 두개의 레이아웃을 사용하게
 							// 한다.
 
@@ -91,18 +91,18 @@ public class View_mylist extends Activity {
 			Reser_date = in.getStringExtra("Reser_date");
 			setContentView(R.layout.view_mylist);
 			
-			/*채팅버튼*/
-			Button Chat_btn = (Button) findViewById(R.id.Chatting_btn);
-
-			Chat_btn.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(View_mylist.this, relay.book.Chatting.Chatting.class);
-					startActivity(intent);
-					
-				}
-			});
-			/*채팅버튼*/
+//			/*채팅버튼*/
+//			Button Chat_btn = (Button) findViewById(R.id.Chatting_btn);
+//
+//			Chat_btn.setOnClickListener(new OnClickListener() {
+//				@Override
+//				public void onClick(View v) {
+//					Intent intent = new Intent(View_mylist.this, relay.book.Chatting.Chatting.class);
+//					startActivity(intent);
+//					
+//				}
+//			});
+//			/*채팅버튼*/
 			
 			//날짜선택
 			mTxtDate = (TextView)findViewById(R.id.txtdate);
@@ -166,6 +166,7 @@ public class View_mylist extends Activity {
 			});
 
 			break;
+			
 		case 0: // 0 = ReservationBook -> view_reserv.xml이 호출될 경우
 			setContentView(R.layout.view_reserv);
 			// 상단 이미지의 위치를 표시해주기 위한 imageview

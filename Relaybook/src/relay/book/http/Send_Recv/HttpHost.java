@@ -61,8 +61,9 @@ public class HttpHost {
 
 	// ------------------------------
 	// Http Post로 주기
+	// 신규 회원가입
 	// ------------------------------
-	public void HttpPostData(String msg) {
+	public void Register(String msg) {
 		try {
 			HttpClient client = new DefaultHttpClient();
 

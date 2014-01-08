@@ -19,8 +19,8 @@ public class StaggeredAdapter extends ArrayAdapter<String> {
 	private ArrayList<ImageItem> book_list = new ArrayList<ImageItem>();
 	static int i = 0;
 	
-	public StaggeredAdapter(Context context, int textViewResourceId,
-			String[] objects, ArrayList<ImageItem> arrayList) {
+	//buy2.java 파일로 부터 넘어온 데이터를 처리하는 생성자
+	public StaggeredAdapter(Context context, int textViewResourceId,String[] objects, ArrayList<ImageItem> arrayList) {
 		super(context, textViewResourceId, objects);
 		mLoader = new ImageLoader(context);
 		this.book_list = arrayList;
@@ -58,10 +58,10 @@ public class StaggeredAdapter extends ArrayAdapter<String> {
 		ImageView finger_img1 = (ImageView)convertView.findViewById(R.id.finger_img);
 		ImageView finger_img2 = (ImageView)convertView.findViewById(R.id.finger_img2);
 		
-		if(item.getActive() == 0)
+		if(item.getActive() == 0)//예약중
 		{
-			finger_img2.setVisibility(View.VISIBLE);
-		} else if(item.getActive() == 1){
+			finger_img2.setVisibility(View.VISIBLE); 
+		} else if(item.getActive() == 1){ //판매중
 			finger_img1.setVisibility(View.VISIBLE);
 		}
 		/*끝*/
