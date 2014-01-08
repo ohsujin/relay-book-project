@@ -20,8 +20,7 @@ public class GeoPictureUploader {
 	static String twoHyphens = "--";
 	static String boundary = "*****Relaybook*****";
 
-	private String Subject, Title, Writer, Publisher, Price, Quality, PhoneNum,
-			Memo;
+	private String Subject, Title, Writer, Publisher, Price, Quality, PhoneNum,Memo;
 	private DataOutputStream dataStream = null;
 
 	public enum ReturnCode {
@@ -41,8 +40,7 @@ public class GeoPictureUploader {
 		this.Memo = Memo;
 	}
 
-	public ReturnCode uploadPicture(String pictureFileName1,
-			String pictureFileName2, String pictureFileName3) {
+	public ReturnCode uploadPicture(String pictureFileName1,String pictureFileName2, String pictureFileName3) {
 
 		File uploadFile1 = new File(pictureFileName1);
 		File uploadFile2 = new File(pictureFileName2);
@@ -50,16 +48,12 @@ public class GeoPictureUploader {
 
 		if (uploadFile1.exists())
 			try {
-				FileInputStream fileInputStream1 = new FileInputStream(
-						uploadFile1);
-				FileInputStream fileInputStream2 = new FileInputStream(
-						uploadFile2);
-				FileInputStream fileInputStream3 = new FileInputStream(
-						uploadFile3);
+				FileInputStream fileInputStream1 = new FileInputStream(uploadFile1);
+				FileInputStream fileInputStream2 = new FileInputStream(uploadFile2);
+				FileInputStream fileInputStream3 = new FileInputStream(uploadFile3);
 
 				URL connectURL = new URL(postUrl);
-				HttpURLConnection conn = (HttpURLConnection) connectURL
-						.openConnection();
+				HttpURLConnection conn = (HttpURLConnection) connectURL.openConnection();
 
 				conn.setDoInput(true);
 				conn.setDoOutput(true);
@@ -68,8 +62,7 @@ public class GeoPictureUploader {
 
 				conn.setRequestProperty("User-Agent", "myGeodiary-V1");
 				conn.setRequestProperty("Connection", "Keep-Alive");
-				conn.setRequestProperty("Content-Type",
-						"multipart/form-data;boundary=" + boundary);
+				conn.setRequestProperty("Content-Type","multipart/form-data;boundary=" + boundary);
 
 				conn.connect();
 
@@ -108,8 +101,7 @@ public class GeoPictureUploader {
 					return ReturnCode.http401;
 			} catch (MalformedURLException mue) {
 				// Log.e(Tag, "error: " + mue.getMessage(), mue);
-				System.out
-						.println("GeoPictureUploader.uploadPicture: Malformed URL: "+ mue.getMessage());
+				System.out.println("GeoPictureUploader.uploadPicture: Malformed URL: "+ mue.getMessage());
 				return ReturnCode.http400;
 			} catch (IOException ioe) {
 				// Log.e(Tag, "error: " + ioe.getMessage(), ioe);

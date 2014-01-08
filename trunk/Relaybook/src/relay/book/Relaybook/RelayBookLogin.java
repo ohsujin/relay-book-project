@@ -132,7 +132,7 @@ public class RelayBookLogin extends Activity implements View.OnClickListener {
 				
 				listData.put("Register", regi);
 
-				http.HttpPostData(listData.toString());
+				http.Register(listData.toString());
 
 				startActivity(intent);
 				finish();

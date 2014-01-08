@@ -123,12 +123,12 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 
 		try {
 			/* 체크할 id와 pwd값 서버로 전송 */
-			String keyword1 = URLEncoder.encode(keyword, "UTF-8");// 한글인코딩 처리를
+			String input_keyword = URLEncoder.encode(keyword, "UTF-8");// 한글인코딩 처리를
 																	// 위해 한번
 																	// 변환해줌
 
 			HttpPost post = new HttpPost(URL_book_inform + "?serch_option="
-					+ Search_option + "&keyword=" + keyword1);
+					+ Search_option + "&keyword=" + input_keyword);
 
 			/* 지연시간 최대 5초 */
 			HttpParams params = client.getParams();
@@ -148,7 +148,7 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 				result += line;
 			}
 
-			System.out.println(result);
+//			System.out.println(result);
 
 			JSONObject json = new JSONObject(result);
 			final JSONArray rece = json.getJSONArray("Book_inform");
@@ -168,17 +168,17 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 				 */
 				final ArrayList<ImageItem> imageItems = new ArrayList<ImageItem>();
 
-				urls = new String[rece.length()];
+				urls = new String[rece.length()]; 
 
-				for (int i = 0; i < rece.length(); i++) {
-					imageItems.add(new ImageItem(rece.getJSONObject(i).getString("title").toString(), // 이부분이 커스텀 뷰의 텍스트항목에 어떤 값을 보내주는지
-							// 알려준다.
+				for (int i = 0; i < rece.length(); i++) { //rece.length() : 몇개의 view를 생성해야 될지 알려준다.
+					
+					// 이부분이 커스텀 뷰의 텍스트항목에 어떤 값을 보내주는지 알려준다. imageItems class의 생성자에 title,writer,price,active값을 넘기고 getter와 setter를 이용하여 StaggeredAdapter에서 사용하도록 해준다. 
+					imageItems.add(new ImageItem(rece.getJSONObject(i).getString("title").toString(), 
 							rece.getJSONObject(i).getString("writer").toString(),
 							rece.getJSONObject(i).getString("price").toString()+ "원",
 							rece.getJSONObject(i).getString("active").toString()) ); 
-					urls[i] = imageUrl
-							+ rece.getJSONObject(i).getString("filename")
-									.toString() + "_1.jpg";
+					
+					urls[i] = imageUrl + rece.getJSONObject(i).getString("filename").toString() + "_1.jpg"; //일단 앞표지 그림만 저장한다.
 				}
 				
 				/*
@@ -191,7 +191,6 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 
 				/*
 				 * 서버로 부터 받아온 데이터를 그리드뷰로 표시해주는 부분 시작
-				 */
 				/* Staggered Grid View */
 
 				StaggeredGridView gridView = (StaggeredGridView) this.findViewById(R.id.staggeredGridView1);

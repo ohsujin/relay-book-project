@@ -50,6 +50,7 @@ public class GCMIntentService extends GCMBaseIntentService {
     protected void onRegistered(Context context, String registrationId) {
         Log.i(TAG, "Device registered: regId = " + registrationId);
         
+        //구글 GCM 서버로 부터 전송 받은 기기의 gcm regId 값을 개발자의 서버로 넘겨주기 위한 부분.
         ServerUtilities.register(context, registrationId);
     }
 
