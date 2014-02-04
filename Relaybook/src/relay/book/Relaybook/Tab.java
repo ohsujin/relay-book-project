@@ -67,7 +67,7 @@ public class Tab extends TabActivity {
 		});
 		
 		/*튜토리얼 다시 보지 않기*/
-		mSharedPref = getSharedPreferences("Test", 0);
+		mSharedPref = getSharedPreferences("relaybook_Setting", 0);
 		mSharedPrefEditor = mSharedPref.edit();
 
 		chAgree = (CheckBox) findViewById(R.id.checkBox1);

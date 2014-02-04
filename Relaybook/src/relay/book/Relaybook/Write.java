@@ -52,10 +52,6 @@ public class Write extends Activity {
 	String image3 = Environment.getExternalStorageDirectory().getAbsolutePath()	+ "/Relaybook/" + "/img-3.jpg";
 
 	/* */
-
-	EditText ISBN;
-	
-	
 	static int i = 1;
 
 	static int REQUEST_PICTURE = 1;
@@ -139,10 +135,7 @@ public class Write extends Activity {
 
 		iv1.setScaleType(ImageView.ScaleType.FIT_XY);
 		iv2.setScaleType(ImageView.ScaleType.FIT_XY);
-		iv3.setScaleType(ImageView.ScaleType.FIT_XY);
-		
-
-		
+		iv3.setScaleType(ImageView.ScaleType.FIT_XY);		
 	}
 	
 	/*
@@ -157,8 +150,6 @@ public class Write extends Activity {
 	    }
 	  };
 
-	
-	
 	// button 클릭
 	Dialog dialog;
 

@@ -14,14 +14,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import relay.book.Option.PhoneNum;
 import relay.book.intentdemob2.R;
+import relay.book.intentdemob2.R.menu;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -46,6 +53,8 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 	private String urls[];
 	/* 서버로 넘겨주는 값을 저장해줌 */
 	String Search_option;
+	
+    Menu mMenu;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -115,11 +124,41 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 
 		adapter.notifyDataSetChanged();
 	}
+	
+	/* 검색옵션 설정 */
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        mMenu = menu;
+        MenuInflater inflater = getMenuInflater();
+        //위에서 만들었던 xml 파일의 리소스아이디값을 넘겨줍니다.
+        inflater.inflate(R.menu.main, menu);
+        System.out.println("옵션");
+        return true;
+    }
+    /*
+      메뉴항목을 선택했을때, 호출되는 함수입니다.
+    */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //각 체크박스 메뉴항목별로 선택했을때 처리..
+        switch (item.getItemId()) {
+          case R.id.enabled_item: // 메뉴 xml 파일에서 정의한 id속성값 입니다.
+            //메뉴항목선택시 처리내용...
+            break;
+          case R.id.disabled_item: // 메뉴 xml 파일에서 정의한 id속성값 입니다.
+            //메뉴항목선택시 처리내용...
+            break;
+        }
+        
+        return true;
+    }
+	
 
 	// 서버로 부터 항목을 받아오는 부분
 	void send_search(String keyword) {
 
 		DefaultHttpClient client = new DefaultHttpClient();
+		SharedPreferences pref = getSharedPreferences("relaybook_Setting", MODE_PRIVATE);
 
 		try {
 			/* 체크할 id와 pwd값 서버로 전송 */
@@ -128,7 +167,7 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 																	// 변환해줌
 
 			HttpPost post = new HttpPost(URL_book_inform + "?serch_option="
-					+ Search_option + "&keyword=" + input_keyword);
+					+ Search_option + "&keyword=" + input_keyword+"&school="+pref.getString("Search_option", null)+"&phone="+ PhoneNum.getPhoneNum());
 
 			/* 지연시간 최대 5초 */
 			HttpParams params = client.getParams();
@@ -286,19 +325,9 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 
 	}
 
-	@Override
-	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-			long arg3) {
-		// TODO Auto-generated method stub
-		// Toast.makeText(this, arraylist.get(arg2),
-		// Toast.LENGTH_LONG).show();//해당목차눌렸을때
-	}
 
-	@Override
-	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method stub
-
-	}
+	
+	
 
 	/* 종료묻기 */
 	@Override
@@ -327,6 +356,19 @@ public class Buy2 extends Activity implements OnItemSelectedListener {
 							}).setNegativeButton(buttonNo, null).show();
 		}
 		return true;
+	}
+
+	@Override
+	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+			long arg3) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
