@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 public class Option extends Activity {
@@ -27,7 +28,34 @@ public class Option extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.option);
+		
+		final SharedPreferences pref = getSharedPreferences("relaybook_Setting", MODE_PRIVATE);
+		final SharedPreferences.Editor editor = pref.edit();
 
+		final RadioButton search_option1 = (RadioButton) findViewById(R.id.All_school);
+		search_option1.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				editor.putString("Search_option", "All");
+				editor.commit();
+			}
+		});
+		
+		final RadioButton search_option2 = (RadioButton) findViewById(R.id.My_school);
+		search_option2.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				editor.putString("Search_option", "My");
+				editor.commit();
+			}
+		});
+		
+		
+		
 		Button button = (Button) findViewById(R.id.SignOut);
 		button.setOnClickListener(new OnClickListener() {
 			@Override

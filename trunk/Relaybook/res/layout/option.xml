@@ -8,17 +8,45 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
+	
+    <RadioGroup
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    
+		<RadioButton
+		    android:id="@+id/My_school"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="소속학교 검색"
+			android:textSize="20dp"
+			android:textStyle="bold"
+			android:textColor="#000000"
+			 android:checked="true"
+			/>
+	
+		<RadioButton
+		    android:id="@+id/All_school"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/My_school"
+		    android:layout_below="@+id/My_school"
+		    android:text="전체학교 검색"
+		    android:textColor="#000000"
+		    android:textSize="20dp"
+		    android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/SignOut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/btn_bg"
-        android:text="회원탈퇴"
-        android:gravity="center"
-        android:textColor="#ffffff"
-        android:textSize="18sp" />
+		<Button
+		    android:id="@+id/SignOut"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="35dp"
+		    android:background="@drawable/btn_bg"
+		    android:gravity="center"
+		    android:text="회원탈퇴"
+		    android:textColor="#ffffff"
+		    android:textSize="18sp" />
+
+	</RadioGroup>
 
 </RelativeLayout>

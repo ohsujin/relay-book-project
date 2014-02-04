@@ -55,16 +55,21 @@ public class MainActivity extends Activity {
 	public String getMy10DigitPhoneNumber() {
 		
 		String s = getMyPhoneNumber();
-
+		SharedPreferences pref = getSharedPreferences("relaybook_Setting", MODE_PRIVATE);
+		SharedPreferences.Editor editor = pref.edit();
+		
 			try
 			{
+				// 기본 검색 옵션으로 소속학교 지정.
+				editor.putString("Search_option", "My");
+				editor.commit();
+				
 				return s.replace("-", "").replace("+82", "0");
 			}catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
 				
-				SharedPreferences pref = getSharedPreferences("Test", MODE_PRIVATE);
-				SharedPreferences.Editor editor = pref.edit();
+				
 				
 				if(pref.getString("MyPhoneNum", null) == null){
 					/* 10자리 임의의 문자열 생성 */
